@@ -1,6 +1,6 @@
 from . import views
 from django.urls import path
 
-urlpatterns = {
+urlpatterns = [
     path('', views.CalendarDisplay.as_view(), name='home'),
-}
+]

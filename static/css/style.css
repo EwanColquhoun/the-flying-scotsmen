@@ -75,7 +75,7 @@
 .sidebar li{
   position: relative;
   min-height: 20%;
-  height: 26%;
+  height: 25%;
   margin: 8px 0;
   list-style: none;
 }
@@ -152,7 +152,7 @@
     position: relative;
   }
 
-.user-name{
+.sidebar .logout-details .user-name{
     color: #fff;
     font-size: 15px;
     font-weight: 500;
@@ -179,15 +179,21 @@
   }
 
 .home-section{
-  position: relative;
-  background: #E4E9F7;
-  min-height: 100vh;
-  top: 0;
-  left: 78px;
-  width: calc(100% - 78px);
-  transition: all 0.5s ease;
-  z-index: 2;
+    position: relative;
+    background-image: url(https://res.cloudinary.com/daoark4xo/image/upload/o_34/v1634245629/cloudscape.jpg);
+    background-position: center;
+    background-color: #E4E9F7;
+    background-attachment: fixed;
+    background-size: cover;
+    min-height: 100vh;
+    top: 0;
+    left: 78px;
+    width: calc(100% - 78px);
+    transition: all 0.5s ease;
+    z-index: 2;
 }
+
+
 .sidebar.open ~ .home-section{
   left: 265px;
   width: calc(100% - 265px);
