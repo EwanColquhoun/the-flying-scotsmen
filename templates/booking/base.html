@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- FontAwesome -->
+    <script src="https://kit.fontawesome.com/48b20a3378.js" crossorigin="anonymous"></script>
+    <!-- CSS  -->
+    <link rel="stylesheet" href="/static/css/style.css" type="text/css">
+    <title>The Flying Scotsmen</title>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="logo-details">
+            <div class="logo_name">The Flying Scotsmen</div>
+            <i class="fas fa-chevron-right" id="btn"></i>
+        </div>
+        <ul class="nav-list">
+            <li>
+                <a href="#">
+                    <i class="fas fa-home"></i>
+                <span class="links_name">Home</span>
+                </a>
+                <span class="tooltip">Home</span>
+            </li>
+        {% if user.is_authorised %}
+            <li>
+            <a href="#">
+                <i class="fas fa-calendar-alt"></i>
+                <span class="links_name">Calendar</span>
+            </a>
+            <span class="tooltip">Calendar</span>
+            </li>
+
+            <li>
+            <a href="#">
+                <i class="fas fa-plane"></i>
+                <span class="links_name">Bookings</span>
+            </a>
+            <span class="tooltip">Bookings</span>
+            </li>
+        {% else %}
+
+            <li>
+                <a href="#">
+                    <i class="fas fa-user-plus"></i>
+                    <span class="links_name">Register</span>
+                </a>
+                <span class="tooltip">Register</span>
+            </li>
+             
+        {% endif %}
+            <li>
+                <a href="#">
+                    <i class="fas fa-phone"></i>
+                    <span class="links_name">Contact</span>
+                </a>
+                <span class="tooltip">Contact</span>
+            </li>
+        </ul>
+        <div class="logout-details">
+            <div class="user-name center-align">Logged in as: {{ request.user.username }}</div>
+            <a href=""><i class="fas fa-sign-out-alt" id="log_out"></i></a>
+        </div>
+    </div>
+
+    <section class="home-section">
+
+        {% block content %}
+
+        {% endblock %}
+
+    </section>
+
+    <script src="/static/script/script.js"></script>
+</body>
+</html>
