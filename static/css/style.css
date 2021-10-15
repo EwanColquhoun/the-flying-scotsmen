@@ -257,8 +257,9 @@
   border: none;
   background-color: #004b84;
   opacity: unset;
-  margin: 0 auto;
+  margin: 70px auto;
 }
+
 hr:not([size]) {
   height: 5px;
 }
