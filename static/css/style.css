@@ -264,6 +264,18 @@ hr:not([size]) {
   height: 5px;
 }
 
+/* SignUp Page */
+.btn-join {
+  background-color: #004b84;
+  color: #E4E9F7;
+}
+
+.btn-join:hover {
+  background-color: #E4E9F7;
+  color: #004b84;
+  border: 2px solid #004b84;
+}
+
 @media (max-width: 980px) {
   .sidebar {
     display: none;
