@@ -224,6 +224,29 @@
   padding-right: 10px;
 }
 
+.sco-blue {
+  background-color: #004b84;
+}
+
+.navbar-light .navbar-toggler i,
+.navbar-light .navbar-nav .nav-link,
+.navbar-light .navbar-brand {
+  color: #E4E9F7;
+}
+
+.navbar-light .navbar-toggler-icon {
+  background: none;
+  font-size: larger;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.navbar-light .navbar-toggler {
+  color: #004b84;
+  border-color: transparent;
+}
+
 .sidebar.open ~ .home-section{
   left: 265px;
   width: calc(100% - 265px);
