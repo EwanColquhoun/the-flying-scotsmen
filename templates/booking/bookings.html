@@ -1,0 +1,24 @@
+{% extends "booking/base.html" %}
+
+{% block content %}
+
+<h1 class="page-heading">Bookings</h1>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12 col-md-6">
+            <span>Empty?</span>
+            {% for booking in bookings %}
+                <div>{{ booking.date }} a booking!</div>
+            {% endfor %}
+        </div>
+        <div class="col-12 col-md-6">
+            <form id="booking-form" action="book" method="POST">
+                {% csrf_token %}
+            {{ bookingform.as_p }}
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -30,7 +30,7 @@
                     <a class="nav-link" href="#"><i class="fas fa-calendar-alt"></i> Calendar</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="fas fa-plane"></i> Bookings</a>
+                    <a class="nav-link" href="{% url 'bookings' %"><i class="fas fa-plane"></i> Bookings</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#"><i class="fas fa-phone"></i> Contact</a>
@@ -78,7 +78,7 @@
             </li>
 
             <li>
-            <a href="#">
+            <a href="{% url 'bookings' %}">
                 <i class="fas fa-plane"></i>
                 <span class="links_name">Bookings</span>
             </a>
