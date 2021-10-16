@@ -125,7 +125,8 @@
     </div>
 
     <!-- messages -->
-    <div class="container">
+
+    <main class="home-section flex-shrink-0 main-bg">
         <div class="row">
             <div class="col-md-8 offset-md-2">
                 {% for message in messages %}
@@ -139,16 +140,15 @@
                 {% endfor %}
             </div>
         </div>
-    </div>
 
-    <section class="home-section">
-        <div class="container base">
+    <!-- main content -->
+    
         {% block content %}
 
         {% endblock %}
-        </div>
+      
+    </main>
 
-    </section>
     <!-- Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <!-- JS -->

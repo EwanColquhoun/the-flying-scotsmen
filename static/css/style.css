@@ -251,13 +251,6 @@
   left: 265px;
   width: calc(100% - 265px);
 }
-.home-section .text{
-  display: inline-block;
-  color: #004b84;
-  font-size: 25px;
-  font-weight: 500;
-  margin: 18px
-}
 
 /* Messages */
 #msg {
