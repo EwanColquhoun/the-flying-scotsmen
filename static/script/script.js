@@ -20,3 +20,10 @@ let sidebar = document.querySelector(".sidebar");
      closeBtn.classList.replace("bx-menu-alt-right","bx-menu");//replacing the iocns class
    }
   }
+
+  // Messages 
+  setTimeout(function() {
+    let messages = document.getElementById('msg')
+    let alert = new bootstrap.Alert(messages);
+    alert.close();
+}, 3000);

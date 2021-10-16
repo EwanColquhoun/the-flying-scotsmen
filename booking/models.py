@@ -42,16 +42,16 @@ class Booking(models.Model):
     date = models.DateField()
     slot = models.ForeignKey(
         Slot,
-        on_delete=models.CASCADE, 
+        on_delete=models.CASCADE,
         related_name='booked_slot'
     )
-    instructor_requested = models.IntegerField(choices=INSTRUCTOR_REQUIRED)
+    instructor_requested = models.IntegerField(choices=INSTRUCTOR_REQUIRED, default=False)
     notes = models.TextField(blank=True)
     created_on = models.DateTimeField(auto_now_add=True)
-    approved = models.IntegerField(choices=APPROVED, default='No')
+    approved = models.IntegerField(choices=APPROVED, default=False)
 
     class Meta:
-        ordering = ['date']
+        ordering = ['date', 'slot']
 
     def __str__(self):
         return f'Booking on {self.date} at {self.slot} by {self.username}'

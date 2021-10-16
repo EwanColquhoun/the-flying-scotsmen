@@ -27,7 +27,10 @@ class BookingAdmin(admin.ModelAdmin):
     """
     Manages bookings
     """
-    list_filter = ('date', 'aircraft', 'username', 'instructor_requested')
-    list_display = ('date', 'slot', 'aircraft', 'username', 'instructor_requested', 'created_on')
+    list_filter = ('date', 'aircraft', 'username', 'instructor_requested', 'approved')
+    list_display = ('date', 'slot', 'aircraft', 'username', 'instructor_requested', 'created_on', 'approved')
     search_fields = ['date', 'aircraft', 'username', 'instructor_requested']
     actions = ['approve_bookings']
+
+    def approve_bookings(self, request, queryset):
+        queryset.update(approved=True)

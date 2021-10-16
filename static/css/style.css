@@ -259,6 +259,11 @@
   margin: 18px
 }
 
+/* Messages */
+#msg {
+  z-index: 5;
+}
+
 /* Home page */
 /* Headings */
 .heading-row {
@@ -285,6 +290,44 @@
 
 hr:not([size]) {
   height: 5px;
+}
+
+/* Bookings Page */
+/* Headings & Misc */
+.page-heading {
+  margin: 0 auto;
+  padding: 40px;
+}
+
+/* existing bookings */
+.table-headings td {
+  font-weight: bold;
+  padding: 5px 15px;
+}
+.booking-row {
+  padding: 10px;
+  background-color: antiquewhite;
+  border-radius: 5px;
+  border: 1px solid #E4E9F7;
+}
+
+.booking-row td {
+  padding: 5px 15px;
+}
+
+.edit-icon,
+.cancel-icon {
+  padding: 0 10px;
+  font-weight: bolder;
+  font-size: larger;
+}
+
+.green {
+  color: green;
+}
+
+.red {
+  color:red;
 }
 
 /* SignUp Page */

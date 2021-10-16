@@ -2,20 +2,58 @@
 
 {% block content %}
 
-<h1 class="page-heading">Bookings</h1>
-
 <div class="container">
     <div class="row">
-        <div class="col-12 col-md-6">
-            <span>Empty?</span>
+        <div class="col-12 d-flex justify-content-center"><h1 class="page-heading">Bookings</h1></div>
+    </div>
+</div>
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 col-md-8 mb-5">
+            <h3 class="page-heading">Existing Bookings</h3>
+                <div class="d-grid gap-3 booking-display-div">
+                    <table>
+                   
+            {% if bookings %}
+           
+                        <tr class="table-headings">
+                            <td>Date</td>
+                            <td>Slot</td>
+                            <td>Aircraft</td>
+                            <td>Notes</td>    
+                            <td>Edit | Cancel</td>    
+                        </tr>
+            {% endif %}
+
             {% for booking in bookings %}
-                <div>{{ booking.date }} a booking!</div>
+                        <tr class="booking-row">
+                            <td>{{ booking.date }}</td>
+                            <td>{{ booking.slot }}</td>
+                            <td>{{ booking.aircraft }}</td>
+                            <td>{{ booking.notes }}</td>
+                            <td><span><a href=""><i class="far fa-edit edit-icon green"></i></a></span>
+                                <span><a href=""><i class="far fa-times-circle cancel-icon red"></i></a></span>
+                            </td>
+                        </tr>
+            {% empty %}
+        
+                        <span>Your bookings will appear here once approved by admin.</span> 
             {% endfor %}
+                    </table>
+                </div>
+           
         </div>
-        <div class="col-12 col-md-6">
-            <form id="booking-form" action="book" method="POST">
+        <div class="col-12 col-md-4">
+            <h3 class="page-heading">Make A New Booking</h3>
+
+            <form id="booking-form" action="{% url 'bookings' %}" method="POST">
                 {% csrf_token %}
             {{ bookingform.as_p }}
+                <div>
+                    <button type="submit" id="new_booking" name="new_booking" class="btn btn-join">Submit</button>
+                </div>
             </form>
         </div>
     </div>
