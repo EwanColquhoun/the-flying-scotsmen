@@ -12,7 +12,7 @@
 <div class="container">
     <div class="row">
         <div class="col-12 col-md-8 mb-5">
-            <h3 class="page-heading">Existing Bookings</h3>
+            <h3 class="page-heading">Existing Bookings: {{ qs.content | safe }}</h3>
                 <div class="d-grid gap-3 booking-display-div">
                     <table>
                    
@@ -52,8 +52,9 @@
                 {% csrf_token %}
             {{ bookingform.as_p }}
                 <div>
-                    <button type="submit" id="new_booking" name="new_booking" class="btn btn-join">Submit</button>
+                    <button type="submit" id="new_booking" class="btn btn-join">Submit</button>
                 </div>
+                <!-- <div id="liveAlertPlaceholder"></div> -->
             </form>
         </div>
     </div>

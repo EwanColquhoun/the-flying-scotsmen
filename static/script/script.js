@@ -1,15 +1,10 @@
 let sidebar = document.querySelector(".sidebar");
   let closeBtn = document.querySelector("#btn");
-  let searchBtn = document.querySelector(".bx-search");
+
 
   closeBtn.addEventListener("click", ()=>{
     sidebar.classList.toggle("open");
     menuBtnChange();//calling the function(optional)
-  });
-
-  searchBtn.addEventListener("click", ()=>{ // Sidebar open when you click on the search iocn
-    sidebar.classList.toggle("open");
-    menuBtnChange(); //calling the function(optional)
   });
 
   // following are the code to change sidebar button(optional)
@@ -27,3 +22,21 @@ let sidebar = document.querySelector(".sidebar");
     let alert = new bootstrap.Alert(messages);
     alert.close();
 }, 3000);
+
+// Bootstrap alert
+
+// var alertPlaceholder = document.getElementById('liveAlertPlaceholder')
+// var alertTrigger = document.getElementById('new_booking')
+
+// function alert(message, type) {
+//   var wrapper = document.createElement('div')
+//   wrapper.innerHTML = '<div class="alert alert-' + type + ' alert-dismissible" role="alert">' + message + '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>'
+
+//   alertPlaceholder.append(wrapper)
+// }
+
+// if (alertTrigger) {
+//   alertTrigger.addEventListener('click', function () {
+//     alert('This is a double booking, please check your date/slot/aircraft and try again.', 'warning')
+//   })
+// }

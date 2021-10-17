@@ -19,13 +19,6 @@ class Aircraft(models.Model):
         return str(self.reg)
 
 
-class Slot(models.Model):
-    time = models.CharField(max_length=11, choices=SLOT)
-
-    def __str__(self):
-        return str(self.time)
-
-
 class Booking(models.Model):
     """
     Takes a booking registering the user, slot and aircraft.
@@ -40,11 +33,7 @@ class Booking(models.Model):
         related_name='booked_aircraft'
     )
     date = models.DateField()
-    slot = models.ForeignKey(
-        Slot,
-        on_delete=models.CASCADE,
-        related_name='booked_slot'
-    )
+    slot = models.CharField(max_length=11, choices=SLOT)
     instructor_requested = models.IntegerField(choices=INSTRUCTOR_REQUIRED, default=False)
     notes = models.TextField(blank=True)
     created_on = models.DateTimeField(auto_now_add=True)
@@ -55,5 +44,4 @@ class Booking(models.Model):
 
     def __str__(self):
         return f'Booking on {self.date} at {self.slot} by {self.username}'
-
 
