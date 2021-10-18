@@ -75,3 +75,11 @@ class CalendarDisplay(View):
             request,
             'booking/calendar.html',
         )
+
+
+class ContactDisplay(View):
+    def get(self, request, *args, **kwargs):
+        return render(
+            request,
+            'booking/contact.html',
+        )
