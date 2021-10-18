@@ -323,6 +323,23 @@ hr:not([size]) {
   color:red;
 }
 
+/* Contact Page */
+.map-container {
+  max-width: 600px;
+  max-height: 600px;
+}
+
+.contact-details p {
+  border: 2px solid #004b84;
+  font-size: initial;
+  font-weight: 400;
+  max-width: 300px;
+  min-width: 200px;
+  text-align: center;
+  padding: 10px;
+}
+
+
 /* SignUp Page */
 .btn-join {
   background-color: #004b84;
