@@ -1,3 +1,4 @@
+import datetime
 from django.shortcuts import render, get_object_or_404, reverse, redirect
 from django.views import generic, View
 from .models import Booking, Aircraft
@@ -18,6 +19,9 @@ class HomeDisplay(View):
         return render(
             request,
             'booking/index.html',
+            {
+                'datetime': datetime,
+            }
         )
 
 

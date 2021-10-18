@@ -9,12 +9,16 @@
   font-family: "Poppins" , sans-serif;
 }
 
+body {
+  background-color: #004b84;
+}
+
 /* Sidebar and Navbar */
 .sidebar{
   position: fixed;
   left: 0;
   top: 0;
-  height: 100%;
+  height: calc(100% - 20px);
   width: 78px;
   background: #004b84;
   padding: 6px 14px;
@@ -61,7 +65,11 @@
 }
 .sidebar.open .logo-details #btn{
   text-align: right;
+  -ms-transform: rotateY(180deg) translateX(-36px) translateY(-28px); /* IE 9 */
+  transform: rotateY(180deg) translateX(-36px) translateY(-28px);
 }
+
+
 .sidebar i{
   color: #fff;
   height: 60px;
@@ -143,13 +151,13 @@
   pointer-events: auto;
 }
 
-.sidebar .logout-details a:hover i,
 .sidebar .logout-details a:hover .user-name,
 .sidebar li a:hover .links_name,
 .sidebar li a:hover i{
   transition: all 0.5s ease;
   color: #004b84;
 }
+
 .sidebar li i{
   height: 50px;
   line-height: 50px;
@@ -158,10 +166,11 @@
 }
 
 .sidebar .logout-details{
-    height: 10%;
+    height: 8%;
     display: flex;
     align-items: center;
     position: relative;
+    bottom: -15px;
   }
 
 .sidebar .logout-details .user-name{
@@ -182,9 +191,12 @@
   transition: all 0.4s ease;
   background: #004b84;
 }
+
+.sidebar .logout-details a:hover #log_out,
 .sidebar .logout-details a:hover {
   transition: all 0.5s ease;
   background: #FFF;
+  color: #004b84;
 }
 
 #log_out{
@@ -194,6 +206,10 @@
     font-size: 28px;
     text-align: center;
     line-height: 60px;
+  }
+
+  #log_out:hover {
+    color: #004b84;
   }
 
 .sidebar.open .logout-details a #log_out{
@@ -252,6 +268,14 @@
   width: calc(100% - 265px);
 }
 
+/*  Footer */
+.footer {
+  width: 100%;
+  height: 25px;
+  background-color: rgba(0, 75, 132, 0.5);
+  text-align: center;
+}
+
 /* Messages */
 #msg {
   z-index: 5;
@@ -268,7 +292,7 @@
 
 /* Carousel */
 #carouselExampleIndicators {
-  max-height: 400px;
+  max-height: 480px;
   overflow: hidden;
 }
 
