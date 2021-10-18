@@ -1,6 +1,5 @@
-from .models import Booking
 from django import forms
-
+from .models import Booking
 
 
 class DateInput(forms.DateInput):
@@ -8,6 +7,7 @@ class DateInput(forms.DateInput):
 
 
 class BookingForm(forms.ModelForm):
+    
     class Meta:
         model = Booking
         fields = ('username', 'date', 'slot', 'aircraft', 'instructor_requested', 'notes')

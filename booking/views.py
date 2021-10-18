@@ -53,8 +53,6 @@ class BookingDisplay(View):
                 booking.save()
                 messages.add_message(request, messages.SUCCESS, 'Your booking will be added once approved by admin. Thank you.')
                 return redirect('bookings')
-                messages.add_message(request, messages.WARNING, 'This is a double booking, please check date/slot and aircraft and try again. Thank you.')
-                return redirect('bookings')
             else:
                 messages.add_message(request, messages.WARNING, 'This is a double booking, please check date/slot and aircraft and try again. Thank you.')
                 return redirect('bookings')
@@ -65,25 +63,15 @@ class BookingDisplay(View):
             request,
             'booking/bookings.html',
             {
-                "qs": qs,
                 "bookings": bookings,
                 "bookingform": BookingForm(),
             },
         )
 
 
-
-    # def editBooking(request, booking_id):
-
-    #     booking = get_object_or_404(Booking, id=booking_id)
-    #     if request.method == 'POST':
-    #         form = BookingForm()(request.POST, instance=booking)
-    #         if form.is_valid():
-    #             form.save()
-    #             return redirect('bookings')
-    #     form = BookingForm()(instance=booking)
-    #     context = {
-    #         'form': form,
-    #         'booking': booking,
-    #     }
-    #     return render(request, "logbook/edit.html", context)
+class CalendarDisplay(View):
+    def get(self, request, *args, **kwargs):
+        return render(
+            request,
+            'booking/calendar.html',
+        )

@@ -1,6 +1,6 @@
 from django.db import models
 from django.conf import settings
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
 from cloudinary.models import CloudinaryField
 
 
@@ -23,6 +23,7 @@ class Booking(models.Model):
     """
     Takes a booking registering the user, slot and aircraft.
     """
+
     username = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE
