@@ -60,5 +60,6 @@ class Booking(models.Model):
     @property
     def get_html_url(self):
         url = reverse('event_edit', args=(self.pk,))
+        
         return f'<button class="btn-event" data-bs-toggle="modal" data-bs-target="#exampleModal">{self.slot.slot} | {self.aircraft} | {self.username}</button><a href="{url}"><i class="fas fa-pen"></i></a>'
 

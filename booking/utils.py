@@ -15,10 +15,16 @@ class Calendar(HTMLCalendar):
         d = ''
         for event in events_per_day:
             d += f'<li class="calendar-events"> {event.get_html_url} </li>'
-
-        if day != 0:
-            return f"<td><button class='btn date'>{day}</button><ul> {d} </ul></td>"
-        return '<td></td>'
+        
+        if day:
+            if day != 0 and len(events_per_day) == 0:
+                return f"<td class='day-free'><button class='btn date'>{day}</button><ul> {d} </ul></td>"
+            elif day != 0 and len(events_per_day) <= 3:
+                return f"<td class='day-medium'><button class='btn date'>{day}</button><ul> {d} </ul></td>"
+            else:
+                return f"<td class='day-full'><button class='btn date'>{day}</button><ul> {d} </ul></td>"
+        else:
+            return '<td class="day-null"></td>'
 
     # formats a week as a tr
     def formatweek(self, theweek, events):
