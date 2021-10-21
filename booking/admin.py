@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Booking, Aircraft
+from .models import Booking, Aircraft, Slot
 
 
 @admin.register(Aircraft)
@@ -12,14 +12,14 @@ class AircraftAdmin(admin.ModelAdmin):
     search_fields = ['reg', ]
 
 
-# @admin.register(Slot)
-# class SlotAdmin(admin.ModelAdmin):
-#     """
-#     Manages Slot allocation
-#     """
-#     list_filter = ('time',)
-#     list_display = ('time',)
-#     search_fields = ['time']
+@admin.register(Slot)
+class SlotAdmin(admin.ModelAdmin):
+    """
+    Manages Slot allocation
+    """
+    list_filter = ('slot', 'start')
+    list_display = ('slot', 'start')
+    search_fields = ['slot', 'start']
 
 
 @admin.register(Booking)

@@ -1,3 +1,5 @@
+import datetime
+from django.urls import reverse
 from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import User
@@ -10,13 +12,13 @@ SLOT = (('0800-1000', '0800-1000'), ('1000-1200', '1000-1200'),
 APPROVED = ((0, 'No'), (1, 'Yes'))
 
 
-# class Slot(models.Model):
-#     slot = models.CharField(max_length=11)
-#     start = models.TimeField(auto_now=False, auto_now_add=False,)
-#     duration = models.TimeField(auto_now=False, auto_now_add=False,)
+class Slot(models.Model):
+    slot = models.CharField(max_length=11)
+    start = models.TimeField(auto_now=False, auto_now_add=False)
+    duration = models.TimeField(auto_now=False, auto_now_add=False)
 
-#     def __str__(self):
-#         return str(self.start)
+    def __str__(self):
+        return str(self.start)
 
 
 class Aircraft(models.Model):
@@ -44,7 +46,7 @@ class Booking(models.Model):
         related_name='booked_aircraft'
     )
     date = models.DateField()
-    slot = models.CharField(max_length=11, choices=SLOT, default=False)
+    slot = models.ForeignKey(Slot, on_delete=models.CASCADE, null=False, blank=False)
     instructor_requested = models.IntegerField(choices=INSTRUCTOR_REQUIRED, default=False)
     notes = models.TextField(blank=True)
     created_on = models.DateTimeField(auto_now_add=True)
@@ -55,5 +57,10 @@ class Booking(models.Model):
         ordering = ['date', 'slot']
 
     def __str__(self):
-        return f'Booking on {self.date} at {self.slot} by {self.username}'
+        return str(self.aircraft)
+
+    @property
+    def get_html_url(self):
+        url = reverse('event_edit', args=(self.id,))
+        return f'<p>{self.aircraft}{self.username}</p><a href="{url}"><i class="fas fa-pen"></i></a>'
 

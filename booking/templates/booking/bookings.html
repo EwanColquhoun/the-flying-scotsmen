@@ -30,7 +30,7 @@
             {% for booking in bookings %}
                         <tr class="booking-row">
                             <td>{{ booking.date }}</td>
-                            <td>{{ booking.slot }}</td>
+                            <td>{{ booking.slot.slot }}</td>
                             <td>{{ booking.aircraft }}</td>
                             <td>{{ booking.notes }}</td>
                             <td><span><a href=""><i class="far fa-edit edit-icon green"></i></a></span>
