@@ -1,6 +1,6 @@
 from django.db import models
 from django.conf import settings
-# from django.contrib.auth.models import User
+from django.contrib.auth.models import User
 from cloudinary.models import CloudinaryField
 
 
@@ -8,6 +8,15 @@ INSTRUCTOR_REQUIRED = ((0, 'No'), (1, 'Yes'))
 SLOT = (('0800-1000', '0800-1000'), ('1000-1200', '1000-1200'), 
         ('1200-1400', '1200-1400'), ('1400-1600', '1400-1600'), ('1600-1800', '1600-1800'))
 APPROVED = ((0, 'No'), (1, 'Yes'))
+
+
+# class Slot(models.Model):
+#     slot = models.CharField(max_length=11)
+#     start = models.TimeField(auto_now=False, auto_now_add=False,)
+#     duration = models.TimeField(auto_now=False, auto_now_add=False,)
+
+#     def __str__(self):
+#         return str(self.start)
 
 
 class Aircraft(models.Model):
@@ -23,10 +32,11 @@ class Booking(models.Model):
     """
     Takes a booking registering the user, slot and aircraft.
     """
-
     username = models.ForeignKey(
         settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        related_name='tfs_users',
+        limit_choices_to={'is_active': True},
     )
     aircraft = models.ForeignKey(
         Aircraft,
@@ -34,10 +44,11 @@ class Booking(models.Model):
         related_name='booked_aircraft'
     )
     date = models.DateField()
-    slot = models.CharField(max_length=11, choices=SLOT)
+    slot = models.CharField(max_length=11, choices=SLOT, default=False)
     instructor_requested = models.IntegerField(choices=INSTRUCTOR_REQUIRED, default=False)
     notes = models.TextField(blank=True)
     created_on = models.DateTimeField(auto_now_add=True)
+    update_on = models.DateTimeField(auto_now_add=True)
     approved = models.IntegerField(choices=APPROVED, default=False)
 
     class Meta:

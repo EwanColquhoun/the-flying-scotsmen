@@ -28,7 +28,7 @@ class BookingAdmin(admin.ModelAdmin):
     Manages bookings
     """
     list_filter = ('date', 'aircraft', 'username', 'instructor_requested', 'approved')
-    list_display = ('date', 'slot', 'aircraft', 'username', 'instructor_requested', 'created_on', 'approved')
+    list_display = ('date', 'slot', 'aircraft', 'username', 'instructor_requested', 'created_on', 'notes', 'approved')
     search_fields = ['date', 'aircraft', 'username', 'instructor_requested']
     actions = ['approve_bookings']
 

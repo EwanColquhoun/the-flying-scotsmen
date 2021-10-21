@@ -50,7 +50,7 @@
 
             <form id="booking-form" action="{% url 'bookings' %}" method="POST">
                 {% csrf_token %}
-            {{ bookingform.as_p }}
+            {{ bookingform.as_table }}
                 <div>
                     <button type="submit" id="new_booking" class="btn btn-join">Submit</button>
                 </div>
