@@ -5,19 +5,57 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-12 mt-5 d-flex justify-content-center">
-            <h1>Calendar</h1>
-        </div>
+        <div class="col-12 d-flex justify-content-center"><h1 class="page-heading">Calendar</h1></div>
     </div>
 </div>
+
+<!-- Calendar -->
 <div class="container">
     <div class="row">
-        <div class="col-12 col-md-6">
+        <div class="col-12 col-md-10 mb-5">
             <a href="{% url 'calendar' %}?{{ prev_month }}"> Previous Month </a>
             <a href="{% url 'calendar' %}?{{ next_month }}"> Next Month </a>
             {{ calendar }}
         </div>
     </div>
 </div>
+
+<!-- existing bookings -->
+<div class="container">
+    <div class="row hide " id="booking-display">
+        <div class="col-12 col-md-10 mb-5">
+            <h3 class="page-heading">Existing Bookings</h3>
+                <table>
+                
+        {% if bookings %}
+        
+                    <tr class="table-headings">
+                        <td>Date</td>
+                        <td>Slot</td>
+                        <td>Aircraft</td>
+                        <td>Notes</td>    
+                        <td>Edit | Cancel</td>    
+                    </tr>
+        {% endif %}
+
+        {% for booking in bookings %}
+                    <tr class="booking-row">
+                        <td>{{ booking.date }}</td>
+                        <td>{{ booking.slot.slot }}</td>
+                        <td>{{ booking.aircraft }}</td>
+                        <td>{{ booking.notes }}</td>
+                        <td><span><a href=""><i class="far fa-edit edit-icon green"></i></a></span>
+                            <span><a href=""><i class="far fa-times-circle cancel-icon red"></i></a></span>
+                        </td>
+                    </tr>
+        {% empty %}
+    
+                    <span>Your bookings will appear here once approved by admin.</span> 
+        {% endfor %}
+                </table>
+        </div>
+    </div>
+</div>
+
 
 {% endblock %}

@@ -83,9 +83,11 @@ class CalendarView(generic.ListView):
         d = self.get_date(self.request.GET.get('month', None))
         cal = Calendar(d.year, d.month)
         html_cal = cal.formatmonth(withyear=True)
+        bookings = Booking.objects.filter(approved=True)
         context['calendar'] = mark_safe(html_cal)
         context['prev_month'] = self.prev_month(d)
         context['next_month'] = self.next_month(d)
+        context['bookings'] = bookings
         return context
 
     def get_date(self, req_month):
@@ -107,18 +109,32 @@ class CalendarView(generic.ListView):
         month = 'month=' + str(next_month.year) + '-' + str(next_month.month)
         return month
 
-    def event(self, request, event_id=None):
-        instance = Booking()
-        if event_id:
-            instance = get_object_or_404(Booking(), pk=event_id)
-        else:
-            instance = Booking()
+    def editBooking(self, request, booking_id):
+        booking = get_object_or_404(Booking, id=booking_id)
+        if request.method == 'POST':
+            form = BookingForm(request.POST, instance=booking)
+            if form.is_valid():
+                form.save()
+                return redirect('calendar')
+        form = BookingForm(instance=booking)
+        context = {
+            'form': form,
+            'booking': booking,
+        }
+        return render(request, "booking/calendar.html", context)
 
-        form = BookingForm(request.POST or None, instance=instance)
-        if request.POST and form.is_valid():
-            form.save()
-            return HttpResponseRedirect(reverse('booking:calendar'))
-        return render(request, 'booking/booking.html', {'form': form})
+    # def event(self, request, event_id=None):
+    #     instance = Booking()
+    #     if event_id:
+    #         instance = get_object_or_404(Booking(), pk=event_id)
+    #     else:
+    #         instance = Booking()
+
+    #     form = BookingForm(request.POST or None, instance=instance)
+    #     if request.POST and form.is_valid():
+    #         form.save()
+    #         return HttpResponseRedirect(reverse('booking:calendar'))
+    #     return render(request, 'booking/booking.html', {'form': form, 'booking': instance})
 
 
 class ContactDisplay(View):

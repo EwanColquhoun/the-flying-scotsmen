@@ -3,12 +3,10 @@ from django.urls import reverse
 from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import User
+from django.shortcuts import get_object_or_404
 from cloudinary.models import CloudinaryField
 
-
 INSTRUCTOR_REQUIRED = ((0, 'No'), (1, 'Yes'))
-SLOT = (('0800-1000', '0800-1000'), ('1000-1200', '1000-1200'), 
-        ('1200-1400', '1200-1400'), ('1400-1600', '1400-1600'), ('1600-1800', '1600-1800'))
 APPROVED = ((0, 'No'), (1, 'Yes'))
 
 
@@ -61,6 +59,6 @@ class Booking(models.Model):
 
     @property
     def get_html_url(self):
-        url = reverse('event_edit', args=(self.id,))
-        return f'<p>{self.aircraft}{self.username}</p><a href="{url}"><i class="fas fa-pen"></i></a>'
+        url = reverse('event_edit', args=(self.pk,))
+        return f'<button class="btn-event" data-bs-toggle="modal" data-bs-target="#exampleModal">{self.slot.slot} | {self.aircraft} | {self.username}</button><a href="{url}"><i class="fas fa-pen"></i></a>'
 

@@ -1,5 +1,7 @@
+// Sidebar
+
 let sidebar = document.querySelector(".sidebar");
-  let closeBtn = document.querySelector("#btn");
+let closeBtn = document.querySelector("#btn");
 
 
   closeBtn.addEventListener("click", ()=>{
@@ -40,3 +42,18 @@ let sidebar = document.querySelector(".sidebar");
 //     alert('This is a double booking, please check your date/slot/aircraft and try again.', 'warning')
 //   })
 // }
+
+const dates = document.querySelectorAll('.date')
+
+dates.forEach((date) => {
+  date.addEventListener("click", function(e){
+    let bookingDisplay = document.getElementById('booking-display');
+    console.log('click', e)
+
+    if (bookingDisplay.classList.contains('hide')) {
+      bookingDisplay.classList.replace('hide', 'show');
+    } else {
+      bookingDisplay.classList.replace('show', 'hide')
+    }
+  });
+});

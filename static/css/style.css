@@ -229,7 +229,7 @@ body {
     left: 78px;
     width: calc(100% - 78px);
     transition: all 0.5s ease;
-    z-index: 2;
+    z-index: 1;
 }
 
 .navbar {
@@ -364,6 +364,14 @@ hr:not([size]) {
 }
 
 /* Calender */
+.hide {
+  display:none;
+}
+
+.show {
+  display:inline-block;
+}
+
 .title {
   text-align: center;
   margin: 10px;
@@ -402,6 +410,7 @@ hr:not([size]) {
 ul {
   height: 100%;
   padding: 0px 5px 0px 20px;
+  list-style: none;
 }
 
 a {
