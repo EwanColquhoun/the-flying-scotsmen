@@ -47,6 +47,7 @@ class BookingDisplay(View):
         bookings = Booking.objects.filter(username=current_user, approved=True)
 
         if booking_form.is_valid():
+            booking_form.username = current_user.username
             qs = Booking.objects.filter(
                 date=booking_form.instance.date,
                 slot=booking_form.instance.slot,
@@ -84,11 +85,10 @@ class BookingDisplay(View):
                     slot=booking_form.instance.slot,
                     aircraft_id=booking_form.instance.aircraft_id,
                 ).count()
-
-            if qs == 0:
-                booking_form.save()
-                messages.add_message(request, messages.SUCCESS, 'Your booking will be added once approved by admin. Thank you.')
-                return redirect('bookings')
+                if qs == 0:
+                    booking_form.save()
+                    messages.add_message(request, messages.SUCCESS, 'Your booking will be added once approved by admin. Thank you.')
+                    return redirect('bookings')
             else:
                 messages.add_message(request, messages.WARNING, 'This is a double booking, please check date/slot and aircraft and try again. Thank you.')
                 return redirect('bookings')

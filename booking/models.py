@@ -32,12 +32,7 @@ class Booking(models.Model):
     """
     Takes a booking registering the user, slot and aircraft.
     """
-    username = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE,
-        related_name='tfs_users',
-        limit_choices_to={'is_active': True},
-    )
+    username = models.CharField(max_length=20)
     aircraft = models.ForeignKey(
         Aircraft,
         on_delete=models.CASCADE,

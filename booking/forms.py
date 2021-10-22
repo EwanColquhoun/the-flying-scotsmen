@@ -10,7 +10,7 @@ class BookingForm(forms.ModelForm):
     
     class Meta:
         model = Booking
-        fields = ('username', 'date', 'slot', 'aircraft', 'instructor_requested', 'notes')
+        fields = ('date', 'slot', 'aircraft', 'instructor_requested', 'notes')
         widgets = {
             'date': DateInput()
         }
