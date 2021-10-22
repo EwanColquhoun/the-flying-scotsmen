@@ -73,19 +73,38 @@ class BookingDisplay(View):
             },
         )
 
-    def editBooking(self, request, booking_id):
+    @staticmethod
+    def editBooking(request, booking_id):
         booking = get_object_or_404(Booking, id=booking_id)
         if request.method == 'POST':
-            form = BookingForm(request.POST, instance=booking)
-            if form.is_valid():
-                form.save()
+            booking_form = BookingForm(request.POST, instance=booking)
+            if booking_form.is_valid():
+                qs = Booking.objects.filter(
+                    date=booking_form.instance.date,
+                    slot=booking_form.instance.slot,
+                    aircraft_id=booking_form.instance.aircraft_id,
+                ).count()
+
+            if qs == 0:
+                booking_form.save()
+                messages.add_message(request, messages.SUCCESS, 'Your booking will be added once approved by admin. Thank you.')
                 return redirect('bookings')
-        form = BookingForm(instance=booking)
+            else:
+                messages.add_message(request, messages.WARNING, 'This is a double booking, please check date/slot and aircraft and try again. Thank you.')
+                return redirect('bookings')
+
+        booking_form = BookingForm(instance=booking)
         context = {
-            'form': form,
+            'form': booking_form,
             'booking': booking,
         }
         return render(request, "booking/edit_booking.html", context)
+
+    @staticmethod
+    def deleteBooking(request, booking_id):
+        booking = get_object_or_404(Booking, id=booking_id)
+        booking.delete()
+        return redirect('bookings')
 
 
 class CalendarView(generic.ListView):
