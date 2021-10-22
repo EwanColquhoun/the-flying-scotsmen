@@ -73,6 +73,20 @@ class BookingDisplay(View):
             },
         )
 
+    def editBooking(self, request, booking_id):
+        booking = get_object_or_404(Booking, id=booking_id)
+        if request.method == 'POST':
+            form = BookingForm(request.POST, instance=booking)
+            if form.is_valid():
+                form.save()
+                return redirect('bookings')
+        form = BookingForm(instance=booking)
+        context = {
+            'form': form,
+            'booking': booking,
+        }
+        return render(request, "booking/edit_booking.html", context)
+
 
 class CalendarView(generic.ListView):
     model = Booking
@@ -109,19 +123,6 @@ class CalendarView(generic.ListView):
         month = 'month=' + str(next_month.year) + '-' + str(next_month.month)
         return month
 
-    def editBooking(self, request, booking_id):
-        booking = get_object_or_404(Booking, id=booking_id)
-        if request.method == 'POST':
-            form = BookingForm(request.POST, instance=booking)
-            if form.is_valid():
-                form.save()
-                return redirect('calendar')
-        form = BookingForm(instance=booking)
-        context = {
-            'form': form,
-            'booking': booking,
-        }
-        return render(request, "booking/calendar.html", context)
 
     # def event(self, request, event_id=None):
     #     instance = Booking()
