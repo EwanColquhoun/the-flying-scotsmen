@@ -92,7 +92,7 @@ class BookingDisplay(View):
                 messages.add_message(request, messages.WARNING, 'This is a double booking, please check date/slot and aircraft and try again. Thank you.')
                 return redirect('bookings')
 
-        booking_form = BookingForm(instance=booking)
+        booking_form = BookingForm(instance=booking, user=request.user)
         context = {
             'form': booking_form,
             'booking': booking,

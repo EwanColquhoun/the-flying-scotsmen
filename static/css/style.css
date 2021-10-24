@@ -451,12 +451,13 @@ hr:not([size]) {
 
 ul {
   height: 100%;
-  padding: 0px 5px 0px 20px;
+  /* padding: 0px 5px 0px 20px; */
   list-style: none;
 }
 
 a {
-  color: #17a2b8;
+  color: unset;
+  text-decoration: none;
 }
 
 /* SignUp Page */

@@ -58,7 +58,7 @@ class Booking(models.Model):
         url = reverse('edit_booking', args=(self.pk,))
         
         if str(self.aircraft) == 'G-BTXG':
-            return f'<button class="btn-event aircraft-purple" data-bs-toggle="modal" data-bs-target="#exampleModal">{self.slot.slot} </button>'
+            return f'<button class="btn-event aircraft-purple mt-2" data-bs-toggle="modal" data-bs-target="#exampleModal"><a href={url}>{self.slot}</a></button>'
         else:
-            return f'<button class="btn-event aircraft-green" data-bs-toggle="modal" data-bs-target="#exampleModal">{self.slot.slot} </button>'
+            return f'<button class="btn-event aircraft-green mt-2" data-bs-toggle="modal" data-bs-target="#exampleModal"><a href={url}>{self.slot}</a></button>'
 
