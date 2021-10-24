@@ -57,5 +57,8 @@ class Booking(models.Model):
     def get_html_url(self):
         url = reverse('edit_booking', args=(self.pk,))
         
-        return f'<button class="btn-event" data-bs-toggle="modal" data-bs-target="#exampleModal">{self.slot.slot} | {self.aircraft} | {self.username}</button><a href="{url}"><i class="fas fa-pen"></i></a>'
+        if str(self.aircraft) == 'G-BTXG':
+            return f'<button class="btn-event aircraft-purple" data-bs-toggle="modal" data-bs-target="#exampleModal">{self.slot.slot} </button>'
+        else:
+            return f'<button class="btn-event aircraft-green" data-bs-toggle="modal" data-bs-target="#exampleModal">{self.slot.slot} </button>'
 

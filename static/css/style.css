@@ -417,8 +417,10 @@ hr:not([size]) {
 
 .btn-event {
   border: unset;
-  background-color: #E4E9F7;
-  border-radius: 10px;
+  border-radius: 5px;
+  width: 80px;
+  height: 23px;
+  box-shadow: 3px 3px cadetblue;
 }
 
 .day-null {
@@ -435,6 +437,16 @@ hr:not([size]) {
 
 .day-full {
   background-color: rgba(243, 119, 115, 0.5);
+}
+
+.aircraft-purple {
+  background-color: purple;
+  color: #E4E9F7;
+}
+
+.aircraft-green {
+  background-color: green;
+  color: #E4E9F7;
 }
 
 ul {
