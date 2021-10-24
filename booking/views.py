@@ -37,17 +37,16 @@ class BookingDisplay(View):
             'booking/bookings.html',
             {
                 "bookings": bookings,
-                "bookingform": BookingForm(),
+                "bookingform": BookingForm(user=request.user),
             },
         )
 
     def post(self, request, *args, **kwargs):
         current_user = request.user
-        booking_form = BookingForm(data=request.POST)
+        booking_form = BookingForm(data=request.POST, user=request.user)
         bookings = Booking.objects.filter(username=current_user, approved=True)
 
         if booking_form.is_valid():
-            booking_form.username = current_user.username
             qs = Booking.objects.filter(
                 date=booking_form.instance.date,
                 slot=booking_form.instance.slot,
@@ -63,14 +62,14 @@ class BookingDisplay(View):
                 messages.add_message(request, messages.WARNING, 'This is a double booking, please check date/slot and aircraft and try again. Thank you.')
                 return redirect('bookings')
         else:
-            booking_form = BookingForm()
+            booking_form = BookingForm(user=request.user)
     
         return render(
             request,
             'booking/bookings.html',
             {
                 "bookings": bookings,
-                "bookingform": BookingForm(),
+                "bookingform": BookingForm(user=request.user),
             },
         )
 
