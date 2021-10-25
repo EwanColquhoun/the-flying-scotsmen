@@ -137,7 +137,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-               <div class="d-grid gap-3">
+               <!-- <div class="d-grid gap-3">
                     <table>
                 
             {% if bookings %}
@@ -146,14 +146,14 @@
                             <td>Date</td>
                             <td>Slot</td>
                             <td>Aircraft</td>
-                            <td>Notes</td>    
+                            <td>day</td>    
                             <td>Edit | Cancel</td>    
                         </tr>
             {% endif %}
-        
-            {% for booking in bookings %}
-            <span>{{booking.date.day|safe}} / {{day|safe}}</span>
-                {% if booking.date.day|safe == day|safe %}
+
+            {% for booking in bookings %} 
+            <span>{{booking.date.day|safe}} / {{day.day}}</span>
+                {% if booking.date.day|safe == day.day|safe %}
                             <tr class="booking-row">
                                 <td>{{ booking.date }}</td>
                                 <td>{{ booking.slot.slot }}</td>
@@ -170,7 +170,7 @@
             
             {% endfor %}
                     </table>
-                </div>
+                </div> -->
             </div>
             <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

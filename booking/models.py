@@ -63,6 +63,6 @@ class Booking(models.Model):
         url = reverse('edit_booking', args=(self.pk,))
         
         if str(self.aircraft) == 'G-BTXG':
-            return f'<a class="btn-events aircraft-purple mt-2 calendar-events" href={url}>{self.slot} | {self.username}</a>'
+            return f'<a class="btn-events aircraft-purple mt-2 calendar-events" name={self.date.day} href={url}>{self.slot} | {self.username}</a>'
         else:
-            return f'<a class="btn-events aircraft-green mt-2 calendar-events" href={url}>{self.slot} | {self.username}</a>'
+            return f'<a class="btn-events aircraft-green mt-2 calendar-events" name={self.date.day} href={url}>{self.slot} | {self.username}</a>'

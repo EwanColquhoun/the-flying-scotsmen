@@ -60,12 +60,21 @@ let closeBtn = document.querySelector("#btn");
 
 
 const dates = document.querySelectorAll('.date')
+let dayBookings = document.querySelectorAll('.calendar-events');
+let modalBody = document.querySelector('.modal-body')
 
 dates.forEach((date) => {
   date.addEventListener('click', function() {
-    let today = date.getAttribute('dataset-tag')
-    let modalBody = document.querySelector('.modal-body')
-    modalBody.innerHTML.replace('today', `${today}|safe`)
-    console.log(day)
-})
+    let today = date.getAttribute('name'); //gets the number of the date from the buttons
+
+   dayBookings.forEach((day) => {
+      let now = day.getAttribute('name') // gets the number from the event
+      if (now === today){
+        modalBody.innerHTML += `<div><p>You have bookings for today!</p></div>`
+
+      } else {
+        modalBody.innerHTML += `<div><p>You have no bookings for today!</p></div>`
+      };
+   });
+});
 });
