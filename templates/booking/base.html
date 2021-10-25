@@ -127,9 +127,64 @@
         {% endif %}
     </div>
 
-    <!-- messages -->
 
+    <!-- modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="myModalLabel">View Bookings</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+               <div class="d-grid gap-3">
+                    <table>
+                
+            {% if bookings %}
+        
+                        <tr class="table-headings">
+                            <td>Date</td>
+                            <td>Slot</td>
+                            <td>Aircraft</td>
+                            <td>Notes</td>    
+                            <td>Edit | Cancel</td>    
+                        </tr>
+            {% endif %}
+        
+            {% for booking in bookings %}
+            <span>{{booking.date.day|safe}} / {{day|safe}}</span>
+                {% if booking.date.day|safe == day|safe %}
+                            <tr class="booking-row">
+                                <td>{{ booking.date }}</td>
+                                <td>{{ booking.slot.slot }}</td>
+                                <td>{{ booking.aircraft }}</td>
+                                <td>{{ booking.notes }}</td>
+                                <td><span><a href="/edit/{{ booking.id }}"><i class="far fa-edit edit-icon green"></i></a></span>
+                                    <span><a href="/delete/{{ booking.id }}"><i class="far fa-times-circle cancel-icon red"></i></a></span>
+                                </td>
+                            </tr>
+                {% endif %}
+            {% empty %}
+        
+                        <span>Your bookings will appear here once approved by admin.</span> 
+            
+            {% endfor %}
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+        </div>
+    </div>
+        
+
+
+    <!-- main-content -->
     <main class="home-section flex-shrink-0 main-bg">
+        <!-- messages -->
         <div class="container">
             <div class="row">
                 <div class="col-md-8 offset-md-2">
@@ -146,8 +201,6 @@
             </div>
         </div>
     
-    <!-- main content -->
-
         {% block content %}
 
         {% endblock %}

@@ -396,7 +396,18 @@ hr:not([size]) {
 .calendar td {
   width: 200px;
   height: 150px;
-  padding: 20px 0px 0px 5px;
+  padding: 10px 0px 0px 3px;
+}
+
+.calendar li {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.calendar-events {
+  width: 100%;
 }
 
 .month {
@@ -407,21 +418,21 @@ hr:not([size]) {
   font-size: 16px;
   border: none;
   background-color: #17a2b8;
-  margin-top: 22px;
+  margin-top: 40px;
 }
 
 .date:active, .date:hover {
   background-color: #E4E9F7;
   border: 3px solid #17a2b8;
 }
-
+/* 
 .btn-event {
   border: unset;
-  border-radius: 5px;
-  width: 80px;
+  border-radius: 5px; 
+  width: 100%;
   height: 23px;
   box-shadow: 3px 3px cadetblue;
-}
+} */
 
 .day-null {
   background-color: rgba(150, 150, 150, 0.5);
@@ -451,12 +462,11 @@ hr:not([size]) {
 
 ul {
   height: 100%;
-  /* padding: 0px 5px 0px 20px; */
+  padding: 0px 5px 0px 0px;
   list-style: none;
 }
 
-a {
-  color: unset;
+.calendar a {
   text-decoration: none;
 }
 

@@ -2,6 +2,7 @@ from datetime import datetime, timedelta
 from calendar import HTMLCalendar
 from .models import Booking
 
+
 class Calendar(HTMLCalendar):
     def __init__(self, year=None, month=None):
         self.year = year
@@ -11,20 +12,25 @@ class Calendar(HTMLCalendar):
     # formats a day as a td
     # filter events by day
     def formatday(self, day, events):
+        def __init__(self):
+            global tDay
+            tDay = day
+
         events_per_day = events.filter(date__day=day)
         d = ''
         for event in events_per_day:
-            d += f'<li class="calendar-events"> {event.get_html_url} </li>'
-        
+            d += f'<li> {event.get_html_url} </li>'
+
         if day:
             if day != 0 and len(events_per_day) == 0:
-                return f"<td class='day-free'><button class='btn date'>{day}</button><ul> {d} </ul></td>"
+                return f"<td class='day-free'><button class='btn date' data-bs-toggle='modal' data-bs-target='#myModal' dataset-tag={day}>{day}</button><ul> {d} </ul></td>"
             elif day != 0 and len(events_per_day) <= 3:
-                return f"<td class='day-medium'><button class='btn date'>{day}</button><ul> {d} </ul></td>"
+                return f"<td class='day-medium'><button class='btn date' data-bs-toggle='modal' data-bs-target='#myModal' dataset-tag={day}>{day}</button><ul> {d} </ul></td>"
             else:
-                return f"<td class='day-full'><button class='btn date'>{day}</button><ul> {d} </ul></td>"
+                return f"<td class='day-full'><button class='btn date' data-bs-toggle='modal' data-bs-target='#myModal' dataset-tag={day}>{day}</button><ul> {d} </ul></td>"
         else:
             return '<td class="day-null"></td>'
+
 
     # formats a week as a tr
     def formatweek(self, theweek, events):

@@ -1,6 +1,7 @@
 import datetime
 from django.urls import reverse
 from django.db import models
+from django import forms
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
@@ -11,12 +12,16 @@ APPROVED = ((0, 'No'), (1, 'Yes'))
 
 
 class Slot(models.Model):
+
+    class Meta:
+        ordering = ['start']
+
     slot = models.CharField(max_length=11)
     start = models.TimeField(auto_now=False, auto_now_add=False)
     duration = models.TimeField(auto_now=False, auto_now_add=False)
 
     def __str__(self):
-        return str(self.start)
+        return str(self.slot)
 
 
 class Aircraft(models.Model):
@@ -58,7 +63,6 @@ class Booking(models.Model):
         url = reverse('edit_booking', args=(self.pk,))
         
         if str(self.aircraft) == 'G-BTXG':
-            return f'<button class="btn-event aircraft-purple mt-2" data-bs-toggle="modal" data-bs-target="#exampleModal"><a href={url}>{self.slot}</a></button>'
+            return f'<a class="btn-events aircraft-purple mt-2 calendar-events" href={url}>{self.slot} | {self.username}</a>'
         else:
-            return f'<button class="btn-event aircraft-green mt-2" data-bs-toggle="modal" data-bs-target="#exampleModal"><a href={url}>{self.slot}</a></button>'
-
+            return f'<a class="btn-events aircraft-green mt-2 calendar-events" href={url}>{self.slot} | {self.username}</a>'

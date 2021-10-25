@@ -108,7 +108,9 @@ class BookingDisplay(View):
 
 class CalendarView(generic.ListView):
     model = Booking
+    queryset = Booking.objects.filter(approved=True)
     template_name = 'booking/calendar.html'
+
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -120,6 +122,7 @@ class CalendarView(generic.ListView):
         context['prev_month'] = self.prev_month(d)
         context['next_month'] = self.next_month(d)
         context['bookings'] = bookings
+        context['day'] = d.day
         return context
 
     def get_date(self, req_month):

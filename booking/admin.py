@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django import forms
 from .models import Booking, Aircraft, Slot
 
 
@@ -17,6 +18,13 @@ class SlotAdmin(admin.ModelAdmin):
     """
     Manages Slot allocation
     """
+    class Meta:
+        ordering = ['start']
+        fields = ('start', 'duration', )
+        widgets = {
+            'start': forms.TimeInput(format='%H:%M'),
+            'duration': forms.TimeInput(format='%H'),
+        }
     list_filter = ('slot', 'start')
     list_display = ('slot', 'start')
     search_fields = ['slot', 'start']

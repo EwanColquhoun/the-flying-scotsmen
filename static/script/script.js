@@ -43,17 +43,29 @@ let closeBtn = document.querySelector("#btn");
 //   })
 // }
 
+// const dates = document.querySelectorAll('.date')
+
+// dates.forEach((date) => {
+//   date.addEventListener("click", function(e){
+//     let bookingDisplay = document.getElementById('booking-display');
+//     console.log('click', e)
+
+//     if (bookingDisplay.classList.contains('hide')) {
+//       bookingDisplay.classList.replace('hide', 'show');
+//     } else {
+//       bookingDisplay.classList.replace('show', 'hide')
+//     }
+//   });
+// });
+
+
 const dates = document.querySelectorAll('.date')
 
 dates.forEach((date) => {
-  date.addEventListener("click", function(e){
-    let bookingDisplay = document.getElementById('booking-display');
-    console.log('click', e)
-
-    if (bookingDisplay.classList.contains('hide')) {
-      bookingDisplay.classList.replace('hide', 'show');
-    } else {
-      bookingDisplay.classList.replace('show', 'hide')
-    }
-  });
+  date.addEventListener('click', function() {
+    let today = date.getAttribute('dataset-tag')
+    let modalBody = document.querySelector('.modal-body')
+    modalBody.innerHTML.replace('today', `${today}|safe`)
+    console.log(day)
+})
 });
