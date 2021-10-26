@@ -369,7 +369,7 @@ hr:not([size]) {
 }
 
 .show {
-  display:inline-block;
+  display:block;
 }
 
 .title {

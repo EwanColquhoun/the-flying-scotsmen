@@ -114,7 +114,7 @@ class CalendarView(generic.ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         d = self.get_date(self.request.GET.get('month', None))
-        print(f"VALUE OF D: {d}")
+        # print(f"VALUE OF D: {d}")
         cal = Calendar(d.year, d.month)
         html_cal = cal.formatmonth(withyear=True)
         bookings = Booking.objects.filter(approved=True)
@@ -122,7 +122,7 @@ class CalendarView(generic.ListView):
         context['prev_month'] = self.prev_month(d)
         context['next_month'] = self.next_month(d)
         context['bookings'] = bookings
-        context['day'] = d # this is where I need to send the 'day'variable. i have tried using 'd', as in the day today and that works but only today!
+        context['day'] = d  # this is where I need to send the 'day'variable. i have tried using 'd', as in the day today and that works but only today!
         return context
 
     def get_date(self, req_month):

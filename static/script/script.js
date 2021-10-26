@@ -60,21 +60,37 @@ let closeBtn = document.querySelector("#btn");
 
 
 const dates = document.querySelectorAll('.date')
-let dayBookings = document.querySelectorAll('.calendar-events');
 let modalBody = document.querySelector('.modal-body')
+let dayBookings = document.querySelectorAll('.calendar-events');
+let siblings = []
 
 dates.forEach((date) => {
   date.addEventListener('click', function() {
-    let today = date.getAttribute('name'); //gets the number of the date from the buttons
+    let today = date.getAttribute('name');
+    console.log(today,'= today'); //gets the number of the date from the buttons
+    // console.log(dayBookings, 'dayBookings')
 
-   dayBookings.forEach((day) => {
-      let now = day.getAttribute('name') // gets the number from the event
-      if (now === today){
-        modalBody.innerHTML += `<div><p>You have bookings for today!</p></div>`
+    // let dailyEvents = document.querySelectorAll('.event')
+    let eventDateNum = 29
+    console.log(eventDateNum, '=eventdatenum')
+    // dailyEvents.forEach((activity) => {
+    //   let eventDate = activity.getElementsByClassName('btn-events')
+    //   eventDateNum += eventDate.getAttribute('name')
+    //   console.log(eventDate[0].getAttribute('name'), '=eventdatenum')
 
+  
+    //   console.log(eventDate,' = eventDate');
+    // });
+    let bookings = document.querySelectorAll(`#booking_${today}`)
+    console.log(bookings)
+    for (let i = 0; i <= bookings.length; i++){
+      if (eventDateNum == today){
+        console.log(bookings[i], 'bookings[i]')
+        bookings[i].classList.replace('hide', 'show')
       } else {
-        modalBody.innerHTML += `<div><p>You have no bookings for today!</p></div>`
+        // bookings[i].classList.replace('show', 'hide')
+        console.log('no bookings')
       };
-   });
-});
-});
+    };
+  });
+});  

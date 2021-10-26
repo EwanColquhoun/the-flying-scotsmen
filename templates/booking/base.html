@@ -137,7 +137,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-               <!-- <div class="d-grid gap-3">
+               <div class="d-grid gap-3">
                     <table>
                 
             {% if bookings %}
@@ -152,9 +152,7 @@
             {% endif %}
 
             {% for booking in bookings %} 
-            <span>{{booking.date.day|safe}} / {{day.day}}</span>
-                {% if booking.date.day|safe == day.day|safe %}
-                            <tr class="booking-row">
+                            <tr id='booking_{{booking.date.day}}'class="booking-row hide">
                                 <td>{{ booking.date }}</td>
                                 <td>{{ booking.slot.slot }}</td>
                                 <td>{{ booking.aircraft }}</td>
@@ -163,14 +161,13 @@
                                     <span><a href="/delete/{{ booking.id }}"><i class="far fa-times-circle cancel-icon red"></i></a></span>
                                 </td>
                             </tr>
-                {% endif %}
             {% empty %}
         
                         <span>Your bookings will appear here once approved by admin.</span> 
             
             {% endfor %}
                     </table>
-                </div> -->
+                </div>
             </div>
             <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
