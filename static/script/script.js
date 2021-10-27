@@ -62,35 +62,31 @@ let closeBtn = document.querySelector("#btn");
 const dates = document.querySelectorAll('.date')
 let modalBody = document.querySelector('.modal-body')
 let dayBookings = document.querySelectorAll('.calendar-events');
-let siblings = []
 
 dates.forEach((date) => {
   date.addEventListener('click', function() {
     let today = date.getAttribute('name');
-    console.log(today,'= today'); //gets the number of the date from the buttons
-    // console.log(dayBookings, 'dayBookings')
-
-    // let dailyEvents = document.querySelectorAll('.event')
-    let eventDateNum = 29
-    console.log(eventDateNum, '=eventdatenum')
-    // dailyEvents.forEach((activity) => {
-    //   let eventDate = activity.getElementsByClassName('btn-events')
-    //   eventDateNum += eventDate.getAttribute('name')
-    //   console.log(eventDate[0].getAttribute('name'), '=eventdatenum')
-
-  
-    //   console.log(eventDate,' = eventDate');
-    // });
+    console.log(today,'= today'); 
     let bookings = document.querySelectorAll(`#booking_${today}`)
-    console.log(bookings)
-    for (let i = 0; i <= bookings.length; i++){
-      if (eventDateNum == today){
-        console.log(bookings[i], 'bookings[i]')
-        bookings[i].classList.replace('hide', 'show')
-      } else {
-        // bookings[i].classList.replace('show', 'hide')
-        console.log('no bookings')
-      };
+
+    let eventBooking = document.querySelectorAll('.booking_list')
+    console.log(eventBooking, 'eventBooking')
+    if (eventBooking[28].firstChild.nextSibling.getAttribute('name') == today){
+      console.log('correct date')
+    }
+    eventBooking.forEach((book) => {
+
+      eNumber = book.getAttribute('name') //This it the number I need to get from the event(booking). its under a name attribute.
+      console.log(eNumber, '=eNumber')
+
+      console.log(bookings, 'bookings')
+      for (let i = 0; i <= bookings.length; i++){
+          console.log(bookings[i], 'bookings[i]')
+          bookings[i].classList.toggle('show')
+          // if (bookings = null ){
+          //   bookings[i].classList.toggle('hide')
+          // }
     };
   });
 });  
+});
