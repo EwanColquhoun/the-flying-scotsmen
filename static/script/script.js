@@ -63,50 +63,76 @@ const dates = document.querySelectorAll('.date')
 let modalBody = document.querySelector('.modal-body')
 let dayBookings = document.querySelectorAll('.calendar-events');
 const modal = document.getElementById('myModal')
+const noBookings = document.getElementById('no-bookings-text') 
+const bookingTable = document.getElementById('booking-table')
 
 dates.forEach((date) => {
   date.addEventListener('click', function() {
     let today = date.getAttribute('name');
-    console.log(today,'= today'); 
+    // console.log(today,'= today'); 
     let bookings = document.querySelectorAll(`.booking_${today}`)
 
-    let eventBooking = document.querySelectorAll('.booking_list')
-    console.log(eventBooking, 'eventBooking')
-    // if (eventBooking[28].firstChild.nextSibling.getAttribute('name') == today){
-    //   console.log('correct date')
-    // }
-      // eNumber = book.getAttribute('name') //This it the number I need to get from the event(booking). its under a name attribute.
-      // console.log(eNumber, '=eNumber')
-      
-      console.log(bookings, 'bookings')
-      if (bookings.length === 0 ){
-        for (let i = 0; i <= bookings.length; i++){
-            console.log('no bookings')
-            // bookings[i].classList.replace('show', 'hide')
-            console.log('booking hide 1')
-        } 
-      } else {
-        // date.addEventListener('show.bs.modal', function() {
-          for (let i = 0; i <= bookings.length; i++){
-              console.log(bookings[i], 'bookings[i]')
-              num = ''
-              // if (bookings[i].classList.contains(`booking_${today}`)){
-                num += today
-              //   console.log(num, 'num')
-              //   console.log(`booking contains ${today}`)
-                if (num !== today && bookings[i].classList.contains('show')){
-                  bookings[i].classList.replace('show', 'hide')
-                  console.log('booking hide2')
-                } else {
-                  bookings[i].classList.replace('hide', 'show')
-                  console.log('booking show');
-                  modal.addEventListener('hidden.bs.modal', function () {
-                    bookings[i].classList.replace('show', 'hide')
-                    console.log('modal to close booking')
-                  });
-                }  
-              }
-        // });
+    console.log(bookings, 'bookings')
+    if (bookings.length === 0 ){
+      bookingTable.classList.replace('show', 'hide')
+      noBookings.classList.replace('hide', 'show')
+    } else {
+      noBookings.classList.replace('show', 'hide')
+      bookingTable.classList.replace('hide', 'show')
+      for (let a = 0; a <= bookings.length; a++){
+          console.log(bookings[a], 'bookings[i]')
+          num = ''
+          num += today
+          if (num !== today && bookings[a].classList.contains('show')){
+            bookings[a].classList.replace('show', 'hide')
+            // console.log('booking hide2')
+          } else {
+            bookings[a].classList.replace('hide', 'show')
+            // console.log('booking show');
+            modal.addEventListener('hidden.bs.modal', function () {
+              bookings[a].classList.replace('show', 'hide')
+              // console.log('modal to close booking')
+            });
+          }  
       }
+    }
   }); 
 });
+
+function modalBookingContent(){
+  return modalBody.innerHTML = ` <div class="d-grid gap-3">
+  <table>
+
+{% if bookings %}
+
+      <tr class="table-headings">
+          <td>Date</td>
+          <td>Slot</td>
+          <td>Aircraft</td>
+          <td>day</td>    
+          <td>Edit | Cancel</td>    
+      </tr>
+{% endif %}
+
+{% for booking in bookings %} 
+          <tr class="booking-row hide booking_{{booking.date.day}}">
+              <td>{{ booking.date }}</td>
+              <td>{{ booking.slot.slot }}</td>
+              <td>{{ booking.aircraft }}</td>
+              <td>{{ booking.notes }}</td>
+              <td><span><a href="/edit/{{ booking.id }}"><i class="far fa-edit edit-icon green"></i></a></span>
+                  <span><a href="/delete/{{ booking.id }}"><i class="far fa-times-circle cancel-icon red"></i></a></span>
+              </td>
+          </tr>
+{% empty %}
+
+      <span>Your bookings will appear here once approved by admin.</span> 
+
+{% endfor %}
+  </table>
+</div>`
+}
+
+function modalEmpty(){
+ return modalBody.innerHTML = `<div>There are no bookings for the selected day</div>`
+}

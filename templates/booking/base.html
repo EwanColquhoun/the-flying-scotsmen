@@ -138,8 +138,9 @@
             </div>
             <div class="modal-body">
                <div class="d-grid gap-3">
-                    <table>
-                
+                    <div id="no-bookings-text"class="hide">There are no bookings for the selected date</div>
+                    <table id="booking-table" class="hide">
+                        
             {% if bookings %}
         
                         <tr class="table-headings">
