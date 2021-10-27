@@ -19,11 +19,11 @@ class Calendar(HTMLCalendar):
 
         if day:
             if day != 0 and len(events_per_day) == 0:
-                return f"<td class='day-free'><a class='btn date' data-bs-toggle='modal' data-bs-target='#myModal' name={day}>{day}</a><ul class='booking_list'> {d} </ul></td>"
+                return f"<td class='day-free'><a class='btn date' data-bs-toggle='modal' data-bs-target='#myModal' name={self.month}_{day}>{day}</a><ul class='booking_list'> {d} </ul></td>"
             elif day != 0 and len(events_per_day) <= 3:
-                return f"<td class='day-medium'><a class='btn date' data-bs-toggle='modal' data-bs-target='#myModal' name={day}>{day}</a><ul class='booking_list'> {d} </ul></td>"
+                return f"<td class='day-medium'><a class='btn date' data-bs-toggle='modal' data-bs-target='#myModal' name={self.month}_{day}>{day}</a><ul class='booking_list'> {d} </ul></td>"
             else:
-                return f"<td class='day-full'><a class='btn date' data-bs-toggle='modal' data-bs-target='#myModal' name={day}>{day}</a><ul class='booking_list'> {d} </ul></td>"
+                return f"<td class='day-full'><a class='btn date' data-bs-toggle='modal' data-bs-target='#myModal' name={self.month}_{day}>{day}</a><ul class='booking_list'> {d} </ul></td>"
         else:
             return '<td class="day-null day"></td>'
 

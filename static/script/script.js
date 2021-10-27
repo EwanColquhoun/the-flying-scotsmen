@@ -69,7 +69,7 @@ const bookingTable = document.getElementById('booking-table')
 dates.forEach((date) => {
   date.addEventListener('click', function() {
     let today = date.getAttribute('name');
-    // console.log(today,'= today'); 
+    console.log(today,'= today'); 
     let bookings = document.querySelectorAll(`.booking_${today}`)
 
     console.log(bookings, 'bookings')
@@ -83,6 +83,7 @@ dates.forEach((date) => {
           console.log(bookings[a], 'bookings[i]')
           num = ''
           num += today
+          console.log(num, '/', today)
           if (num !== today && bookings[a].classList.contains('show')){
             bookings[a].classList.replace('show', 'hide')
             // console.log('booking hide2')
