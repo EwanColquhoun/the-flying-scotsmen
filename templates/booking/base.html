@@ -152,7 +152,7 @@
             {% endif %}
 
             {% for booking in bookings %} 
-                            <tr id='booking_{{booking.date.day}}'class="booking-row hide">
+                            <tr class="booking-row hide booking_{{booking.date.day}}">
                                 <td>{{ booking.date }}</td>
                                 <td>{{ booking.slot.slot }}</td>
                                 <td>{{ booking.aircraft }}</td>

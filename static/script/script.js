@@ -62,31 +62,51 @@ let closeBtn = document.querySelector("#btn");
 const dates = document.querySelectorAll('.date')
 let modalBody = document.querySelector('.modal-body')
 let dayBookings = document.querySelectorAll('.calendar-events');
+const modal = document.getElementById('myModal')
 
 dates.forEach((date) => {
   date.addEventListener('click', function() {
     let today = date.getAttribute('name');
     console.log(today,'= today'); 
-    let bookings = document.querySelectorAll(`#booking_${today}`)
+    let bookings = document.querySelectorAll(`.booking_${today}`)
 
     let eventBooking = document.querySelectorAll('.booking_list')
     console.log(eventBooking, 'eventBooking')
-    if (eventBooking[28].firstChild.nextSibling.getAttribute('name') == today){
-      console.log('correct date')
-    }
-    eventBooking.forEach((book) => {
-
-      eNumber = book.getAttribute('name') //This it the number I need to get from the event(booking). its under a name attribute.
-      console.log(eNumber, '=eNumber')
-
+    // if (eventBooking[28].firstChild.nextSibling.getAttribute('name') == today){
+    //   console.log('correct date')
+    // }
+      // eNumber = book.getAttribute('name') //This it the number I need to get from the event(booking). its under a name attribute.
+      // console.log(eNumber, '=eNumber')
+      
       console.log(bookings, 'bookings')
-      for (let i = 0; i <= bookings.length; i++){
-          console.log(bookings[i], 'bookings[i]')
-          bookings[i].classList.toggle('show')
-          // if (bookings = null ){
-          //   bookings[i].classList.toggle('hide')
-          // }
-    };
-  });
-});  
+      if (bookings.length === 0 ){
+        for (let i = 0; i <= bookings.length; i++){
+            console.log('no bookings')
+            // bookings[i].classList.replace('show', 'hide')
+            console.log('booking hide 1')
+        } 
+      } else {
+        // date.addEventListener('show.bs.modal', function() {
+          for (let i = 0; i <= bookings.length; i++){
+              console.log(bookings[i], 'bookings[i]')
+              num = ''
+              // if (bookings[i].classList.contains(`booking_${today}`)){
+                num += today
+              //   console.log(num, 'num')
+              //   console.log(`booking contains ${today}`)
+                if (num !== today && bookings[i].classList.contains('show')){
+                  bookings[i].classList.replace('show', 'hide')
+                  console.log('booking hide2')
+                } else {
+                  bookings[i].classList.replace('hide', 'show')
+                  console.log('booking show');
+                  modal.addEventListener('hidden.bs.modal', function () {
+                    bookings[i].classList.replace('show', 'hide')
+                    console.log('modal to close booking')
+                  });
+                }  
+              }
+        // });
+      }
+  }); 
 });
