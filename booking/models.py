@@ -1,4 +1,4 @@
-import datetime
+from datetime import date
 from django.urls import reverse
 from django.db import models
 from django import forms
@@ -44,7 +44,7 @@ class Booking(models.Model):
         on_delete=models.CASCADE,
         related_name='booked_aircraft'
     )
-    date = models.DateField()
+    date = models.DateField(default=date.today)
     slot = models.ForeignKey(Slot, on_delete=models.CASCADE, null=False, blank=False)
     instructor_requested = models.IntegerField(choices=INSTRUCTOR_REQUIRED, default=False)
     notes = models.TextField(blank=True)
@@ -63,6 +63,7 @@ class Booking(models.Model):
         url = reverse('edit_booking', args=(self.pk,))
         
         if str(self.aircraft) == 'G-BTXG':
-            return f'<a class="btn-events aircraft-purple calendar-events" name={self.date.month}_{self.date.day} href={url}>{self.slot} | {self.username}</a>'
+            return f'<span class="btn-events aircraft-purple calendar-events" name={self.date.month}_{self.date.day}>{self.slot} | {self.username}</span>'
         else:
-            return f'<a class="btn-events aircraft-green calendar-events" name={self.date.month}_{self.date.day} href={url}>{self.slot} | {self.username}</a>'
+            return f'<span class="btn-events aircraft-green calendar-events" name={self.date.month}_{self.date.day}>{self.slot} | {self.username}</span>'
+            # f'<a class="btn-events aircraft-green calendar-events" name={self.date.month}_{self.date.day} href={url}>{self.slot} | {self.username}</a>'

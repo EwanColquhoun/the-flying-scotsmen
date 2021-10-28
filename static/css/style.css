@@ -369,7 +369,8 @@ hr:not([size]) {
 }
 
 .show {
-  display:block;
+  display:revert;
+  justify-content: center;
 }
 
 .title {
@@ -379,6 +380,10 @@ hr:not([size]) {
 
 .booking_list {
   margin-bottom: 0px;
+}
+
+.booking-table > tbody {
+  width: 80%;
 }
 
 .calendar {
@@ -488,6 +493,15 @@ ul {
 }
 
 @media (max-width: 1100px) {
+  .sub-heading {
+    font-size: large;
+    padding: 10px;
+  }
+
+  .bookings {
+    font-size: smaller;
+  }
+
   #reg1, #reg2 {
     display: none;
   }
@@ -543,5 +557,14 @@ ul {
 @media (max-width: 800px) {
   .calendar {
     width: 80vw;
+  }
+
+  .page-heading {
+    padding: 10px;
+  }
+
+  .booking-row td,
+  .table-headings {
+    padding: 7px;
   }
 }

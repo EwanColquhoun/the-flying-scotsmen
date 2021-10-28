@@ -77,7 +77,7 @@ class BookingDisplay(View):
     def editBooking(request, booking_id):
         booking = get_object_or_404(Booking, id=booking_id)
         if request.method == 'POST':
-            booking_form = BookingForm(request.POST, instance=booking)
+            booking_form = BookingForm(request.POST, instance=booking, user=request.user)
             if booking_form.is_valid():
                 qs = Booking.objects.filter(
                     date=booking_form.instance.date,
@@ -85,22 +85,24 @@ class BookingDisplay(View):
                     aircraft_id=booking_form.instance.aircraft_id,
                 ).count()
                 if qs == 0:
+                    booking.approved= False
                     booking_form.save()
                     messages.add_message(request, messages.SUCCESS, 'Your booking will be added once approved by admin. Thank you.')
                     return redirect('bookings')
-            else:
-                messages.add_message(request, messages.WARNING, 'This is a double booking, please check date/slot and aircraft and try again. Thank you.')
-                return redirect('bookings')
+                else:
+                    messages.add_message(request, messages.WARNING, 'This is a double booking, please check date/slot and aircraft and try again. Thank you.')
+                    return redirect('edit_booking', booking.id)
 
-        booking_form = BookingForm(instance=booking, user=request.user)
-        context = {
-            'form': booking_form,
-            'booking': booking,
-        }
+        else:
+            booking_form = BookingForm(instance=booking, user=request.user)
+            context = {
+                'form': booking_form,
+                'booking': booking,
+            }
         return render(request, "booking/edit_booking.html", context)
 
     @staticmethod
-    def deleteBooking(request, booking_id):
+    def deleteBooking(booking_id):
         booking = get_object_or_404(Booking, id=booking_id)
         booking.delete()
         return redirect('bookings')
@@ -110,6 +112,7 @@ class CalendarView(generic.ListView):
     model = Booking
     queryset = Booking.objects.filter(approved=True)
     template_name = 'booking/calendar.html'
+
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

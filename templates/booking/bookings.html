@@ -12,9 +12,9 @@
 <div class="container">
     <div class="row">
         <div class="col-12 col-md-8 mb-5">
-            <h3 class="page-heading">Existing Bookings for {{ request.user.username }}:</h3>
+            <h3 class="sub-heading">Existing Bookings for {{ request.user.username }}:</h3>
                 <div class="d-grid gap-3">
-                    <table>
+                    <table class="bookings">
                    
             {% if bookings %}
            
@@ -22,17 +22,17 @@
                             <td>Date</td>
                             <td>Slot</td>
                             <td>Aircraft</td>
-                            <td>Notes</td>    
+                            <!-- <td>Notes</td>     -->
                             <td>Edit | Cancel</td>    
                         </tr>
             {% endif %}
 
             {% for booking in bookings %}
                         <tr class="booking-row">
-                            <td>{{ booking.date }}</td>
+                            <td>{{ booking.date|date:'d/m' }}</td>
                             <td>{{ booking.slot.slot }}</td>
                             <td>{{ booking.aircraft }}</td>
-                            <td>{{ booking.notes }}</td>
+                            <!-- <td>{{ booking.notes }}</td> -->
                             <td><span><a href="/edit/{{ booking.id }}"><i class="far fa-edit edit-icon green"></i></a></span>
                                 <span><a href="/delete/{{ booking.id }}"><i class="far fa-times-circle cancel-icon red"></i></a></span>
                             </td>
@@ -45,7 +45,7 @@
                 </div>
            
         </div>
-        <div class="col-12 col-md-4">
+        <div class="col-12 col-md-4 mb-5">
             <h3 class="page-heading">Make A New Booking</h3>
 
             <form id="booking-form" action="{% url 'bookings' %}" method="POST">

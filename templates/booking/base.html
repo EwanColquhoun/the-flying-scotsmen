@@ -137,42 +137,54 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-               <div class="d-grid gap-3">
-                    <div id="no-bookings-text"class="hide">There are no bookings for the selected date</div>
-                    <table id="booking-table" class="hide">
-                        
-            {% if bookings %}
-        
-                        <tr class="table-headings">
-                            <td>Date</td>
-                            <td>Slot</td>
-                            <td>Aircraft</td>
-                            <td>day</td>    
-                            <td>Edit | Cancel</td>    
-                        </tr>
-            {% endif %}
-
-            {% for booking in bookings %} 
-                            <tr class="booking-row hide booking_{{booking.date.month}}_{{booking.date.day}}">
-                                <td>{{ booking.date }}</td>
-                                <td>{{ booking.slot.slot }}</td>
-                                <td>{{ booking.aircraft }}</td>
-                                <td>{{ booking.notes }}</td>
-                                <td><span><a href="/edit/{{ booking.id }}"><i class="far fa-edit edit-icon green"></i></a></span>
-                                    <span><a href="/delete/{{ booking.id }}"><i class="far fa-times-circle cancel-icon red"></i></a></span>
-                                </td>
-                            </tr>
-            {% empty %}
-        
-                        <span>Your bookings will appear here once approved by admin.</span> 
+                <div class="container">
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-12 col-md-10">
+                            <div class="d-grid gap-3">
+                                <div id="no-bookings-text"class="hide">There are no bookings for the selected date</div>
+                                <table id="booking-table" class="hide bookings">
+                                    
+                        {% if bookings %}
+                    
+                                    <tr class="table-headings">
+                                        <td>Date</td>
+                                        <td>Slot</td>
+                                        <td>Aircraft</td>
+                                        <td>User</td>
+                                        {% if booking.username == request.user.username %}
+                                        <td>Edit | Cancel</td>   
+                                        {% endif %} 
+                                    </tr>
+                        {% endif %}
             
-            {% endfor %}
-                    </table>
+                        {% for booking in bookings %} 
+                                        <tr class="booking-row hide booking_{{booking.date.month}}_{{booking.date.day}}">
+                                            <td>{{ booking.date|date:'d/m' }}</td>
+                                            <td>{{ booking.slot.slot }}</td>
+                                            <td>{{ booking.aircraft }}</td>
+                                            <td>{{ booking.username }}</td>
+                                            {% if booking.username == request.user.username %}
+                                            <td><span><a href="/edit/{{ booking.id }}"><i class="far fa-edit edit-icon green"></i></a></span>
+                                                <span><a href="/delete/{{ booking.id }}"><i class="far fa-times-circle cancel-icon red"></i></a></span>
+                                            </td>
+                                            {% else %}
+                                            <td></td>
+                                            {% endif %}
+                                        </tr>
+                        {% empty %}
+                    
+                                    <span>Your bookings will appear here once approved by admin.</span> 
+                        
+                        {% endfor %}
+                                </table>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
+            <button type="button" class="btn btn-join" data-bs-dismiss="modal">Close</button>
+
             </div>
         </div>
         </div>

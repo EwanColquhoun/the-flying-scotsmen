@@ -35,6 +35,12 @@ class BookingAdmin(admin.ModelAdmin):
     """
     Manages bookings
     """
+    class Meta:
+        model = Booking
+        widgets = {
+          'notes': forms.Textarea(attrs={'rows': 5, 'cols': 33}),
+        }
+
     list_filter = ('date', 'aircraft', 'username', 'instructor_requested', 'approved')
     list_display = ('date', 'slot', 'aircraft', 'username', 'instructor_requested', 'created_on', 'notes', 'approved')
     search_fields = ['date', 'aircraft', 'username', 'instructor_requested']
