@@ -14,14 +14,14 @@
 
 <!-- Calendar -->
 
-<div class="container">
+<div class="container-fluid">
     <div class="row d-flex justify-content-center">
-        <div class="col-12 col-md-10 mb-5">
+        <div class="col-12 col-lg-8 col-md-10 mb-5">
             <a href="{% url 'calendar' %}?{{ prev_month }}"> Previous Month </a>
             <a href="{% url 'calendar' %}?{{ next_month }}"> Next Month </a>
-            <p class="aircraft-purple">G-BTXG</p>
-            <p class="aircraft-green">G-TEST</p>           
-
+            <p id="reg1" class="aircraft-purple">G-BTXG</p>
+            <p id="reg2" class="aircraft-green">G-TEST</p>           
+            
             {{ calendar }}
         </div>
     </div>
