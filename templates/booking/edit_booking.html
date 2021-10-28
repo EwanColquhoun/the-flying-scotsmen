@@ -2,15 +2,28 @@
 
 {% block content %}
 
-<h1>Edit a Booking :</h1>
-<form method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <div>
-        <p>
-            <button type="submit">Update Booking: </button>
-        </p>   
-    </div> 
-</form>
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="page-heading">Edit a Booking :</h1>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12 col-md-8">
+            <form method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <div>
+                    <a class="btn btn-back" href="{% url 'bookings' %}">Back </a>
+                    <button class="btn btn-join" type="submit">Update Booking</button> 
+                </div> 
+            </form>
+        </div>
+    </div>
+</div>
+
 
 {% endblock %}

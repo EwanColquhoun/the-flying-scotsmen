@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
 from cloudinary.models import CloudinaryField
 
-INSTRUCTOR_REQUIRED = ((0, 'No'), (1, 'Yes'))
+INSTRUCTOR_REQUIRED = (('No', 'No'), ('Yes', 'Yes'))
 APPROVED = ((0, 'No'), (1, 'Yes'))
 
 
@@ -46,7 +46,7 @@ class Booking(models.Model):
     )
     date = models.DateField(default=date.today)
     slot = models.ForeignKey(Slot, on_delete=models.CASCADE, null=False, blank=False)
-    instructor_requested = models.IntegerField(choices=INSTRUCTOR_REQUIRED, default=False)
+    instructor_requested = models.CharField(max_length=5, choices=INSTRUCTOR_REQUIRED, default=False)
     notes = models.TextField(blank=True)
     created_on = models.DateTimeField(auto_now_add=True)
     update_on = models.DateTimeField(auto_now_add=True)

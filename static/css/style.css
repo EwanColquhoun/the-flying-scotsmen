@@ -230,6 +230,7 @@ body {
     width: calc(100% - 78px);
     transition: all 0.5s ease;
     z-index: 1;
+    /* position: relative; */
 }
 
 .navbar {
@@ -272,8 +273,11 @@ body {
 .footer {
   width: 100vw;
   height: 25px;
-  background-color: rgba(0, 75, 132, 0.5);
+  background-color: rgba(0, 75, 132, 0.3);
   text-align: center;
+  /* z-index: 50;
+  position: absolute;
+  bottom: -63px; */
 }
 
 /* Messages */
@@ -313,6 +317,12 @@ hr:not([size]) {
 /* Headings & Misc */
 .page-heading {
   margin: 0 auto;
+  padding: 40px;
+  color: #004b84;
+}
+
+.sub-heading {
+  font-size: 28px;
   padding: 40px;
 }
 
@@ -378,6 +388,26 @@ hr:not([size]) {
   margin: 10px;
 }
 
+.prev, .next {
+  text-decoration: none;
+  font-weight: 600;
+  padding: 5px 20px;
+}
+
+#reg1, #reg2 {
+  width: 70px;
+  text-align: center;
+  border-radius: 5px;
+  box-shadow: 0px 0px 15px 0px rgb(0 0 0 / 75%);
+  -webkit-box-shadow: 0px 0px 15px 0px rgb(0 0 0 / 75%);
+  -moz-box-shadow: 0px 0px 15px 0px rgb(0 0 0 / 75%);
+}
+
+.key {
+  width: 50px;
+  height: 20px;
+}
+
 .booking_list {
   margin-bottom: 0px;
 }
@@ -390,6 +420,9 @@ hr:not([size]) {
   width: 98%;
   margin: auto;
   font-size: 13px;
+  box-shadow: 0px 0px 15px 0px rgb(0 0 0 / 75%);
+  -webkit-box-shadow: 0px 0px 15px 0px rgb(0 0 0 / 75%);
+  -moz-box-shadow: 0px 0px 15px 0px rgb(0 0 0 / 75%);
 }
 
 .calendar tr, .calendar td {
@@ -427,22 +460,22 @@ hr:not([size]) {
 .date {
   font-size: 16px;
   border: none;
-  background-color: #17a2b8;
+  background-color: #B5CCBA;
   margin: 30px 0px 3px 0px;
+  box-shadow: 0px 0px 4px 0px rgb(0 0 0 / 75%);
+  -webkit-box-shadow: 0px 0px 4px 0px rgb(0 0 0 / 75%);
+  -moz-box-shadow: 0px 0px 4px 0px rgb(0 0 0 / 75%);
 }
 
 .date:active, .date:hover {
   background-color: #E4E9F7;
   border: 3px solid #17a2b8;
 }
-/* 
-.btn-event {
-  border: unset;
-  border-radius: 5px; 
+
+.btn-events {
+  border-radius: 3px;
   width: 100%;
-  height: 23px;
-  box-shadow: 3px 3px cadetblue;
-} */
+}
 
 .day-null {
   background-color: rgba(150, 150, 150, 0.5);
@@ -479,6 +512,20 @@ ul {
 .calendar a {
   text-decoration: none;
 }
+
+/* Edit Booking  */
+.btn-back {
+  background-color: crimson;
+  color: #E4E9F7;
+}
+
+.btn-back:hover {
+  background-color: #E4E9F7;
+  color: crimson;
+  border: 2px solid crimson;
+}
+
+
 
 /* SignUp Page */
 .btn-join {
@@ -555,16 +602,30 @@ ul {
 }
 
 @media (max-width: 800px) {
+  .half-page-break {
+    margin: 35px auto
+  }
+
   .calendar {
     width: 80vw;
   }
 
+  .prev, .next{
+    padding: 5px 5px;
+  }
+
+  .key {
+    width: 20px;
+
+  }
+  
   .page-heading {
     padding: 10px;
   }
 
   .booking-row td,
-  .table-headings {
-    padding: 7px;
+  .table-headings td {
+    padding: 5px;
   }
+
 }

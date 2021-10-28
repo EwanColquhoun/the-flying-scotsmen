@@ -139,7 +139,7 @@
             <div class="modal-body">
                 <div class="container">
                     <div class="row d-flex justify-content-center">
-                        <div class="col-12 col-md-10">
+                        <div class="col-12 col-md-10 g-0">
                             <div class="d-grid gap-3">
                                 <div id="no-bookings-text"class="hide">There are no bookings for the selected date</div>
                                 <table id="booking-table" class="hide bookings">
@@ -147,27 +147,35 @@
                         {% if bookings %}
                     
                                     <tr class="table-headings">
-                                        <td>Date</td>
+                                        <!-- <td>Date</td> -->
                                         <td>Slot</td>
                                         <td>Aircraft</td>
                                         <td>User</td>
-                                        {% if booking.username == request.user.username %}
-                                        <td>Edit | Cancel</td>   
-                                        {% endif %} 
+                                        <td>Ins Req</td>
+                                {% for booking in bookings %}
+                                    {% if booking.username == request.user.username %}
+                                        <td class="text-truncate" style="max-width: 40px;">Edit|Cancel</td> 
+                                    {% else %}
+                                        <td></td>
+                                        <!-- <td></td> -->
+                                    {% endif %}
+                                {% endfor %}
                                     </tr>
                         {% endif %}
             
                         {% for booking in bookings %} 
                                         <tr class="booking-row hide booking_{{booking.date.month}}_{{booking.date.day}}">
-                                            <td>{{ booking.date|date:'d/m' }}</td>
+                                            <!-- <td>{{ booking.date|date:'d/m' }}</td> -->
                                             <td>{{ booking.slot.slot }}</td>
                                             <td>{{ booking.aircraft }}</td>
                                             <td>{{ booking.username }}</td>
+                                            <td>{{ booking.instructor_requested }}</td>
+
                                             {% if booking.username == request.user.username %}
                                             <td><span><a href="/edit/{{ booking.id }}"><i class="far fa-edit edit-icon green"></i></a></span>
-                                                <span><a href="/delete/{{ booking.id }}"><i class="far fa-times-circle cancel-icon red"></i></a></span>
-                                            </td>
+                                            <span><a href="/delete/{{ booking.id }}"><i class="far fa-times-circle cancel-icon red"></i></a></span></td>
                                             {% else %}
+                                            <td></td>
                                             <td></td>
                                             {% endif %}
                                         </tr>
@@ -220,7 +228,6 @@
     <!-- footer -->
     <footer aria-label="Footer" class="scots fixed-bottom footer">
         <div><p>&copy Copyright Ewan Colquhoun 2021</p></div>
-        <div></div>
     </footer>
 
     <!-- Bootstrap -->

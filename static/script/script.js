@@ -80,22 +80,26 @@ dates.forEach((date) => {
       noBookings.classList.replace('show', 'hide')
       bookingTable.classList.replace('hide', 'show')
       for (let a = 0; a <= bookings.length; a++){
-          console.log(bookings[a], 'bookings[i]')
-          num = ''
-          num += today
-          console.log(num, '/', today)
-          if (num !== today && bookings[a].classList.contains('show')){
-            bookings[a].classList.replace('show', 'hide')
-            // console.log('booking hide2')
-          } else {
+        // if (bookings.length == 0) {
+        //   continue
+          // bookings[a].classList.replace('hide', 'show')
+        // } else {
+          // console.log(bookings[a], 'bookings[i]')
+          // num = ''
+          // num += today
+          // console.log(num, '/', today)
+          // if (num !== today && bookings[a].classList.contains('show')){
+          //   bookings[a].classList.replace('show', 'hide')
+          //   // console.log('booking hide2')
+          // } else {
             bookings[a].classList.replace('hide', 'show')
             // console.log('booking show');
             modal.addEventListener('hidden.bs.modal', function () {
               bookings[a].classList.replace('show', 'hide')
               // console.log('modal to close booking')
             });
-          }  
-      }
+          } 
+      // }
     }
   }); 
 });
