@@ -147,25 +147,27 @@
                         {% if bookings %}
                     
                                     <tr class="table-headings">
-                                        <!-- <td>Date</td> -->
+                                
                                         <td>Slot</td>
                                         <td>Aircraft</td>
                                         <td>User</td>
-                                        <td>Ins Req</td>
-                                {% for booking in bookings %}
-                                    {% if booking.username == request.user.username %}
-                                        <td class="text-truncate" style="max-width: 40px;">Edit|Cancel</td> 
-                                    {% else %}
-                                        <td></td>
-                                        <!-- <td></td> -->
-                                    {% endif %}
-                                {% endfor %}
+                                        <td>Inst Req</td>
+                             
+                                
+                                    
+                                        <td>Edit/Cancel</td> 
+                                  
+                              
+                                
+                                
+                               
+                                
                                     </tr>
                         {% endif %}
             
                         {% for booking in bookings %} 
                                         <tr class="booking-row hide booking_{{booking.date.month}}_{{booking.date.day}}">
-                                            <!-- <td>{{ booking.date|date:'d/m' }}</td> -->
+                                          
                                             <td>{{ booking.slot.slot }}</td>
                                             <td>{{ booking.aircraft }}</td>
                                             <td>{{ booking.username }}</td>

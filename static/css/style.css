@@ -582,6 +582,10 @@ ul {
     display: none;
   }
 
+  .modal-body {
+    padding: 1px;
+  }
+
   .navbar {
     display: block;
   }
