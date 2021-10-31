@@ -1,11 +1,8 @@
 from datetime import date
 from django.urls import reverse
 from django.db import models
-from django import forms
-from django.conf import settings
-from django.contrib.auth.models import User
-from django.shortcuts import get_object_or_404
 from cloudinary.models import CloudinaryField
+from django.core.exceptions import ValidationError
 
 INSTRUCTOR_REQUIRED = (('No', 'No'), ('Yes', 'Yes'))
 APPROVED = ((0, 'No'), (1, 'Yes'))
@@ -67,3 +64,4 @@ class Booking(models.Model):
         else:
             return f'<span class="btn-events aircraft-green calendar-events" name={self.date.month}_{self.date.day}>{self.slot} | {self.username}</span>'
             # f'<a class="btn-events aircraft-green calendar-events" name={self.date.month}_{self.date.day} href={url}>{self.slot} | {self.username}</a>'
+

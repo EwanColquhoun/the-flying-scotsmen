@@ -7,7 +7,7 @@ import calendar
 from .models import Booking
 from .forms import BookingForm
 from .utils import Calendar
-# from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect
 from django.contrib import messages
 
 
@@ -45,21 +45,26 @@ class BookingDisplay(View):
         current_user = request.user
         booking_form = BookingForm(data=request.POST, user=request.user)
         bookings = Booking.objects.filter(username=current_user, approved=True)
+        today = date.today()
 
         if booking_form.is_valid():
-            qs = Booking.objects.filter(
-                date=booking_form.instance.date,
-                slot=booking_form.instance.slot,
-                aircraft_id=booking_form.instance.aircraft_id,
-            ).count()
+            if booking_form.instance.date > today:
+                qs = Booking.objects.filter(
+                    date=booking_form.instance.date,
+                    slot=booking_form.instance.slot,
+                    aircraft_id=booking_form.instance.aircraft_id,
+                ).count()
 
-            if qs == 0:
-                booking = booking_form.save(commit=False)
-                booking.save()
-                messages.add_message(request, messages.SUCCESS, 'Your booking will be added once approved by admin. Thank you.')
-                return redirect('bookings')
-            else:
-                messages.add_message(request, messages.WARNING, 'This is a double booking, please check date/slot and aircraft and try again. Thank you.')
+                if qs == 0:
+                    booking = booking_form.save(commit=False)
+                    booking.save()
+                    messages.add_message(request, messages.SUCCESS, 'Your booking will be added once approved by admin. Thank you.')
+                    return redirect('bookings')
+                else:
+                    messages.add_message(request, messages.WARNING, 'This is a double booking, please check date/slot and aircraft and try again. Thank you.')
+                    return redirect('bookings')
+            else: 
+                messages.add_message(request, messages.WARNING, 'Booking dates must be in the future, please check the date. Thank you.')
                 return redirect('bookings')
         else:
             booking_form = BookingForm(user=request.user)
@@ -85,7 +90,7 @@ class BookingDisplay(View):
                     aircraft_id=booking_form.instance.aircraft_id,
                 ).count()
                 if qs == 0:
-                    booking.approved= False
+                    booking.approved = False
                     booking_form.save()
                     messages.add_message(request, messages.SUCCESS, 'Your booking will be added once approved by admin. Thank you.')
                     return redirect('bookings')
@@ -101,10 +106,11 @@ class BookingDisplay(View):
             return render(request, "booking/edit_booking.html", context)
 
     @staticmethod
-    def deleteBooking(booking_id):
+    def deleteBooking(request, booking_id):
         booking = get_object_or_404(Booking, id=booking_id)
         booking.delete()
-        return redirect('bookings')
+        messages.add_message(request, messages.SUCCESS, 'Your Booking has been deleted successfully. Thank you.')
+        return HttpResponseRedirect(reverse('bookings'))
 
 
 class CalendarView(generic.ListView):
@@ -112,11 +118,9 @@ class CalendarView(generic.ListView):
     queryset = Booking.objects.filter(approved=True)
     template_name = 'booking/calendar.html'
 
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         d = self.get_date(self.request.GET.get('month', None))
-        # print(f"VALUE OF D: {d}")
         cal = Calendar(d.year, d.month)
         html_cal = cal.formatmonth(withyear=True)
         bookings = Booking.objects.filter(approved=True)
@@ -124,7 +128,6 @@ class CalendarView(generic.ListView):
         context['prev_month'] = self.prev_month(d)
         context['next_month'] = self.next_month(d)
         context['bookings'] = bookings
-        context['day'] = d  # this is where I need to send the 'day'variable. i have tried using 'd', as in the day today and that works but only today!
         return context
 
     def get_date(self, req_month):
@@ -145,20 +148,6 @@ class CalendarView(generic.ListView):
         next_month = last + timedelta(days=1)
         month = 'month=' + str(next_month.year) + '-' + str(next_month.month)
         return month
-
-
-    # def event(self, request, event_id=None):
-    #     instance = Booking()
-    #     if event_id:
-    #         instance = get_object_or_404(Booking(), pk=event_id)
-    #     else:
-    #         instance = Booking()
-
-    #     form = BookingForm(request.POST or None, instance=instance)
-    #     if request.POST and form.is_valid():
-    #         form.save()
-    #         return HttpResponseRedirect(reverse('booking:calendar'))
-    #     return render(request, 'booking/booking.html', {'form': form, 'booking': instance})
 
 
 class ContactDisplay(View):

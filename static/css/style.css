@@ -364,7 +364,6 @@ hr:not([size]) {
 }
 
 .contact-details p {
-  border: 2px solid #004b84;
   font-size: initial;
   font-weight: 400;
   max-width: 300px;
@@ -373,7 +372,20 @@ hr:not([size]) {
   padding: 10px;
 }
 
+.blue-border {
+  border: 2px solid #004b84;
+  box-shadow: 0px 0px 15px 0px rgb(0 0 0 / 75%);
+  -webkit-box-shadow: 0px 0px 15px 0px rgb(0 0 0 / 75%);
+  -moz-box-shadow: 0px 0px 15px 0px rgb(0 0 0 / 75%);
+  border-radius: 5px;
+}
+
 /* Calender */
+#today {
+  background-color: #8579de;
+  color: #E4E9F7;
+}
+
 .hide {
   display:none;
 }

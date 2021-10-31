@@ -2,6 +2,7 @@
 
 {% block content %}
 
+
 <div class="container">
     <div class="row">
         <div class="col-12 d-flex justify-content-center"><h1 class="page-heading">Bookings</h1></div>
@@ -29,13 +30,16 @@
             {% endif %}
 
             {% for booking in bookings %}
+
                         <tr class="booking-row">
                             <td>{{ booking.date|date:'d/m' }}</td>
                             <td>{{ booking.slot.slot }}</td>
                             <td>{{ booking.aircraft }}</td>
                             <!-- <td>{{ booking.notes }}</td> -->
                             <td><span><a href="/edit/{{ booking.id }}"><i class="far fa-edit edit-icon green"></i></a></span></td>
-                            <td><span><a href="/delete/{{ booking.id }}"><i class="far fa-times-circle cancel-icon red"></i></a></span></td>
+                            <td><a name="{{ booking.id }}" class="delete_button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                            <i class="far fa-times-circle cancel-icon red"></i></a>
+                            </td>
                         </tr>
             {% empty %}
         

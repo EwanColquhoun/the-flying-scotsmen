@@ -25,41 +25,45 @@ let closeBtn = document.querySelector("#btn");
     alert.close();
 }, 3000);
 
-// Bootstrap alert
 
-// var alertPlaceholder = document.getElementById('liveAlertPlaceholder')
-// var alertTrigger = document.getElementById('new_booking')
+// Gets the delete modal working
+const modal_buttons = document.getElementById('delete-modal-buttons')
+const delete_button = document.querySelectorAll('.delete_button')
 
-// function alert(message, type) {
-//   var wrapper = document.createElement('div')
-//   wrapper.innerHTML = '<div class="alert alert-' + type + ' alert-dismissible" role="alert">' + message + '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>'
+if (delete_button.length !== 0){
+  console.log('delete_button not 0')
+  delete_button.forEach((button) => {
+    button.addEventListener('click', function() {
+      const booking_id = button.getAttribute('name')
+      modal_buttons.innerHTML = `
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      <a href="/delete/${booking_id}" class="btn btn-back">DELETE</a>
+      `
+    });
+  })
+}
 
-//   alertPlaceholder.append(wrapper)
-// }
-
-// if (alertTrigger) {
-//   alertTrigger.addEventListener('click', function () {
-//     alert('This is a double booking, please check your date/slot/aircraft and try again.', 'warning')
-//   })
-// }
-
-// const dates = document.querySelectorAll('.date')
-
-// dates.forEach((date) => {
-//   date.addEventListener("click", function(e){
-//     let bookingDisplay = document.getElementById('booking-display');
-//     console.log('click', e)
-
-//     if (bookingDisplay.classList.contains('hide')) {
-//       bookingDisplay.classList.replace('hide', 'show');
-//     } else {
-//       bookingDisplay.classList.replace('show', 'hide')
-//     }
-//   });
-// });
-
-
+// Highlights today on the calendar
 const dates = document.querySelectorAll('.date')
+d = new Date();
+month = d.getMonth() + 1
+day_of_the_month = d.getDate()
+now = `${month}_${day_of_the_month}`
+
+window.onload = function() {
+  dates.forEach((date) => {
+    let today = date.getAttribute('name');
+    console.log(today, 't/n', now)
+    if (today == now){
+      date.setAttribute('id', 'today')
+    }
+  })
+}
+
+
+
+
+// Activates the calendar booking modal
 let modalBody = document.querySelector('.modal-body')
 let dayBookings = document.querySelectorAll('.calendar-events');
 const modal = document.getElementById('myModal')
@@ -69,10 +73,8 @@ const bookingTable = document.getElementById('booking-table')
 dates.forEach((date) => {
   date.addEventListener('click', function() {
     let today = date.getAttribute('name');
-    console.log(today,'= today'); 
     let bookings = document.querySelectorAll(`.booking_${today}`)
 
-    console.log(bookings, 'bookings')
     if (bookings.length === 0 ){
       bookingTable.classList.replace('show', 'hide')
       noBookings.classList.replace('hide', 'show')
@@ -80,64 +82,12 @@ dates.forEach((date) => {
       noBookings.classList.replace('show', 'hide')
       bookingTable.classList.replace('hide', 'show')
       for (let a = 0; a <= bookings.length; a++){
-        // if (bookings.length == 0) {
-        //   continue
-          // bookings[a].classList.replace('hide', 'show')
-        // } else {
-          // console.log(bookings[a], 'bookings[i]')
-          // num = ''
-          // num += today
-          // console.log(num, '/', today)
-          // if (num !== today && bookings[a].classList.contains('show')){
-          //   bookings[a].classList.replace('show', 'hide')
-          //   // console.log('booking hide2')
-          // } else {
-            bookings[a].classList.replace('hide', 'show')
-            // console.log('booking show');
-            modal.addEventListener('hidden.bs.modal', function () {
-              bookings[a].classList.replace('show', 'hide')
-              // console.log('modal to close booking')
+        bookings[a].classList.replace('hide', 'show')
+        modal.addEventListener('hidden.bs.modal', function () {
+          bookings[a].classList.replace('show', 'hide')
+              
             });
           } 
-      // }
     }
   }); 
 });
-
-function modalBookingContent(){
-  return modalBody.innerHTML = ` <div class="d-grid gap-3">
-  <table>
-
-{% if bookings %}
-
-      <tr class="table-headings">
-          <td>Date</td>
-          <td>Slot</td>
-          <td>Aircraft</td>
-          <td>day</td>    
-          <td>Edit | Cancel</td>    
-      </tr>
-{% endif %}
-
-{% for booking in bookings %} 
-          <tr class="booking-row hide booking_{{booking.date.day}}">
-              <td>{{ booking.date }}</td>
-              <td>{{ booking.slot.slot }}</td>
-              <td>{{ booking.aircraft }}</td>
-              <td>{{ booking.notes }}</td>
-              <td><span><a href="/edit/{{ booking.id }}"><i class="far fa-edit edit-icon green"></i></a></span>
-                  <span><a href="/delete/{{ booking.id }}"><i class="far fa-times-circle cancel-icon red"></i></a></span>
-              </td>
-          </tr>
-{% empty %}
-
-      <span>Your bookings will appear here once approved by admin.</span> 
-
-{% endfor %}
-  </table>
-</div>`
-}
-
-function modalEmpty(){
- return modalBody.innerHTML = `<div>There are no bookings for the selected day</div>`
-}

@@ -128,7 +128,7 @@
     </div>
 
 
-    <!-- modal -->
+    <!-- Calendar modal -->
     <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-scrollable modal-xl">
         <div class="modal-content">
@@ -145,23 +145,13 @@
                                 <table id="booking-table" class="hide bookings">
                                     
                         {% if bookings %}
-                    
                                     <tr class="table-headings">
                                 
                                         <td>Slot</td>
                                         <td>Aircraft</td>
                                         <td>User</td>
                                         <td>Inst Req</td>
-                             
-                                
-                                    
-                                        <td>Edit/Cancel</td> 
-                                  
-                              
-                                
-                                
-                               
-                                
+                                        <td>Edit/Cancel</td>
                                     </tr>
                         {% endif %}
             
@@ -175,7 +165,9 @@
 
                                             {% if booking.username == request.user.username %}
                                             <td><span><a href="/edit/{{ booking.id }}"><i class="far fa-edit edit-icon green"></i></a></span>
-                                            <span><a href="/delete/{{ booking.id }}"><i class="far fa-times-circle cancel-icon red"></i></a></span></td>
+                                                <span><a name="{{ booking.id }}" class="delete_button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                                <i class="far fa-times-circle cancel-icon red"></i></a></span>
+                                            </td>
                                             {% else %}
                                             <td></td>
                                             <td></td>
@@ -199,8 +191,25 @@
         </div>
         </div>
     </div>
-        
-
+    
+    <!-- Delete booking modal -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Delete Booking</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="-delete-modal-body">
+                    <p><i class="fas fa-exclamation-triangle"></i> Are you sure you want to delete this booking? <i class="fas fa-exclamation-triangle"></i></p>
+                </div>
+                <div class="modal-footer" id="delete-modal-buttons">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <a href="/delete/{{ selectedBooking }}" class="btn btn-back">DELETE</a>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- main-content -->
     <main class="home-section flex-shrink-0 main-bg">
