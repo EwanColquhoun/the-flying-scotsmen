@@ -269,6 +269,10 @@ body {
   width: calc(100% - 265px);
 }
 
+.delete-modal-body p {
+  margin-bottom: 0;
+}
+
 /*  Footer */
 .footer {
   width: 100vw;
@@ -324,6 +328,8 @@ hr:not([size]) {
 .sub-heading {
   font-size: 28px;
   padding: 40px;
+  text-align: center;
+  font-weight: 600;
 }
 
 /* existing bookings */
@@ -340,6 +346,11 @@ hr:not([size]) {
 
 .booking-row td {
   padding: 5px 15px;
+  font-size: 14px;
+}
+
+a {
+  cursor: pointer;
 }
 
 .edit-icon,
@@ -357,6 +368,37 @@ hr:not([size]) {
   color:red;
 }
 
+
+#booking-content {
+  max-height: 300px;
+  overflow-y: scroll;
+}
+
+#booking-content .booking-row {
+  margin: 5px 0px;
+}
+
+#booking-form label {
+  font-weight: bold;
+  padding: 5px 15px;
+}
+
+#booking-form button {
+  margin: 20px;
+}
+
+#booking-form p {
+  text-align: center;
+}
+
+#booking-form:first-of-type p {
+  margin-top: 10px;
+}
+
+#booking-form label {
+  vertical-align: top;
+}
+
 /* Contact Page */
 .map-container {
   max-width: 600px;
@@ -364,10 +406,10 @@ hr:not([size]) {
 }
 
 .contact-details p {
-  font-size: initial;
+  font-size: larger;
   font-weight: 400;
-  max-width: 300px;
-  min-width: 200px;
+  max-width: 400px;
+  min-width: 300px;
   text-align: center;
   padding: 10px;
 }
@@ -378,6 +420,14 @@ hr:not([size]) {
   -webkit-box-shadow: 0px 0px 15px 0px rgb(0 0 0 / 75%);
   -moz-box-shadow: 0px 0px 15px 0px rgb(0 0 0 / 75%);
   border-radius: 5px;
+}
+
+.form-label {
+  font-size: larger;
+}
+
+#map {
+  margin-bottom: 40px;
 }
 
 /* Calender */
@@ -438,7 +488,8 @@ hr:not([size]) {
 }
 
 .calendar tr, .calendar td {
-  border: 1px solid black;
+  border: 2px solid rgba(0, 75, 132, 0.5);
+  border-radius: 3px;
 }
 
 .calendar th {
@@ -557,6 +608,10 @@ ul {
     padding: 10px;
   }
 
+  .blockquote p {
+    font-size: large;
+  }
+
   .bookings {
     font-size: smaller;
   }
@@ -586,6 +641,7 @@ ul {
     align-content: center;
     align-items: center;
     justify-content: space-around;
+    border-radius: 0;
   }
 }
 
@@ -632,7 +688,6 @@ ul {
 
   .key {
     width: 20px;
-
   }
   
   .page-heading {
@@ -642,6 +697,20 @@ ul {
   .booking-row td,
   .table-headings td {
     padding: 5px;
+    font-size: unset;
+  }
+
+  #booking-form p label {
+    float: left;
+  }
+
+
+  .notes {
+    display: none;
+  }
+
+  #map {
+    margin-bottom: 20px;
   }
 
 }

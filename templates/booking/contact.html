@@ -5,16 +5,16 @@
 
 <div class="container-fluid">
     <div class="row d-flex justify-content-center">
-        <div class="col-8 mt-5 d-flex justify-content-center">
-            <h1>Contact</h1>
+        <div class="col-8 mt-5 mb-4 d-flex justify-content-center">
+            <h1 class="page-heading">Contact</h1>
         </div>
     </div>
 </div>
 
-<div class="containter">
-    <div class="row g-0 d-flex justify-content-evenly">
-        <div class="col-12 col-md-7 mt-3 mb-5">
-            <form action="POST" class="blue-border p-3 mt-3">
+<div class="container">
+    <div class="row g-0 d-flex justify-content-around">
+        <div class="col-12 col-md-5 mt-3 mb-5 blue-border">
+            <form action="POST" class="p-3 mt-3">
                 <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">Name:</label>
                     <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="eg: Pete Mitchell">
@@ -36,9 +36,10 @@
                 </div>
             </form>
         </div>
-        <div class="col-12 col-md-3 mt-3">
-            <div class="mt-3 contact-details d-flex justify-content-center">
-                <p class="blue-border">
+        <div class="col-12 col-md-5 mt-3 mb-5 d-flex justify-content-center blue-border align-items-center">
+            <div class="mt-3 contact-details">
+                <h3 class="sub-heading">56.4391° N, 3.3714° W</h3>
+                <p>
                     The Flying Scotsmen,<br>
                     Perth Aerodrome,<br>
                     Perth,<br>
@@ -53,17 +54,40 @@
         </div>
     </div>
 </div>
-<div class="container-fluid">
-    <div class="row g-0 d-flex justify-content-evenly">
-        <div class="col-12 col-md-5 mt-4 mb-4 blue-border">
+<div class="container">
+    <div class="row g-0 d-flex justify-content-around">
+        <div id="map" class="col-12 col-md-5 mt-4 blue-border">
             <div class="ratio ratio-1x1 map-container">
                 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d18336.95713135544!2d-3.3605618086385145!3d56.44135997822792!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48863c1062d054c9%3A0x5eb3fcd704908285!2sPerth%20Airport!5e0!3m2!1sen!2suk!4v1634546102894!5m2!1sen!2suk" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
             </div>
         </div>
         <div class="col-12 col-md-5 mt-4 mb-5 blue-border">
             <div>
-                <h3>Testimonials</h3>
-                <P>Peter - The group is a great mix of professional pilots and amateur flyers.</P>
+                <h3 class="sub-heading">Testimonials</h3>
+                <figure class="text-center">
+                    <blockquote class="blockquote">
+                        <p>A great group of experienced flyers. Always welcoming like minded fellow Pilots</p>
+                    </blockquote>
+                    <figcaption class="blockquote-footer">
+                      Peter, Joined TFS 2015, <cite title="Source Title">CPL/ME/IR</cite>
+                    </figcaption>
+                </figure>
+                <figure class="text-center">
+                    <blockquote class="blockquote">
+                        <p>The aircraft are hangered and kept in tip top form.</p>
+                    </blockquote>
+                    <figcaption class="blockquote-footer">
+                        Davey, Joined TFS 2019, <cite title="Source Title">PPL/CRE</cite>
+                    </figcaption>
+                </figure>
+                <figure class="text-center">
+                    <blockquote class="blockquote">
+                        <p>A variety of experience in the group, airline, ex-military and of course amateur flyers. </p>
+                    </blockquote>
+                    <figcaption class="blockquote-footer">
+                        Ted, Joined TFS 2010, <cite title="Source Title">PPL</cite>
+                    </figcaption>
+                </figure>
             </div>
         </div>
     </div>
