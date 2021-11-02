@@ -13,7 +13,7 @@
 <div class="container">
     <div class="row g-0">
         <div class="col-12">
-            <h3 class="sub-heading">Bookings for <strong>{{ request.user.username }}:</strong></h3>
+            <h3 class="sub-heading">Bookings for <strong class="scots">{{ request.user.username }}:</strong></h3>
                 <div id="booking-content" class="d-grid gap-3 blue-border">
                     <table class="bookings">
                    
@@ -62,9 +62,9 @@
             <form id="booking-form" class="blue-border" action="{% url 'bookings' %}" method="POST">
                 {% csrf_token %}
             {{ bookingform.as_p }}
-                <p>
+                <div id="booking-button">
                     <button type="submit" id="new_booking" class="btn btn-join">Submit</button>
-                </p>
+                </div>
             </form>
         </div>
     </div>

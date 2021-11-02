@@ -4,8 +4,8 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.views import generic, View
 from django.utils.safestring import mark_safe
 import calendar
-from .models import Booking
-from .forms import BookingForm
+from .models import Booking, Contact
+from .forms import BookingForm, ContactForm
 from .utils import Calendar
 from django.http import HttpResponseRedirect
 from django.contrib import messages
@@ -152,7 +152,33 @@ class CalendarView(generic.ListView):
 
 class ContactDisplay(View):
     def get(self, request, *args, **kwargs):
+        contact_form = ContactForm()
+        context = {
+            'contact_form': contact_form,
+        }
         return render(
             request,
             'booking/contact.html',
+            context
         )
+
+    def post(self, request, *args, **kwargs):
+        contact_form = ContactForm(data=request.POST)
+        if request.method == 'POST':
+            contact_form = ContactForm(data=request.POST)
+            if contact_form.is_valid:
+                contact_form.replied = False
+                contact_form.save()
+                messages.add_message(request, messages.SUCCESS, 'Your message has been sent, we will endeavour to reply as soon as we can. Thank you.')
+                return redirect('contact')
+            else:
+                messages.add_message(request, messages.WARNING, 'This is a double booking, please check date/slot and aircraft and try again. Thank you.')
+                return redirect('contact')
+
+        else:
+            contact_form = ContactForm()
+            context = {
+                'contact_form': contact_form,
+            }
+        return render(request, 'booking/contact.html', context)
+    

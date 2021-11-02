@@ -6,6 +6,7 @@ from django.core.exceptions import ValidationError
 
 INSTRUCTOR_REQUIRED = (('No', 'No'), ('Yes', 'Yes'))
 APPROVED = ((0, 'No'), (1, 'Yes'))
+REPLIED = ((0, 'No'), (1, 'Yes'))
 
 
 class Slot(models.Model):
@@ -64,4 +65,19 @@ class Booking(models.Model):
         else:
             return f'<span class="btn-events aircraft-green calendar-events" name={self.date.month}_{self.date.day}>{self.slot} | {self.username}</span>'
             # f'<a class="btn-events aircraft-green calendar-events" name={self.date.month}_{self.date.day} href={url}>{self.slot} | {self.username}</a>'
+
+
+class Contact(models.Model):
+    
+    class Meta:
+        ordering = ['name']
+
+    name = models.CharField(max_length=30, null=False, blank=False)
+    telephone = models.CharField(max_length=20, null=False, blank=False)
+    email = models.EmailField(max_length=40)
+    message = models.TextField(blank=False)
+    replied = models.IntegerField(choices=REPLIED, default=False)
+
+    def __str__(self):
+        return str(self.name)
 

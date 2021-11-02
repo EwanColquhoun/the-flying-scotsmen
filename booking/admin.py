@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django import forms
-from .models import Booking, Aircraft, Slot
+from .models import Booking, Aircraft, Slot, Contact
 
 
 @admin.register(Aircraft)
@@ -48,3 +48,22 @@ class BookingAdmin(admin.ModelAdmin):
 
     def approve_bookings(self, request, queryset):
         queryset.update(approved=True)
+
+@admin.register(Contact)
+class ContactAdmin(admin.ModelAdmin):
+    """
+    Manages contact requests
+    """
+    class Meta:
+        model = Contact
+        widgets = {
+          'message': forms.Textarea(attrs={'rows': 5, 'cols': 33}),
+        }
+
+    actions = ['replied']
+    list_filter = ('name', 'telephone', 'email', 'message', 'replied')
+    list_display = ('name', 'telephone', 'email', 'message', 'replied')
+    search_fields = ['name', 'telephone', 'email', 'message', 'replied']
+
+    def replied(self, request, queryset):
+        queryset.update(replied=True)

@@ -306,7 +306,7 @@ body {
 
 /* Misc */
 .half-page-break {
-  width: 30%;
+  width: 50%;
   border: none;
   background-color: #004b84;
   opacity: unset;
@@ -337,15 +337,21 @@ hr:not([size]) {
 }
 
 /* existing bookings */
+
+
+.table-headings {
+  height: 30px;
+}
+
 .table-headings td {
   font-weight: bold;
   padding: 5px 15px;
 }
+
 .booking-row {
-  padding: 10px;
   background-color: antiquewhite;
   border-radius: 5px;
-  border: 1px solid #E4E9F7;
+  border: 1px solid rgb(241, 214, 177);
 }
 
 .booking-row td {
@@ -372,20 +378,15 @@ a {
   color:red;
 }
 
-
 #booking-content {
-  max-height: 300px;
+  height: 300px;
   overflow-y: scroll;
   padding: 10px 5px;
 }
 
-#booking-content .booking-row {
-  margin: 5px 0px;
-}
-
 #booking-form label {
   font-weight: bold;
-  padding: 5px 15px;
+  padding: 5px 10px;
 }
 
 #booking-form button {
@@ -393,20 +394,34 @@ a {
 }
 
 #booking-form p {
-  text-align: center;
-  max-width: 45%;
-  margin: 0 auto;
+  max-width: 50%;
+  margin: 15px auto;
+  text-align: end;
 }
 
-#booking-form:first-of-type p {
-  margin-top: 10px;
+#booking-form {
+  padding: 20px 0px;
+}
+
+#booking-button {
+  text-align: center;
+}
+
+#booking-form #id_username,
+#booking-form #id_date,
+#booking-form #id_aircraft,
+#booking-form #id_slot,
+#booking-form #id_instructor_requested,
+#booking-form #id_notes {
+  border-radius: 3px;
+  margin: 5px 10px;
+  box-shadow: 0px 0px 10px 0px rgb(0 0 0 / 50%);
+  -webkit-box-shadow: 0px 0px 10px 0px rgb(0 0 0 / 50%);
+  -moz-box-shadow: 0px 0px 10px 0px rgb(0 0 0 / 50%);
 }
 
 #booking-form label {
   vertical-align: top;
-}
-
-#booking-form p label {
   float: left;
 }
 
@@ -439,6 +454,29 @@ a {
 
 #map {
   margin-bottom: 40px;
+}
+
+#contact-form label {
+  font-weight: bold;
+  padding: 5px 10px;
+}
+
+#contact-form button {
+  margin: 20px;
+}
+
+#contact-form p {
+  max-width: 50%;
+  margin: 15px auto;
+  text-align: end;
+}
+
+#contact-form {
+  padding: 20px 0px;
+}
+
+#contact-button {
+  text-align: center;
 }
 
 /* Calender */
@@ -711,11 +749,6 @@ ul {
     font-size: unset;
   }
 
-  #booking-form p {
-    width: 100%;
-    max-width: 100%;
-  }
-
   .notes {
     display: none;
   }
@@ -724,4 +757,11 @@ ul {
     margin-bottom: 20px;
   }
 
+}
+
+@media (max-width: 500px) {
+  #booking-form p {
+    width: 100%;
+    max-width: 100%;
+  }
 }
