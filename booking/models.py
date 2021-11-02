@@ -3,6 +3,8 @@ from django.urls import reverse
 from django.db import models
 from cloudinary.models import CloudinaryField
 from django.core.exceptions import ValidationError
+from django.core.validators import validate_email
+
 
 INSTRUCTOR_REQUIRED = (('No', 'No'), ('Yes', 'Yes'))
 APPROVED = ((0, 'No'), (1, 'Yes'))
@@ -67,17 +69,21 @@ class Booking(models.Model):
             # f'<a class="btn-events aircraft-green calendar-events" name={self.date.month}_{self.date.day} href={url}>{self.slot} | {self.username}</a>'
 
 
+def custom_validate_email(value):
+    if '.' not in email:
+        raise ValidationError('Email format is incorrect')
+
+
 class Contact(models.Model):
-    
-    class Meta:
-        ordering = ['name']
 
     name = models.CharField(max_length=30, null=False, blank=False)
-    telephone = models.CharField(max_length=20, null=False, blank=False)
-    email = models.EmailField(max_length=40)
+    telephone = models.CharField(max_length=20, null=False, blank=False, help_text='Including country code')
+    email = models.EmailField(max_length=40, blank=False, help_text='maverick@topgun.com', validators=[validate_email, custom_validate_email])
     message = models.TextField(blank=False)
     replied = models.IntegerField(choices=REPLIED, default=False)
 
+    class Meta:
+        ordering = ['name']
+
     def __str__(self):
         return str(self.name)
-
