@@ -69,16 +69,11 @@ class Booking(models.Model):
             # f'<a class="btn-events aircraft-green calendar-events" name={self.date.month}_{self.date.day} href={url}>{self.slot} | {self.username}</a>'
 
 
-def custom_validate_email(value):
-    if '.' not in email:
-        raise ValidationError('Email format is incorrect')
-
-
 class Contact(models.Model):
 
     name = models.CharField(max_length=30, null=False, blank=False)
-    telephone = models.CharField(max_length=20, null=False, blank=False, help_text='Including country code')
-    email = models.EmailField(max_length=40, blank=False, help_text='maverick@topgun.com', validators=[validate_email, custom_validate_email])
+    telephone = models.CharField(max_length=20, null=False, blank=False)
+    email = models.EmailField(max_length=40, blank=False, validators=[validate_email])
     message = models.TextField(blank=False)
     replied = models.IntegerField(choices=REPLIED, default=False)
 

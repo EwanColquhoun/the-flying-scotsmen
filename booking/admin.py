@@ -38,7 +38,7 @@ class BookingAdmin(admin.ModelAdmin):
     class Meta:
         model = Booking
         widgets = {
-          'notes': forms.Textarea(attrs={'rows': 5, 'cols': 33}),
+          'notes': forms.Textarea(attrs={'rows': 5, 'cols': 33,}),        
         }
 
     list_filter = ('date', 'aircraft', 'username', 'instructor_requested', 'approved')
@@ -58,6 +58,7 @@ class ContactAdmin(admin.ModelAdmin):
         model = Contact
         widgets = {
           'message': forms.Textarea(attrs={'rows': 5, 'cols': 33}),
+          'telephone': forms.Textarea(attrs={'placeholder': 'Including country code'}),
         }
 
     actions = ['replied']

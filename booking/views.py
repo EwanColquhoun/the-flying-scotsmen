@@ -10,7 +10,6 @@ from .utils import Calendar
 from django.http import HttpResponseRedirect
 from django.contrib import messages
 
-
 # class BookingList(generic.ListView):
 #     model = Aircraft
 #     queryset = Aircraft.objects.all()
@@ -167,6 +166,7 @@ class ContactDisplay(View):
         if request.method == 'POST':
             contact_form = ContactForm(data=request.POST)
             if contact_form.is_valid:
+                print(contact_form.instance.email)
                 contact_form.replied = False
                 contact_form.save()
                 messages.add_message(request, messages.SUCCESS, 'Your message has been sent, we will endeavour to reply as soon as we can. Thank you.')

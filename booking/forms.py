@@ -1,6 +1,8 @@
 import datetime
 from django import forms
 from .models import Booking, Contact
+from django.core.exceptions import ValidationError
+from django.core.validators import validate_email
 
 
 class DateInput(forms.DateInput):
@@ -28,10 +30,11 @@ class BookingForm(forms.ModelForm):
 
 class ContactForm(forms.ModelForm):
 
-       class Meta:
+    class Meta:
         model = Contact
         fields = ('name', 'telephone', 'email', 'message')
         widgets = {
-            'message': forms.Textarea(attrs={'rows': 4, 'cols': 33, 'placeholder': 'Enter your message here...',}),
+            'message': forms.Textarea(attrs={'rows': 4, 'cols': 33, 'placeholder': 'Enter your message here...'}),
+            'email': forms.EmailInput(attrs={'placeholder': 'maverick@topgun.com'}),
+            'telephone': forms.TextInput(attrs={'placeholder': 'Include the country code', 'rows': 1, 'cols': 33})
         }
-
