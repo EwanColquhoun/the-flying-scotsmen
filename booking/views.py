@@ -10,11 +10,6 @@ from .utils import Calendar
 from django.http import HttpResponseRedirect
 from django.contrib import messages
 
-# class BookingList(generic.ListView):
-#     model = Aircraft
-#     queryset = Aircraft.objects.all()
-#     template_name = 'index.html'
-
 
 class HomeDisplay(View):
 
