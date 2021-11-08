@@ -10,7 +10,7 @@
     
 <div class="container">
     <div class="row d-flex justify-content-center">
-        <div class="col-sm-12 col-md-8 pt-5">
+        <div class="col-sm-12 col-md-8 pt-3">
             <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-indicators">
                   <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -18,22 +18,26 @@
                   <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
                   <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>
                   <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="4" aria-label="Slide 5"></button>
+                  <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="5" aria-label="Slide 6"></button>
                 </div>
                 <div class="carousel-inner">
                   <div class="carousel-item active">
-                    <img src="https://res.cloudinary.com/daoark4xo/image/upload/c_scale,h_500/v1634559628/bansai_hanger.jpg" class="d-block w-100" alt="...">
+                    <img src="https://res.cloudinary.com/daoark4xo/image/upload/c_scale,h_500/v1634559628/bansai_hanger.jpg" class="d-block w-100" alt="Aircraft in front of hanger">
                   </div>
                   <div class="carousel-item">
-                    <img src="https://res.cloudinary.com/daoark4xo/image/upload/c_scale,h_500/v1634559628/bansai_taxi.jpg" class="d-block w-100" alt="...">
+                    <img src="https://res.cloudinary.com/daoark4xo/image/upload/c_scale,h_500/v1636406409/cessna-cockpit.jpg" class="d-block w-100" alt="Aircraft cockpit">
                   </div>
                   <div class="carousel-item">
-                    <img src="https://res.cloudinary.com/daoark4xo/image/upload/c_scale,h_500/v1634559627/bansai_dundee.jpg" class="d-block w-100" alt="...">
+                    <img src="https://res.cloudinary.com/daoark4xo/image/upload/c_scale,h_500/v1634559628/bansai_taxi.jpg" class="d-block w-100" alt="Aircraft taxiing">
                   </div>
                   <div class="carousel-item">
-                    <img src="https://res.cloudinary.com/daoark4xo/image/upload/c_scale,h_500/v1634559626/bansai_reg.jpg" class="d-block w-100" alt="...">
+                    <img src="https://res.cloudinary.com/daoark4xo/image/upload/c_scale,h_500/v1636406191/cessna-flyby.jpg" class="d-block w-100" alt="Aircraft flyby">
                   </div>
                   <div class="carousel-item">
-                    <img src="https://res.cloudinary.com/daoark4xo/image/upload/c_scale,h_500/v1634560664/cessna_cockpit.jpg" class="d-block w-100" alt="...">
+                    <img src="https://res.cloudinary.com/daoark4xo/image/upload/c_scale,h_500/v1634559627/bansai_dundee.jpg" class="d-block w-100" alt="Aircraft Parked">
+                  </div>
+                  <div class="carousel-item">
+                    <img src="https://res.cloudinary.com/daoark4xo/image/upload/c_scale,h_500/v1634559626/bansai_reg.jpg" class="d-block w-100" alt="Aircraft in hanger from rear">
                   </div>
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
@@ -47,31 +51,39 @@
             </div>
         </div>
     </div>
+    <hr class="half-page-break">
 </div>
 
-<hr class="half-page-break">
+
 
 <div class="container">
     <div class="row ">
-        <div class="col-12 col-sm-6">
+        <div class="col-12">
             <h3 class="sub-heading">About Us</h3>
             <div id="about-us-text">
                 <p>
-                    The Flying Scotsmen (TFS) were formed from a group of like-minded friends and amateur and professional flyers. TFS are based at Perth Scone Airfield (EGPT, PSL), Scotland. Created in 2010, the group started off with the trusty Cessna 172.
-                     In recent years the group has expanded and now has access to two group owned aircraft, a Glasair III and a Cessna 172. The aircraft are always hangered and have full and maintainance histories. We are now accepting <a class="scots" id="new-members-link" href="{% url 'account_signup' %}">new members!</a>
+                    The Flying Scotsmen (TFS) were formed from a group of like-minded friends who are amateur and professional flyers. TFS are based at Perth Scone Airfield (EGPT, PSL), Scotland. Created in 2010, the group started off with the trusty Cessna 172.
+                     In recent years the group has expanded and now has access to two group owned aircraft, a Glasair III and a Cessna 172. The Glasair III is a fantaic aircraft for navigating around the country. 
+                     Aerobatic, airways capable and with its exceptional performance it is a true touring machine.
+                     The aircraft are always hangered and have full and maintainance histories. We are now accepting <a class="scots" id="new-members-link" href="{% url 'account_signup' %}">new members!</a>
                 </p>
             </div>
         </div>
 
-        <hr id="mobile-hr" class="half-page-break">
-
-        <div class="col-12 col-sm-6">
+        <hr class="half-page-break">
+    </div>
+</div>
+    
+<div class="container">
+  <div class="row">
+        <div class="col-12">
             <h3 class="sub-heading">Our Aircraft</h3>
             <div class="row">
-                <div class="col-6 aircraft-info">
-                    <img src="https://res.cloudinary.com/daoark4xo/image/upload/w_1000,ar_1:1,c_fill,g_auto,e_art:hokusai/v1634559628/bansai_hanger.jpg" height="100px" width="100px" alt="Glasair aircraft in a hanger">
+                <div class="col-12 col-md-6 aircraft-info mb-5">
+                    <img src="https://res.cloudinary.com/daoark4xo/image/upload/v1636406791/bansai-thumb.jpg" height="150px" width="150px" alt="Glasair aircraft in a hanger">
                     <h6><strong>G-BSAI, Glasair III</strong></h6>
                     <ul class="stats-list">
+                      <li>A complex, high performance aircraft</li>
                       <li>Seats: 2</li>
                       <li>Useful load: 380kg</li>
                       <li>Powerplant: 1 × Lycoming IO-540-K1H5, 300hp</li>
@@ -80,31 +92,15 @@
                       <li>Service Ceiling: 24000ft</li>
                       <li>Max Speed: 291kts</li>
                       <li>Cruise Speed: 272kts</li>
-                    </ul>
-<!--                     
-                    <p> Crew: 2
-                        Length: 21 ft 4 in (6.50 m)
-                        Wingspan: 23 ft 3 in (7.09 m)
-                        Height: 7 ft 2 in (2.18 m)
-                        Wing area: 81.3 sq ft (7.55 m2)
-                        Aspect ratio: 6.65
-                        Empty weight: 1,550–1,625 lb (703 kg)
-                        Gross weight: 2,400 lb (1,089 kg)
-                        Powerplant: 1 × Lycoming IO-540-K1H5 , 300[5] hp (224 kW)
-                        Performance
-                        
-                        Maximum speed: 335 mph (539 km/h, 291 kn)
-                        Cruise speed: 313 mph (454 km/h, 272 kn)
-                        Stall speed: 74 mph (119 km/h, 64 kn)
-                        Range: 1,300 mi (2,092 km, 1,100 nmi)
-                        Service ceiling: 24,000 ft (7,315 m)
-                        g limits: +6/-4
-                        Rate of climb: 2,400 ft/min (12.2 m/s)</p> -->
+                      <li>Avionics: Traditional</li>
+                    </ul>              
+
                 </div>
-                <div class="col-6 aircraft-info">
-                    <img class="" src="https://res.cloudinary.com/daoark4xo/image/upload/w_1000,ar_1:1,c_fill,g_auto,e_art:hokusai/v1634560668/cessna_ramp.jpg" height="100px" width="100px" alt="Cessna 172 aircraft image">
+                <div class="col-12 col-md-6 aircraft-info mb-5">
+                    <img class="" src="https://res.cloudinary.com/daoark4xo/image/upload/v1636406294/cessna-ramp.jpg" height="150px" width="150px" alt="Cessna 172 aircraft image">
                     <h6><strong>G-BURD, Cessna 172</strong></h6>
                     <ul class="stats-list">
+                      <li>A basic, comfortable tourer</li>
                       <li>Seats: 4</li>
                       <li>Useful load: 341kg</li>
                       <li>Powerplant: 1 × Lycoming IO-360-L2A, 160hp</li>
@@ -113,6 +109,7 @@
                       <li>Service Ceiling: 13500ft</li>
                       <li>Max Speed: 163kts</li>
                       <li>Cruise Speed: 122kts</li>
+                      <li>Avionics: G1000</li>
                     </ul>
                 </div>
             </div>

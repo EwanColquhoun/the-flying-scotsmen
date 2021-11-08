@@ -62,7 +62,7 @@ class Booking(models.Model):
     def get_html_url(self):
         url = reverse('edit_booking', args=(self.pk,))
         
-        if str(self.aircraft) == 'G-BTXG':
+        if str(self.aircraft) == 'G-BSAI':
             return f'<span class="btn-events aircraft-purple calendar-events" name={self.date.month}_{self.date.day}>{self.slot} | {self.username}</span>'
         else:
             return f'<span class="btn-events aircraft-green calendar-events" name={self.date.month}_{self.date.day}>{self.slot} | {self.username}</span>'
