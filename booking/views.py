@@ -25,7 +25,6 @@ class BookingDisplay(View):
 
     def get(self, request, *args, **kwargs):
         current_user = request.user
-        # bookings = Booking.objects.filter(username=current_user).filter(approved=True)
         bookings = Booking.objects.filter(username=current_user)
 
         return render(
@@ -116,9 +115,6 @@ class EditDisplay(View):
 
     def get(self, request, booking_id):
         current_user = request.user
-
-        # booking = Booking.objects.filter(Booking.id==booking_id)
-
         booking = get_object_or_404(Booking, id=booking_id)
         booking_form = BookingForm(instance=booking, user=request.user)
         return render(
