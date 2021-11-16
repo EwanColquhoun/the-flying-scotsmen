@@ -7,7 +7,7 @@ import calendar
 from .models import Booking, Contact
 from .forms import BookingForm, ContactForm
 from .utils import Calendar
-from .email import send_email_to_admin
+from .email import send_email_to_admin, send_contact_email_to_admin
 from django.http import HttpResponseRedirect
 from django.contrib import messages
 
@@ -88,6 +88,7 @@ class BookingDisplay(View):
                 if qs == 0:
                     booking.approved = False
                     booking_form.save()
+                    send_email_to_admin(current_user, booking_form.instance.date)
                     messages.add_message(request, messages.SUCCESS, 'Your booking will be added once approved by admin. Thank you.')
                     return redirect('bookings')
                 else:
@@ -165,6 +166,7 @@ class ContactDisplay(View):
             if contact_form.is_valid:
                 contact_form.replied = False
                 contact_form.save()
+                send_contact_email_to_admin(contact_form.instance)
                 messages.add_message(request, messages.SUCCESS, 'Your message has been sent, we will endeavour to reply as soon as we can. Thank you.')
                 return redirect('contact')
             else:
