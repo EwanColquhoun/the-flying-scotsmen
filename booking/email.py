@@ -2,14 +2,20 @@ import os
 import smtplib, ssl
 
 
-def send_email_to_admin(username, date):
+def send_email_to_admin(booking):
     sender_email = "theflyingscotsmen.booking@gmail.com"
     receiver_email = "theflyingscotsmen.booking@gmail.com"
     message = f"""
     Subject: NEW BOOKING
 
-    You have a new booking request to approve from {username} for {date}.
-    
+    You have a new booking request to approve
+    Member Username: {booking.username}
+    Booking Date: {booking.date}
+    Slot: {booking.slot}
+    Aircraft: {booking.aircraft}
+    Instructor Requested: {booking.instructor_requested}
+    Notes: {booking.notes}
+
     Click here to visit the admin site
     
     https://the-flying-scotsmen.herokuapp.com/admin/booking/booking/

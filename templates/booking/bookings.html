@@ -31,8 +31,9 @@
             {% endif %}
 
             {% for booking in bookings %}
+                {% if booking.approved == 0 %}
 
-                        <tr class="booking-row">
+                        <tr class="booking-row awaiting">
                             <td>{{ booking.date|date:'d/m' }}</td>
                             <td>{{ booking.slot.slot }}</td>
                             <td>{{ booking.aircraft }}</td>
@@ -45,6 +46,22 @@
                                 </span>
                             </td>
                         </tr>
+                {% else %}
+                        
+                        <tr class="booking-row approved">
+                            <td>{{ booking.date|date:'d/m' }}</td>
+                            <td>{{ booking.slot.slot }}</td>
+                            <td>{{ booking.aircraft }}</td>
+                            <td class="notes">{{ booking.notes }}</td>
+                            <td>{{ booking.instructor_requested }}</td>
+                            <td><span><a href="/edit/{{ booking.id }}"><i class="far fa-edit edit-icon green"></i></a></span></td>
+                            <td>
+                                <span><a name="{{ booking.id }}" class="delete_button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                    <i class="far fa-times-circle cancel-icon red"></i></a>
+                                </span>
+                            </td>
+                        </tr>
+                {% endif %}
             {% empty %}
         
                         <span class="d-flex justify-content-center mt-5">Your bookings will appear here once approved by admin.</span> 

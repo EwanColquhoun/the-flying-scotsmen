@@ -149,31 +149,43 @@
                                 
                                         <td>Slot</td>
                                         <td>Aircraft</td>
-                                        <td>User</td>
+                                        <td class="notes">Notes</td>
                                         <td>Inst Req</td>
                                         <td>Edit/Cancel</td>
                                 
                                     </tr>
                         {% endif %}
-            
+                  
                         {% for booking in bookings %} 
-                                        <tr class="booking-row hide booking_{{booking.date.month}}_{{booking.date.day}}">
-                                          
-                                            <td>{{ booking.slot.slot }}</td>
-                                            <td>{{ booking.aircraft }}</td>
-                                            <td>{{ booking.username }}</td>
-                                            <td>{{ booking.instructor_requested }}</td>
+                            {% if booking.approved == 0 %}
 
-                                            {% if booking.username == request.user.username %}
-                                            <td><span><a href="/edit/{{ booking.id }}"><i class="far fa-edit edit-icon green"></i></a></span>
-                                                <span><a name="{{ booking.id }}" class="delete_button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                                                <i class="far fa-times-circle cancel-icon red"></i></a></span>
-                                            </td>
-                                            {% else %}
-                                            <td><span><i class="fas fa-times edit-icon"></i></span>
-                                            <span><i class="fas fa-times cancel-icon"></i></span></td>
-                                            {% endif %}
-                                        </tr>
+                                <tr class="booking-row hide booking_{{booking.date.month}}_{{booking.date.day}} awaiting">
+                                  
+                                    <td>{{ booking.slot.slot }}</td>
+                                    <td>{{ booking.aircraft }}</td>
+                                    <td class="notes">{{ booking.notes }}</td>
+                                    <td>{{ booking.instructor_requested }}</td>
+                                    <td><span><a href="/edit/{{ booking.id }}"><i class="far fa-edit edit-icon green"></i></a></span>
+                                        <span><a name="{{ booking.id }}" class="delete_button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                            <i class="far fa-times-circle cancel-icon red"></i></a>
+                                        </span>
+                                    </td>
+                                </tr>
+                            {% else %}
+                            
+                                <tr class="booking-row hide booking_{{booking.date.month}}_{{booking.date.day}} approved">
+                                  
+                                    <td>{{ booking.slot.slot }}</td>
+                                    <td>{{ booking.aircraft }}</td>
+                                    <td class="notes">{{ booking.notes }}</td>
+                                    <td>{{ booking.instructor_requested }}</td>
+                                    <td><span><a href="/edit/{{ booking.id }}"><i class="far fa-edit edit-icon green"></i></a></span>
+                                        <span><a name="{{ booking.id }}" class="delete_button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                            <i class="far fa-times-circle cancel-icon red"></i></a>
+                                        </span>
+                                    </td>
+                                </tr>
+                            {% endif %}
                         {% empty %}
                     
                                     <span>Your bookings will appear here once approved by admin.</span> 

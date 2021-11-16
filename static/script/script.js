@@ -91,14 +91,13 @@ dates.forEach((date) => {
 });
 
 // Only displays approved bookings on the calendar
-let dayEvents = document.querySelectorAll('.btn-events')
-console.log(dayEvents)
-dayEvents.forEach(de => {
-  console.log(de.getAttribute('data-ref'))
-  if (de.getAttribute('data-ref') == 0){
-    de.classList.add('hide')
-  } else {
-    de.classList.add('show')
-  }
-  
-});
+// let dayEvents = document.querySelectorAll('.btn-events')
+// console.log(dayEvents)
+// dayEvents.forEach(de => {
+//   console.log(de.getAttribute('data-ref'))
+//   if (de.getAttribute('data-ref') == 0){
+//     de.classList.add('hide')
+//   } else {
+//     de.classList.add('show')
+//   }
+// });

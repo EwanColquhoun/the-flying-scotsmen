@@ -25,7 +25,8 @@ class BookingDisplay(View):
 
     def get(self, request, *args, **kwargs):
         current_user = request.user
-        bookings = Booking.objects.filter(username=current_user).filter(approved=True)
+        # bookings = Booking.objects.filter(username=current_user).filter(approved=True)
+        bookings = Booking.objects.filter(username=current_user)
 
         return render(
             request,
@@ -53,7 +54,7 @@ class BookingDisplay(View):
                 if qs == 0:
                     booking = booking_form.save(commit=False)
                     booking.save()
-                    send_email_to_admin(current_user, booking_form.instance.date)
+                    send_email_to_admin(booking_form.instance)
                     messages.add_message(request, messages.SUCCESS, 'Your booking will be added once approved by admin. Thank you.')
                     return redirect('bookings')
                 else:
@@ -74,33 +75,34 @@ class BookingDisplay(View):
             },
         )
 
-    @staticmethod
-    def editBooking(request, booking_id):
-        booking = get_object_or_404(Booking, id=booking_id)
-        if request.method == 'POST':
-            booking_form = BookingForm(request.POST, instance=booking, user=request.user)
-            if booking_form.is_valid():
-                qs = Booking.objects.filter(
-                    date=booking_form.instance.date,
-                    slot=booking_form.instance.slot,
-                    aircraft_id=booking_form.instance.aircraft_id,
-                ).count()
-                if qs == 0:
-                    booking.approved = False
-                    booking_form.save()
-                    send_email_to_admin(current_user, booking_form.instance.date)
-                    messages.add_message(request, messages.SUCCESS, 'Your booking will be added once approved by admin. Thank you.')
-                    return redirect('bookings')
-                else:
-                    messages.add_message(request, messages.WARNING, 'This is a double booking, please check date/slot and aircraft and try again. Thank you.')
-                    return redirect('edit_booking', booking.id)
-        else:
-            booking_form = BookingForm(instance=booking, user=request.user)
-            context = {
-                'form': booking_form,
-                'booking': booking,
-            }
-            return render(request, "booking/edit_booking.html", context)
+    # @staticmethod
+    # def editBooking(request, booking_id):
+    #     booking = get_object_or_404(Booking, id=booking_id)
+    #     if request.method == 'POST':
+    #         booking_form = BookingForm(request.POST, instance=booking, user=request.user)
+    #         if booking_form.is_valid():
+    #             qs = Booking.objects.filter(
+    #                 date=booking_form.instance.date,
+    #                 slot=booking_form.instance.slot,
+    #                 aircraft_id=booking_form.instance.aircraft_id,
+    #             ).count()
+    #             if qs == 0:
+    #                 booking.approved = False
+    #                 booking_form.save()
+    #                 send_email_to_admin(current_user, booking_form.instance.date)
+    #                 messages.add_message(request, messages.SUCCESS, 'Your booking will be added once approved by admin. Thank you.')
+    #                 return redirect('bookings')
+    #             else:
+    #                 messages.add_message(request, messages.WARNING, 'This is a double booking, please check date/slot and aircraft and try again. Thank you.')
+    #                 return redirect('edit_booking', booking.id)
+    #     else:
+    #         booking_form = BookingForm(instance=booking, user=request.user)
+    #         context = {
+    #             'form': booking_form,
+    #             'booking': booking,
+    #         }
+    #         return render(request, "booking/edit_booking.html", context)
+
 
     @staticmethod
     def deleteBooking(request, booking_id):
@@ -110,9 +112,61 @@ class BookingDisplay(View):
         return HttpResponseRedirect(reverse('calendar'))
 
 
+class EditDisplay(View):
+
+    def get(self, request, booking_id):
+        current_user = request.user
+
+        # booking = Booking.objects.filter(Booking.id==booking_id)
+
+        booking = get_object_or_404(Booking, id=booking_id)
+        booking_form = BookingForm(instance=booking, user=request.user)
+        return render(
+            request,
+            'booking/edit_booking.html',
+            {
+                "form": booking_form,
+                'booking': booking,
+            },
+        )
+
+    def post(self, request, booking_id):
+        current_user = request.user
+        booking = get_object_or_404(Booking, id=booking_id)
+        booking_form = BookingForm(request.POST, instance=booking, user=request.user)
+        
+        if booking_form.is_valid():
+            qs = Booking.objects.filter(
+                date=booking_form.instance.date,
+                slot=booking_form.instance.slot,
+                aircraft_id=booking_form.instance.aircraft_id,
+                instructor_requested=booking_form.instance.instructor_requested
+            ).count()
+            if qs == 0:
+                booking.approved = False
+                booking_form.save()
+                send_email_to_admin(booking_form.instance)
+                messages.add_message(request, messages.SUCCESS, 'Your booking will be added once approved by admin. Thank you.')
+                return redirect('bookings')
+            else:
+                messages.add_message(request, messages.WARNING, 'This is a double booking, please check date/slot and aircraft and try again. Thank you.')
+                return redirect('edit_booking', booking.id)
+        else:
+            booking_form = BookingForm(user=request.user)
+
+        return render(
+            request,
+            'booking/edit_booking.html',
+            {
+                "bookings": bookings,
+                "form": booking_form,
+            },
+        )
+
+
 class CalendarView(generic.ListView):
     model = Booking
-    queryset = Booking.objects.filter(approved=True)
+    queryset = Booking.objects.all()
     template_name = 'booking/calendar.html'
 
     def get_context_data(self, **kwargs):
@@ -120,7 +174,7 @@ class CalendarView(generic.ListView):
         d = self.get_date(self.request.GET.get('month', None))
         cal = Calendar(d.year, d.month)
         html_cal = cal.formatmonth(withyear=True)
-        bookings = Booking.objects.filter(approved=True)
+        bookings = Booking.objects.all()
         context['calendar'] = mark_safe(html_cal)
         context['prev_month'] = self.prev_month(d)
         context['next_month'] = self.next_month(d)
