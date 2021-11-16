@@ -8,8 +8,6 @@ def send_email_to_admin(username, date):
     message = f"""
     Subject: NEW BOOKING
 
-    Hi Admin,
-
     You have a new booking request to approve from {username} for {date}.
     
     Click here to visit the admin site
@@ -48,8 +46,6 @@ def send_contact_email_to_admin(contact):
     message = f"""
     Subject: CONTACT
 
-    Hi Admin,
-
     You have a new contact request from {contact.name}
 
     Telephone - {contact.telephone}
@@ -59,7 +55,7 @@ def send_contact_email_to_admin(contact):
     
     Click here to visit the admin site
     
-    https://the-flying-scotsmen.herokuapp.com/admin/booking/contact/
+    https://the-flying-scotsmen.herokuapp.com/admin/contact/
     
     Thanks."""
 

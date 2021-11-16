@@ -63,10 +63,9 @@ class Booking(models.Model):
         url = reverse('edit_booking', args=(self.pk,))
         
         if str(self.aircraft) == 'G-BSAI':
-            return f'<span class="btn-events aircraft-purple calendar-events" name={self.date.month}_{self.date.day}>{self.slot} | {self.username}</span>'
+            return f'<span class="btn-events aircraft-purple calendar-events" data-ref={self.approved} name={self.date.month}_{self.date.day}>{self.slot} | {self.username}</span>'
         else:
-            return f'<span class="btn-events aircraft-green calendar-events" name={self.date.month}_{self.date.day}>{self.slot} | {self.username}</span>'
-            # f'<a class="btn-events aircraft-green calendar-events" name={self.date.month}_{self.date.day} href={url}>{self.slot} | {self.username}</a>'
+            return f'<span class="btn-events aircraft-green calendar-events" data-ref={self.approved} name={self.date.month}_{self.date.day}>{self.slot} | {self.username}</span>'
 
 
 class Contact(models.Model):

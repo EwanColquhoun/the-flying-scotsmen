@@ -152,6 +152,7 @@
                                         <td>User</td>
                                         <td>Inst Req</td>
                                         <td>Edit/Cancel</td>
+                                
                                     </tr>
                         {% endif %}
             
@@ -169,8 +170,8 @@
                                                 <i class="far fa-times-circle cancel-icon red"></i></a></span>
                                             </td>
                                             {% else %}
-                                            <td></td>
-                                            <td></td>
+                                            <td><span><i class="fas fa-times edit-icon"></i></span>
+                                            <span><i class="fas fa-times cancel-icon"></i></span></td>
                                             {% endif %}
                                         </tr>
                         {% empty %}

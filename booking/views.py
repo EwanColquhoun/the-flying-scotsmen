@@ -107,7 +107,7 @@ class BookingDisplay(View):
         booking = get_object_or_404(Booking, id=booking_id)
         booking.delete()
         messages.add_message(request, messages.SUCCESS, 'Your Booking has been deleted successfully. Thank you.')
-        return HttpResponseRedirect(reverse('bookings'))
+        return HttpResponseRedirect(reverse('calendar'))
 
 
 class CalendarView(generic.ListView):

@@ -31,7 +31,7 @@ const modal_buttons = document.getElementById('delete-modal-buttons')
 const delete_button = document.querySelectorAll('.delete_button')
 
 if (delete_button.length !== 0){
-  console.log('delete_button not 0')
+  // console.log('delete_button not 0')
   delete_button.forEach((button) => {
     button.addEventListener('click', function() {
       const booking_id = button.getAttribute('name')
@@ -53,14 +53,12 @@ now = `${month}_${day_of_the_month}`
 window.onload = function() {
   dates.forEach((date) => {
     let today = date.getAttribute('name');
-    console.log(today, 't/n', now)
+    // console.log(today, 't/n', now)
     if (today == now){
       date.setAttribute('id', 'today')
     }
   })
 }
-
-
 
 
 // Activates the calendar booking modal
@@ -90,4 +88,17 @@ dates.forEach((date) => {
           } 
     }
   }); 
+});
+
+// Only displays approved bookings on the calendar
+let dayEvents = document.querySelectorAll('.btn-events')
+console.log(dayEvents)
+dayEvents.forEach(de => {
+  console.log(de.getAttribute('data-ref'))
+  if (de.getAttribute('data-ref') == 0){
+    de.classList.add('hide')
+  } else {
+    de.classList.add('show')
+  }
+  
 });
