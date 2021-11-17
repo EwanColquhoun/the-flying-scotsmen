@@ -131,3 +131,8 @@ function initMap() {
     "https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m",
 });
 }
+
+// animated title
+
+const element = document.querySelector('.title');
+element.style.setProperty('--animate-duration', '0.5s');

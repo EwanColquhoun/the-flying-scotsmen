@@ -4,9 +4,13 @@
 
 <div class="container">
     <div class="row heading-row">
-        <div class="col-12 d-flex justify-content-center"><h1 class="page-heading">The Flying <span id="heading-span">Scots</span>men</h1></div>
+        <div id="title" class="col-12 d-flex justify-content-center animate__animated animate__fadeInRightBig"><h1 class="page-heading">The Flying <span id="heading-span">Scots</span>men</h1></div>
     </div>
 </div>
+
+<!-- <div id="aircraft" class="animate__animated animate__fadeOutTopRight">
+  <img src="https://res.cloudinary.com/daoark4xo/image/upload/v1637156756/glasair-removebg-preview_iuphys.png" alt="animated aircraft">
+</div> -->
     
 <div class="container">
     <div class="row d-flex justify-content-center">
@@ -54,23 +58,27 @@
     <hr class="half-page-break">
 </div>
 
-
-
 <div class="container">
-    <div class="row ">
-        <div class="col-12">
+    <div class="row d-flex justify-content-center">
+        <div class="col-12 col-md-11">
             <h3 class="sub-heading">About Us</h3>
             <div id="about-us-text">
                 <p>
                     The Flying Scotsmen (TFS) were formed from a group of like-minded friends who are amateur and professional flyers. TFS are based at Perth Scone Airfield (EGPT, PSL), Scotland. Created in 2010, the group started off with the trusty Cessna 172.
-                     In recent years the group has expanded and now has access to two group owned aircraft, a Glasair III and a Cessna 172. The Glasair III is a fantaic aircraft for navigating around the country. 
+                     In recent years the group has expanded and now has access to two group owned aircraft, a Glasair III and a Cessna 172. 
+                     <br>The Glasair III is a fantaic aircraft for navigating around the country. 
                      Aerobatic, airways capable and with its exceptional performance it is a true touring machine.
-                     The aircraft are always hangered and have full and maintainance histories. We are now accepting <a class="scots" id="new-members-link" href="{% url 'contact' %}">new members!</a>
+                     The aircraft are always hangered and have full and maintainance histories. We are now accepting 
+                     {% if user.is_authenticated %}
+                     <a class="scots new-members-link" href="{% url 'contact' %}">new members!</a>
+                     {% else %}
+                     <a class="scots new-members-link" href="{% url 'account_signup' %}">new members!</a>
+                     {% endif %}
                 </p>
             </div>
         </div>
 
-        <hr class="half-page-break">
+        <hr class="half-page-break" id="field">
     </div>
 </div>
     
@@ -83,7 +91,7 @@
                     <img src="https://res.cloudinary.com/daoark4xo/image/upload/v1636406791/bansai-thumb.jpg" height="150px" width="150px" alt="Glasair aircraft in a hanger">
                     <h6><strong>G-BSAI, Glasair III</strong></h6>
                     <ul class="stats-list">
-                      <li>A complex, high performance aircraft</li>
+                      <li>A complex, high performance tourer</li>
                       <li>Seats: 2</li>
                       <li>Useful load: 380kg</li>
                       <li>Powerplant: 1 × Lycoming IO-540-K1H5, 300hp</li>
@@ -93,6 +101,7 @@
                       <li>Max Speed: 291kts</li>
                       <li>Cruise Speed: 272kts</li>
                       <li>Avionics: Traditional</li>
+                      <li>Range: 1100nm (econ)</li>
                     </ul>              
 
                 </div>
@@ -110,6 +119,7 @@
                       <li>Max Speed: 163kts</li>
                       <li>Cruise Speed: 122kts</li>
                       <li>Avionics: G1000</li>
+                      <li>Range: 640nm (econ)</li>
                     </ul>
                 </div>
             </div>

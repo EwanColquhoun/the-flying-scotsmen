@@ -314,6 +314,19 @@ body {
 }
 
 /* Misc */
+/* 
+#aircraft {
+  width: 120px;
+  height: 60px;
+  position: absolute;
+  top: 10%;
+  left: 0px;
+} */
+
+.center {
+  text-align: center;
+}
+
 .half-page-break {
   width: 50%;
   border: none;
@@ -326,11 +339,17 @@ hr:not([size]) {
   height: 5px;
 }
 
-#new-members-link {
+.new-members-link {
   text-decoration: none;
   font-weight: 800;
-  font-style: italic;
+  /* font-style: italic; */
 }
+
+/* About us */
+#about-us-text {
+  text-align: center;
+}
+
 
 /* Aircraft Stats */
 .stats-list {
@@ -537,10 +556,11 @@ a {
   text-align: center;
 }
 
-#id_name,
-#id_telephone,
-#id_email,
-#id_message {
+
+#contact-form #id_name,
+#contact-form #id_telephone,
+#contact-form #id_email,
+#contact-form #id_message {
   width: 90%;
   border-radius: 3px;
   margin: 5px 10px;
@@ -660,19 +680,19 @@ a {
 }
 
 .day-null {
-  background-color: rgba(150, 150, 150, 0.5);
+  background-color: rgba(150, 150, 150, 0.3);
 }
 
 .day-free {
-  background-color: rgba(138, 243, 191, 0.5);
+  background-color: rgba(138, 243, 191, 0.3);
 }
 
 .day-medium {
-  background-color: rgba(241, 198, 119, 0.5);
+  background-color: rgba(241, 198, 119, 0.3);
 }
 
 .day-full {
-  background-color: rgba(243, 119, 115, 0.5);
+  background-color: rgba(243, 119, 115, 0.3);
 }
 
 .aircraft-purple {
@@ -719,6 +739,18 @@ a {
   background-color: #E4E9F7;
   color: #004b84;
   border: 2px solid #004b84;
+}
+
+
+/* Login page */
+#login-form #id_login,
+#login-form #id_password,
+#login-form #id_remember {
+  border-radius: 3px;
+  margin: 5px 10px;
+  box-shadow: 0px 0px 10px 0px rgb(0 0 0 / 50%);
+  -webkit-box-shadow: 0px 0px 10px 0px rgb(0 0 0 / 50%);
+  -moz-box-shadow: 0px 0px 10px 0px rgb(0 0 0 / 50%);
 }
 
 
@@ -798,6 +830,7 @@ a {
   }
 
   #contact-form p,
+  #signup-form p,
   #booking-form p {
     width: 90%;
     max-width: 90%;

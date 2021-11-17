@@ -22,6 +22,11 @@
             <p id="reg2" class="aircraft-green">G-BURD</p>   
             <a class="next scots" href="{% url 'calendar' %}?{{ next_month }}"> Next Month <i class="fas fa-chevron-right"></i></a>
         </div>
+        <div class="col-12 col-lg-8 col-md-10 mb-5 ">
+
+            {{ calendar }}
+ 
+        </div>
         <div class="col-12 col-lg-8 col-md-10 mt-4 mb-4 d-flex justify-content-evenly">
             <div class="d-flex justify-content-evenly">
                 <div class="key day-free"></div>
@@ -35,9 +40,6 @@
                 <div class="key day-full"></div>
                 <p>= Full</p>
             </div>
-        </div>
-        <div class="col-12 col-lg-8 col-md-10 mb-5 ">
-            {{ calendar }}
         </div>
     </div>
 </div>
