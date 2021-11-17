@@ -18,9 +18,9 @@ class Calendar(HTMLCalendar):
             d += f'<li class="event"> {event.get_html_url} </li>'
 
         if day:
-            if day != 0 and len(events_per_day) == 5:
+            if day != 0 and len(events_per_day) == 10:
                 return f"<td class='day-full'><a class='btn date' data-bs-toggle='modal' data-bs-target='#myModal' name={self.month}_{day}>{day}</a><ul class='booking_list'> {d} </ul></td>"
-            elif day != 0 and len(events_per_day) >= 2 and len(events_per_day) <= 4:
+            elif day != 0 and len(events_per_day) >= 4 and len(events_per_day) <= 9:
                 return f"<td class='day-medium'><a class='btn date' data-bs-toggle='modal' data-bs-target='#myModal' name={self.month}_{day}>{day}</a><ul class='booking_list'> {d} </ul></td>"
             else:
                 return f"<td class='day-free'><a class='btn date' data-bs-toggle='modal' data-bs-target='#myModal' name={self.month}_{day}>{day}</a><ul class='booking_list'> {d} </ul></td>"

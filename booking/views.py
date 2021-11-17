@@ -50,7 +50,13 @@ class BookingDisplay(View):
                     aircraft_id=booking_form.instance.aircraft_id,
                 ).count()
 
-                if qs == 0:
+                maint = Booking.objects.filter(
+                    date=booking_form.instance.date,
+                    slot=12,
+                    aircraft_id=booking_form.instance.aircraft_id,
+                ).count()
+
+                if qs == 0 and maint == 0:
                     booking = booking_form.save(commit=False)
                     booking.save()
                     send_email_to_admin(booking_form.instance)

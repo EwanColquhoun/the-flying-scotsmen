@@ -16,7 +16,7 @@ class Slot(models.Model):
     class Meta:
         ordering = ['start']
 
-    slot = models.CharField(max_length=11)
+    slot = models.CharField(max_length=11, unique=True)
     start = models.TimeField(auto_now=False, auto_now_add=False)
     duration = models.TimeField(auto_now=False, auto_now_add=False)
 
@@ -64,13 +64,13 @@ class Booking(models.Model):
         
         if str(self.aircraft) == 'G-BSAI':
             if self.approved == 1:
-                return f'<span class="btn-events aircraft-purple calendar-events" data-ref={self.approved} name={self.date.month}_{self.date.day}>{self.slot} | {self.username}</span>'
+                return f'<span class="btn-events aircraft-purple calendar-events" data-ref={self.approved} name={self.date.month}_{self.date.day}>{self.slot} | {self.username} | <i class="fas fa-check"></i> </span>'
             else:
-                return f'<span class="btn-events calendar-events purple-transparent" data-ref={self.approved} name={self.date.month}_{self.date.day}>{self.slot} | {self.username}</span>'
+                return f'<span class="btn-events calendar-events purple-transparent" data-ref={self.approved} name={self.date.month}_{self.date.day}>{self.slot} | {self.username} | <i class="fas fa-user-cog"></i></span>'
         elif self.approved == 1:
-            return f'<span class="btn-events aircraft-green calendar-events" data-ref={self.approved} name={self.date.month}_{self.date.day}>{self.slot} | {self.username}</span>'
+            return f'<span class="btn-events aircraft-green calendar-events" data-ref={self.approved} name={self.date.month}_{self.date.day}>{self.slot} | {self.username} | <i class="fas fa-check"></i></span>'
         else:
-            return f'<span class="btn-events calendar-events green-transparent" data-ref={self.approved} name={self.date.month}_{self.date.day}>{self.slot} | {self.username}</span>'
+            return f'<span class="btn-events calendar-events green-transparent" data-ref={self.approved} name={self.date.month}_{self.date.day}>{self.slot} | {self.username} | <i class="fas fa-user-cog"></i></span>'
 
 
 class Contact(models.Model):
