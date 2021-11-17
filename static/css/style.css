@@ -466,13 +466,14 @@ a {
 }
 
 #booking-form p {
-  max-width: 50%;
+  max-width: 75%;
   margin: 15px auto;
   text-align: end;
 }
 
 #booking-form {
   padding: 20px 0px;
+  min-height: 470px;
 }
 
 #booking-form #id_username,
@@ -495,7 +496,7 @@ a {
 
 /* map */
 #map {
-  min-height: 510px;
+  min-height: 470px;
 }
 
 /* Contact Page */
@@ -601,6 +602,22 @@ a {
   padding: 5px 20px;
 }
 
+#calendar-row {
+  position: relative;
+}
+
+#color-codes {
+  position:absolute;
+  bottom: -70px;
+  width: 50%;
+  left: 25%;
+}
+
+#color-codes p {
+  margin: unset;
+  padding: 5px;
+}
+
 #reg1, #reg2 {
   width: 70px;
   text-align: center;
@@ -613,6 +630,7 @@ a {
 .key {
   width: 50px;
   height: 20px;
+  border: 1px solid rgba(0, 75, 132, 0.5)
 }
 
 .booking_list {
@@ -762,11 +780,6 @@ a {
 }
 
 
-@media (max-width: 1200px) {
-  #booking-form p {
-    max-width: 65%;
-}
-
 @media (max-width: 1100px) {
   .sub-heading {
     font-size: large;
@@ -909,6 +922,12 @@ a {
 }
 
 @media (max-width: 575px) {
+  #color-codes {
+    position: unset;
+    width: 100%;
+    margin: 5px auto;
+  }
+
   #booking-form p {
     width: 90%;
     max-width: 90%;
