@@ -376,7 +376,6 @@ hr:not([size]) {
 
 /* existing bookings */
 
-
 .table-headings {
   height: 30px;
 }
@@ -387,7 +386,6 @@ hr:not([size]) {
 }
 
 .booking-row {
-  /* background-color: antiquewhite; */
   border-radius: 5px;
   border: 1px solid rgb(241, 214, 177);
 }
@@ -438,6 +436,7 @@ a {
   padding: 10px 5px;
 }
 
+/* booking form */
 #booking-form label {
   font-weight: bold;
   padding: 5px 10px;
@@ -479,6 +478,7 @@ a {
   float: left;
 }
 
+/* map */
 #map {
   min-height: 510px;
 }
@@ -721,6 +721,12 @@ a {
   border: 2px solid #004b84;
 }
 
+
+@media (max-width: 1200px) {
+  #booking-form p {
+    max-width: 65%;
+}
+
 @media (max-width: 1100px) {
   .sub-heading {
     font-size: large;
@@ -857,7 +863,7 @@ a {
   #booking-form #id_slot,
   #booking-form #id_instructor_requested,
   #booking-form #id_notes {
-    width: 100%;
+    width: 93%;
   }
 
   #mobile-hr {
