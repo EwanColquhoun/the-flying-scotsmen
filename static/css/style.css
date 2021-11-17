@@ -479,6 +479,10 @@ a {
   float: left;
 }
 
+#map {
+  min-height: 510px;
+}
+
 /* Contact Page */
 .map-container {
   max-width: 600px;

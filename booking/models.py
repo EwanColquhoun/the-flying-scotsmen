@@ -19,6 +19,7 @@ class Slot(models.Model):
     slot = models.CharField(max_length=11, unique=True)
     start = models.TimeField(auto_now=False, auto_now_add=False)
     duration = models.TimeField(auto_now=False, auto_now_add=False)
+    admin = models.BooleanField(default=False)
 
     def __str__(self):
         return str(self.slot)

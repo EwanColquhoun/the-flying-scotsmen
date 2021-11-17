@@ -90,14 +90,44 @@ dates.forEach((date) => {
   }); 
 });
 
-// Only displays approved bookings on the calendar
-// let dayEvents = document.querySelectorAll('.btn-events')
-// console.log(dayEvents)
-// dayEvents.forEach(de => {
-//   console.log(de.getAttribute('data-ref'))
-//   if (de.getAttribute('data-ref') == 0){
-//     de.classList.add('hide')
-//   } else {
-//     de.classList.add('show')
-//   }
-// });
+// GoogleMaps API
+
+function initMap() {
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: {lat: 52.3308, lng: 1.6851},
+    zoom: 4.5
+  });
+
+  var labels = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  var locations = [
+    { lat: 55.9508, lng: -3.3615},
+    { lat: 58.2139, lng: -6.3219},
+    { lat: 57.2037, lng: -2.2002},
+    { lat: 57.3406, lng: -5.6491},
+    { lat: 53.8981, lng: -0.3660},
+    { lat: 55.0372, lng: -8.3414},
+    { lat: 50.9660, lng: -2.1572},
+    { lat: 50.1024, lng: -5.6681},
+    { lat: 50.9557, lng: 0.9335},
+    { lat: 47.4072, lng: 8.6396},
+    { lat: 52.4825, lng: 13.3891},
+    { lat: 48.5897, lng: -2.0758},
+    { lat: 51.9555, lng: 4.4399},
+    { lat: 48.9812, lng: 6.2437},
+    { lat: 48.8335, lng: 3.0056},
+    { lat: 56.4391, lng: -3.3714},
+    { lat: 55.6836, lng: -6.2483},
+  ]
+
+  var markers = locations.map(function(location, i) {
+    return new google.maps.Marker({
+      position: location,
+      label: labels[i % labels.length]
+    });
+  });
+
+  var markerCluster = new MarkerClusterer(map, markers, {
+    imagePath:
+    "https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m",
+});
+}

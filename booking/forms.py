@@ -5,6 +5,8 @@ from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
 
 
+# SLOT = ('07-09', '09-11', '11-13', '13-15', '15-17')
+
 class DateInput(forms.DateInput):
     input_type = 'date'
 
@@ -17,7 +19,7 @@ class BookingForm(forms.ModelForm):
         widgets = {
             'date': DateInput(),
             'notes': forms.Textarea(attrs={'rows': 4, 'cols': 33, 'placeholder': 'Enter your message here...',}),
-            'username': forms.HiddenInput()
+            'username': forms.HiddenInput(),
         }
 
     def __init__(self, *args, **kws):
@@ -26,6 +28,7 @@ class BookingForm(forms.ModelForm):
         super().__init__(*args, **kws)
         self.fields['username'].initial = self.username
         self.fields['username'].disabled = True
+        
 
 
 class ContactForm(forms.ModelForm):

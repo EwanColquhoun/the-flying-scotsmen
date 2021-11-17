@@ -3,6 +3,7 @@ from django.shortcuts import render, get_object_or_404, reverse, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views import generic, View
 from django.utils.safestring import mark_safe
+from django.contrib.auth.models import User
 import calendar
 from .models import Booking, Contact
 from .forms import BookingForm, ContactForm
@@ -38,6 +39,7 @@ class BookingDisplay(View):
 
     def post(self, request, *args, **kwargs):
         current_user = request.user
+        admin = User.objects.filter(is_superuser=True)
         booking_form = BookingForm(data=request.POST, user=request.user)
         bookings = Booking.objects.filter(username=current_user, approved=True)
         today = date.today()
@@ -56,15 +58,19 @@ class BookingDisplay(View):
                     aircraft_id=booking_form.instance.aircraft_id,
                 ).count()
 
-                if qs == 0 and maint == 0:
-                    booking = booking_form.save(commit=False)
-                    booking.save()
-                    send_email_to_admin(booking_form.instance)
-                    messages.add_message(request, messages.SUCCESS, 'Your booking will be added once approved by admin. Thank you.')
+                if booking_form.instance.slot_id==12:
+                    messages.add_message(request, messages.WARNING, 'Only Admin can book MAINT slots. Thank you.')
                     return redirect('bookings')
                 else:
-                    messages.add_message(request, messages.WARNING, 'This is a double booking, please check date/slot and aircraft and try again. Thank you.')
-                    return redirect('bookings')
+                    if qs == 0 and maint == 0:
+                        booking = booking_form.save(commit=False)
+                        booking.save()
+                        send_email_to_admin(booking_form.instance)
+                        messages.add_message(request, messages.SUCCESS, 'Your booking will be added once approved by admin. Thank you.')
+                        return redirect('bookings')
+                    else:
+                        messages.add_message(request, messages.WARNING, 'This is a double booking, please check date/slot and aircraft and try again. Thank you.')
+                        return redirect('bookings')
             else: 
                 messages.add_message(request, messages.WARNING, 'Booking dates must be in the future, please check the date. Thank you.')
                 return redirect('bookings')

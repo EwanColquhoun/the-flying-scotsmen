@@ -73,7 +73,7 @@
     </div>
      
     <div class="row g-0">
-        <div class="col-12 mb-5">
+        <div class="col-12 col-md-6 mb-5">
             <h3 class="sub-heading">Make A New Booking</h3>
 
             <form id="booking-form" class="blue-border" action="{% url 'bookings' %}" method="POST">
@@ -84,6 +84,13 @@
                 </div>
             </form>
         </div>
+    
+        <div class="col-12 col-md-6 mb-5">
+            <h3 class="sub-heading">Our Travels So Far</h3>
+            <div id='map' class="blue-border">
+            </div>
+        </div>
+
     </div>
 </div>
 
