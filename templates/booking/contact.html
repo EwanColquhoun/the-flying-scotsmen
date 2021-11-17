@@ -5,7 +5,7 @@
 
 <div class="container-fluid">
     <div class="row d-flex justify-content-center">
-        <div class="col-8 mt-5 mb-4 d-flex justify-content-center">
+        <div class="col-8 mt-2 mb-2 d-flex justify-content-center">
             <h1 class="page-heading">Contact</h1>
         </div>
     </div>
@@ -13,7 +13,7 @@
 
 <div class="container">
     <div class="row g-0 d-flex justify-content-around">
-        <div class="col-12 col-md-5 mt-3 mb-5 blue-border">
+        <div class="col-12 col-md-5 mt-3 mb-1 blue-border">
             <form id="contact-form" action="{% url 'contact' %}" method="POST">
                 {% csrf_token %}
                 {{ contact_form.as_p }}
@@ -24,7 +24,7 @@
             </form>
         </div>
 
-        <div class="col-12 col-md-5 mt-3 mb-5 d-flex justify-content-center blue-border align-items-center">
+        <div class="col-12 col-md-5 mt-3 mb-1 d-flex justify-content-center blue-border align-items-center">
             <div class="mt-3 contact-details">
                 <h3 class="sub-heading">56.4391° N, 3.3714° W</h3>
                 <p>
@@ -44,7 +44,7 @@
 </div>
 <div class="container">
     <div class="row g-0 d-flex justify-content-around">
-        <div id="map" class="col-12 col-md-5 mt-4 blue-border">
+        <div id="contact-map" class="col-12 col-md-5 mt-4 blue-border">
             <div class="ratio ratio-1x1 map-container">
                 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d18336.95713135544!2d-3.3605618086385145!3d56.44135997822792!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48863c1062d054c9%3A0x5eb3fcd704908285!2sPerth%20Airport!5e0!3m2!1sen!2suk!4v1634546102894!5m2!1sen!2suk" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
             </div>

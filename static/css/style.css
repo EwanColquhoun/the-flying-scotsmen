@@ -510,7 +510,7 @@ a {
   font-size: larger;
 }
 
-#map {
+#contact-map {
   margin-bottom: 40px;
 }
 
@@ -840,7 +840,7 @@ a {
     display: none;
   }
 
-  #map {
+  #contact-map {
     margin-bottom: 20px;
   }
 
