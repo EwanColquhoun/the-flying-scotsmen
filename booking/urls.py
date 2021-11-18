@@ -4,6 +4,7 @@ from django.conf.urls import re_path
 
 urlpatterns = [
     path('', views.HomeDisplay.as_view(), name='home'),
+    # path('accounts/signup/', views.SignUpDisplay.as_view(), name='sign_up'),
     path('bookings/', views.BookingDisplay.as_view(), name='bookings'),
     path('contact/', views.ContactDisplay.as_view(), name='contact'),
     re_path(r'^calendar/$', views.CalendarView.as_view(), name='calendar'),

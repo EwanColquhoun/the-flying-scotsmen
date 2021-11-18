@@ -578,7 +578,7 @@ a {
 
 /* Calender */
 #today {
-  background-color: #F06D89;
+  background-color: rgba(0, 101, 189, 0.9);
   color: #E4E9F7;
 }
 
@@ -642,6 +642,7 @@ a {
 }
 
 .calendar {
+  border: 3px solid #0065bd;
   width: 98%;
   margin: auto;
   font-size: 13px;
@@ -884,7 +885,7 @@ a {
   }
 
   .calendar {
-    width: 80vw;
+    width: 100%;
   }
 
   .prev, .next{

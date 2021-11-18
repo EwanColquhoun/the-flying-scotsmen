@@ -103,7 +103,8 @@ The Flying Scotsmen project is made up of 4 main pages. [index](templates/bookin
 [Back to top](<#contents>)
 
 # Data Model
-## Class Based Views
+## Class Based Views (CBV)
+
 
 
 
@@ -246,6 +247,7 @@ The Flying Scotsmen project is made up of 4 main pages. [index](templates/bookin
 * [Django]
 * [Bootstrap]
 * [Animate CSS]
+* [DrawSQL](https://drawsql.app/) - for the database diagram
 
 [Back to top](<#contents>)
 

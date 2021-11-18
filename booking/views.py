@@ -22,6 +22,15 @@ class HomeDisplay(View):
         )
 
 
+class SignUpDisplay(View):
+
+    def get(self, request, *args, **kwargs):
+        return render(
+            request,
+            'account/signup.html',
+        )
+
+
 class BookingDisplay(View):
 
     def get(self, request, *args, **kwargs):
