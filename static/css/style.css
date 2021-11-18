@@ -10,7 +10,7 @@
 }
 
 body {
-  background-color: #004b84;
+  background-color: #0065bd;
 }
 
 /* Sidebar and Navbar */
@@ -20,7 +20,7 @@ body {
   top: 0;
   height: calc(100% - 20px);
   width: 78px;
-  background: #004b84;
+  background: #0065bd;
   padding: 6px 14px;
   z-index: 99;
   transition: all 0.5s ease;
@@ -132,7 +132,7 @@ body {
   align-items: center;
   text-decoration: none;
   transition: all 0.4s ease;
-  background: #004b84;
+  background: #0065bd;
 }
 .sidebar li a:hover{
   background: #FFF;
@@ -155,7 +155,7 @@ body {
 .sidebar li a:hover .links_name,
 .sidebar li a:hover i{
   transition: all 0.5s ease;
-  color: #004b84;
+  color: #0065bd;
 }
 
 .sidebar li i{
@@ -189,14 +189,14 @@ body {
   align-items: center;
   text-decoration: none;
   transition: all 0.4s ease;
-  background: #004b84;
+  background: #0065bd;
 }
 
 .sidebar .logout-details a:hover #log_out,
 .sidebar .logout-details a:hover {
   transition: all 0.5s ease;
   background: #FFF;
-  color: #004b84;
+  color: #0065bd;
 }
 
 #log_out{
@@ -209,7 +209,7 @@ body {
   }
 
   #log_out:hover {
-    color: #004b84;
+    color: #0065bd;
   }
 
 .sidebar.open .logout-details a #log_out{
@@ -241,7 +241,7 @@ body {
 }
 
 .sco-blue {
-  background-color: #004b84;
+  background-color: #0065bd;
 }
 
 .navbar-light .navbar-toggler i,
@@ -259,7 +259,7 @@ body {
 }
 
 .navbar-light .navbar-toggler {
-  color: #004b84;
+  color: #0065bd;
   border-color: transparent;
 }
 
@@ -304,7 +304,7 @@ body {
   padding: 20px;
 }
 .scots {
-  color: #004b84;
+  color: #0065bd;
 }
 
 /* Carousel */
@@ -330,7 +330,7 @@ body {
 .half-page-break {
   width: 50%;
   border: none;
-  background-color: #004b84;
+  background-color: #0065bd;
   opacity: unset;
   margin: 70px auto;
 }
@@ -383,7 +383,7 @@ hr:not([size]) {
 .page-heading {
   margin: 0 auto;
   padding: 40px;
-  color: #004b84;
+  color: #0065bd;
 }
 
 .sub-heading {
@@ -514,11 +514,11 @@ a {
 }
 
 .contact-details .sub-heading {
-  text-shadow:1px 1px #004b84;
+  text-shadow:1px 1px #0065bd;
 }
 
 .blue-border {
-  border: 2px solid #004b84;
+  border: 2px solid #0065bd;
   box-shadow: 0px 0px 15px 0px rgb(0 0 0 / 75%);
   -webkit-box-shadow: 0px 0px 15px 0px rgb(0 0 0 / 75%);
   -moz-box-shadow: 0px 0px 15px 0px rgb(0 0 0 / 75%);
@@ -578,7 +578,7 @@ a {
 
 /* Calender */
 #today {
-  background-color: #8579de;
+  background-color: #F06D89;
   color: #E4E9F7;
 }
 
@@ -708,7 +708,7 @@ a {
 }
 
 .day-free {
-  background-color: rgba(138, 243, 191, 0.3);
+  background-color: rgba(230, 244, 241, 0.4);
 }
 
 .day-medium {
@@ -755,7 +755,7 @@ a {
 
 /* SignUp Page */
 .btn-join {
-  background-color: #004b84;
+  background-color: #0065bd;
   color: #E4E9F7;
   display: block;
   margin: 0 auto;
@@ -763,8 +763,8 @@ a {
 
 .btn-join:hover {
   background-color: #E4E9F7;
-  color: #004b84;
-  border: 2px solid #004b84;
+  color: #0065bd;
+  border: 2px solid #0065bd;
 }
 
 
@@ -859,7 +859,7 @@ a {
 
   #email-icon {
     display: block;
-    color: #004b84;
+    color: #0065bd;
     font-size: x-large;
   }
 
