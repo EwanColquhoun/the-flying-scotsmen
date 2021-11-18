@@ -23,7 +23,7 @@ let closeBtn = document.querySelector("#btn");
     let messages = document.getElementById('msg')
     let alert = new bootstrap.Alert(messages);
     alert.close();
-}, 3000);
+}, 5000);
 
 
 // Gets the delete modal working
@@ -132,7 +132,23 @@ function initMap() {
 });
 }
 
-// animated title
 
-const element = document.querySelector('.title');
-element.style.setProperty('--animate-duration', '0.5s');
+// lets the date to the future
+// let date = document.getElementById('id_date')
+// console.log(date)
+// var today = new Date();
+// var dd = String(today.getDate()).padStart(2, '0');
+// var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+// var yyyy = today.getFullYear();
+
+// today = yyyy + '/' + mm + '/' + dd;
+// console.log(today)
+// att = document.createAttribute('min')
+// att.value = today
+// date.setAttributeNode(att)
+
+// flatpickr
+const myInput = document.querySelector("#id_date");
+const fp = flatpickr(myInput, {
+  minDate: "today"
+});  // flatpickr

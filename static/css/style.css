@@ -594,6 +594,7 @@ a {
 .title {
   text-align: center;
   margin: 10px;
+  transition-timing-function: 1000ms;
 }
 
 .prev, .next {

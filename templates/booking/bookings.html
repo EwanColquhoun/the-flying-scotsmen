@@ -79,6 +79,7 @@
             <form id="booking-form" class="blue-border" action="{% url 'bookings' %}" method="POST">
                 {% csrf_token %}
             {{ bookingform.as_p }}
+            {{ bookingform.non_field_errors }}
                 <div id="booking-button">
                     <button type="submit" id="new_booking" class="btn btn-join">Submit</button>
                 </div>

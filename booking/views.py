@@ -22,13 +22,15 @@ class HomeDisplay(View):
         )
 
 
-class SignUpDisplay(View):
+# class SignUpDisplay(View):
 
-    def get(self, request, *args, **kwargs):
-        return render(
-            request,
-            'account/signup.html',
-        )
+#     def get(self, request, *args, **kwargs):
+#         signup_form = 
+#         return render(
+#             request,
+#             'account/signup.html',
+#         )
+    
 
 
 class BookingDisplay(View):
@@ -150,26 +152,32 @@ class EditDisplay(View):
     def post(self, request, booking_id):
         current_user = request.user
         booking = get_object_or_404(Booking, id=booking_id)
-        booking_form = BookingForm(request.POST, instance=booking, user=request.user)
+        today = date.today()
         
-        if booking_form.is_valid():
-            qs = Booking.objects.filter(
-                date=booking_form.instance.date,
-                slot=booking_form.instance.slot,
-                aircraft_id=booking_form.instance.aircraft_id,
-                instructor_requested=booking_form.instance.instructor_requested
-            ).count()
-            if qs == 0:
-                booking.approved = False
-                booking_form.save()
-                send_email_to_admin(booking_form.instance)
-                messages.add_message(request, messages.SUCCESS, 'Your booking will be added once approved by admin. Thank you.')
-                return redirect('bookings')
-            else:
-                messages.add_message(request, messages.WARNING, 'This is a double booking, please check date/slot and aircraft and try again. Thank you.')
-                return redirect('edit_booking', booking.id)
-        else:
-            booking_form = BookingForm(user=request.user)
+        if request.method == 'POST':
+            booking_form = BookingForm(request.POST, instance=booking, user=request.user)
+            if booking_form.instance.date > today:
+                if booking_form.is_valid():
+                    qs = Booking.objects.filter(
+                        date=booking_form.instance.date,
+                        slot=booking_form.instance.slot,
+                        aircraft_id=booking_form.instance.aircraft_id,
+                        instructor_requested=booking_form.instance.instructor_requested
+                    ).count()
+                    if qs == 0:
+                        booking.approved = False
+                        booking_form.save()
+                        send_email_to_admin(booking_form.instance)
+                        messages.add_message(request, messages.SUCCESS, 'Your booking will be added once approved by admin. Thank you.')
+                        return redirect('bookings')
+                    else:
+                        messages.add_message(request, messages.WARNING, 'This is a double booking, please check date/slot and aircraft and try again. Thank you.')
+                        return redirect('edit_booking', booking.id)
+                else:
+                    booking_form = BookingForm(user=request.user)
+            else: 
+                messages.add_message(request, messages.WARNING, 'Booking dates must be in the future, please check the date. Thank you.')
+                return redirect('edit_booking')
 
         return render(
             request,

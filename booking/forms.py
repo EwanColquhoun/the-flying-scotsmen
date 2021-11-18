@@ -7,8 +7,8 @@ from django.core.validators import validate_email
 
 # SLOT = ('07-09', '09-11', '11-13', '13-15', '15-17')
 
-class DateInput(forms.DateInput):
-    input_type = 'date'
+# class DateInput(forms.DateInput):
+#     input_type = 'date'
 
 
 class BookingForm(forms.ModelForm):
@@ -17,10 +17,11 @@ class BookingForm(forms.ModelForm):
         model = Booking
         fields = ('username', 'date', 'slot', 'aircraft', 'instructor_requested', 'notes')
         widgets = {
-            'date': DateInput(),
+            # 'date': DateInput(),
             'notes': forms.Textarea(attrs={'rows': 4, 'cols': 33, 'placeholder': 'Enter your message here...',}),
             'username': forms.HiddenInput(),
         }
+
 
     def __init__(self, *args, **kws):
     # To get request.user. Do not use kwargs.pop('user', None) due to potential security hole
