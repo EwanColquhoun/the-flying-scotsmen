@@ -33,6 +33,38 @@ class HomeDisplay(View):
     
 
 
+def validate_booking(booking_form, request, *args, **kwargs):
+    today = date.today()
+    if booking_form.instance.date > today:
+        qs = Booking.objects.filter(
+            date=booking_form.instance.date,
+            slot=booking_form.instance.slot,
+            aircraft_id=booking_form.instance.aircraft_id,
+        ).count()
+
+        maint = Booking.objects.filter(
+            date=booking_form.instance.date,
+            slot=12,
+            aircraft_id=booking_form.instance.aircraft_id,
+        ).count()
+
+        if booking_form.instance.slot_id==12:
+            messages.add_message(request, messages.WARNING, 'Only Admin can book MAINT slots. Thank you.')
+            return 
+        else:
+            if qs == 0 and maint == 0:
+                booking = booking_form.save(commit=False)
+                booking.save()
+                send_email_to_admin(booking_form.instance)
+                messages.add_message(request, messages.SUCCESS, 'Your booking will be added once approved by admin. Thank you.')
+            else:
+                messages.add_message(request, messages.WARNING, 'This is a double booking, please check date/slot and aircraft and try again. Thank you.')
+                return 
+    else:
+        messages.add_message(request, messages.WARNING, 'Booking dates must be in the future, please check the date. Thank you.')
+        return 
+
+
 class BookingDisplay(View):
 
     def get(self, request, *args, **kwargs):
@@ -50,41 +82,13 @@ class BookingDisplay(View):
 
     def post(self, request, *args, **kwargs):
         current_user = request.user
-        admin = User.objects.filter(is_superuser=True)
         booking_form = BookingForm(data=request.POST, user=request.user)
         bookings = Booking.objects.filter(username=current_user, approved=True)
-        today = date.today()
+
 
         if booking_form.is_valid():
-            if booking_form.instance.date > today:
-                qs = Booking.objects.filter(
-                    date=booking_form.instance.date,
-                    slot=booking_form.instance.slot,
-                    aircraft_id=booking_form.instance.aircraft_id,
-                ).count()
-
-                maint = Booking.objects.filter(
-                    date=booking_form.instance.date,
-                    slot=12,
-                    aircraft_id=booking_form.instance.aircraft_id,
-                ).count()
-
-                if booking_form.instance.slot_id==12:
-                    messages.add_message(request, messages.WARNING, 'Only Admin can book MAINT slots. Thank you.')
-                    return redirect('bookings')
-                else:
-                    if qs == 0 and maint == 0:
-                        booking = booking_form.save(commit=False)
-                        booking.save()
-                        send_email_to_admin(booking_form.instance)
-                        messages.add_message(request, messages.SUCCESS, 'Your booking will be added once approved by admin. Thank you.')
-                        return redirect('bookings')
-                    else:
-                        messages.add_message(request, messages.WARNING, 'This is a double booking, please check date/slot and aircraft and try again. Thank you.')
-                        return redirect('bookings')
-            else: 
-                messages.add_message(request, messages.WARNING, 'Booking dates must be in the future, please check the date. Thank you.')
-                return redirect('bookings')
+            validate_booking(booking_form, request, bookings, current_user)
+            return redirect('bookings')
         else:
             booking_form = BookingForm(user=request.user)
     
@@ -96,34 +100,6 @@ class BookingDisplay(View):
                 "bookingform": BookingForm(user=request.user),
             },
         )
-
-    # @staticmethod
-    # def editBooking(request, booking_id):
-    #     booking = get_object_or_404(Booking, id=booking_id)
-    #     if request.method == 'POST':
-    #         booking_form = BookingForm(request.POST, instance=booking, user=request.user)
-    #         if booking_form.is_valid():
-    #             qs = Booking.objects.filter(
-    #                 date=booking_form.instance.date,
-    #                 slot=booking_form.instance.slot,
-    #                 aircraft_id=booking_form.instance.aircraft_id,
-    #             ).count()
-    #             if qs == 0:
-    #                 booking.approved = False
-    #                 booking_form.save()
-    #                 send_email_to_admin(current_user, booking_form.instance.date)
-    #                 messages.add_message(request, messages.SUCCESS, 'Your booking will be added once approved by admin. Thank you.')
-    #                 return redirect('bookings')
-    #             else:
-    #                 messages.add_message(request, messages.WARNING, 'This is a double booking, please check date/slot and aircraft and try again. Thank you.')
-    #                 return redirect('edit_booking', booking.id)
-    #     else:
-    #         booking_form = BookingForm(instance=booking, user=request.user)
-    #         context = {
-    #             'form': booking_form,
-    #             'booking': booking,
-    #         }
-    #         return render(request, "booking/edit_booking.html", context)
 
 
     @staticmethod
@@ -152,32 +128,16 @@ class EditDisplay(View):
     def post(self, request, booking_id):
         current_user = request.user
         booking = get_object_or_404(Booking, id=booking_id)
+        bookings = Booking.objects.filter(username=current_user, approved=True)
         today = date.today()
         
         if request.method == 'POST':
             booking_form = BookingForm(request.POST, instance=booking, user=request.user)
-            if booking_form.instance.date > today:
-                if booking_form.is_valid():
-                    qs = Booking.objects.filter(
-                        date=booking_form.instance.date,
-                        slot=booking_form.instance.slot,
-                        aircraft_id=booking_form.instance.aircraft_id,
-                        instructor_requested=booking_form.instance.instructor_requested
-                    ).count()
-                    if qs == 0:
-                        booking.approved = False
-                        booking_form.save()
-                        send_email_to_admin(booking_form.instance)
-                        messages.add_message(request, messages.SUCCESS, 'Your booking will be added once approved by admin. Thank you.')
-                        return redirect('bookings')
-                    else:
-                        messages.add_message(request, messages.WARNING, 'This is a double booking, please check date/slot and aircraft and try again. Thank you.')
-                        return redirect('edit_booking', booking.id)
-                else:
+            if booking_form.is_valid():
+                validate_booking(booking_form, request, bookings, current_user)
+                return redirect ('bookings')
+            else:
                     booking_form = BookingForm(user=request.user)
-            else: 
-                messages.add_message(request, messages.WARNING, 'Booking dates must be in the future, please check the date. Thank you.')
-                return redirect('edit_booking')
 
         return render(
             request,

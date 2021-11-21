@@ -24,7 +24,7 @@ class BookingForm(forms.ModelForm):
 
 
     def __init__(self, *args, **kws):
-    # To get request.user. Do not use kwargs.pop('user', None) due to potential security hole
+        # To get request.user. Do not use kwargs.pop('user', None) due to potential security hole
         self.username = kws.pop('user')
         super().__init__(*args, **kws)
         self.fields['username'].initial = self.username
