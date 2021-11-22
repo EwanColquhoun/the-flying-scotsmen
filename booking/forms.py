@@ -2,13 +2,7 @@ import datetime
 from django import forms
 from .models import Booking, Contact
 from django.core.exceptions import ValidationError
-from django.core.validators import validate_email
-
-
-# SLOT = ('07-09', '09-11', '11-13', '13-15', '15-17')
-
-# class DateInput(forms.DateInput):
-#     input_type = 'date'
+from django.core.validators import validate_email, EmailValidator
 
 
 class BookingForm(forms.ModelForm):
@@ -29,7 +23,6 @@ class BookingForm(forms.ModelForm):
         super().__init__(*args, **kws)
         self.fields['username'].initial = self.username
         self.fields['username'].disabled = True
-        
 
 
 class ContactForm(forms.ModelForm):
@@ -40,5 +33,5 @@ class ContactForm(forms.ModelForm):
         widgets = {
             'message': forms.Textarea(attrs={'rows': 4, 'cols': 33, 'placeholder': 'Enter your message here...'}),
             'email': forms.EmailInput(attrs={'placeholder': 'maverick@topgun.com'}),
-            # 'telephone': forms.PhoneNumberField(attrs={'placeholder': 'Include the country code eg: +44', 'rows': 1, 'cols': 33})
+            'telephone': forms.TextInput(attrs={'placeholder': '+44 1234567890', 'rows': 1, 'cols': 33})
         }

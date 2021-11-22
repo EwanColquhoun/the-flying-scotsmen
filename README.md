@@ -301,7 +301,9 @@ The method from cloning a project from GitHub is below:
 * The form validation idea came from a [YouTube tutorial](https://www.youtube.com/watch?v=fNcJuPIZ2WE).
 * The code for the Safari specific styling was inspired by an example on [Stack Overflow](https://stackoverflow.com/).
 * The inspiration for the Project page sliders came from this repository on [GitHub](https://gist.github.com/zhilinskiy/4603199).
-* [Balsamiq](https://balsamiq.com/wireframes/) was used to create the wireframes. -->
+* [Balsamiq](https://balsamiq.com/wireframes/) was used to create the wireframes.
+* [PhoneNumberField](https://github.com/stefanfoulis/django-phonenumber-field) was used to validate the Contact form Telephone field.
+ -->
 
 
 ### Media

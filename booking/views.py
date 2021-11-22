@@ -129,14 +129,13 @@ class EditDisplay(View):
         booking = get_object_or_404(Booking, id=booking_id)
         bookings = Booking.objects.filter(username=current_user, approved=True)
         today = date.today()
-        
-        if request.method == 'POST':
-            booking_form = BookingForm(request.POST, instance=booking, user=request.user)
-            if booking_form.is_valid():
-                validate_booking(booking_form, request, bookings, current_user, booking.id)
-                # return redirect ('bookings')
-            else:
-                booking_form = BookingForm(user=request.user)
+        booking_form = BookingForm(request.POST, instance=booking, user=request.user)
+
+        if booking_form.is_valid():
+            validate_booking(booking_form, request, bookings, current_user, booking.id)
+            return redirect ('bookings')
+        else:
+            booking_form = BookingForm(user=request.user)
 
         return render(
             request,
@@ -194,10 +193,11 @@ class CalendarView(generic.ListView):
 
 
 class ContactDisplay(View):
+    
     def get(self, request, *args, **kwargs):
-        contact_form = ContactForm()
+        form = ContactForm()
         context = {
-            'contact_form': contact_form,
+            'contact_form': form,
         }
         return render(
             request,
@@ -206,23 +206,19 @@ class ContactDisplay(View):
         )
 
     def post(self, request, *args, **kwargs):
-        contact_form = ContactForm(data=request.POST)
-        if request.method == 'POST':
-            contact_form = ContactForm(data=request.POST)
-            if contact_form.is_valid:
-                contact_form.replied = False
-                contact_form.save()
-                send_contact_email_to_admin(contact_form.instance)
-                messages.add_message(request, messages.SUCCESS, 'Your message has been sent, we will endeavour to reply as soon as we can. Thank you.')
-                return redirect('contact')
-            else:
-                messages.add_message(request, messages.WARNING, 'This is a double booking, please check date/slot and aircraft and try again. Thank you.')
-                return redirect('contact')
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            form.replied = False
+            form.save()
+            send_contact_email_to_admin(form.instance)
+            messages.add_message(request, messages.SUCCESS, 'Your message has been sent, we will endeavour to reply as soon as we can. Thank you.')
+            return redirect('contact')
+        else: 
+            messages.add_message(request, messages.WARNING, 'All fields are required, please check the details and try again. Thank you.')
+            return redirect('contact')
 
-        else:
-            contact_form = ContactForm()
-            context = {
-                'contact_form': contact_form,
-            }
+        form = ContactForm()
+        context = {
+            'contact_form': form,
+        }
         return render(request, 'booking/contact.html', context)
-    

@@ -536,6 +536,7 @@ a {
 #contact-form label {
   font-weight: bold;
   padding: 5px 10px;
+  float: left;
 }
 
 #contact-form button {
@@ -543,7 +544,7 @@ a {
 }
 
 #contact-form p {
-  max-width: 60%;
+  max-width: 90%;
   margin: 15px auto;
   text-align: center;
 }

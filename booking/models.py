@@ -76,13 +76,13 @@ class Booking(models.Model):
             return f'<span class="btn-events calendar-events green-transparent" data-ref={self.approved} name={self.date.month}_{self.date.day}>{self.slot} | {self.username} | <i class="fas fa-user-cog"></i></span>'
 
 
+
 class Contact(models.Model):
 
     name = models.CharField(max_length=30, null=False, blank=False)
-    # phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Phone number must be entered in the format: '+441234567890'. Up to 15 digits allowed.")
-    telephone = PhoneNumberField(null=False, blank=False,)
-    email = models.EmailField(max_length=40, blank=False)
-    message = models.TextField(blank=False)
+    telephone = PhoneNumberField(null=False, blank=False, help_text='Include country code, eg +44')
+    email = models.EmailField(max_length=40, blank=False, help_text='Email must include "@"')
+    message = models.TextField(blank=False, null=False)
     replied = models.IntegerField(choices=REPLIED, default=False)
 
     class Meta:

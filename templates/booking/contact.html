@@ -14,10 +14,10 @@
 <div class="container">
     <div class="row g-0 d-flex justify-content-around">
         <div class="col-12 col-md-5 mt-3 mb-1 blue-border">
-            <form id="contact-form" action="{% url 'contact' %}" method="POST">
+            <form id="contact-form" action="{% url 'contact' %}" method="POST" novalidate>
                 {% csrf_token %}
                 {{ contact_form.as_p }}
-      
+     
             <div id="contact-button" class="mb-3">
                 <input class="btn btn-join" type="submit" value="Submit">
             </div>
