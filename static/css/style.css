@@ -294,8 +294,8 @@ body {
 .message {
   position: absolute;
   top:10px;
-  left: 20%;
-  width: 60%;
+  left: 10%;
+  width: 80%;
 }
 
 /* Home page */

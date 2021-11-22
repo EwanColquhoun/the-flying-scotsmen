@@ -5,20 +5,26 @@ from django.views import generic, View
 from django.utils.safestring import mark_safe
 from django.contrib.auth.models import User
 import calendar
-from .models import Booking, Contact
+from .models import Booking, Contact, Group_Member
 from .forms import BookingForm, ContactForm
 from .utils import Calendar
 from .email import send_email_to_admin, send_contact_email_to_admin
 from django.http import HttpResponseRedirect
 from django.contrib import messages
+from django.contrib.auth.decorators import permission_required, login_required
 
 
 class HomeDisplay(View):
 
     def get(self, request, *args, **kwargs):
+        # group_member = Group_Member.objects.filter(registered=True, user=request.user)
+        # print(group_member)
         return render(
             request,
             'booking/index.html',
+            # {
+            #     "member": group_member,
+            # },
         )
 
 

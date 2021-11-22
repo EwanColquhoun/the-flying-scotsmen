@@ -5,12 +5,23 @@ from django.db import models
 from cloudinary.models import CloudinaryField
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email, RegexValidator
+from django.contrib.auth.models import Permission, User
 from phonenumber_field.modelfields import PhoneNumberField
 
 
 INSTRUCTOR_REQUIRED = (('No', 'No'), ('Yes', 'Yes'))
 APPROVED = ((0, 'No'), (1, 'Yes'))
 REPLIED = ((0, 'No'), (1, 'Yes'))
+
+
+class Group_Member(models.Model):
+
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    registered = models.BooleanField(default=False)
+    date_joined = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return str(self.user)
 
 
 class Slot(models.Model):
