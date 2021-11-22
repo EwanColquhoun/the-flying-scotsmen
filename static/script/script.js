@@ -35,10 +35,19 @@ if (delete_button.length !== 0){
   delete_button.forEach((button) => {
     button.addEventListener('click', function() {
       const booking_id = button.getAttribute('name')
-      modal_buttons.innerHTML = `
-      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-      <a href="/delete/${booking_id}" class="btn btn-back">DELETE</a>
-      `
+      let calbut = button.getAttribute('data-ref')
+      console.log(calbut)
+      if (calbut === '0'){
+        modal_buttons.innerHTML = `
+        <button type="button" class="btn btn-secondary" data-ref="0" data-bs-dismiss="modal">Close</button>
+        <a href="/delete/${booking_id}" class="btn btn-back">DELETE</a>
+        `
+      } else {
+        modal_buttons.innerHTML = `
+        <button type="button" class="btn btn-secondary" data-ref="1" data-bs-dismiss="modal">Close</button>
+        <a href="/delete_calendar_booking/${booking_id}" class="btn btn-back">DELETE</a>
+        `     
+      }
     });
   })
 }

@@ -174,7 +174,7 @@
 
                                     {% if booking.username == request.user.username %}
                                     <td><span><a href="/edit/{{ booking.id }}"><i class="far fa-edit edit-icon green"></i></a></span>
-                                        <span><a name="{{ booking.id }}" class="delete_button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                        <span><a name="{{ booking.id }}" class="delete_button" data-num="1" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                                         <i class="far fa-times-circle cancel-icon red"></i></a></span>
                                     </td>
                                     {% else %}
@@ -193,7 +193,7 @@
 
                                     {% if booking.username == request.user.username %}
                                     <td><span><a href="/edit/{{ booking.id }}"><i class="far fa-edit edit-icon green"></i></a></span>
-                                        <span><a name="{{ booking.id }}" class="delete_button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                        <span><a name="{{ booking.id }}" class="delete_button" data-num="1" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                                         <i class="far fa-times-circle cancel-icon red"></i></a></span>
                                     </td>
                                     {% else %}
@@ -234,7 +234,7 @@
                 </div>
                 <div class="modal-footer" id="delete-modal-buttons">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <a href="/delete/{{ selectedBooking }}" class="btn btn-back">DELETE</a>
+                    <a href="/delete_calendar_booking/{{ booking.id }}" class="btn btn-back">DELETE</a>
                 </div>
             </div>
         </div>

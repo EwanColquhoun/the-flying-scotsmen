@@ -11,4 +11,5 @@ urlpatterns = [
     # path('edit/<booking_id>', views.BookingDisplay.editBooking, name='edit_booking'),
     path('edit/<booking_id>', views.EditDisplay.as_view(), name='edit_booking'),
     path('delete/<booking_id>', views.BookingDisplay.deleteBooking, name='delete_booking'),
+    path('delete_calendar_booking/<booking_id>', views.CalendarView.deleteBooking, name='delete_calendar_booking'),
 ]

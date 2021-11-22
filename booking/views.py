@@ -33,7 +33,7 @@ class HomeDisplay(View):
     
 
 
-def validate_booking(booking_form, request, *args, **kwargs):
+def validate_booking(booking_form, request, booking, *args, **kwargs):
     today = date.today()
     if booking_form.instance.date > today:
         qs = Booking.objects.filter(
@@ -50,7 +50,7 @@ def validate_booking(booking_form, request, *args, **kwargs):
 
         if booking_form.instance.slot_id==12:
             messages.add_message(request, messages.WARNING, 'Only Admin can book MAINT slots. Thank you.')
-            return 
+            return redirect('edit_booking', booking)
         else:
             if qs == 0 and maint == 0:
                 booking = booking_form.save(commit=False)
@@ -59,10 +59,11 @@ def validate_booking(booking_form, request, *args, **kwargs):
                 messages.add_message(request, messages.SUCCESS, 'Your booking will be added once approved by admin. Thank you.')
             else:
                 messages.add_message(request, messages.WARNING, 'This is a double booking, please check date/slot and aircraft and try again. Thank you.')
-                return 
+                return redirect('edit_booking', booking)
+
     else:
         messages.add_message(request, messages.WARNING, 'Booking dates must be in the future, please check the date. Thank you.')
-        return 
+        return redirect('edit_booking', booking)
 
 
 class BookingDisplay(View):
@@ -100,14 +101,12 @@ class BookingDisplay(View):
                 "bookingform": BookingForm(user=request.user),
             },
         )
-
-
     @staticmethod
     def deleteBooking(request, booking_id):
         booking = get_object_or_404(Booking, id=booking_id)
         booking.delete()
         messages.add_message(request, messages.SUCCESS, 'Your Booking has been deleted successfully. Thank you.')
-        return HttpResponseRedirect(reverse('calendar'))
+        return HttpResponseRedirect(reverse('bookings'))
 
 
 class EditDisplay(View):
@@ -134,10 +133,10 @@ class EditDisplay(View):
         if request.method == 'POST':
             booking_form = BookingForm(request.POST, instance=booking, user=request.user)
             if booking_form.is_valid():
-                validate_booking(booking_form, request, bookings, current_user)
-                return redirect ('bookings')
+                validate_booking(booking_form, request, bookings, current_user, booking.id)
+                # return redirect ('bookings')
             else:
-                    booking_form = BookingForm(user=request.user)
+                booking_form = BookingForm(user=request.user)
 
         return render(
             request,
@@ -184,6 +183,14 @@ class CalendarView(generic.ListView):
         next_month = last + timedelta(days=1)
         month = 'month=' + str(next_month.year) + '-' + str(next_month.month)
         return month
+
+    @staticmethod
+    def deleteBooking(request, booking_id):
+        booking = get_object_or_404(Booking, id=booking_id)
+        booking.delete()
+        messages.add_message(request, messages.SUCCESS, 'Your Booking has been deleted successfully. Thank you.')
+        return HttpResponseRedirect(reverse('calendar'))
+
 
 
 class ContactDisplay(View):
