@@ -59,7 +59,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'cloudinary',
     'booking',
+    'phonenumber_field',
 ]
+
+PHONENUMBER_DEFAULT_REGION = 'GB'
 
 SITE_ID = 1
 

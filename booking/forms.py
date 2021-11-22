@@ -40,5 +40,5 @@ class ContactForm(forms.ModelForm):
         widgets = {
             'message': forms.Textarea(attrs={'rows': 4, 'cols': 33, 'placeholder': 'Enter your message here...'}),
             'email': forms.EmailInput(attrs={'placeholder': 'maverick@topgun.com'}),
-            'telephone': forms.TextInput(attrs={'placeholder': 'Include the country code', 'rows': 1, 'cols': 33})
+            # 'telephone': forms.PhoneNumberField(attrs={'placeholder': 'Include the country code eg: +44', 'rows': 1, 'cols': 33})
         }

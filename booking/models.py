@@ -4,7 +4,8 @@ from django.urls import reverse
 from django.db import models
 from cloudinary.models import CloudinaryField
 from django.core.exceptions import ValidationError
-from django.core.validators import validate_email
+from django.core.validators import validate_email, RegexValidator
+from phonenumber_field.modelfields import PhoneNumberField
 
 
 INSTRUCTOR_REQUIRED = (('No', 'No'), ('Yes', 'Yes'))
@@ -78,8 +79,9 @@ class Booking(models.Model):
 class Contact(models.Model):
 
     name = models.CharField(max_length=30, null=False, blank=False)
-    telephone = models.CharField(max_length=20, null=False, blank=False)
-    email = models.EmailField(max_length=40, blank=False, validators=[validate_email])
+    # phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Phone number must be entered in the format: '+441234567890'. Up to 15 digits allowed.")
+    telephone = PhoneNumberField(null=False, blank=False,)
+    email = models.EmailField(max_length=40, blank=False)
     message = models.TextField(blank=False)
     replied = models.IntegerField(choices=REPLIED, default=False)
 
