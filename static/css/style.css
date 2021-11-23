@@ -194,7 +194,7 @@ body {
 
 .sidebar .logout-details a:hover #log_out,
 .sidebar .logout-details a:hover {
-  transition: all 0.5s ease;
+  transition: all 0.0s ease;
   background: #FFF;
   color: #0065bd;
 }
@@ -376,6 +376,57 @@ hr:not([size]) {
 
 #mobile-hr {
   display: none;
+}
+
+/* Register Page */
+#signup-form .helptext,
+#signup-form ul {
+  color: gray;
+  font-size: smaller;
+  margin: 0 auto;
+  display: block;
+}
+
+#signup-form .helptext {
+  /* margin: 5px; */
+}
+
+#signup-form label,
+#login-form label {
+  font-weight: bold;
+  padding: 5px 10px;
+  float: left;
+}
+
+#signup-form input,
+#login-form input {
+  width: 100%;
+  border-radius: 3px;
+  margin: 5px 10px;
+  box-shadow: 0px 0px 10px 0px rgb(0 0 0 / 50%);
+  -webkit-box-shadow: 0px 0px 10px 0px rgb(0 0 0 / 50%);
+  -moz-box-shadow: 0px 0px 10px 0px rgb(0 0 0 / 50%);
+}
+
+#login-form #id_remember {
+  width: 4%;
+  font-size: larger;
+  margin-top: 10px;
+  margin-left: 20px;
+  border-radius: 3px;
+  box-shadow: 0px 0px 10px 0px rgb(0 0 0 / 50%);
+  -webkit-box-shadow: 0px 0px 10px 0px rgb(0 0 0 / 50%);
+  -moz-box-shadow: 0px 0px 10px 0px rgb(0 0 0 / 50%);
+}
+
+input[type=checkbox] {
+  /* Double-sized Checkboxes */
+  -ms-transform: scale(1.5); /* IE */
+  -moz-transform: scale(1.5); /* FF */
+  -webkit-transform: scale(1.5); /* Safari and Chrome */
+  -o-transform: scale(1.5); /* Opera */
+  transform: scale(1.5);
+  padding: 10px;
 }
 
 /* Bookings Page */
@@ -811,8 +862,7 @@ margin: unset;
 
 /* Login page */
 #login-form #id_login,
-#login-form #id_password,
-#login-form #id_remember {
+#login-form #id_password {
   border-radius: 3px;
   margin: 5px 10px;
   box-shadow: 0px 0px 10px 0px rgb(0 0 0 / 50%);
@@ -908,6 +958,7 @@ margin: unset;
   }
 
   #contact-form p,
+  #login-form p,
   #signup-form p,
   #booking-form p {
     width: 90%;
@@ -979,6 +1030,10 @@ margin: unset;
 }
 
 @media (max-width: 575px) {
+  .btn-join{
+    width: 90%;
+  }
+
   #color-codes {
     position: unset;
     width: 100%;

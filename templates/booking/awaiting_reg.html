@@ -1,0 +1,24 @@
+{% extends "booking/base.html" %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-12 mt-5 d-flex justify-content-center">
+            <h1 class="page-heading">Awaiting Registration</h1>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row d-flex justify-content-center">
+        <div class="col-12 mt-5">
+           <p class="center mt-3">Your registration is awaiting approval from Admin. Please allow 48 hours for us to get intouch.</p>
+           <p class="center mt-3">Once approved, you will have full site access.</p>
+           <p class="center mt-3">Please use the <a class="scots new-members-link" href="{% url 'contact' %}">contact form</a> if you need to get intouch.</p>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

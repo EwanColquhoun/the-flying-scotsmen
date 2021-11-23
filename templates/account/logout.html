@@ -6,20 +6,26 @@
 
 {% block content %}
 <div class="container">
-  <div class="col-12 d-flex justify-content-center">
-    <h1 class="page-heading">{% trans "Sign Out" %}</h1>
+  <div class="row">
+    <div class="col-12 mt-2 d-flex justify-content-center">
+      <h1 class="page-heading">{% trans "Sign Out" %}</h1>
+    </div>
   </div>
-  <div class="col-12">
-    <p class="center">{% trans 'Are you sure you want to sign out?' %}</p>
+  <div class="row">
+    <div class="col-12 mt-4">
+      <p class="center"><span class="scots"><strong>{{user}}</strong></span> {% trans 'are you sure you want to sign out?' %}</p>
+    </div>
   </div>
-  <div class="col-12 d-flex justify-content-center">
-    <form method="post" action="{% url 'account_logout' %}">
-      {% csrf_token %}
-      {% if redirect_field_value %}
-      <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
-      {% endif %}
-      <button class="btn btn-join mt-4" type="submit">{% trans 'Sign Out' %}</button>
-    </form>
+  <div class="row">
+    <div class="col-12 mt-4">
+      <form method="post" action="{% url 'account_logout' %}">
+        {% csrf_token %}
+        {% if redirect_field_value %}
+        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+        {% endif %}
+        <button class="btn btn-join mt-4" type="submit">{% trans 'Sign Out' %}</button>
+      </form>
+    </div>
   </div>
 </div>
 

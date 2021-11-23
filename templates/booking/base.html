@@ -34,7 +34,7 @@
                 <li class="nav-item">
                     <a class="nav-link" aria-current="page" href="{% url 'home' %}"><i class="fas fa-home"></i> Home</a>
                 </li>
-                {% if user.is_authenticated and member.registered %}
+                {% if user.is_authenticated %}
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'calendar' %}"><i class="fas fa-calendar-alt"></i> Calendar</a>
                 </li>
@@ -92,6 +92,28 @@
                 <span class="links_name">Bookings</span>
             </a>
             <span class="tooltip">Bookings</span>
+            </li>
+            <li>
+                <a href="{% url 'contact' %}">
+                    <i class="fas fa-phone"></i>
+                    <span class="links_name">Contact</span>
+                </a>
+                <span class="tooltip">Contact</span>
+            </li>
+        </ul>
+        <div class="logout-details">
+            <a href="{% url 'account_logout' %}">
+                <i class="fas fa-sign-out-alt" id="log_out"></i>
+                <span class="user-name">Logout {{ request.user.username }}</span>
+            </a>
+        </div>
+        {% elif user.is_authenticated %}
+            <li class="register-li">
+                <a href="{% url 'awaiting_reg' %}">
+                    <i class="fas fa-user-plus"></i>
+                    <span class="links_name">Register</span>
+                </a>
+                <span class="tooltip">Register</span>
             </li>
             <li>
                 <a href="{% url 'contact' %}">

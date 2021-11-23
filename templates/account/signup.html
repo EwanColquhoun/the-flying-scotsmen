@@ -16,14 +16,14 @@
     </div>
   </div>
   <div class="row d-flex justify-content-center">
-      <div class="col-12 col-md-6 mt-3 d-flex justify-content-center flex-column">
+      <div class="col-12 mt-3 d-flex justify-content-center">
         <form class="signup center" id="signup-form" method="post" action="{% url 'account_signup' %}">
           {% csrf_token %}
           {{ form.as_p }}
           {% if redirect_field_value %}
           <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
           {% endif %}
-          <button class="btn btn-join mt-4" type="submit">{% trans "Sign Up" %} &raquo;</button>
+          <button class="btn btn-join mt-4 mb-5" type="submit">{% trans "Sign Up" %} &raquo;</button>
         </form>
       </div>
   </div>

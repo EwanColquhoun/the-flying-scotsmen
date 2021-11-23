@@ -3,6 +3,8 @@ from django import forms
 from .models import Booking, Contact
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email, EmailValidator
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 
 
 class BookingForm(forms.ModelForm):
@@ -35,3 +37,13 @@ class ContactForm(forms.ModelForm):
             'email': forms.EmailInput(attrs={'placeholder': 'maverick@topgun.com'}),
             'telephone': forms.TextInput(attrs={'placeholder': '+44 1234567890', 'rows': 1, 'cols': 33})
         }
+
+
+class SignUpForm(UserCreationForm):
+    class Meta:
+        model = User
+        fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2', )
+
+    first_name = forms.CharField(max_length=30, required=True, help_text='Required')
+    last_name = forms.CharField(max_length=30, required=True, help_text='Required')
+    email = forms.EmailField(max_length=254, help_text='Required. Inform a valid email address.')

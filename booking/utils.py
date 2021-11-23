@@ -46,3 +46,11 @@ class Calendar(HTMLCalendar):
         for week in self.monthdays2calendar(self.year, self.month):
             cal += f'{self.formatweek(week, events)}\n'
         return cal
+
+
+def passthrough_next_redirect_url(request, url, redirect_field_name):
+    assert url.find("?") < 0  # TODO: Handle this case properly
+    next_url = get_next_redirect_url(request, redirect_field_name)
+    if next_url:
+        url = url + "?" + urlencode({redirect_field_name: next_url})
+    return url

@@ -6,12 +6,13 @@ from django.utils.safestring import mark_safe
 from django.contrib.auth.models import User
 import calendar
 from .models import Booking, Contact, Group_Member
-from .forms import BookingForm, ContactForm
+from .forms import BookingForm, ContactForm, SignUpForm
 from .utils import Calendar
 from .email import send_email_to_admin, send_contact_email_to_admin
 from django.http import HttpResponseRedirect
 from django.contrib import messages
 from django.contrib.auth.decorators import permission_required, login_required
+from django.contrib.auth import login, authenticate
 
 
 class HomeDisplay(View):
@@ -25,9 +26,7 @@ class HomeDisplay(View):
                 return render(
                         request,
                         'booking/index.html',
-                        {
-                        'member': member
-                        }
+                        {'member': member, }
                 )
             else:
                 print('auth but not reg')
@@ -41,17 +40,32 @@ class HomeDisplay(View):
                 request,
                 'booking/index.html',
             )
-            
+
+    # @staticmethod
+    # def authenticate_user(request, *args):
+    #     if request.user.is_authenticated:
+    #         if Group_Member.objects.filter(user=request.user).exists():
+    #             member = Group_Member.objects.get(user=request.user)
+    #             print('auth and reg')
+    #             return member
+                
+    #         else:
+    #             print('auth but not reg')
+    #             return False
+    #     else:
+    #         print('not auth and not reg')
+    #         return False
         
 
-# class SignUpDisplay(View):
 
-#     def get(self, request, *args, **kwargs):
-#         signup_form = 
-#         return render(
-#             request,
-#             'account/signup.html',
-#         )
+class AwaitingRegDisplay(View):
+
+    def get(self, request, *args, **kwargs):
+        
+        return render(
+            request,
+            'booking/awaiting_reg.html',
+        )
     
 
 
@@ -93,6 +107,7 @@ class BookingDisplay(View):
     def get(self, request, *args, **kwargs):
         current_user = request.user
         bookings = Booking.objects.filter(username=current_user)
+        member = Group_Member.objects.get(user=request.user)
 
         return render(
             request,
@@ -100,6 +115,7 @@ class BookingDisplay(View):
             {
                 "bookings": bookings,
                 "bookingform": BookingForm(user=request.user),
+                "member": member,
             },
         )
 
@@ -107,6 +123,7 @@ class BookingDisplay(View):
         current_user = request.user
         booking_form = BookingForm(data=request.POST, user=request.user)
         bookings = Booking.objects.filter(username=current_user, approved=True)
+        member = Group_Member.objects.get(user=request.user)
 
 
         if booking_form.is_valid():
@@ -121,6 +138,7 @@ class BookingDisplay(View):
             {
                 "bookings": bookings,
                 "bookingform": BookingForm(user=request.user),
+                "member": member,
             },
         )
     @staticmethod
@@ -137,12 +155,14 @@ class EditDisplay(View):
         current_user = request.user
         booking = get_object_or_404(Booking, id=booking_id)
         booking_form = BookingForm(instance=booking, user=request.user)
+        member = Group_Member.objects.get(user=request.user)
         return render(
             request,
             'booking/edit_booking.html',
             {
                 "form": booking_form,
                 'booking': booking,
+                "member": member,
             },
         )
 
@@ -152,6 +172,7 @@ class EditDisplay(View):
         bookings = Booking.objects.filter(username=current_user, approved=True)
         today = date.today()
         booking_form = BookingForm(request.POST, instance=booking, user=request.user)
+        member = Group_Member.objects.get(user=request.user)
 
         if booking_form.is_valid():
             validate_booking(booking_form, request, bookings, current_user, booking.id)
@@ -165,26 +186,47 @@ class EditDisplay(View):
             {
                 "bookings": bookings,
                 "form": booking_form,
+                "member": member,
             },
         )
 
 
-class CalendarView(generic.ListView):
-    model = Booking
-    queryset = Booking.objects.all()
-    template_name = 'booking/calendar.html'
+class CalendarView(View):
+    # model = Booking
+    # queryset = Booking.objects.all()
+    # template_name = 'booking/calendar.html'
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
+    def get(self, request, *args, **kwargs):
         d = self.get_date(self.request.GET.get('month', None))
         cal = Calendar(d.year, d.month)
         html_cal = cal.formatmonth(withyear=True)
         bookings = Booking.objects.all()
-        context['calendar'] = mark_safe(html_cal)
-        context['prev_month'] = self.prev_month(d)
-        context['next_month'] = self.next_month(d)
-        context['bookings'] = bookings
-        return context
+        member = Group_Member.objects.get(user=request.user)
+        return render(request,
+            'booking/calendar.html',
+            {
+                'calendar': mark_safe(html_cal),
+                'prev_month': self.prev_month(d),
+                'next_month': self.next_month(d),
+                'bookings': bookings,
+                'member': member
+            })
+
+
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     d = self.get_date(self.request.GET.get('month', None))
+    #     cal = Calendar(d.year, d.month)
+    #     html_cal = cal.formatmonth(withyear=True)
+    #     bookings = Booking.objects.all()
+    #     member = self.request.POST.get('request.user')
+    #     context['member'] = member
+    #     print(context) 
+    #     context['calendar'] = mark_safe(html_cal)
+    #     context['prev_month'] = self.prev_month(d)
+    #     context['next_month'] = self.next_month(d)
+    #     context['bookings'] = bookings
+    #     return context
 
     def get_date(self, req_month):
         if req_month:
@@ -213,13 +255,14 @@ class CalendarView(generic.ListView):
         return HttpResponseRedirect(reverse('calendar'))
 
 
-
 class ContactDisplay(View):
     
     def get(self, request, *args, **kwargs):
+        member = Group_Member.objects.get(user=request.user)
         form = ContactForm()
         context = {
             'contact_form': form,
+            'member': member,
         }
         return render(
             request,
@@ -229,6 +272,7 @@ class ContactDisplay(View):
 
     def post(self, request, *args, **kwargs):
         form = ContactForm(request.POST)
+        member = Group_Member.objects.get(user=request.user)
         if form.is_valid():
             form.replied = False
             form.save()
@@ -242,5 +286,34 @@ class ContactDisplay(View):
         form = ContactForm()
         context = {
             'contact_form': form,
+            'member': member,
         }
         return render(request, 'booking/contact.html', context)
+
+
+class SignUpDisplay(View):
+
+    def get(self, request, *args, **kwargs):
+        form = SignUpForm()
+        login_url = reverse("account_login")
+        return render(
+            request,
+            'account/signup.html',
+            {
+                'form': form,
+                "login_url": login_url,
+            }
+        )
+
+    def post(self, request, *args, **kwargs):
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+            login(request, user)
+            return redirect('home')
+        else:
+            form = SignUpForm()
+        return render(request, 'signup.html', {'form': form})
