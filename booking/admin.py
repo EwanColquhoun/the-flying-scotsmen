@@ -17,7 +17,7 @@ class AircraftAdmin(admin.ModelAdmin):
 class Group_MemberAdmin(admin.ModelAdmin):
 
     list_filter = ('registered', 'date_joined',)
-    list_display = ('user', 'registered', 'date_joined',)
+    list_display = ('user', 'registered', 'message', 'date_joined',)
     search_fields = ['user', 'registered', 'date_joined', ]
 
     def register_member(self, request, queryset):

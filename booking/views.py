@@ -6,9 +6,9 @@ from django.utils.safestring import mark_safe
 from django.contrib.auth.models import User
 import calendar
 from .models import Booking, Contact, Group_Member
-from .forms import BookingForm, ContactForm, SignUpForm
+from .forms import BookingForm, ContactForm, SignUpForm, UserMessageForm
 from .utils import Calendar
-from .email import send_email_to_admin, send_contact_email_to_admin
+from .email import send_email_to_admin, send_contact_email_to_admin, send_register_email_to_admin
 from django.http import HttpResponseRedirect
 from django.contrib import messages
 from django.contrib.auth.decorators import permission_required, login_required
@@ -258,11 +258,9 @@ class CalendarView(View):
 class ContactDisplay(View):
     
     def get(self, request, *args, **kwargs):
-        member = Group_Member.objects.get(user=request.user)
         form = ContactForm()
         context = {
             'contact_form': form,
-            'member': member,
         }
         return render(
             request,
@@ -272,7 +270,6 @@ class ContactDisplay(View):
 
     def post(self, request, *args, **kwargs):
         form = ContactForm(request.POST)
-        member = Group_Member.objects.get(user=request.user)
         if form.is_valid():
             form.replied = False
             form.save()
@@ -286,34 +283,108 @@ class ContactDisplay(View):
         form = ContactForm()
         context = {
             'contact_form': form,
-            'member': member,
         }
         return render(request, 'booking/contact.html', context)
+
+
+# class ContactDisplay(View):
+    
+#     def get(self, request, *args, **kwargs):
+#         if request.user.is_authenticated:
+#             if Group_Member.objects.filter(user=request.user).exists():
+#                 member = Group_Member.objects.get(user=request.user)
+#                 form = ContactForm()
+#                 return render(
+#                         request,
+#                         'booking/contact.html',
+#                         {'member': member, 
+#                         'contact_form':form,
+#                         }
+#                 )
+#             else:
+#                 form = ContactForm()
+#                 return render(
+#                     request,
+#                     'booking/contact.html',
+#                      {'contact_form':form,}
+#                 )
+#         else:
+#             form = ContactForm()
+#             return render(
+#                 request,
+#                 'booking/contact.html',
+#                     {'contact_form':form,}
+#             )
+
+#     def post(self, request, *args, **kwargs):
+#         if request.user.is_authenticated:
+#             if Group_Member.objects.filter(user=request.user).exists():
+#                 form = ContactForm(request.POST)
+#                 member = Group_Member.objects.get(user=request.user)
+#                 if form.is_valid():
+#                     form.replied = False
+#                     form.save()
+#                     send_contact_email_to_admin(form.instance)
+#                     messages.add_message(request, messages.SUCCESS, 'Your message has been sent, we will endeavour to reply as soon as we can. Thank you.')
+#                     return redirect('contact')
+#                 else: 
+#                     messages.add_message(request, messages.WARNING, 'All fields are required, please check the details and try again. Thank you.')
+#                     return redirect('contact')
+
+#                 form = ContactForm()
+#                 context = {
+#                     'contact_form': form,
+#                     'member': member,
+#                 }
+#                 return render(request, 'booking/contact.html', context)
+#             else:
+#                 form = ContactForm()
+#                 return render(
+#                     request,
+#                     'booking/contact.html',
+#                      {'contact_form':form,}
+#                 )
+#         else:
+#             form = ContactForm()
+#             return render(
+#                 request,
+#                 'booking/contact.html',
+#                     {'contact_form':form,}
+#             )
 
 
 class SignUpDisplay(View):
 
     def get(self, request, *args, **kwargs):
         form = SignUpForm()
+        # message_form = UserMessageForm()
         login_url = reverse("account_login")
         return render(
             request,
             'account/signup.html',
             {
                 'form': form,
+                # 'msgform': message_form,
                 "login_url": login_url,
             }
         )
 
     def post(self, request, *args, **kwargs):
         form = SignUpForm(request.POST)
+        # message_form = UserMessageForm(request.POST.get('message'))
         if form.is_valid():
             form.save()
+            # message_form.save()
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
+            # message = message_form.cleaned_data.get('message')
             user = authenticate(username=username, password=raw_password)
+            # print(user.registered.message)
             login(request, user)
-            return redirect('home')
+            send_register_email_to_admin(form.instance)
+            messages.add_message(request, messages.SUCCESS, 'Your request to register has been noted. We will be in touch shortly. Thank you.')
+            return redirect('awaiting_reg')
         else:
             form = SignUpForm()
-        return render(request, 'signup.html', {'form': form})
+            # message_form = UserMessageForm()
+            return render(request, 'account/signup.html', {'form': form,})

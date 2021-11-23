@@ -16,7 +16,8 @@ REPLIED = ((0, 'No'), (1, 'Yes'))
 
 class Group_Member(models.Model):
 
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, unique=True, related_name='registered')
+    message = models.TextField(blank=True, null=True, help_text='Optional', default='default message')
     registered = models.BooleanField(default=False)
     date_joined = models.DateTimeField(auto_now_add=True)
     
