@@ -17,16 +17,32 @@ from django.contrib.auth.decorators import permission_required, login_required
 class HomeDisplay(View):
 
     def get(self, request, *args, **kwargs):
-        # group_member = Group_Member.objects.filter(registered=True, user=request.user)
-        # print(group_member)
-        return render(
-            request,
-            'booking/index.html',
-            # {
-            #     "member": group_member,
-            # },
-        )
 
+        if request.user.is_authenticated:
+            if Group_Member.objects.filter(user=request.user).exists():
+                member = Group_Member.objects.get(user=request.user)
+                print('auth and reg')
+                return render(
+                        request,
+                        'booking/index.html',
+                        {
+                        'member': member
+                        }
+                )
+            else:
+                print('auth but not reg')
+                return render(
+                    request,
+                    'booking/index.html',
+                )
+        else:
+            print('not auth and not reg')
+            return render(
+                request,
+                'booking/index.html',
+            )
+            
+        
 
 # class SignUpDisplay(View):
 
