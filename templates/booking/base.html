@@ -179,7 +179,7 @@
                                         <td>Aircraft</td>
                                         <td class="notes">Notes</td>
                                         <td>Inst Req</td>
-                                        <td>Edit/Cancel</td>
+                                        <td>Edit/Delete</td>
                                 
                                     </tr>
                         {% endif %}
@@ -265,9 +265,9 @@
     <!-- main-content -->
     <main class="home-section flex-shrink-0 main-bg">
         <!-- messages -->
-        <div class="container message">
+        <div class="container">
             <div class="row">
-                <div class="col-md-8 offset-md-2">
+                <div class="col-12 col-md-10 offset-md-2">
                     {% for message in messages %}
                     <div class="alert {{ message.tags }} alert-dismissible fade show" id="msg"
                     role="alert">

@@ -285,18 +285,24 @@ body {
 
 /* Messages */
 #msg {
+  font-size: 17px;
+  text-align: center;
+  position: absolute;
+  top:10px;
+  left: 10%;
+  width: 80%;
   z-index: 5;
   box-shadow: 0px 0px 10px 0px rgb(0 0 0 / 50%);
   -webkit-box-shadow: 0px 0px 10px 0px rgb(0 0 0 / 50%);
   -moz-box-shadow: 0px 0px 10px 0px rgb(0 0 0 / 50%);
 }
-
+/* 
 .message {
   position: absolute;
   top:10px;
   left: 10%;
   width: 80%;
-}
+} */
 
 /* Home page */
 /* Headings */
@@ -514,6 +520,8 @@ a {
 #booking-form label {
   font-weight: bold;
   padding: 5px 10px;
+  vertical-align: top;
+  float: left;
 }
 
 #booking-form p {
@@ -540,10 +548,6 @@ a {
   -moz-box-shadow: 0px 0px 10px 0px rgb(0 0 0 / 50%);
 }
 
-#booking-form label {
-  vertical-align: top;
-  float: left;
-}
 
 /* map */
 #map {
@@ -785,6 +789,10 @@ a {
   background-color: rgba(243, 119, 115, 0.3);
 }
 
+.day-bookings {
+  background-color: rgba(0, 255, 0, 0.3);
+}
+
 .aircraft-purple {
   background-color: purple;
   color: #E4E9F7;
@@ -831,6 +839,9 @@ margin: unset;
 
 #edit-form p label {
   float: left;
+  font-weight: bold;
+  padding: 5px 0px;
+  vertical-align: top;
 }
 
 #edit-form p input,
@@ -915,24 +926,29 @@ margin: unset;
 
   #today {
     position: absolute;
-    top: 24%;
-    left: 33%;
+    top: 15%;
+    left: 30%;
     background-color: #0065bd;
     color: #E4E9F7;
-    width: 33%;
-    height: 50%;
+    width: 40%;
+    height: 60%;
     margin: unset;
     display: flex;
     align-content: center;
     align-items: center;
     justify-content: space-around;
-    border-radius: 40%;
+    border-radius: 50%;
   }
 }
 
 @media (max-width: 980px) {
   .sidebar {
     display: none;
+  }
+
+  #msg {
+    width: 100%;
+    left: 0;
   }
 
   .modal-body {
@@ -1051,6 +1067,7 @@ margin: unset;
   }
 
   #booking-form #id_username,
+  #booking-form input,
   #booking-form #id_date,
   #booking-form #id_aircraft,
   #booking-form #id_slot,
@@ -1059,7 +1076,16 @@ margin: unset;
     width: 93%;
   }
 
+  #contact-form label {
+    float: none;
+  }
+
   #mobile-hr {
     display: block;
+  }
+
+  #today {
+    top: 30%;
+    height: 40%;
   }
 }

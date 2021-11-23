@@ -70,6 +70,7 @@ window.onload = function() {
 }
 
 
+
 // Activates the calendar booking modal
 let modalBody = document.querySelector('.modal-body')
 let dayBookings = document.querySelectorAll('.calendar-events');
