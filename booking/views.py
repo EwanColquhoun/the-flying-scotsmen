@@ -15,37 +15,45 @@ from django.contrib.auth.decorators import permission_required, login_required
 from django.contrib.auth import login, authenticate
 
 
-def validate_booking(booking_form, request, booking, *args, **kwargs):
+def validate_booking(booking_form, request, msg, booking, *args, **kwargs):
     today = date.today()
+    message = request.POST.get('notes')
+
     if booking_form.instance.date > today:
+        print('today')
         qs = Booking.objects.filter(
-            date=booking_form.instance.date,
-            slot=booking_form.instance.slot,
-            aircraft_id=booking_form.instance.aircraft_id,
-        ).count()
-
+                date=booking_form.instance.date,
+                slot=booking_form.instance.slot,
+                aircraft_id=booking_form.instance.aircraft_id,
+                ).count()
         maint = Booking.objects.filter(
-            date=booking_form.instance.date,
-            slot=12,
-            aircraft_id=booking_form.instance.aircraft_id,
-        ).count()
-
+                date=booking_form.instance.date,
+                slot=12,
+                aircraft_id=booking_form.instance.aircraft_id,
+                ).count()
         if booking_form.instance.slot_id==12 and request.user.username != 'admin2021':
+            print('maint')
             messages.add_message(request, messages.WARNING, 'Only Admin can book MAINT slots. Thank you.')
-            return redirect('edit_booking', booking)
+            redirect('edit_booking', booking)
         else:
-            if qs == 0 and maint == 0:
-                booking = booking_form.save(commit=False)
-                booking.save()
-                send_email_to_admin(booking_form.instance)
-                messages.add_message(request, messages.SUCCESS, 'Your booking will be added once approved by admin. Thank you.')
-            else:
-                messages.add_message(request, messages.WARNING, 'This is a double booking, please check date/slot and aircraft and try again. Thank you.')
-                return redirect('edit_booking', booking)
-
+            if qs != 0 and message != msg:
+                print('same dates but diff msg')
+                if maint == 0:
+                    print('same dates, diff msg and not maint')
+                    # if message != msg:
+                    print('legit!')
+                    booking = booking_form.save(commit=False)
+                    booking.save()
+                    send_email_to_admin(booking_form.instance)
+                    messages.add_message(request, messages.SUCCESS, 'Your booking will be added once approved by admin. Thank you.')
+                else:
+                    print('bookings today=', qs, 'maint=', maint, )
+                    messages.add_message(request, messages.WARNING, 'This is a double booking, please check date/slot and aircraft and try again. Thank you.')
+                    redirect('edit_booking', booking)
     else:
+        print('nottoday')
         messages.add_message(request, messages.WARNING, 'Booking dates must be in the future, please check the date. Thank you.')
-        return redirect('edit_booking', booking)
+        redirect('edit_booking', booking)
 
 
 class HomeDisplay(View):
@@ -129,12 +137,13 @@ class EditDisplay(View):
     def post(self, request, booking_id):
         current_user = request.user
         booking = get_object_or_404(Booking, id=booking_id)
+        msg = booking.notes
         bookings = Booking.objects.filter(username=current_user, approved=True)
         today = date.today()
         booking_form = BookingForm(request.POST, instance=booking, user=request.user)
 
         if booking_form.is_valid():
-            validate_booking(booking_form, request, bookings, current_user, booking.id)
+            validate_booking(booking_form, request, msg, booking, current_user, booking.id)
             return redirect ('bookings')
         else:
             booking_form = BookingForm(user=request.user)

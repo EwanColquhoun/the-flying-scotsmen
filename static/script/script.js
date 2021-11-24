@@ -181,6 +181,7 @@ let calendar_page = document.querySelectorAll('#calendar-page')
 
 
 window.addEventListener('load', ()=> {
+  alerts()
   sidebar()
   if (password.length >= 1){
       passwordMatch();
