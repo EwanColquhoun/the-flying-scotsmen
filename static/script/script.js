@@ -1,113 +1,117 @@
-// Sidebar
-
-let sidebar = document.querySelector(".sidebar");
-let closeBtn = document.querySelector("#btn");
-
-
-  closeBtn.addEventListener("click", ()=>{
-    sidebar.classList.toggle("open");
-    menuBtnChange();//calling the function(optional)
-  });
-
-  // following are the code to change sidebar button(optional)
-  function menuBtnChange() {
-   if(sidebar.classList.contains("open")){
-     closeBtn.classList.replace("bx-menu", "bx-menu-alt-right");//replacing the iocns class
-   }else {
-     closeBtn.classList.replace("bx-menu-alt-right","bx-menu");//replacing the iocns class
-   }
-  }
-
-  // Messages 
+// Message Timeout
+function alerts(){
   setTimeout(function() {
     let messages = document.getElementById('msg')
     let alert = new bootstrap.Alert(messages);
-    alert.close();
+    messages.classList.remove('show');
 }, 5000);
+}
 
 
-// Gets the delete modal working
-const modal_buttons = document.getElementById('delete-modal-buttons')
-const delete_button = document.querySelectorAll('.delete_button')
-
-if (delete_button.length !== 0){
-  // console.log('delete_button not 0')
-  delete_button.forEach((button) => {
-    button.addEventListener('click', function() {
-      const booking_id = button.getAttribute('name')
-      let calbut = button.getAttribute('data-ref')
-      console.log(calbut)
-      if (calbut === '0'){
-        modal_buttons.innerHTML = `
-        <button type="button" class="btn btn-secondary" data-ref="0" data-bs-dismiss="modal">Close</button>
-        <a href="/delete/${booking_id}" class="btn btn-back">DELETE</a>
-        `
-      } else {
-        modal_buttons.innerHTML = `
-        <button type="button" class="btn btn-secondary" data-ref="1" data-bs-dismiss="modal">Close</button>
-        <a href="/delete_calendar_booking/${booking_id}" class="btn btn-back">DELETE</a>
-        `     
-      }
+// Sidebar functions
+function sidebar(){
+  let sidebar = document.querySelector(".sidebar");
+  let closeBtn = document.querySelector("#btn");
+  
+    closeBtn.addEventListener("click", ()=>{
+      sidebar.classList.toggle("open");
     });
-  })
 }
 
-// Highlights today on the calendar
-const dates = document.querySelectorAll('.date')
-d = new Date();
-month = d.getMonth() + 1
-day_of_the_month = d.getDate()
-now = `${month}_${day_of_the_month}`
+// Calendar functions
+function deleteModal(){
+  // Gets the delete modal working
+  const modal_buttons = document.getElementById('delete-modal-buttons')
+  const delete_button = document.querySelectorAll('.delete_button')
 
-window.onload = function() {
+  if (delete_button.length !== 0){
+    // console.log('delete_button not 0')
+    delete_button.forEach((button) => {
+      button.addEventListener('click', function() {
+        const booking_id = button.getAttribute('name')
+        let calbut = button.getAttribute('data-ref')
+        console.log(calbut)
+        if (calbut === '0'){
+          modal_buttons.innerHTML = `
+          <button type="button" class="btn btn-secondary" data-ref="0" data-bs-dismiss="modal">Close</button>
+          <a href="/delete/${booking_id}" class="btn btn-back">DELETE</a>
+          `
+        } else {
+          modal_buttons.innerHTML = `
+          <button type="button" class="btn btn-secondary" data-ref="1" data-bs-dismiss="modal">Close</button>
+          <a href="/delete_calendar_booking/${booking_id}" class="btn btn-back">DELETE</a>
+          `     
+        }
+      });
+    })
+  }
+}
+
+function today(){
+  // Highlights today on the calendar
+  const dates = document.querySelectorAll('.date')
+  d = new Date();
+  month = d.getMonth() + 1
+  day_of_the_month = d.getDate()
+  now = `${month}_${day_of_the_month}`
+  getToday()
+
+ function getToday() {
+    dates.forEach((date) => {
+      let today = date.getAttribute('name');
+      // console.log(today, 't/n', now)
+      if (today == now){
+        date.setAttribute('id', 'today')
+      }
+    })
+  }
+}
+
+function calendarBookingModal(){
+  // Activates the calendar booking modal
+  const dates = document.querySelectorAll('.date')
+  // let modalBody = document.querySelector('.modal-body')
+  // let dayBookings = document.querySelectorAll('.calendar-events');
+  const modal = document.getElementById('myModal')
+  const noBookings = document.getElementById('no-bookings-text') 
+  const bookingTable = document.getElementById('booking-table')
+
   dates.forEach((date) => {
-    let today = date.getAttribute('name');
-    // console.log(today, 't/n', now)
-    if (today == now){
-      date.setAttribute('id', 'today')
-    }
-  })
+    date.addEventListener('click', function() {
+      let today = date.getAttribute('name');
+      let bookings = document.querySelectorAll(`.booking_${today}`)
+
+      if (bookings.length === 0 ){
+        bookingTable.classList.replace('show', 'hide')
+        noBookings.classList.replace('hide', 'show')
+      } else {
+        noBookings.classList.replace('show', 'hide')
+        bookingTable.classList.replace('hide', 'show')
+        for (let a = 0; a <= bookings.length; a++){
+          console.log(bookings[a])
+          bookings[a].classList.replace('hide', 'show')
+          modal.addEventListener('hidden.bs.modal', function () {
+            bookings[a].classList.replace('show', 'hide')
+                
+              });
+            } 
+      }
+    }); 
+  });
 }
 
+function calendar(){
+  deleteModal()
+  today()
+  calendarBookingModal()
+}
 
-
-// Activates the calendar booking modal
-let modalBody = document.querySelector('.modal-body')
-let dayBookings = document.querySelectorAll('.calendar-events');
-const modal = document.getElementById('myModal')
-const noBookings = document.getElementById('no-bookings-text') 
-const bookingTable = document.getElementById('booking-table')
-
-dates.forEach((date) => {
-  date.addEventListener('click', function() {
-    let today = date.getAttribute('name');
-    let bookings = document.querySelectorAll(`.booking_${today}`)
-
-    if (bookings.length === 0 ){
-      bookingTable.classList.replace('show', 'hide')
-      noBookings.classList.replace('hide', 'show')
-    } else {
-      noBookings.classList.replace('show', 'hide')
-      bookingTable.classList.replace('hide', 'show')
-      for (let a = 0; a <= bookings.length; a++){
-        bookings[a].classList.replace('hide', 'show')
-        modal.addEventListener('hidden.bs.modal', function () {
-          bookings[a].classList.replace('show', 'hide')
-              
-            });
-          } 
-    }
-  }); 
-});
-
-// GoogleMaps API
-
-function initMap() {
+// Map with Markers
+function map(){
   map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: 52.3308, lng: 1.6851},
     zoom: 4.5
   });
-
   var labels = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   var locations = [
     { lat: 55.9508, lng: -3.3615},
@@ -135,31 +139,59 @@ function initMap() {
       label: labels[i % labels.length]
     });
   });
-
   var markerCluster = new MarkerClusterer(map, markers, {
     imagePath:
     "https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m",
-});
+  });
 }
 
+// flatpickr
+function flatpickrInit(){
+  const myInput = document.querySelector("#id_date");
+  const fp = flatpickr(myInput, {
+    minDate: "today"
+  });  // flatpickr
+}
 
 // provides feedback if passwords match
-let password1 = document.getElementById('id_password1')
-let password2 = document.getElementById('id_password2')
+function passwordMatch(){
 
-password2.addEventListener("input", function(){
-  if (password2.value === password1.value){
-    password2.classList.add('matched')
-    password1.classList.add('matched')
-  } else {
-    password2.classList.remove('matched')
-    password1.classList.remove('matched')
-  }
+  let password1 = document.getElementById('id_password1')
+  let password2 = document.getElementById('id_password2')
+
+  password2.addEventListener("input", function(){
+    if (password2.value === password1.value){
+      password2.classList.add('matched')
+      password1.classList.add('matched')
+    } else {
+      password2.classList.remove('matched')
+      password1.classList.remove('matched')
+    }
+  });
+
+}
+
+// document.querySelectorAll('#id_password1').addEventListener('DOMContentLoaded', passwordMatch())
+let password = document.querySelectorAll('#id_password1')
+let date_input = document.querySelectorAll('#id_date')
+let map_div = document.querySelectorAll('#map')
+let calendar_page = document.querySelectorAll('#calendar-page')
+
+
+window.addEventListener('load', ()=> {
+  sidebar()
+  if (password.length >= 1){
+    console.log('password', password)
+    passwordMatch();
+  } else if (calendar_page.length >= 1){
+    console.log('calendar')
+    calendar()
+  } else if (date_input.length && map_div.length >= 1){
+    console.log('flatpickr')
+    flatpickrInit();
+    console.log('map')
+    map()
+  } else if (date_input.length >= 1){
+      flatpickrInit();
+  };
 });
-
-
-// flatpickr
-const myInput = document.querySelector("#id_date");
-const fp = flatpickr(myInput, {
-  minDate: "today"
-});  // flatpickr
