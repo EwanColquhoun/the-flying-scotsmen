@@ -143,19 +143,20 @@ function initMap() {
 }
 
 
-// lets the date to the future
-// let date = document.getElementById('id_date')
-// console.log(date)
-// var today = new Date();
-// var dd = String(today.getDate()).padStart(2, '0');
-// var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-// var yyyy = today.getFullYear();
+// provides feedback if passwords match
+let password1 = document.getElementById('id_password1')
+let password2 = document.getElementById('id_password2')
 
-// today = yyyy + '/' + mm + '/' + dd;
-// console.log(today)
-// att = document.createAttribute('min')
-// att.value = today
-// date.setAttributeNode(att)
+password2.addEventListener("input", function(){
+  if (password2.value === password1.value){
+    password2.classList.add('matched')
+    password1.classList.add('matched')
+  } else {
+    password2.classList.remove('matched')
+    password1.classList.remove('matched')
+  }
+});
+
 
 // flatpickr
 const myInput = document.querySelector("#id_date");

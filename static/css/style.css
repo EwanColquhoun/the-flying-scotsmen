@@ -38,27 +38,29 @@ body {
   opacity: 0;
   transition: all 0.5s ease;
 }
-.sidebar .logo-details .logo_name{
+.sidebar .logo-details .logo_name a {
   color: #fff;
   font-size: 20px;
   font-weight: 600;
   opacity: 0;
   transition: all 0.5s ease;
+  text-decoration: none;
+  padding-left: 5px;
 }
 
-.sidebar .logo_name a {
+/* #logo-link {
   text-decoration: none;
   color: #E4E9F7;
   height: 100%;
   width: 100%;
   padding-left: 5px;
-}
+} */
 
-.sidebar.open .logo-details .icon,
-.sidebar.open .logo-details .logo_name,
+.sidebar.open .logo-details .logo_name a,
 .sidebar.open .logout-details .user-name{
   opacity: 1;
 }
+
 .sidebar .logo-details #btn{
   position: absolute;
   top: 50%;
@@ -184,7 +186,7 @@ body {
 .sidebar .logout-details .user-name{
     color: #fff;
     font-size: 20px;
-    font-weight: 500;
+    font-weight: 400;
     opacity: 0;
     transition: all 0.5s ease;
 }
@@ -289,9 +291,6 @@ body {
   height: 25px;
   background-color: rgba(0, 75, 132, 0.3);
   text-align: center;
-  /* z-index: 50;
-  position: absolute;
-  bottom: -63px; */
 }
 
 /* Messages */
@@ -307,13 +306,7 @@ body {
   -webkit-box-shadow: 0px 0px 10px 0px rgb(0 0 0 / 50%);
   -moz-box-shadow: 0px 0px 10px 0px rgb(0 0 0 / 50%);
 }
-/* 
-.message {
-  position: absolute;
-  top:10px;
-  left: 10%;
-  width: 80%;
-} */
+
 
 /* Home page */
 /* Headings */
@@ -331,14 +324,6 @@ body {
 }
 
 /* Misc */
-/* 
-#aircraft {
-  width: 120px;
-  height: 60px;
-  position: absolute;
-  top: 10%;
-  left: 0px;
-} */
 
 .center {
   text-align: center;
@@ -363,7 +348,6 @@ hr:not([size]) {
 .new-members-link {
   text-decoration: none;
   font-weight: 800;
-  /* font-style: italic; */
 }
 
 /* About us */
@@ -404,10 +388,6 @@ hr:not([size]) {
   display: block;
 }
 
-#signup-form .helptext {
-  /* margin: 5px; */
-}
-
 #signup-form label,
 #login-form label {
   font-weight: bold;
@@ -444,6 +424,10 @@ input[type=checkbox] {
   -o-transform: scale(1.5); /* Opera */
   transform: scale(1.5);
   padding: 10px;
+}
+
+.matched {
+  background-color: rgba(47, 255, 64, 0.6)
 }
 
 /* Bookings Page */
@@ -486,9 +470,9 @@ input[type=checkbox] {
   font-size: 14px;
 }
 
-a {
+/* a {
   cursor: pointer;
-}
+} */
 
 .edit-icon,
 .cancel-icon {

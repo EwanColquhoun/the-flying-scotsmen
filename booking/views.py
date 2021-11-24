@@ -5,7 +5,7 @@ from django.views import generic, View
 from django.utils.safestring import mark_safe
 from django.contrib.auth.models import User
 import calendar
-from .models import Booking, Contact, Group_Member
+from .models import Booking, Contact
 from .forms import BookingForm, ContactForm, SignUpForm, UserMessageForm
 from .utils import Calendar
 from .email import send_email_to_admin, send_contact_email_to_admin, send_register_email_to_admin
@@ -13,60 +13,6 @@ from django.http import HttpResponseRedirect
 from django.contrib import messages
 from django.contrib.auth.decorators import permission_required, login_required
 from django.contrib.auth import login, authenticate
-
-
-class HomeDisplay(View):
-
-    def get(self, request, *args, **kwargs):
-
-        if request.user.is_authenticated:
-            if Group_Member.objects.filter(user=request.user).exists():
-                member = Group_Member.objects.get(user=request.user)
-                print('auth and reg')
-                return render(
-                        request,
-                        'booking/index.html',
-                        {'member': member, }
-                )
-            else:
-                print('auth but not reg')
-                return render(
-                    request,
-                    'booking/index.html',
-                )
-        else:
-            print('not auth and not reg')
-            return render(
-                request,
-                'booking/index.html',
-            )
-
-    # @staticmethod
-    # def authenticate_user(request, *args):
-    #     if request.user.is_authenticated:
-    #         if Group_Member.objects.filter(user=request.user).exists():
-    #             member = Group_Member.objects.get(user=request.user)
-    #             print('auth and reg')
-    #             return member
-                
-    #         else:
-    #             print('auth but not reg')
-    #             return False
-    #     else:
-    #         print('not auth and not reg')
-    #         return False
-        
-
-
-class AwaitingRegDisplay(View):
-
-    def get(self, request, *args, **kwargs):
-        
-        return render(
-            request,
-            'booking/awaiting_reg.html',
-        )
-    
 
 
 def validate_booking(booking_form, request, booking, *args, **kwargs):
@@ -84,7 +30,7 @@ def validate_booking(booking_form, request, booking, *args, **kwargs):
             aircraft_id=booking_form.instance.aircraft_id,
         ).count()
 
-        if booking_form.instance.slot_id==12:
+        if booking_form.instance.slot_id==12 and request.user.username != 'admin2021':
             messages.add_message(request, messages.WARNING, 'Only Admin can book MAINT slots. Thank you.')
             return redirect('edit_booking', booking)
         else:
@@ -102,12 +48,31 @@ def validate_booking(booking_form, request, booking, *args, **kwargs):
         return redirect('edit_booking', booking)
 
 
+class HomeDisplay(View):
+
+    def get(self, request, *args, **kwargs):
+
+        return render(
+            request,
+            'booking/index.html',
+        )
+
+
+class AwaitingRegDisplay(View):
+
+    def get(self, request, *args, **kwargs):
+        
+        return render(
+            request,
+            'booking/awaiting_reg.html',
+        )
+
+
 class BookingDisplay(View):
 
     def get(self, request, *args, **kwargs):
         current_user = request.user
         bookings = Booking.objects.filter(username=current_user)
-        member = Group_Member.objects.get(user=request.user)
 
         return render(
             request,
@@ -115,7 +80,6 @@ class BookingDisplay(View):
             {
                 "bookings": bookings,
                 "bookingform": BookingForm(user=request.user),
-                "member": member,
             },
         )
 
@@ -123,7 +87,6 @@ class BookingDisplay(View):
         current_user = request.user
         booking_form = BookingForm(data=request.POST, user=request.user)
         bookings = Booking.objects.filter(username=current_user, approved=True)
-        member = Group_Member.objects.get(user=request.user)
 
 
         if booking_form.is_valid():
@@ -138,7 +101,6 @@ class BookingDisplay(View):
             {
                 "bookings": bookings,
                 "bookingform": BookingForm(user=request.user),
-                "member": member,
             },
         )
     @staticmethod
@@ -155,14 +117,12 @@ class EditDisplay(View):
         current_user = request.user
         booking = get_object_or_404(Booking, id=booking_id)
         booking_form = BookingForm(instance=booking, user=request.user)
-        member = Group_Member.objects.get(user=request.user)
         return render(
             request,
             'booking/edit_booking.html',
             {
                 "form": booking_form,
                 'booking': booking,
-                "member": member,
             },
         )
 
@@ -172,7 +132,6 @@ class EditDisplay(View):
         bookings = Booking.objects.filter(username=current_user, approved=True)
         today = date.today()
         booking_form = BookingForm(request.POST, instance=booking, user=request.user)
-        member = Group_Member.objects.get(user=request.user)
 
         if booking_form.is_valid():
             validate_booking(booking_form, request, bookings, current_user, booking.id)
@@ -186,22 +145,17 @@ class EditDisplay(View):
             {
                 "bookings": bookings,
                 "form": booking_form,
-                "member": member,
             },
         )
 
 
 class CalendarView(View):
-    # model = Booking
-    # queryset = Booking.objects.all()
-    # template_name = 'booking/calendar.html'
 
     def get(self, request, *args, **kwargs):
         d = self.get_date(self.request.GET.get('month', None))
         cal = Calendar(d.year, d.month)
         html_cal = cal.formatmonth(withyear=True)
         bookings = Booking.objects.all()
-        member = Group_Member.objects.get(user=request.user)
         return render(request,
             'booking/calendar.html',
             {
@@ -209,24 +163,8 @@ class CalendarView(View):
                 'prev_month': self.prev_month(d),
                 'next_month': self.next_month(d),
                 'bookings': bookings,
-                'member': member
             })
 
-
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     d = self.get_date(self.request.GET.get('month', None))
-    #     cal = Calendar(d.year, d.month)
-    #     html_cal = cal.formatmonth(withyear=True)
-    #     bookings = Booking.objects.all()
-    #     member = self.request.POST.get('request.user')
-    #     context['member'] = member
-    #     print(context) 
-    #     context['calendar'] = mark_safe(html_cal)
-    #     context['prev_month'] = self.prev_month(d)
-    #     context['next_month'] = self.next_month(d)
-    #     context['bookings'] = bookings
-    #     return context
 
     def get_date(self, req_month):
         if req_month:
@@ -287,72 +225,6 @@ class ContactDisplay(View):
         return render(request, 'booking/contact.html', context)
 
 
-# class ContactDisplay(View):
-    
-#     def get(self, request, *args, **kwargs):
-#         if request.user.is_authenticated:
-#             if Group_Member.objects.filter(user=request.user).exists():
-#                 member = Group_Member.objects.get(user=request.user)
-#                 form = ContactForm()
-#                 return render(
-#                         request,
-#                         'booking/contact.html',
-#                         {'member': member, 
-#                         'contact_form':form,
-#                         }
-#                 )
-#             else:
-#                 form = ContactForm()
-#                 return render(
-#                     request,
-#                     'booking/contact.html',
-#                      {'contact_form':form,}
-#                 )
-#         else:
-#             form = ContactForm()
-#             return render(
-#                 request,
-#                 'booking/contact.html',
-#                     {'contact_form':form,}
-#             )
-
-#     def post(self, request, *args, **kwargs):
-#         if request.user.is_authenticated:
-#             if Group_Member.objects.filter(user=request.user).exists():
-#                 form = ContactForm(request.POST)
-#                 member = Group_Member.objects.get(user=request.user)
-#                 if form.is_valid():
-#                     form.replied = False
-#                     form.save()
-#                     send_contact_email_to_admin(form.instance)
-#                     messages.add_message(request, messages.SUCCESS, 'Your message has been sent, we will endeavour to reply as soon as we can. Thank you.')
-#                     return redirect('contact')
-#                 else: 
-#                     messages.add_message(request, messages.WARNING, 'All fields are required, please check the details and try again. Thank you.')
-#                     return redirect('contact')
-
-#                 form = ContactForm()
-#                 context = {
-#                     'contact_form': form,
-#                     'member': member,
-#                 }
-#                 return render(request, 'booking/contact.html', context)
-#             else:
-#                 form = ContactForm()
-#                 return render(
-#                     request,
-#                     'booking/contact.html',
-#                      {'contact_form':form,}
-#                 )
-#         else:
-#             form = ContactForm()
-#             return render(
-#                 request,
-#                 'booking/contact.html',
-#                     {'contact_form':form,}
-#             )
-
-
 class SignUpDisplay(View):
 
     def get(self, request, *args, **kwargs):
@@ -386,5 +258,6 @@ class SignUpDisplay(View):
             return redirect('awaiting_reg')
         else:
             form = SignUpForm()
-            # message_form = UserMessageForm()
-            return render(request, 'account/signup.html', {'form': form,})
+            messages.add_message(request, messages.WARNING, 'All fields are required, please check the details and try again. Thank you.')
+            return redirect('account_signup')
+            # return render(request, 'account/signup.html', {'form': form,})

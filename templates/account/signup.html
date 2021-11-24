@@ -20,10 +20,24 @@
         <form class="signup center" id="signup-form" method="post" action="{% url 'account_signup' %}">
           {% csrf_token %}
           {{ form.as_p }}
-          {{ msgform.as_p }}
+          {% if form.errors %}
+          {% for field in form %}
+          {% for error in field.errors %}
+          <div class="alert alert-danger">
+          <strong>{{ error|escape }}</strong>
+          </div>
+          {% endfor %}
+          {% endfor %}
+          {% for error in form.non_field_errors %}
+          <div class="alert alert-danger">
+          <strong>{{ error|escape }}</strong>
+          </div>
+          {% endfor %}
+          {% endif %}
           {% if redirect_field_value %}
           <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
           {% endif %}
+          <p class="center mb-3">Please note: It can take up to 48 hours for Admin to approve your request to join The Flying Scotsmen.</p>
           <button class="btn btn-join mt-4 mb-5" type="submit">{% trans "Sign Up" %} &raquo;</button>
         </form>
       </div>
