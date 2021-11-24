@@ -29,7 +29,7 @@ TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 
@@ -75,6 +75,7 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = "theflyingscotsmen.booking@gmail.com"
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASSWORD')
+ACCOUNT_EMAIL_SUBJECT_PREFIX = '[TFS] '
 
 MESSAGE_TAGS = {
     messages.DEBUG: 'alert-info',
