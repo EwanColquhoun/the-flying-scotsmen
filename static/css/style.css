@@ -20,7 +20,7 @@ body {
   top: 0;
   height: 100vh;
   width: 78px;
-  background: #0065bd;
+  background: rgb(0, 101, 189);
   padding: 6px 14px;
   z-index: 99;
   transition: all 0.5s ease;
