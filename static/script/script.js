@@ -7,7 +7,6 @@ function alerts(){
 }, 5000);
 }
 
-
 // Sidebar functions
 function sidebar(){
   let sidebar = document.querySelector(".sidebar");
@@ -107,11 +106,15 @@ function calendar(){
 }
 
 // Map with Markers
-function map(){
+
+function initMap(){
   map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: 52.3308, lng: 1.6851},
     zoom: 4.5
   });
+}
+
+function googleMapApi(){
   var labels = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   var locations = [
     { lat: 55.9508, lng: -3.3615},
@@ -180,6 +183,8 @@ let calendar_page = document.querySelectorAll('#calendar-page')
 
 window.addEventListener('load', ()=> {
   sidebar()
+  console.log('loaded')
+  console.log(date_input)
   if (password.length >= 1){
     console.log('password', password)
     passwordMatch();
@@ -190,8 +195,9 @@ window.addEventListener('load', ()=> {
     console.log('flatpickr')
     flatpickrInit();
     console.log('map')
-    map()
+    googleMapApi()
   } else if (date_input.length >= 1){
+      console.log('flatpickr SOLO')
       flatpickrInit();
   };
 });
