@@ -137,13 +137,14 @@
                 <span class="user-name">Logout {{ request.user.username }}</span>
             </a>
         </div>
-        {% endif %}
+        {% else %}
         <div class="logout-details">
             <a href="{% url 'account_login' %}">
                 <i class="fas fa-sign-in-alt" id="log_out"></i>
                 <span class="user-name">Login</span>
             </a>
         </div>
+        {% endif %}
     </div>
 
 

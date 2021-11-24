@@ -18,7 +18,7 @@ body {
   position: fixed;
   left: 0;
   top: 0;
-  height: calc(100% - 20px);
+  height: 100vh;
   width: 78px;
   background: #0065bd;
   padding: 6px 14px;
@@ -28,6 +28,7 @@ body {
 .sidebar.open{
   width: 265px;
 }
+
 .sidebar .logo-details{
   height: 10%;
   display: flex;
@@ -38,6 +39,7 @@ body {
   opacity: 0;
   transition: all 0.5s ease;
 }
+
 .sidebar .logo-details .logo_name a {
   color: #fff;
   font-size: 20px;
@@ -81,7 +83,7 @@ body {
 }
 
 .sidebar .nav-list{
-  margin-top: 20px;
+  /* margin-top: 20px; */
   height: 77%;
   margin-bottom: 20px;
   padding: 0;
@@ -172,7 +174,7 @@ body {
 }
 
 .sidebar .logout-details{
-    height: 8%;
+    height: 10%;
     display: flex;
     align-items: center;
     position: relative;
@@ -286,11 +288,18 @@ body {
   color: #0065bd;
   border-color: transparent;
 }
-
+/* 
 .sidebar.open ~ .home-section{
   left: 265px;
   width: calc(100% - 265px);
-}
+} */
+/* 
+.sidebar.open ~ footer{
+  left: 265px;
+  width: calc(100% - 265px);
+  transition: all 0.5s ease;
+} */
+
 
 .delete-modal-body p {
   margin-bottom: 0;
@@ -302,6 +311,7 @@ body {
   height: 25px;
   background-color: rgba(0, 75, 132, 0.3);
   text-align: center;
+  z-index: 5;
 }
 
 /* Messages */
