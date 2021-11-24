@@ -190,8 +190,7 @@ body {
 }
 
 .sidebar .logout-details a,
-.sidebar .logo_name a,
-.sidebar .logo_name {
+.sidebar .logo_name a {
   display: flex;
   height: 100%;
   width: 100%;
@@ -200,6 +199,11 @@ body {
   text-decoration: none;
   transition: all 0.4s ease;
   background: #0065bd;
+}
+
+.sidebar .logo_name {
+  width: 80%;
+  height: 100%;
 }
 
 .sidebar .logout-details a:hover #log_out,
