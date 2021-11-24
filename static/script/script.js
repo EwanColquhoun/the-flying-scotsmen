@@ -106,7 +106,6 @@ function calendar(){
 }
 
 // Map with Markers
-
 function initMap(){
   map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: 52.3308, lng: 1.6851},
@@ -183,21 +182,15 @@ let calendar_page = document.querySelectorAll('#calendar-page')
 
 window.addEventListener('load', ()=> {
   sidebar()
-  console.log('loaded')
-  console.log(date_input)
   if (password.length >= 1){
-    console.log('password', password)
-    passwordMatch();
+      passwordMatch();
   } else if (calendar_page.length >= 1){
-    console.log('calendar')
-    calendar()
+      calendar()
   } else if (date_input.length && map_div.length >= 1){
-    console.log('flatpickr')
-    flatpickrInit();
-    console.log('map')
-    googleMapApi()
+      flatpickrInit();
+      initMap()
+      googleMapApi()
   } else if (date_input.length >= 1){
-      console.log('flatpickr SOLO')
       flatpickrInit();
   };
 });

@@ -256,7 +256,8 @@ body {
 }
 
 .navbar-brand {
-  width: 80%;
+  min-width: 230px;
+  width: 30%;
 }
 
 .navbar-brand:hover .text,

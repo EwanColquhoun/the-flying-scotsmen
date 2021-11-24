@@ -25,7 +25,7 @@
     <nav class="navbar sticky-top navbar-expand-lg navbar-light sco-blue">
         <div class="container-fluid">
           <a class="navbar-brand" href="{% url 'home' %}"><span class="text">The Flying Scotsmen</span></a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+          <button id="burger" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"><i class="fas fa-bars"></i></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
@@ -291,6 +291,9 @@
     <!-- JS -->
     <script src="{% static 'script/script.js' %}"></script>
     <!-- Google Map API -->
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDWMSnIwRPg1eaSJzBfGrlNCmQuLin6rTw&callback=initMap"></script>
+    {% block script %}
+    {% endblock %}
+    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDWMSnIwRPg1eaSJzBfGrlNCmQuLin6rTw&callback=initMap"></script> -->
+    
 </body>
 </html>
