@@ -303,6 +303,7 @@ The method from cloning a project from GitHub is below:
 * The inspiration for the Project page sliders came from this repository on [GitHub](https://gist.github.com/zhilinskiy/4603199).
 * [Balsamiq](https://balsamiq.com/wireframes/) was used to create the wireframes.
 * [PhoneNumberField](https://github.com/stefanfoulis/django-phonenumber-field) was used to validate the Contact form Telephone field.
+https://www.iconfinder.com/ - for favicon
  -->
 
 
