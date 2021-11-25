@@ -203,35 +203,42 @@ class SignUpDisplay(View):
 
     def get(self, request, *args, **kwargs):
         form = SignUpForm()
-        # message_form = UserMessageForm()
+        message_form = UserMessageForm()
         login_url = reverse("account_login")
         return render(
             request,
             'account/signup.html',
             {
-                'form': form,
-                # 'msgform': message_form,
+                'form1': form,
+                'form2': message_form,
                 "login_url": login_url,
             }
         )
 
     def post(self, request, *args, **kwargs):
         form = SignUpForm(request.POST)
-        # message_form = UserMessageForm(request.POST.get('message'))
-        if form.is_valid():
+        message_form = UserMessageForm(request.POST)
+        if form.is_valid() or message_form.is_valid():
+            print(form.instance.username)
+            print('oneform valid')
+            # message_form.instance.user = User.registered.user
             form.save()
-            # message_form.save()
+            print('formvalid')
+            message_form.save() # cant get the user in group member for to equal the form in the User model.
+            print('message valid')
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
-            # message = message_form.cleaned_data.get('message')
+            message = message_form.cleaned_data.get('message')
             user = authenticate(username=username, password=raw_password)
-            # print(user.registered.message)
+            print(user.registered.message)
             login(request, user)
             send_register_email_to_admin(form.instance)
             messages.add_message(request, messages.SUCCESS, 'Your request to register has been noted. We will be in touch shortly. Thank you.')
             return redirect('awaiting_reg')
         else:
+            print(request.POST)
             form = SignUpForm()
+            message_form = UserMessageForm()
             messages.add_message(request, messages.WARNING, 'All fields are required, please check the details and try again. Thank you.')
-            return redirect('account_signup')
-            # return render(request, 'account/signup.html', {'form': form,})
+            # return redirect('account_signup')
+            return render(request, 'account/signup.html', {'form1': form, 'form2': message_form})

@@ -7,6 +7,13 @@ function alerts(){
 }, 5000);
 }
 
+
+// signup forms
+signupForms = function(){
+  console.log('signup')
+  document.getElementById("signup-form").submit();
+  document.getElementById("signup-form2").submit();
+}
 // Sidebar functions
 function sidebar(){
   let sidebar = document.querySelector(".sidebar");
