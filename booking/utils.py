@@ -54,3 +54,73 @@ def passthrough_next_redirect_url(request, url, redirect_field_name):
     if next_url:
         url = url + "?" + urlencode({redirect_field_name: next_url})
     return url
+
+
+class Validate_booking:
+
+    def __init__(self, edit, booking_form, request, msg, booking,):
+        self.edit = edit
+        self.booking_form = booking_form
+        self.request = request
+        self.msg = msg
+        self.booking = booking
+        self.today = date.today()
+        self.message = self.request.POST.get('notes')
+
+    def edit_validation(self, request, qs, maint):
+        if qs != 0 and self.message != self.msg and maint == 0:
+            booking = self.booking_form.save(commit=False)
+            booking.save()
+            send_email_to_admin(self.booking_form.instance)
+            messages.add_message(request, messages.SUCCESS, 'Your booking will be added once approved by Admin. Thank you.')
+            return True
+        elif qs == 0 and maint == 0:
+            booking = self.booking_form.save(commit=False)
+            booking.save()
+            send_email_to_admin(self.booking_form.instance)
+            messages.add_message(request, messages.SUCCESS, 'Your booking will be added once approved by Admin. Thank you.')
+            return True
+        elif qs != 0 and maint != 0:
+            messages.add_message(request, messages.ERROR, 'That aircraft is on MAINT, please check date/slot and aircraft and try again. Thank you.')
+            return False
+        else:
+            messages.add_message(request, messages.ERROR, 'This is a double booking, please check date/slot and aircraft and try again. Thank you.')
+            return False
+            
+    def booking_validation(self, request, qs, maint):
+        if qs == 0 and maint == 0:
+            booking = self.booking_form.save(commit=False)
+            booking.save()
+            send_email_to_admin(self.booking_form.instance)
+            messages.add_message(request, messages.SUCCESS, 'Your booking will be added once approved by Admin. Thank you.')
+            return True
+        elif qs != 0 and maint != 0:
+            messages.add_message(request, messages.ERROR, 'That aircraft is on MAINT, please check date/slot and aircraft and try again. Thank you.')
+            return False
+        else:
+            messages.add_message(request, messages.ERROR, 'This is a double booking, please check date/slot and aircraft and try again. Thank you.')
+            return False
+
+    def validate(self):
+        if self.booking_form.instance.date > self.today:
+            qs = Booking.objects.filter(
+                    date=self.booking_form.instance.date,
+                    slot=self.booking_form.instance.slot,
+                    aircraft_id=self.booking_form.instance.aircraft_id,
+                    ).count()
+            maint = Booking.objects.filter(
+                    date=self.booking_form.instance.date,
+                    slot=12,
+                    aircraft_id=self.booking_form.instance.aircraft_id,
+                    ).count()
+            if self.booking_form.instance.slot_id == 12 and self.request.user.username != 'admin2021':
+                messages.add_message(self.request, messages.WARNING, 'Only Admin can book MAINT slots. Thank you.')
+            else:
+                if self.edit:
+                    updated = self.edit_validation(self.request, qs, maint)
+                    return updated
+                else:
+                    self.booking_validation(self.request, qs, maint)
+        else:
+            messages.add_message(request, messages.WARNING, 'Booking dates must be in the future, please check the date. Thank you.')
+

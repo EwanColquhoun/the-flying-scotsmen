@@ -178,8 +178,6 @@ let password = document.querySelectorAll('#id_password1')
 let date_input = document.querySelectorAll('#id_date')
 let map_div = document.querySelectorAll('#map')
 let calendar_page = document.querySelectorAll('#calendar-page')
-let booking_page = document.querySelectorAll('#bookings-page')
-
 
 window.addEventListener('load', ()=> {
   alerts()
@@ -187,13 +185,10 @@ window.addEventListener('load', ()=> {
   if (password.length >= 1){
       passwordMatch();
   } else if (calendar_page.length >= 1){
-    console.log('calendar')
       calendar()
-  } else if (booking_page.length >= 1){
-      console.log('bookings')
-      deleteModal()
   } else if (date_input.length && map_div.length >= 1){
       flatpickrInit();
+      deleteModal()
       initMap()
       googleMapApi()
   } else if (date_input.length >= 1){
