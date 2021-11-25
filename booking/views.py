@@ -34,26 +34,32 @@ def validate_booking(booking_form, request, msg, booking, *args, **kwargs):
         if booking_form.instance.slot_id==12 and request.user.username != 'admin2021':
             print('maint')
             messages.add_message(request, messages.WARNING, 'Only Admin can book MAINT slots. Thank you.')
-            redirect('edit_booking', booking)
+            # redirect('edit_booking', booking)
         else:
-            if qs != 0 and message != msg:
-                print('same dates but diff msg')
-                if maint == 0:
-                    print('same dates, diff msg and not maint')
-                    # if message != msg:
-                    print('legit!')
+            if edit:
+                if qs != 0 and message != msg and maint == 0: #allows a booking to be changed but only if the msg is changed. need to work on this , maybe another if else or elif statement.
+                    print('legit! with a changed message')
                     booking = booking_form.save(commit=False)
                     booking.save()
                     send_email_to_admin(booking_form.instance)
-                    messages.add_message(request, messages.SUCCESS, 'Your booking will be added once approved by admin. Thank you.')
-                else:
-                    print('bookings today=', qs, 'maint=', maint, )
-                    messages.add_message(request, messages.WARNING, 'This is a double booking, please check date/slot and aircraft and try again. Thank you.')
-                    redirect('edit_booking', booking)
+                    messages.add_message(request, messages.SUCCESS, 'Your booking will be added once approved by Admin. Thank you.')
+            elif qs == 0 and maint == 0:
+                print('legit with the same message, or new booking')
+                booking = booking_form.save(commit=False)
+                booking.save()
+                send_email_to_admin(booking_form.instance)
+                messages.add_message(request, messages.SUCCESS, 'Your booking will be added once approved by Admin. Thank you.')
+            elif qs != 0 and maint !=0:
+                print('bookings today=', qs, 'maint=', maint, )
+                messages.add_message(request, messages.ERROR, 'That aircraft is on MAINT, please check date/slot and aircraft and try again. Thank you.')
+                # redirect('edit_booking', booking)
+            else:
+                print('double booking')
+                messages.add_message(request, messages.ERROR, 'This is a double booking, please check date/slot and aircraft and try again. Thank you.')
     else:
         print('nottoday')
         messages.add_message(request, messages.WARNING, 'Booking dates must be in the future, please check the date. Thank you.')
-        redirect('edit_booking', booking)
+        # redirect('edit_booking', booking)
 
 
 class HomeDisplay(View):
@@ -92,13 +98,14 @@ class BookingDisplay(View):
         )
 
     def post(self, request, *args, **kwargs):
+        edit = False
         current_user = request.user
         booking_form = BookingForm(data=request.POST, user=request.user)
         bookings = Booking.objects.filter(username=current_user, approved=True)
 
 
         if booking_form.is_valid():
-            validate_booking(booking_form, request, bookings, current_user)
+            validate_booking(edit, booking_form, request, bookings, current_user)
             return redirect('bookings')
         else:
             booking_form = BookingForm(user=request.user)
@@ -135,6 +142,7 @@ class EditDisplay(View):
         )
 
     def post(self, request, booking_id):
+        edit = True
         current_user = request.user
         booking = get_object_or_404(Booking, id=booking_id)
         msg = booking.notes
@@ -143,7 +151,7 @@ class EditDisplay(View):
         booking_form = BookingForm(request.POST, instance=booking, user=request.user)
 
         if booking_form.is_valid():
-            validate_booking(booking_form, request, msg, booking, current_user, booking.id)
+            validate_booking(edit, booking_form, request, msg, booking, current_user, booking.id)
             return redirect ('bookings')
         else:
             booking_form = BookingForm(user=request.user)

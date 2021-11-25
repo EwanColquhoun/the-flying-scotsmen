@@ -29,7 +29,7 @@ function deleteModal(){
       button.addEventListener('click', function() {
         const booking_id = button.getAttribute('name')
         let calbut = button.getAttribute('data-ref')
-        console.log(calbut)
+        console.log(calbut, 'cal del but')
         if (calbut === '0'){
           modal_buttons.innerHTML = `
           <button type="button" class="btn btn-secondary" data-ref="0" data-bs-dismiss="modal">Close</button>
@@ -178,6 +178,7 @@ let password = document.querySelectorAll('#id_password1')
 let date_input = document.querySelectorAll('#id_date')
 let map_div = document.querySelectorAll('#map')
 let calendar_page = document.querySelectorAll('#calendar-page')
+let booking_page = document.querySelectorAll('#bookings-page')
 
 
 window.addEventListener('load', ()=> {
@@ -186,7 +187,11 @@ window.addEventListener('load', ()=> {
   if (password.length >= 1){
       passwordMatch();
   } else if (calendar_page.length >= 1){
+    console.log('calendar')
       calendar()
+  } else if (booking_page.length >= 1){
+      console.log('bookings')
+      deleteModal()
   } else if (date_input.length && map_div.length >= 1){
       flatpickrInit();
       initMap()
