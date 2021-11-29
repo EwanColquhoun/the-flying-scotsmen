@@ -68,6 +68,7 @@ SITE_ID = 1
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+# ACCOUNT_ADAPTER = 'theFlyingScotsmen.users.adapter.MyAccountAdapter'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'

@@ -43,7 +43,7 @@ class SignUpForm(UserCreationForm):
     class Meta:
         model = User
         fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2', )
-    # username = forms.CharField(max_length=30, required=True, help_text='Required')
+    username = forms.CharField(max_length=30, required=True, help_text='Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.')
     first_name = forms.CharField(max_length=30, required=True, help_text='Required')
     last_name = forms.CharField(max_length=30, required=True, help_text='Required')
     email = forms.EmailField(max_length=254, required=False, help_text='Required. Input a valid email address.')
@@ -52,8 +52,17 @@ class SignUpForm(UserCreationForm):
 class UserMessageForm(forms.ModelForm):
     class Meta:
         model = Group_Member
-        fields = ('user', 'message',)
+        fields = ('message',)
         widgets = {
-            'user': forms.HiddenInput(),
             'message': forms.Textarea(attrs={'rows': 4, 'cols': 33, 'placeholder': 'Enter your message here...'}),
         }
+    
+    def clean_message(self):
+
+        message = self.cleaned_data['message']
+
+        if len(message)<6:
+            msg = 'username is too short'
+            self.add_error('message', msg)
+
+        return message
