@@ -1,6 +1,6 @@
 import datetime
 from django import forms
-from .models import Booking, Contact, Group_Member
+from .models import Booking, Contact
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email, EmailValidator
 from django.contrib.auth.forms import UserCreationForm

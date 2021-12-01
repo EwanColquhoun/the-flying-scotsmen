@@ -2,8 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from allauth.account.forms import SignupForm
-from booking.models import Group_Member
-from .models import CustomUser
+from .models import Group_Member, CustomUser
 
 
 class CustomSignUpForm(UserCreationForm, SignupForm):
@@ -18,9 +17,6 @@ class CustomSignUpForm(UserCreationForm, SignupForm):
     first_name = forms.CharField(max_length=30, required=True, help_text='Required')
     last_name = forms.CharField(max_length=30, required=True, help_text='Required')
     email = forms.EmailField(max_length=254, required=True, label=("Email"), help_text='Required. Input a valid email address.')
-    # password1 = forms.PasswordField(
-    #         label=_("Password"), autocomplete="new-password")
-    # password2 = forms.PasswordField(label=_("Password (again)"))
     message = forms.Textarea()
 
 

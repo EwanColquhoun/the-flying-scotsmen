@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django import forms
-from .models import Booking, Aircraft, Slot, Contact, Group_Member
+from .models import Booking, Aircraft, Slot, Contact
 
 
 @admin.register(Aircraft)
@@ -12,17 +12,6 @@ class AircraftAdmin(admin.ModelAdmin):
     list_display = ('reg', 'desc',)
     search_fields = ['reg', ]
 
-
-@admin.register(Group_Member)
-class Group_MemberAdmin(admin.ModelAdmin):
-
-    list_filter = ('registered', 'date_joined',)
-    list_display = ('user', 'registered', 'message', 'date_joined',)
-    search_fields = ['user', 'registered', 'date_joined', ]
-
-    def register_member(self, request, queryset):
-        queryset.update(registered=True)
-        
 
 @admin.register(Slot)
 class SlotAdmin(admin.ModelAdmin):
