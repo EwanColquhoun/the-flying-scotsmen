@@ -9,7 +9,7 @@ class CustomUserAdmin(admin.ModelAdmin):
     Manages Users
     """
     list_filter = ('username', 'first_name', 'last_name', 'email')
-    list_display = ('username', 'first_name', 'last_name', 'email', 'message')
+    list_display = ('username', 'first_name', 'last_name', 'email', 'registered', 'message')
     search_fields = ['username', 'first_name', 'last_name', 'email']
 
 
@@ -17,7 +17,7 @@ class CustomUserAdmin(admin.ModelAdmin):
 class Group_MemberAdmin(admin.ModelAdmin):
 
     list_filter = ('registered', 'date_joined',)
-    list_display = ('user', 'registered', 'message', 'date_joined',)
+    list_display = ('user', 'registered', 'date_joined',)
     search_fields = ['user', 'registered', 'date_joined', ]
 
     def register_member(self, request, queryset):

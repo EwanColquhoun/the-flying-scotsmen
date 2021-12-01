@@ -6,6 +6,16 @@ from .models import Group_Member, CustomUser
 
 
 class CustomSignUpForm(UserCreationForm, SignupForm):
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['email'].label = 'Email'
+        self.fields['password1'].label = 'Password'
+        self.fields['password2'].label = 'Password again'
+
+        self.fields['password1'].help_text = 'Required'
+        self.fields['password2'].help_text = 'Required'
+
     class Meta:
         model = CustomUser
         fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2', 'message')
@@ -16,9 +26,12 @@ class CustomSignUpForm(UserCreationForm, SignupForm):
     username = forms.CharField(max_length=30, required=True, help_text='Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.')
     first_name = forms.CharField(max_length=30, required=True, help_text='Required')
     last_name = forms.CharField(max_length=30, required=True, help_text='Required')
-    email = forms.EmailField(max_length=254, required=True, label=("Email"), help_text='Required. Input a valid email address.')
+    email = forms.CharField(max_length=100,
+                           widget= forms.EmailInput
+                           (attrs={'placeholder':'mav@topgun.com'}))
     message = forms.Textarea()
-
+    
+    field_order = ['username', 'first_name', 'last_name', 'email', 'password1', 'password2', 'message']
 
     def save(self, request):
         user = super(CustomSignUpForm, self).save(request)

@@ -190,6 +190,7 @@ class ContactDisplay(View):
         return render(request, 'booking/contact.html', context)
 
 
+
 # class SignUpDisplay(View):
 
 #     def get(self, request, *args, **kwargs):

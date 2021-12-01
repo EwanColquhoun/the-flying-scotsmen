@@ -19,14 +19,14 @@ class SlotAdmin(admin.ModelAdmin):
     Manages Slot allocation
     """
     class Meta:
-        ordering = ['start']
-        fields = ('start', 'duration', )
+        ordering = ['admin']
+        fields = ('start', 'duration',)
         widgets = {
             'start': forms.TimeInput(format='%H:%M'),
             'duration': forms.TimeInput(format='%H'),
         }
     list_filter = ('slot', 'start')
-    list_display = ('slot', 'start')
+    list_display = ('slot', 'start', 'admin')
     search_fields = ['slot', 'start']
 
 
@@ -38,7 +38,7 @@ class BookingAdmin(admin.ModelAdmin):
     class Meta:
         model = Booking
         widgets = {
-          'notes': forms.Textarea(attrs={'rows': 5, 'cols': 33,}),        
+          'notes': forms.Textarea(attrs={'rows': 5, 'cols': 33, }),      
         }
 
     list_filter = ('date', 'aircraft', 'username', 'instructor_requested', 'approved')

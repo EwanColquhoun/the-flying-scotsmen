@@ -17,7 +17,6 @@
   </div>
   <div class="row d-flex justify-content-center">
       <div class="col-12 mt-3 d-flex justify-content-center">
-        <div>form here...</div>
         <form class="signup center" id="signup-form" method="post" action="{% url 'account_signup' %}">
           {% csrf_token %}
           {{ form.as_p }}

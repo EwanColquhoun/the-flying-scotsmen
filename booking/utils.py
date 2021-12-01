@@ -112,10 +112,10 @@ class Validate_booking:
                     ).count()
             maint = Booking.objects.filter(
                     date=self.booking_form.instance.date,
-                    slot=12,
+                    slot=7,
                     aircraft_id=self.booking_form.instance.aircraft_id,
                     ).count()
-            if self.booking_form.instance.slot_id == 12 and self.request.user.username != 'admin2021':
+            if self.booking_form.instance.slot_id == 7 and self.request.user.username != 'admin2021':
                 messages.add_message(self.request, messages.WARNING, 'Only Admin can book MAINT slots. Thank you.')
             else:
                 if self.edit:
@@ -124,5 +124,5 @@ class Validate_booking:
                 else:
                     self.booking_validation(self.request, qs, maint)
         else:
-            messages.add_message(request, messages.WARNING, 'Booking dates must be in the future, please check the date. Thank you.')
+            messages.add_message(self.request, messages.WARNING, 'Booking dates must be in the future, please check the date. Thank you.')
 

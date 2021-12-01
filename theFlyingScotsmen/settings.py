@@ -78,6 +78,7 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = "theflyingscotsmen.booking@gmail.com"
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASSWORD')
 ACCOUNT_EMAIL_SUBJECT_PREFIX = '[TFS] '
+EMAIL_VERIFICATION = 'optional'
 
 ACCOUNT_FORMS = {'signup': 'accounts.forms.CustomSignUpForm'}
 AUTH_USER_MODEL = 'accounts.CustomUser'

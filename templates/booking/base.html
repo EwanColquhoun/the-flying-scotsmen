@@ -86,7 +86,7 @@
                 </a>
                 <span class="tooltip">Home</span>
             </li>
-        {% if customuser.is_authenticated and customuser.registered.registered %}
+        {% if user.is_authenticated and user.registered.registered %}
             <li>
             <a href="{% url 'calendar' %}">
                 <i class="fas fa-calendar-alt"></i>
@@ -103,7 +103,7 @@
             <span class="tooltip">Bookings</span>
             </li>
         {% endif %}
-        {% if customuser.is_authenticated and not customuser.registered.registered %}
+        {% if user.is_authenticated and not user.registered.registered %}
             <li class="register-li">
                 <a href="{% url 'awaiting_reg' %}">
                     <i class="fas fa-user-plus"></i>
@@ -112,7 +112,7 @@
                 <span class="tooltip">Register</span>
             </li>
         {% endif %}
-        {% if not customuser.is_authenticated %}
+        {% if not user.is_authenticated %}
             <li class="register-li">
                 <a href="{% url 'account_signup' %}">
                     <i class="fas fa-user-plus"></i>
@@ -129,7 +129,7 @@
                 <span class="tooltip">Contact</span>
             </li>
         </ul>
-        {% if customuser.is_authenticated %}
+        {% if user.is_authenticated %}
         <div class="logout-details">
             <a href="{% url 'account_logout' %}">
                 <i class="fas fa-sign-out-alt" id="log_out"></i>
