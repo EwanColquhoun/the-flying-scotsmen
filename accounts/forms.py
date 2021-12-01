@@ -15,6 +15,7 @@ class CustomSignUpForm(UserCreationForm, SignupForm):
 
         self.fields['password1'].help_text = 'Required'
         self.fields['password2'].help_text = 'Required'
+        self.fields['email'].help_text = 'Required'
 
     class Meta:
         model = CustomUser
