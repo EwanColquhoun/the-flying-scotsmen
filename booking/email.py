@@ -86,7 +86,7 @@ def send_contact_email_to_admin(contact):
         server.quit() 
 
 
-def send_register_email_to_admin(user, message):
+def send_register_email_to_admin(user):
     sender_email = "theflyingscotsmen.booking@gmail.com"
     receiver_email = "theflyingscotsmen.booking@gmail.com"
     message = f"""
@@ -98,7 +98,6 @@ def send_register_email_to_admin(user, message):
     First Name - {user.first_name}
     Last Name - {user.last_name}
     Email - {user.email}
-    Message = {message}
     
     
     Click here to visit the admin site

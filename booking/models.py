@@ -1,4 +1,4 @@
-from datetime import date
+from datetime import datetime, date
 from django.core.validators import MinValueValidator
 from django.urls import reverse
 from django.db import models
@@ -6,6 +6,7 @@ from cloudinary.models import CloudinaryField
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email, RegexValidator
 from django.contrib.auth.models import Permission, User
+from theFlyingScotsmen import settings
 from phonenumber_field.modelfields import PhoneNumberField
 
 
@@ -16,8 +17,8 @@ REPLIED = ((0, 'No'), (1, 'Yes'))
 
 class Group_Member(models.Model):
 
-    user = models.OneToOneField(User, on_delete=models.CASCADE, unique=True, null=True, related_name='registered')
-    message = models.TextField(blank=True, null=True, help_text='Optional, but it would help us with your request!')
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, unique=True, null=True, related_name='registered')
+    message = models.TextField(blank=False, null=False, help_text='Required', default='')
     registered = models.BooleanField(default=False)
     date_joined = models.DateTimeField(auto_now_add=True)
     

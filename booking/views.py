@@ -6,9 +6,10 @@ from django.utils.safestring import mark_safe
 from django.contrib.auth.models import User
 import calendar
 from .models import Booking, Contact
-from .forms import BookingForm, ContactForm, SignUpForm, UserMessageForm
+from .forms import BookingForm, ContactForm
 from .utils import Calendar, Validate_booking
 from .email import send_email_to_admin, send_contact_email_to_admin, send_register_email_to_admin
+from accounts.forms import CustomSignUpForm
 from django.http import HttpResponseRedirect
 from django.contrib import messages
 from django.contrib.auth.decorators import permission_required, login_required
@@ -22,16 +23,6 @@ class HomeDisplay(View):
         return render(
             request,
             'booking/index.html',
-        )
-
-
-class AwaitingRegDisplay(View):
-
-    def get(self, request, *args, **kwargs):
-        
-        return render(
-            request,
-            'booking/awaiting_reg.html',
         )
 
 
@@ -199,44 +190,48 @@ class ContactDisplay(View):
         return render(request, 'booking/contact.html', context)
 
 
-class SignUpDisplay(View):
+# class SignUpDisplay(View):
 
-    def get(self, request, *args, **kwargs):
-        form = SignUpForm()
-        message_form = UserMessageForm()
-        login_url = reverse("account_login")
-        return render(
-            request,
-            'account/signup.html',
-            {
-                'form1': form,
-                'form2': message_form,
-                "login_url": login_url,
-            }
-        )
+#     def get(self, request, *args, **kwargs):
+#         form = SignUpForm(request.POST or None)
+#         message_form = UserMessageForm()
+#         login_url = reverse("account_login")
+#         return render(
+#             request,
+#             'account/signup.html',
+#             {
+#                 'form': form,
+#                 'form2': message_form,
+#                 "login_url": login_url,
+#             }
+#         )
 
-    def post(self, request, *args, **kwargs):
-        form = SignUpForm(request.POST)
-        message_form = UserMessageForm(request.POST)
-        if request.method == 'POST' or None:
-            if form.is_valid() and message_form.is_valid():
-                print('form valid')
-                form.save()
-                usermsg = request.POST.get('message')
-                message_form.save()
-                username = form.cleaned_data.get('username')
-                raw_password = form.cleaned_data.get('password1')
-                user = authenticate(username=username, password=raw_password)
-                login(request, user)
-                send_register_email_to_admin(form.instance, usermsg)
-                messages.add_message(request, messages.SUCCESS, 'Your request to register has been noted. We will be in touch shortly. Thank you.')
-                return redirect('awaiting_reg')
-            else:
-                print('form not valid', form.errors, message_form.errors)
-                # errorMSG = ValidationError('this field didnt validate', error)
-                # messages.error(request. , "Error")
-                form = SignUpForm()
-                message_form = UserMessageForm()
-                # messages.add_message(request, messages.WARNING, 'All fields are required, please check the details and try again. Thank you.')
-                return render(request, 'account/signup.html', {'form1': form, 'form2': message_form,})
-        return render(request, 'account/signup.html', {'form1': form, 'form2': message_form,})
+#     def post(self, request, *args, **kwargs):
+        
+#         print('post')
+#         form = SignUpForm(request.POST)
+#         # message_form = UserMessageForm(request.POST or None)
+#         if form.is_valid():
+#             print('form valid')
+#             form.save(commit=False)
+#             print(form)
+#             print('form valid')
+#             form.save()
+#             # usermsg = request.POST.get('message')
+#             # message_form.save()
+#             username = form.cleaned_data.get('username')
+#             raw_password = form.cleaned_data.get('password1')
+#             user = authenticate(username=username, password=raw_password)
+#             login(request, user)
+#             send_register_email_to_admin(form.instance)
+#             messages.add_message(request, messages.SUCCESS, 'Your request to register has been noted. We will be in touch shortly. Thank you.')
+#             return redirect('awaiting_reg')
+#         else:
+#             print('form not valid', form.errors)
+#             # errorMSG = ValidationError('this field didnt validate', error)
+#             # messages.error(request. , "Error")
+#             form = SignUpForm()
+#             # message_form = UserMessageForm()
+#             # messages.add_message(request, messages.WARNING, 'All fields are required, please check the details and try again. Thank you.')
+#             return render(request, 'account/signup.html', {'form': form,})
+

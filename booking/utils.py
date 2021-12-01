@@ -1,6 +1,8 @@
-from datetime import datetime, timedelta
+from datetime import date, timedelta
+from django.contrib import messages
 from calendar import HTMLCalendar
 from .models import Booking
+from .email import send_contact_email_to_admin, send_email_to_admin, send_register_email_to_admin
 
 
 class Calendar(HTMLCalendar):
@@ -57,8 +59,8 @@ def passthrough_next_redirect_url(request, url, redirect_field_name):
 
 
 class Validate_booking:
+    def __init__(self, edit, booking_form, request, msg, booking):
 
-    def __init__(self, edit, booking_form, request, msg, booking,):
         self.edit = edit
         self.booking_form = booking_form
         self.request = request
