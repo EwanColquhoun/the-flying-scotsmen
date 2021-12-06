@@ -260,7 +260,7 @@ body {
 }
 
 .navbar-brand {
-  min-width: 230px;
+  min-width: 200px;
   width: 30%;
 }
 
@@ -392,6 +392,16 @@ hr:not([size]) {
   padding-left: 0;
 }
 
+.stats {
+  font-weight: 700;
+  color: #0065bd;
+}
+
+.grey {
+  color: darkslategray;
+  font-weight: 600;
+}
+
 .stats-list li {
   padding: 3px 0px;
   list-style-type: none;
@@ -430,7 +440,8 @@ hr:not([size]) {
 #login-form input {
   width: 100%;
   border-radius: 3px;
-  margin: 5px 10px;
+  margin: 0 auto;
+  margin-top: 5px;
   box-shadow: 0px 0px 10px 0px rgb(0 0 0 / 50%);
   -webkit-box-shadow: 0px 0px 10px 0px rgb(0 0 0 / 50%);
   -moz-box-shadow: 0px 0px 10px 0px rgb(0 0 0 / 50%);
@@ -582,8 +593,15 @@ input[type=checkbox] {
 
 /* Contact Page */
 .map-container {
+  height: 100%;
+  width: 100%;
   max-width: 600px;
   max-height: 600px;
+}
+
+#mapDiv iframe {
+  height: 100%;
+  width: 100%;
 }
 
 .contact-details p {
@@ -1005,6 +1023,8 @@ margin: unset;
   #booking-form p {
     width: 90%;
     max-width: 90%;
+    margin: 0 auto;
+    margin-top: 1px;
   }
 
   #email-icon {
@@ -1061,6 +1081,7 @@ margin: unset;
 
   #contact-map {
     margin-bottom: 20px;
+    max-height: 380px;
   }
 
 }
