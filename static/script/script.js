@@ -3,10 +3,11 @@ function alerts(){
   setTimeout(function() {
     let messages = document.getElementById('msg')
     let alert = new bootstrap.Alert(messages);
-    messages.classList.remove('show');
+    if (messages){
+      messages.classList.remove('show');
+    };
 }, 5000);
 }
-
 
 // signup forms
 signupForms = function(){
@@ -31,12 +32,10 @@ function deleteModal(){
   const delete_button = document.querySelectorAll('.delete_button')
 
   if (delete_button.length !== 0){
-    // console.log('delete_button not 0')
     delete_button.forEach((button) => {
       button.addEventListener('click', function() {
         const booking_id = button.getAttribute('name')
         let calbut = button.getAttribute('data-ref')
-        console.log(calbut, 'cal del but')
         if (calbut === '0'){
           modal_buttons.innerHTML = `
           <button type="button" class="btn btn-secondary" data-ref="0" data-bs-dismiss="modal">Close</button>
@@ -65,7 +64,6 @@ function today(){
  function getToday() {
     dates.forEach((date) => {
       let today = date.getAttribute('name');
-      // console.log(today, 't/n', now)
       if (today == now){
         date.setAttribute('id', 'today')
       }
@@ -76,8 +74,7 @@ function today(){
 function calendarBookingModal(){
   // Activates the calendar booking modal
   const dates = document.querySelectorAll('.date')
-  // let modalBody = document.querySelector('.modal-body')
-  // let dayBookings = document.querySelectorAll('.calendar-events');
+
   const modal = document.getElementById('myModal')
   const noBookings = document.getElementById('no-bookings-text') 
   const bookingTable = document.getElementById('booking-table')
@@ -94,7 +91,6 @@ function calendarBookingModal(){
         noBookings.classList.replace('show', 'hide')
         bookingTable.classList.replace('hide', 'show')
         for (let a = 0; a <= bookings.length; a++){
-          console.log(bookings[a])
           bookings[a].classList.replace('hide', 'show')
           modal.addEventListener('hidden.bs.modal', function () {
             bookings[a].classList.replace('show', 'hide')
@@ -180,11 +176,13 @@ function passwordMatch(){
 
 }
 
-// document.querySelectorAll('#id_password1').addEventListener('DOMContentLoaded', passwordMatch())
+// Site initialisation
 let password = document.querySelectorAll('#id_password1')
 let date_input = document.querySelectorAll('#id_date')
 let map_div = document.querySelectorAll('#map')
 let calendar_page = document.querySelectorAll('#calendar-page')
+let message_container = document.querySelector('#message-container')
+
 
 window.addEventListener('load', ()=> {
   alerts()
