@@ -75,9 +75,12 @@
                      <br>
                      Before you can go flying we will need you to register. Once all the neccessary paperwork is completed we can then approved your booking. 
                      <br>                   
-                     
-                     We are now accepting 
-                     <a class="scots new-members-link" href="{% url 'account_signup' %}">new members!</a>
+                     <br>
+                     {% if user.is_authenticated and user.registered %}
+                     <a class="scots new-members-link" href="{% url 'contact' %}">Contact us</a> to register a friend.
+                     {% else %}
+                     We are now accepting <a class="scots new-members-link" href="{% url 'account_signup' %}">new members!</a>
+                     {% endif %}
                 </p>
             </div>
         </div>

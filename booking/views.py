@@ -1,24 +1,22 @@
 from datetime import datetime, timedelta, date
-from django.shortcuts import render, get_object_or_404, reverse, redirect
-from django.http import HttpResponse, HttpResponseRedirect
-from django.views import generic, View
-from django.utils.safestring import mark_safe
-from django.contrib.auth.models import User
 import calendar
-from .models import Booking, Contact
-from .forms import BookingForm, ContactForm
-from .utils import Calendar, Validate_booking
-from .email import send_email_to_admin, send_contact_email_to_admin, send_register_email_to_admin
-from accounts.forms import CustomSignUpForm
+from django.shortcuts import render, get_object_or_404, reverse, redirect
 from django.http import HttpResponseRedirect
+from django.views import View
+from django.utils.safestring import mark_safe
 from django.contrib import messages
-from django.contrib.auth.decorators import permission_required, login_required
-from django.contrib.auth import login, authenticate, get_user_model
+
+from .models import Booking
+from .forms import BookingForm, ContactForm
+from .utils import Calendar, ValidateBooking, UserMessages
+from .email import send_contact_email_to_admin
 
 
 class HomeDisplay(View):
-
-    def get(self, request, *args, **kwargs):
+    """
+    The home page
+    """
+    def get(self, request):
 
         return render(
             request,
@@ -27,8 +25,11 @@ class HomeDisplay(View):
 
 
 class BookingDisplay(View):
+    """
+    Bookings page
+    """
 
-    def get(self, request, *args, **kwargs):
+    def get(self, request):
         current_user = request.user
         bookings = Booking.objects.filter(username=current_user)
 
@@ -41,18 +42,22 @@ class BookingDisplay(View):
             },
         )
 
-    def post(self, request, *args, **kwargs):
+    def post(self, request):
         edit = False
         current_user = request.user
         booking_form = BookingForm(data=request.POST, user=request.user)
         bookings = Booking.objects.filter(username=current_user, approved=True)
 
         if booking_form.is_valid():
-            Validate_booking(edit, booking_form, request, bookings, current_user).validate()
+            ValidateBooking(
+                edit,
+                booking_form,
+                request, bookings,
+                current_user).validate()
             return redirect('bookings')
         else:
             booking_form = BookingForm(user=request.user)
-    
+
         return render(
             request,
             'booking/bookings.html',
@@ -61,18 +66,24 @@ class BookingDisplay(View):
                 "bookingform": BookingForm(user=request.user),
             },
         )
+
     @staticmethod
-    def deleteBooking(request, booking_id):
+    def delete_booking(request, booking_id):
+        """
+        Deletes the booking when called, returns the user to
+        bookings with a confirmation message.
+        """
         booking = get_object_or_404(Booking, id=booking_id)
         booking.delete()
-        messages.add_message(request, messages.SUCCESS, 'Your Booking has been deleted successfully. Thank you.')
+        messages.add_message(request, messages.SUCCESS, UserMessages.deleted)
         return HttpResponseRedirect(reverse('bookings'))
 
 
 class EditDisplay(View):
-
+    """
+    Edit booking page
+    """
     def get(self, request, booking_id):
-        current_user = request.user
         booking = get_object_or_404(Booking, id=booking_id)
         booking_form = BookingForm(instance=booking, user=request.user)
         return render(
@@ -90,15 +101,21 @@ class EditDisplay(View):
         booking = get_object_or_404(Booking, id=booking_id)
         msg = booking.notes
         bookings = Booking.objects.filter(username=current_user, approved=True)
-        booking_form = BookingForm(request.POST, instance=booking, user=request.user)
+        booking_form = BookingForm(
+            request.POST,
+            instance=booking,
+            user=request.user)
 
         if booking_form.is_valid():
-            updated = Validate_booking(edit, booking_form, request, msg, booking).validate()
+            updated = ValidateBooking(
+                edit,
+                booking_form,
+                request,
+                msg,
+                booking).validate()
             if updated:
-                print('updated should be true')
                 return redirect('bookings')
             else:
-                print('updated should be false')
                 return redirect('edit_booking', booking_id=booking.id)
 
         else:
@@ -115,21 +132,23 @@ class EditDisplay(View):
 
 
 class CalendarView(View):
+    """
+    Calendar page
+    """
 
-    def get(self, request, *args, **kwargs):
+    def get(self, request):
         d = self.get_date(self.request.GET.get('month', None))
         cal = Calendar(d.year, d.month)
         html_cal = cal.formatmonth(withyear=True)
         bookings = Booking.objects.all()
         return render(request,
-            'booking/calendar.html',
-            {
-                'calendar': mark_safe(html_cal),
-                'prev_month': self.prev_month(d),
-                'next_month': self.next_month(d),
-                'bookings': bookings,
-            })
-
+                      'booking/calendar.html',
+                      {
+                        'calendar': mark_safe(html_cal),
+                        'prev_month': self.prev_month(d),
+                        'next_month': self.next_month(d),
+                        'bookings': bookings,
+                       })
 
     def get_date(self, req_month):
         if req_month:
@@ -151,16 +170,19 @@ class CalendarView(View):
         return month
 
     @staticmethod
-    def deleteBooking(request, booking_id):
+    def delete_booking(request, booking_id):
         booking = get_object_or_404(Booking, id=booking_id)
         booking.delete()
-        messages.add_message(request, messages.SUCCESS, 'Your Booking has been deleted successfully. Thank you.')
+        messages.add_message(request, messages.SUCCESS, UserMessages.deleted)
         return HttpResponseRedirect(reverse('calendar'))
 
 
 class ContactDisplay(View):
-    
-    def get(self, request, *args, **kwargs):
+    """
+    Displays the contact page.
+    """
+
+    def get(self, request):
         form = ContactForm()
         context = {
             'contact_form': form,
@@ -171,16 +193,22 @@ class ContactDisplay(View):
             context
         )
 
-    def post(self, request, *args, **kwargs):
+    def post(self, request):
         form = ContactForm(request.POST)
         if form.is_valid():
             form.replied = False
             form.save()
             send_contact_email_to_admin(form.instance)
-            messages.add_message(request, messages.SUCCESS, 'Your message has been sent, we will endeavour to reply as soon as we can. Thank you.')
+            messages.add_message(
+                request,
+                messages.SUCCESS,
+                UserMessages.sent)
             return redirect('contact')
-        else: 
-            messages.add_message(request, messages.WARNING, 'All fields are required, please check the details and try again. Thank you.')
+        else:
+            messages.add_message(
+                request,
+                messages.WARNING,
+                UserMessages.errors)
             return redirect('contact')
 
         form = ContactForm()
@@ -188,51 +216,3 @@ class ContactDisplay(View):
             'contact_form': form,
         }
         return render(request, 'booking/contact.html', context)
-
-
-
-# class SignUpDisplay(View):
-
-#     def get(self, request, *args, **kwargs):
-#         form = SignUpForm(request.POST or None)
-#         message_form = UserMessageForm()
-#         login_url = reverse("account_login")
-#         return render(
-#             request,
-#             'account/signup.html',
-#             {
-#                 'form': form,
-#                 'form2': message_form,
-#                 "login_url": login_url,
-#             }
-#         )
-
-#     def post(self, request, *args, **kwargs):
-        
-#         print('post')
-#         form = SignUpForm(request.POST)
-#         # message_form = UserMessageForm(request.POST or None)
-#         if form.is_valid():
-#             print('form valid')
-#             form.save(commit=False)
-#             print(form)
-#             print('form valid')
-#             form.save()
-#             # usermsg = request.POST.get('message')
-#             # message_form.save()
-#             username = form.cleaned_data.get('username')
-#             raw_password = form.cleaned_data.get('password1')
-#             user = authenticate(username=username, password=raw_password)
-#             login(request, user)
-#             send_register_email_to_admin(form.instance)
-#             messages.add_message(request, messages.SUCCESS, 'Your request to register has been noted. We will be in touch shortly. Thank you.')
-#             return redirect('awaiting_reg')
-#         else:
-#             print('form not valid', form.errors)
-#             # errorMSG = ValidationError('this field didnt validate', error)
-#             # messages.error(request. , "Error")
-#             form = SignUpForm()
-#             # message_form = UserMessageForm()
-#             # messages.add_message(request, messages.WARNING, 'All fields are required, please check the details and try again. Thank you.')
-#             return render(request, 'account/signup.html', {'form': form,})
-

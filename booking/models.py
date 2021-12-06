@@ -1,12 +1,7 @@
-from datetime import datetime, date
-from django.core.validators import MinValueValidator
+from datetime import date
 from django.urls import reverse
 from django.db import models
 from cloudinary.models import CloudinaryField
-from django.core.exceptions import ValidationError
-from django.core.validators import validate_email, RegexValidator
-from django.contrib.auth.models import Permission, User
-from theFlyingScotsmen import settings
 from phonenumber_field.modelfields import PhoneNumberField
 
 
@@ -16,6 +11,9 @@ REPLIED = ((0, 'No'), (1, 'Yes'))
 
 
 class Slot(models.Model):
+    """
+    Allows Admin to alter the slots.
+    """
 
     class Meta:
         ordering = ['start']
@@ -30,6 +28,9 @@ class Slot(models.Model):
 
 
 class Aircraft(models.Model):
+    """
+    Lets Admin register the Aircraft details.
+    """
     reg = models.CharField(max_length=6, null=False, blank=False)
     desc = models.CharField(max_length=25, null=False, blank=False)
     aircraft_image = CloudinaryField('image', default='placeholder')
@@ -42,7 +43,7 @@ class Booking(models.Model):
     """
     Takes a booking registering the user, slot and aircraft.
     """
-    
+
     username = models.CharField(max_length=20)
     aircraft = models.ForeignKey(
         Aircraft,
@@ -50,8 +51,15 @@ class Booking(models.Model):
         related_name='booked_aircraft'
     )
     date = models.DateField(default=date.today)
-    slot = models.ForeignKey(Slot, on_delete=models.CASCADE, null=False, blank=False)
-    instructor_requested = models.CharField(max_length=5, choices=INSTRUCTOR_REQUIRED, default=False)
+    slot = models.ForeignKey(
+        Slot,
+        on_delete=models.CASCADE,
+        null=False,
+        blank=False)
+    instructor_requested = models.CharField(
+        max_length=5,
+        choices=INSTRUCTOR_REQUIRED,
+        default=False)
     notes = models.TextField(blank=True)
     created_on = models.DateTimeField(auto_now_add=True)
     update_on = models.DateTimeField(auto_now_add=True)
@@ -65,25 +73,55 @@ class Booking(models.Model):
 
     @property
     def get_html_url(self):
+        """
+        Displays the booking as a span in the Calendar
+        """
         url = reverse('edit_booking', args=(self.pk,))
-        
+
         if str(self.aircraft) == 'G-BSAI':
             if self.approved == 1:
-                return f'<span class="btn-events aircraft-purple calendar-events" data-ref={self.approved} name={self.date.month}_{self.date.day}>{self.slot} | {self.username} | <i class="fas fa-check"></i> </span>'
+                return (
+                    f'<span class="btn-events aircraft-purple calendar-events"'
+                    f'data-ref={self.approved} name={self.date.month}_'
+                    f'{self.date.day}>{self.slot}'
+                    f' | {self.username} | <i class="fas fa-check"></i></span>'
+                )
             else:
-                return f'<span class="btn-events calendar-events purple-transparent" data-ref={self.approved} name={self.date.month}_{self.date.day}>{self.slot} | {self.username} | <i class="fas fa-user-cog"></i></span>'
+                return (
+                    f'<span class="btn-events calendar-events purple-trans"'
+                    f' data-ref={self.approved} name={self.date.month}_'
+                    f'{self.date.day}>{self.slot} | {self.username} | '
+                    f'<i class="fas fa-user-cog"></i></span>'
+                )
         elif self.approved == 1:
-            return f'<span class="btn-events aircraft-green calendar-events" data-ref={self.approved} name={self.date.month}_{self.date.day}>{self.slot} | {self.username} | <i class="fas fa-check"></i></span>'
+            return (
+                f'<span class="btn-events aircraft-green calendar-events"'
+                f'data-ref={self.approved} name={self.date.month}_'
+                f'{self.date.day}>{self.slot} | {self.username}'
+                f' | <i class="fas fa-check"></i></span>'
+            )
         else:
-            return f'<span class="btn-events calendar-events green-transparent" data-ref={self.approved} name={self.date.month}_{self.date.day}>{self.slot} | {self.username} | <i class="fas fa-user-cog"></i></span>'
-
+            return (
+                f'<span class="btn-events calendar-events green-trans"'
+                f' data-ref={self.approved} name={self.date.month}_'
+                f'{self.date.day}>{self.slot} | {self.username}'
+                f' | <i class="fas fa-user-cog"></i></span>'
+            )
 
 
 class Contact(models.Model):
-
+    """
+    Initiates the contact model - kept separate from the user model.
+    """
     name = models.CharField(max_length=30, null=False, blank=False)
-    telephone = PhoneNumberField(null=False, blank=False, help_text='Include country code, eg +44')
-    email = models.EmailField(max_length=40, blank=False, help_text='Email must include "@"')
+    telephone = PhoneNumberField(
+        null=False,
+        blank=False,
+        help_text='Include country code, eg +44')
+    email = models.EmailField(
+        max_length=40,
+        blank=False,
+        help_text='Email must include "@"')
     message = models.TextField(blank=False, null=False)
     replied = models.IntegerField(choices=REPLIED, default=False)
 

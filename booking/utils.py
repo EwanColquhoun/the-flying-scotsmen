@@ -1,11 +1,14 @@
-from datetime import date, timedelta
-from django.contrib import messages
+from datetime import date
 from calendar import HTMLCalendar
+from django.contrib import messages
 from .models import Booking
-from .email import send_contact_email_to_admin, send_email_to_admin, send_register_email_to_admin
+from .email import send_email_to_admin
 
 
 class Calendar(HTMLCalendar):
+    """
+    Initiates the HTML Calendar
+    """
     def __init__(self, year=None, month=None):
         self.year = year
         self.month = month
@@ -21,14 +24,26 @@ class Calendar(HTMLCalendar):
 
         if day:
             if day != 0 and len(events_per_day) == 10:
-                return f"<td class='day-full'><a class='btn date' data-bs-toggle='modal' data-bs-target='#myModal' name={self.month}_{day}>{day}</a><ul class='booking_list'> {d} </ul></td>"
-            elif day != 0 and len(events_per_day) >= 1 and len(events_per_day) <= 9:
-                return f"<td class='day-medium'><a class='btn date' data-bs-toggle='modal' data-bs-target='#myModal' name={self.month}_{day}>{day}</a><ul class='booking_list'> {d} </ul></td>"
+                return (f"<td class='day-full'><a class='btn date'"
+                        f" data-bs-toggle='modal' data-bs-target='#myModal'"
+                        f" name={self.month}_{day}>{day}</a><ul "
+                        f"class='booking_list'> {d} </ul></td>"
+                        )
+            elif ((day != 0) and (len(events_per_day) >= 1) and
+                  (len(events_per_day) <= 9)):
+                return (f"<td class='day-medium'><a class='btn date'"
+                        f" data-bs-toggle='modal' data-bs-target='#myModal'"
+                        f" name={self.month}_{day}>{day}</a><ul"
+                        f" class='booking_list'> {d} </ul></td>"
+                        )
             else:
-                return f"<td class='day-free'><a class='btn date' data-bs-toggle='modal' data-bs-target='#myModal' name={self.month}_{day}>{day}</a><ul class='booking_list'> {d} </ul></td>"
+                return (f"<td class='day-free'><a class='btn date'"
+                        F" data-bs-toggle='modal' data-bs-target='#myModal'"
+                        f" name={self.month}_{day}>{day}</a><ul"
+                        f" class='booking_list'> {d} </ul></td>"
+                        )
         else:
             return '<td class="day-null day"></td>'
-
 
     # formats a week as a tr
     def formatweek(self, theweek, events):
@@ -40,9 +55,12 @@ class Calendar(HTMLCalendar):
     # formats a month as a table
     # filter events by year and month
     def formatmonth(self, withyear=True):
-        events = Booking.objects.filter(date__year=self.year, date__month=self.month)
-
-        cal = f'<table border="0" cellpadding="0" cellspacing="0" class="calendar">\n'
+        events = Booking.objects.filter(
+            date__year=self.year,
+            date__month=self.month)
+        cal_inner = ('<table border="0" cellpadding="0"'
+                    ' cellspacing="0" class="calendar">')
+        cal = f'{cal_inner}\n'
         cal += f'{self.formatmonthname(self.year, self.month, withyear=withyear)}\n'
         cal += f'{self.formatweekheader()}\n'
         for week in self.monthdays2calendar(self.year, self.month):
@@ -50,15 +68,12 @@ class Calendar(HTMLCalendar):
         return cal
 
 
-def passthrough_next_redirect_url(request, url, redirect_field_name):
-    assert url.find("?") < 0  # TODO: Handle this case properly
-    next_url = get_next_redirect_url(request, redirect_field_name)
-    if next_url:
-        url = url + "?" + urlencode({redirect_field_name: next_url})
-    return url
-
-
-class Validate_booking:
+class ValidateBooking:
+    """
+    Takes the booking information, validates for dates,
+    aircraft, slots, no double bookings, correct user for
+    the chosen slot.
+    """
     def __init__(self, edit, booking_form, request, msg, booking):
 
         self.edit = edit
@@ -69,43 +84,74 @@ class Validate_booking:
         self.today = date.today()
         self.message = self.request.POST.get('notes')
 
-    def edit_validation(self, request, qs, maint):
-        if qs != 0 and self.message != self.msg and maint == 0:
+    def edit_validation(self, request, q_s, maint):
+        """
+        Validates on the edit booking page, different as it needs to compare
+        the message field aswell.
+        """
+        if q_s != 0 and self.message != self.msg and maint == 0:
             booking = self.booking_form.save(commit=False)
             booking.save()
             send_email_to_admin(self.booking_form.instance)
-            messages.add_message(request, messages.SUCCESS, 'Your booking will be added once approved by Admin. Thank you.')
+            messages.add_message(
+                request,
+                messages.SUCCESS,
+                UserMessages.confirmed)
             return True
-        elif qs == 0 and maint == 0:
+        elif q_s == 0 and maint == 0:
             booking = self.booking_form.save(commit=False)
             booking.save()
             send_email_to_admin(self.booking_form.instance)
-            messages.add_message(request, messages.SUCCESS, 'Your booking will be added once approved by Admin. Thank you.')
+            messages.add_message(
+                request,
+                messages.SUCCESS,
+                UserMessages.confirmed)
             return True
-        elif qs != 0 and maint != 0:
-            messages.add_message(request, messages.ERROR, 'That aircraft is on MAINT, please check date/slot and aircraft and try again. Thank you.')
+        elif q_s != 0 and maint != 0:
+            messages.add_message(
+                request,
+                messages.ERROR,
+                UserMessages.onMaint)
             return False
         else:
-            messages.add_message(request, messages.ERROR, 'This is a double booking, please check date/slot and aircraft and try again. Thank you.')
+            messages.add_message(
+                request,
+                messages.ERROR,
+                UserMessages.double)
             return False
-            
-    def booking_validation(self, request, qs, maint):
-        if qs == 0 and maint == 0:
+
+    def booking_validation(self, request, q_s, maint):
+        """
+        Validates the initial booking.
+        """
+        if q_s == 0 and maint == 0:
             booking = self.booking_form.save(commit=False)
             booking.save()
             send_email_to_admin(self.booking_form.instance)
-            messages.add_message(request, messages.SUCCESS, 'Your booking will be added once approved by Admin. Thank you.')
+            messages.add_message(
+                request,
+                messages.SUCCESS,
+                UserMessages.confirmed)
             return True
-        elif qs != 0 and maint != 0:
-            messages.add_message(request, messages.ERROR, 'That aircraft is on MAINT, please check date/slot and aircraft and try again. Thank you.')
+        elif q_s != 0 and maint != 0:
+            messages.add_message(
+                request,
+                messages.ERROR,
+                UserMessages.onMaint)
             return False
         else:
-            messages.add_message(request, messages.ERROR, 'This is a double booking, please check date/slot and aircraft and try again. Thank you.')
+            messages.add_message(
+                request,
+                messages.ERROR,
+                UserMessages.double)
             return False
 
     def validate(self):
+        """
+        Calls the respective validation methods.
+        """
         if self.booking_form.instance.date > self.today:
-            qs = Booking.objects.filter(
+            q_s = Booking.objects.filter(
                     date=self.booking_form.instance.date,
                     slot=self.booking_form.instance.slot,
                     aircraft_id=self.booking_form.instance.aircraft_id,
@@ -115,14 +161,42 @@ class Validate_booking:
                     slot=7,
                     aircraft_id=self.booking_form.instance.aircraft_id,
                     ).count()
-            if self.booking_form.instance.slot_id == 7 and self.request.user.username != 'admin2021':
-                messages.add_message(self.request, messages.WARNING, 'Only Admin can book MAINT slots. Thank you.')
+            if (self.booking_form.instance.slot_id == 7
+               and self.request.user.username != 'admin2021'):
+                messages.add_message(
+                    self.request,
+                    messages.WARNING,
+                    UserMessages.maint)
             else:
                 if self.edit:
-                    updated = self.edit_validation(self.request, qs, maint)
+                    updated = self.edit_validation(self.request, q_s, maint)
                     return updated
                 else:
-                    self.booking_validation(self.request, qs, maint)
+                    self.booking_validation(self.request, q_s, maint)
         else:
-            messages.add_message(self.request, messages.WARNING, 'Booking dates must be in the future, please check the date. Thank you.')
+            messages.add_message(
+                self.request,
+                messages.WARNING,
+                UserMessages.past)
 
+
+class UserMessages:
+    """
+    Message variables stored here.
+    """
+
+    past = ('Booking dates must be in the future,'
+            ' please check the date. Thank you.')
+    confirmed = 'Your booking will be added once approved by Admin. Thank you.'
+    maint = 'Only Admin can book MAINT slots. Thank you.'
+    double = ('This is a double booking, please check date/slot and'
+              ' aircraft and try again. Thank you.')
+    onMaint = ('That aircraft is on MAINT, please check date/slot and'
+               ' aircraft and try again. Thank you.')
+    deleted = 'Your Booking has been deleted successfully. Thank you.'
+    errors = ('All fields are required, '
+              'please check the details and try again. Thank you.')
+    sent = ('Your message has been sent, '
+            'we will endeavour to reply as soon as we can. Thank you.')
+    register = ('Your request to register has been noted.'
+                'We will be in touch shortly. Thank you.')
