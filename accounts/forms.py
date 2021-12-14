@@ -1,11 +1,13 @@
 from django import forms
-from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from allauth.account.forms import SignupForm
-from .models import Group_Member, CustomUser
+from .models import CustomUser
 
 
 class CustomSignUpForm(UserCreationForm, SignupForm):
+    """
+    Takes the default AllAuth user form, adds and modifies as below.
+    """
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -19,42 +21,30 @@ class CustomSignUpForm(UserCreationForm, SignupForm):
 
     class Meta:
         model = CustomUser
-        fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2', 'message')
+        fields = ('username', 'first_name', 'last_name',
+                  'email', 'password1', 'password2', 'message')
         widgets = {
-            'message': forms.Textarea(attrs={'rows': 4, 'cols': 33, 'placeholder': 'Why do you want to join The Flying Scotsmen...'}),
+            'message': forms.Textarea(attrs={'rows': 4,
+                                             'cols': 33,
+                                             'placeholder': 'Why do you want to join The Flying Scotsmen...'}),
         }
 
     username = forms.CharField(max_length=30, required=True, help_text='Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.')
     first_name = forms.CharField(max_length=30, required=True, help_text='Required')
     last_name = forms.CharField(max_length=30, required=True, help_text='Required')
     email = forms.CharField(max_length=100,
-                           widget= forms.EmailInput
-                           (attrs={'placeholder':'mav@topgun.com'}))
+                            widget=forms.EmailInput
+                            (attrs={'placeholder': 'mav@topgun.com'}))
     message = forms.Textarea()
-    
+
     field_order = ['username', 'first_name', 'last_name', 'email', 'password1', 'password2', 'message']
 
     def save(self, request):
+        """
+        Alters the default save command to take in the message and
+        the remaining form elements in the one command.
+        """
         user = super(CustomSignUpForm, self).save(request)
         user.message = self.cleaned_data['message']
         user.save()
         return user
-
-
-# class UserMessageForm(forms.ModelForm):
-#     class Meta:
-#         model = Group_Member
-#         fields = ('message',)
-#         widgets = {
-#             'message': forms.Textarea(attrs={'rows': 4, 'cols': 33, 'placeholder': 'Why you want to join The Flying Scotsmen...'}),
-#         }
-    
-#     def clean_message(self):
-
-#         message = self.cleaned_data['message']
-
-#         if len(message) < 6:
-#             msg = 'username is too short'
-#             self.add_error('message', msg)
-
-#         return message

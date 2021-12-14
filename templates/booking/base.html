@@ -26,58 +26,59 @@
     <!-- mobile first navbar -->
     <nav class="navbar sticky-top navbar-expand-lg navbar-light sco-blue">
         <div class="container-fluid">
-          <a class="navbar-brand" href="{% url 'home' %}"><span class="text">The Flying Scotsmen</span></a>
-          <button id="burger" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"><i class="fas fa-bars"></i></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="{% url 'home' %}"><i class="fas fa-home"></i><span class="text"> Home</span></a>
-                </li>
-                {% if user.is_authenticated and user.registered.registered %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'calendar' %}"><i class="fas fa-calendar-alt"></i><span class="text"> Calendar</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'bookings' %}"><i class="fas fa-plane"></i><span class="text"> Bookings</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'contact' %}"><i class="fas fa-phone"></i><span class="text"> Contact</span></a>
-                </li>   
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'account_logout' %}"><i class="fas fa-sign-out-alt"></i><span class="text"> Logout {{ request.user.username }}</span></a>
-                </li>
-                {% elif user.is_authenticated %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'awaiting_reg' %}"><i class="fas fa-user-plus"></i><span class="text"> Register</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'contact' %}"><i class="fas fa-phone"></i><span class="text"> Contact</span></a>
-                </li> 
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'account_logout' %}"><i class="fas fa-sign-out-alt"></i><span class="text"> Logout {{ request.user.username }}</span></a>
-                </li>
-                {% else %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'account_signup' %}"><i class="fas fa-user-plus"></i><span class="text"> Register</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'contact' %}"><i class="fas fa-phone"></i><span class="text"> Contact</span></a>
-                </li> 
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'account_login' %}"><i class="fas fa-sign-in-alt"></i><span class="text"> Login</span></a>
-                </li>
-                {% endif %}
-            </ul>
-          </div>
+            <a class="navbar-brand" href="{% url 'home' %}"><span class="text">The Flying Scotsmen</span></a>
+            <button id="burger" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"><i class="fas fa-bars"></i></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="{% url 'home' %}"><i class="fas fa-home"></i><span class="text"> Home</span></a>
+                    </li>
+                    {% if user.is_authenticated and user.registered.registered %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'calendar' %}"><i class="fas fa-calendar-alt"></i><span class="text"> Calendar</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'bookings' %}"><i class="fas fa-plane"></i><span class="text"> Bookings</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'contact' %}"><i class="fas fa-phone"></i><span class="text"> Contact</span></a>
+                    </li>   
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'account_logout' %}"><i class="fas fa-sign-out-alt"></i><span class="text"> Logout {{ request.user.username }}</span></a>
+                    </li>
+                    {% elif user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'awaiting_reg' %}"><i class="fas fa-user-plus"></i><span class="text"> Register</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'contact' %}"><i class="fas fa-phone"></i><span class="text"> Contact</span></a>
+                    </li> 
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'account_logout' %}"><i class="fas fa-sign-out-alt"></i><span class="text"> Logout {{ request.user.username }}</span></a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'account_signup' %}"><i class="fas fa-user-plus"></i><span class="text"> Register</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'contact' %}"><i class="fas fa-phone"></i><span class="text"> Contact</span></a>
+                    </li> 
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'account_login' %}"><i class="fas fa-sign-in-alt"></i><span class="text"> Login</span></a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
         </div>
       </nav>
 
     <!-- nav sidebar -->
     <div id="sidebar" class="sidebar">
         <div class="logo-details">
-            <div class="logo_name"><a id="logo-link" href="{% url 'home' %}">The Flying Scotsmen</a></div>
+            <div class="logo_name"><a id="logo-link" href="{% url 'home' %}">The Flying Scotsmen</a>
+            </div>
             <i class="fas fa-chevron-right rotate" id="btn"></i>
         </div>
         <ul class="nav-list">
@@ -152,87 +153,87 @@
     <!-- Calendar modal -->
     <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-scrollable modal-xl">
-        <div class="modal-content">
-            <div class="modal-header">
-            <h5 class="modal-title" id="myModalLabel">View Bookings</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="container">
-                    <div class="row d-flex justify-content-center">
-                        <div class="col-12 col-md-10 g-0">
-                            <div class="d-grid gap-3">
-                                <div id="no-bookings-text"class="hide">There are no bookings for the selected date</div>
-                                <table id="booking-table" class="hide bookings">
-                                    
-                        {% if bookings %}
-                                    <tr class="table-headings">
-                                
-                                        <td>Slot</td>
-                                        <td>Aircraft</td>
-                                        <td class="notes">Notes</td>
-                                        <td>Inst Req</td>
-                                        <td>Edit/Delete</td>
-                                
-                                    </tr>
-                        {% endif %}
-                  
-                        {% for booking in bookings %} 
-                            {% if booking.approved == 0 %}
-
-                                <tr class="booking-row hide booking_{{booking.date.month}}_{{booking.date.day}} awaiting">
-                                  
-                                    <td>{{ booking.slot.slot }}</td>
-                                    <td>{{ booking.aircraft }}</td>
-                                    <td class='notes'>{{ booking.notes }}</td>
-                                    <td>{{ booking.instructor_requested }}</td>
-
-                                    {% if booking.username == request.user.username %}
-                                    <td><span><a href="/edit/{{ booking.id }}"><i class="far fa-edit edit-icon green"></i></a></span>
-                                        <span><a name="{{ booking.id }}" class="delete_button" data-num="1" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                                        <i class="far fa-times-circle cancel-icon red"></i></a></span>
-                                    </td>
-                                    {% else %}
-                                    <td><span><i class="fas fa-lock cancel-icon"></i></span>
-                                        <span><i class="fas fa-lock cancel-icon"></i></span></td>
-                                    {% endif %}
-                                </tr>
-                            {% else %}
-                            
-                                <tr class="booking-row hide booking_{{booking.date.month}}_{{booking.date.day}} approved">
-                                  
-                                    <td>{{ booking.slot.slot }}</td>
-                                    <td>{{ booking.aircraft }}</td>
-                                    <td class="notes">{{ booking.notes }}</td>
-                                    <td>{{ booking.instructor_requested }}</td>
-
-                                    {% if booking.username == request.user.username %}
-                                    <td><span><a href="/edit/{{ booking.id }}"><i class="far fa-edit edit-icon green"></i></a></span>
-                                        <span><a name="{{ booking.id }}" class="delete_button" data-num="1" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                                        <i class="far fa-times-circle cancel-icon red"></i></a></span>
-                                    </td>
-                                    {% else %}
-                                    <td><span><i class="fas fa-lock cancel-icon"></i></span>
-                                    <span><i class="fas fa-lock cancel-icon"></i></span></td>
-                                    {% endif %}
-                                </tr>
-                            {% endif %}
-                        {% empty %}
-                    
-                                    <span>Your bookings will appear here once approved by admin.</span> 
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="myModalLabel">View Bookings</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row d-flex justify-content-center">
+                            <div class="col-12 col-md-10 g-0">
+                                <div class="d-grid gap-3">
+                                    <div id="no-bookings-text"class="hide">There are no bookings for the selected date</div>
+                                        <table id="booking-table" class="hide bookings">
+                                            
+                                        {% if bookings %}
+                                            <tr class="table-headings">
+                                        
+                                                <td>Slot</td>
+                                                <td>Aircraft</td>
+                                                <td class="notes">Notes</td>
+                                                <td>Inst Req</td>
+                                                <td>Edit/Delete</td>
+                                        
+                                            </tr>
+                                        {% endif %}
                         
-                        {% endfor %}
-                                </table>
+                                    {% for booking in bookings %} 
+                                        {% if booking.approved == 0 %}
+
+                                            <tr class="booking-row hide booking_{{booking.date.month}}_{{booking.date.day}} awaiting">
+                                            
+                                                <td>{{ booking.slot.slot }}</td>
+                                                <td>{{ booking.aircraft }}</td>
+                                                <td class='notes'>{{ booking.notes }}</td>
+                                                <td>{{ booking.instructor_requested }}</td>
+
+                                                {% if booking.username == request.user.username %}
+                                                <td><span><a href="/edit/{{ booking.id }}"><i class="far fa-edit edit-icon green"></i></a></span>
+                                                    <span><a name="{{ booking.id }}" class="delete_button" data-num="1" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                                    <i class="far fa-times-circle cancel-icon red"></i></a></span>
+                                                </td>
+                                                {% else %}
+                                                <td><span><i class="fas fa-lock cancel-icon"></i></span>
+                                                    <span><i class="fas fa-lock cancel-icon"></i></span></td>
+                                                {% endif %}
+                                            </tr>
+                                        {% else %}
+                                    
+                                            <tr class="booking-row hide booking_{{booking.date.month}}_{{booking.date.day}} approved">
+                                            
+                                                <td>{{ booking.slot.slot }}</td>
+                                                <td>{{ booking.aircraft }}</td>
+                                                <td class="notes">{{ booking.notes }}</td>
+                                                <td>{{ booking.instructor_requested }}</td>
+
+                                                {% if booking.username == request.user.username %}
+                                                <td><span><a href="/edit/{{ booking.id }}"><i class="far fa-edit edit-icon green"></i></a></span>
+                                                    <span><a name="{{ booking.id }}" class="delete_button" data-num="1" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                                    <i class="far fa-times-circle cancel-icon red"></i></a></span>
+                                                </td>
+                                                {% else %}
+                                                <td><span><i class="fas fa-lock cancel-icon"></i></span>
+                                                <span><i class="fas fa-lock cancel-icon"></i></span></td>
+                                                {% endif %}
+                                            </tr>
+                                        {% endif %}
+                                    {% empty %}
+                            
+                                            <span>Your bookings will appear here once approved by admin.</span> 
+                                
+                                    {% endfor %}
+                                        </table>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-            <button type="button" class="btn btn-join" data-bs-dismiss="modal">Close</button>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-join" data-bs-dismiss="modal">Close</button>
 
+                </div>
             </div>
-        </div>
         </div>
     </div>
     
