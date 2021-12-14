@@ -20,70 +20,70 @@
     <!-- CSS  -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
     <link rel="icon prefetch" href="https://res.cloudinary.com/daoark4xo/image/upload/v1637767239/pilot2.png" type="image/png">
-    <title>The Flying Scotsmen</title>
+    <title aria-label="Main Title">The Flying Scotsmen</title>
 </head>
 <body>
     <!-- mobile first navbar -->
     <nav class="navbar sticky-top navbar-expand-lg navbar-light sco-blue">
         <div class="container-fluid">
-            <a class="navbar-brand" href="{% url 'home' %}"><span class="text">The Flying Scotsmen</span></a>
+            <a aria-label="Home button" class="navbar-brand" href="{% url 'home' %}"><span class="text">The Flying Scotsmen</span></a>
             <button id="burger" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"><i class="fas fa-bars"></i></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="{% url 'home' %}"><i class="fas fa-home"></i><span class="text"> Home</span></a>
+                        <a class="nav-link" aria-label="Home" href="{% url 'home' %}"><i class="fas fa-home"></i><span class="text"> Home</span></a>
                     </li>
                     {% if user.is_authenticated and user.registered.registered %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'calendar' %}"><i class="fas fa-calendar-alt"></i><span class="text"> Calendar</span></a>
+                        <a class="nav-link" aria-label="Calendar" href="{% url 'calendar' %}"><i class="fas fa-calendar-alt"></i><span class="text"> Calendar</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'bookings' %}"><i class="fas fa-plane"></i><span class="text"> Bookings</span></a>
+                        <a class="nav-link" aria-label="Bookings" href="{% url 'bookings' %}"><i class="fas fa-plane"></i><span class="text"> Bookings</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'contact' %}"><i class="fas fa-phone"></i><span class="text"> Contact</span></a>
+                        <a class="nav-link" aria-label="Contact" href="{% url 'contact' %}"><i class="fas fa-phone"></i><span class="text"> Contact</span></a>
                     </li>   
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'account_logout' %}"><i class="fas fa-sign-out-alt"></i><span class="text"> Logout {{ request.user.username }}</span></a>
+                        <a class="nav-link" aria-label="Logout" href="{% url 'account_logout' %}"><i class="fas fa-sign-out-alt"></i><span class="text"> Logout {{ request.user.username }}</span></a>
                     </li>
                     {% elif user.is_authenticated %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'awaiting_reg' %}"><i class="fas fa-user-plus"></i><span class="text"> Register</span></a>
+                        <a class="nav-link" aria-label="Register" href="{% url 'awaiting_reg' %}"><i class="fas fa-user-plus"></i><span class="text"> Register</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'contact' %}"><i class="fas fa-phone"></i><span class="text"> Contact</span></a>
+                        <a class="nav-link" aria-label="Contact" href="{% url 'contact' %}"><i class="fas fa-phone"></i><span class="text"> Contact</span></a>
                     </li> 
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'account_logout' %}"><i class="fas fa-sign-out-alt"></i><span class="text"> Logout {{ request.user.username }}</span></a>
+                        <a class="nav-link" aria-label="Logout" href="{% url 'account_logout' %}"><i class="fas fa-sign-out-alt"></i><span class="text"> Logout {{ request.user.username }}</span></a>
                     </li>
                     {% else %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'account_signup' %}"><i class="fas fa-user-plus"></i><span class="text"> Register</span></a>
+                        <a class="nav-link" aria-label="Register" href="{% url 'account_signup' %}"><i class="fas fa-user-plus"></i><span class="text"> Register</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'contact' %}"><i class="fas fa-phone"></i><span class="text"> Contact</span></a>
+                        <a class="nav-link" aria-label="Contact" href="{% url 'contact' %}"><i class="fas fa-phone"></i><span class="text"> Contact</span></a>
                     </li> 
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'account_login' %}"><i class="fas fa-sign-in-alt"></i><span class="text"> Login</span></a>
+                        <a class="nav-link" aria-label="Login" href="{% url 'account_login' %}"><i class="fas fa-sign-in-alt"></i><span class="text"> Login</span></a>
                     </li>
                     {% endif %}
                 </ul>
             </div>
         </div>
-      </nav>
+    </nav>
 
     <!-- nav sidebar -->
     <div id="sidebar" class="sidebar">
         <div class="logo-details">
-            <div class="logo_name"><a id="logo-link" href="{% url 'home' %}">The Flying Scotsmen</a>
+            <div class="logo_name"><a aria-label="Home" id="logo-link" href="{% url 'home' %}">The Flying Scotsmen</a>
             </div>
             <i class="fas fa-chevron-right rotate" id="btn"></i>
         </div>
         <ul class="nav-list">
             <li>
-                <a href="{% url 'home' %}">
+                <a aria-label="Home" href="{% url 'home' %}">
                     <i class="fas fa-home"></i>
                     <span class="links_name">Home</span>
                 </a>
@@ -91,7 +91,7 @@
             </li>
         {% if user.is_authenticated and user.registered.registered %}
             <li>
-            <a href="{% url 'calendar' %}">
+            <a aria-label="Calendar" href="{% url 'calendar' %}">
                 <i class="fas fa-calendar-alt"></i>
                 <span class="links_name">Calendar</span>
             </a>
@@ -99,7 +99,7 @@
             </li>
 
             <li>
-            <a href="{% url 'bookings' %}">
+            <a aria-label="Bookings" href="{% url 'bookings' %}">
                 <i class="fas fa-plane"></i>
                 <span class="links_name">Bookings</span>
             </a>
@@ -108,7 +108,7 @@
         {% endif %}
         {% if user.is_authenticated and not user.registered.registered %}
             <li class="register-li">
-                <a href="{% url 'awaiting_reg' %}">
+                <a aria-label="Register" href="{% url 'awaiting_reg' %}">
                     <i class="fas fa-user-plus"></i>
                     <span class="links_name">Register</span>
                 </a>
@@ -117,7 +117,7 @@
         {% endif %}
         {% if not user.is_authenticated %}
             <li class="register-li">
-                <a href="{% url 'account_signup' %}">
+                <a aria-label="Register" href="{% url 'account_signup' %}">
                     <i class="fas fa-user-plus"></i>
                     <span class="links_name">Register</span>
                 </a>
@@ -125,7 +125,7 @@
             </li>
         {% endif %}
             <li>
-                <a href="{% url 'contact' %}">
+                <a aria-label="Contact" href="{% url 'contact' %}">
                     <i class="fas fa-phone"></i>
                     <span class="links_name">Contact</span>
                 </a>
@@ -134,21 +134,20 @@
         </ul>
         {% if user.is_authenticated %}
         <div class="logout-details">
-            <a href="{% url 'account_logout' %}">
+            <a aria-label="Logout" href="{% url 'account_logout' %}">
                 <i class="fas fa-sign-out-alt" id="log_out"></i>
                 <span class="user-name">Logout {{ request.user.username }}</span>
             </a>
         </div>
         {% else %}
         <div class="logout-details">
-            <a href="{% url 'account_login' %}">
-                <i class="fas fa-sign-in-alt" id="log_out"></i>
+            <a aria-label="Login" href="{% url 'account_login' %}">
+                <i class="fas fa-sign-in-alt" id="log_in"></i>
                 <span class="user-name">Login</span>
             </a>
         </div>
         {% endif %}
     </div>
-
 
     <!-- Calendar modal -->
     <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -164,7 +163,7 @@
                             <div class="col-12 col-md-10 g-0">
                                 <div class="d-grid gap-3">
                                     <div id="no-bookings-text"class="hide">There are no bookings for the selected date</div>
-                                        <table id="booking-table" class="hide bookings">
+                                        <table aria-label="Bookings table" id="booking-table" class="hide bookings">
                                             
                                         {% if bookings %}
                                             <tr class="table-headings">
@@ -208,8 +207,8 @@
                                                 <td>{{ booking.instructor_requested }}</td>
 
                                                 {% if booking.username == request.user.username %}
-                                                <td><span><a href="/edit/{{ booking.id }}"><i class="far fa-edit edit-icon green"></i></a></span>
-                                                    <span><a name="{{ booking.id }}" class="delete_button" data-num="1" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                                <td><span><a aria-label="Edit" href="/edit/{{ booking.id }}"><i class="far fa-edit edit-icon green"></i></a></span>
+                                                    <span><a aril-label="Delete" name="{{ booking.id }}" class="delete_button" data-num="1" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                                                     <i class="far fa-times-circle cancel-icon red"></i></a></span>
                                                 </td>
                                                 {% else %}
@@ -230,7 +229,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                <button type="button" class="btn btn-join" data-bs-dismiss="modal">Close</button>
+                <button aria-label="Close" type="button" class="btn btn-join" data-bs-dismiss="modal">Close</button>
 
                 </div>
             </div>
@@ -250,7 +249,7 @@
                 </div>
                 <div class="modal-footer" id="delete-modal-buttons">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <a href="/delete_calendar_booking/{{ booking.id }}" class="btn btn-back delete-button">DELETE</a>
+                    <a aria-label="Delete" href="/delete_calendar_booking/{{ booking.id }}" class="btn btn-back delete-button">DELETE</a>
                 </div>
             </div>
         </div>
@@ -266,7 +265,7 @@
                     <div class="alert {{ message.tags }} alert-dismissible fade show" id="msg"
                     role="alert">
                     {{ message | safe }} 
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
                     </button>
                 
                     </div>

@@ -2,7 +2,7 @@
 
 {% block content %}
 
-
+<!-- Page heading -->
 <div class="container-fluid">
     <div class="row d-flex justify-content-center">
         <div class="col-8 mt-2 mb-2 d-flex justify-content-center">
@@ -11,22 +11,23 @@
     </div>
 </div>
 
+<!-- Contact Form and Contact Details -->
 <div class="container">
     <div class="row g-0 d-flex justify-content-around">
-        <div class="col-12 col-md-5 mt-3 mb-1 blue-border">
+        <div aria-label="Contact Form" class="col-12 col-md-5 mt-3 mb-1 blue-border">
             <form id="contact-form" action="{% url 'contact' %}" method="POST" novalidate>
                 {% csrf_token %}
                 {{ contact_form.as_p }}
      
             <div id="contact-button" class="mb-3">
-                <input class="btn btn-join" type="submit" value="Submit">
+                <input aria-label="Submit" class="btn btn-join" type="submit" value="Submit">
             </div>
             </form>
         </div>
 
-        <div class="col-12 col-md-5 mt-3 mb-1 d-flex justify-content-center blue-border align-items-center">
+        <div aria-label="Contact Details" class="col-12 col-md-5 mt-3 mb-1 d-flex justify-content-center blue-border align-items-center">
             <div class="mt-3 contact-details">
-                <h3 class="sub-heading">56.4391° N, 3.3714° W</h3>
+                <h2 class="sub-heading">56.4391° N, 3.3714° W</h2>
                 <p>
                     The Flying Scotsmen,<br>
                     Perth Aerodrome,<br>
@@ -43,16 +44,17 @@
         </div>
     </div>
 </div>
+<!-- Map and Testimonials -->
 <div class="container">
     <div class="row g-0 d-flex justify-content-around">
         <div id="contact-map" class="col-12 col-md-5 mt-4 blue-border">
             <div id="mapDiv" class=" map-container">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d18336.95713135544!2d-3.3605618086385145!3d56.44135997822792!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48863c1062d054c9%3A0x5eb3fcd704908285!2sPerth%20Airport!5e0!3m2!1sen!2suk!4v1634546102894!5m2!1sen!2suk" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                <iframe aria-label="Map of our location" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d18336.95713135544!2d-3.3605618086385145!3d56.44135997822792!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48863c1062d054c9%3A0x5eb3fcd704908285!2sPerth%20Airport!5e0!3m2!1sen!2suk!4v1634546102894!5m2!1sen!2suk" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
             </div>
         </div>
         <div class="col-12 col-md-5 mt-4 mb-5 blue-border">
             <div>
-                <h3 class="sub-heading">Testimonials</h3>
+                <h2 class="sub-heading">Testimonials</h2>
                 <figure class="text-center">
                     <blockquote class="blockquote">
                         <p>A great group of experienced flyers. Always welcoming like minded fellow Pilots</p>

@@ -207,6 +207,7 @@ body {
 }
 
 .sidebar .logout-details a:hover #log_out,
+.sidebar .logout-details a:hover #log_in,
 .sidebar .logout-details a:hover,
 .sidebar .logo_name a:hover {
   transition: all 0.0s ease;
@@ -214,7 +215,7 @@ body {
   color: #0065bd;
 }
 
-#log_out{
+#log_out {
     color: #fff;
     height: 60px;
     min-width: 50px;
@@ -223,11 +224,22 @@ body {
     line-height: 60px;
   }
 
-  #log_out:hover {
+  #log_in {
+    color: #fff;
+    height: 60px;
+    min-width: 50px;
+    font-size: 28px;
+    text-align: center;
+    line-height: 60px;
+  }
+
+  #log_out:hover,
+  #log_in:hover {
     color: #0065bd;
   }
 
-.sidebar.open .logout-details a #log_out{
+.sidebar.open .logout-details a #log_out,
+.sidebar.open .logout-details a #log_in {
     width: 50px;
     background: none;
   }
@@ -387,6 +399,12 @@ hr:not([size]) {
 
 
 /* Aircraft Stats */
+.aircraft-heading {
+  margin-top: 1rem;
+  font-size: larger;
+  text-decoration: underline;
+}
+
 .stats-list {
   margin-bottom: 40px;
   padding-left: 0;
