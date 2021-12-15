@@ -14,7 +14,6 @@ class BookingForm(forms.ModelForm):
         model = Booking
         fields = ('username', 'date', 'slot', 'aircraft', 'instructor_requested', 'notes')
         widgets = {
-            # 'date': DateInput(),
             'notes': forms.Textarea(attrs={'rows': 4, 'cols': 33, 'placeholder': 'Enter your message here...',}),
             'username': forms.HiddenInput(),
         }

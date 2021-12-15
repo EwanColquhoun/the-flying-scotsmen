@@ -52,7 +52,8 @@ class BookingDisplay(View):
             ValidateBooking(
                 edit,
                 booking_form,
-                request, bookings,
+                request,
+                bookings,
                 current_user).validate()
             return redirect('bookings')
         else:

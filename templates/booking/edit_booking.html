@@ -13,12 +13,12 @@
 <div class="container">
     <div class="row d-flex justify-content-center">
         <div class="col-12 col-md-8 d-flex justify-content-center">
-            <form id="edit-form" method="POST">
+            <form aria-label="Edit booking form" id="edit-form" method="POST">
                 {% csrf_token %}
                 {{ form.as_p }}
                 <div class="d-flex justify-content-evenly">
-                    <a class="btn btn-back" href="{% url 'bookings' %}">Back </a>
-                    <button id="update-booking" class="btn btn-join" type="submit">Update Booking</button> 
+                    <a aria-label="Back" class="btn btn-back" href="{% url 'bookings' %}">Back </a>
+                    <button aria-label="Update" id="update-booking" class="btn btn-join" type="submit">Update Booking</button> 
                 </div> 
             </form>
         </div>

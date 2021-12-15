@@ -14,6 +14,7 @@ from pathlib import Path
 import os
 import dj_database_url
 from django.contrib.messages import constants as messages
+import sys
 if os.path.isfile('env.py'):
     import env
 
@@ -83,6 +84,7 @@ EMAIL_VERIFICATION = 'optional'
 ACCOUNT_FORMS = {'signup': 'accounts.forms.CustomSignUpForm'}
 AUTH_USER_MODEL = 'accounts.CustomUser'
 
+
 MESSAGE_TAGS = {
     messages.DEBUG: 'alert-info',
     messages.INFO: 'alert-info',
@@ -126,16 +128,17 @@ WSGI_APPLICATION = 'theFlyingScotsmen.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
 
 DATABASES = {
     'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
 }
+
+if 'test' in sys.argv:
+    DATABASES['default'] = {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3'
+    }
+
 
 
 # Password validation

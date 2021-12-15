@@ -13,14 +13,13 @@
 
 
 <!-- Calendar -->
-
 <div class="container-fluid">
     <div class="row d-flex justify-content-center">
         <div class="col-12 col-lg-8 col-md-10 mt-3 d-flex justify-content-evenly">
-            <a class="prev scots" href="{% url 'calendar' %}?{{ prev_month }}"><i class="fas fa-chevron-left"></i> Previous Month </a>
+            <a aria-label="Previous Month" class="prev scots" href="{% url 'calendar' %}?{{ prev_month }}"><i class="fas fa-chevron-left"></i> Previous Month </a>
             <p id="reg1" class="aircraft-purple">G-BSAI</p>
             <p id="reg2" class="aircraft-green">G-BURD</p>   
-            <a class="next scots" href="{% url 'calendar' %}?{{ next_month }}"> Next Month <i class="fas fa-chevron-right"></i></a>
+            <a aria-label="Next Month" class="next scots" href="{% url 'calendar' %}?{{ next_month }}"> Next Month <i class="fas fa-chevron-right"></i></a>
         </div>
     </div>
 

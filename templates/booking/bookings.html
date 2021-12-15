@@ -15,7 +15,7 @@
         <div class="col-12">
             <h3 class="sub-heading">Bookings for <strong class="scots">{{ request.user.username }}:</strong></h3>
                 <div id="booking-content" class="d-grid gap-3 blue-border">
-                    <table class="bookings">
+                    <table aria-label="booking table" class="bookings">
                    
             {% if bookings %}
            
@@ -39,9 +39,9 @@
                             <td>{{ booking.aircraft }}</td>
                             <td class="notes">{{ booking.notes }}</td>
                             <td>{{ booking.instructor_requested }}</td>
-                            <td><span><a href="/edit/{{ booking.id }}"><i class="far fa-edit edit-icon green"></i></a></span></td>
+                            <td><span><a aria-label="Edit" href="/edit/{{ booking.id }}"><i class="far fa-edit edit-icon green"></i></a></span></td>
                             <td>
-                                <span><a name="{{ booking.id }}" class="delete_button" data-ref="0" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                <span><a aria-label="Delete" name="{{ booking.id }}" class="delete_button" data-ref="0" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                                     <i class="far fa-times-circle cancel-icon red"></i></a>
                                 </span>
                             </td>
@@ -54,9 +54,9 @@
                             <td>{{ booking.aircraft }}</td>
                             <td class="notes">{{ booking.notes }}</td>
                             <td>{{ booking.instructor_requested }}</td>
-                            <td><span><a href="/edit/{{ booking.id }}"><i class="far fa-edit edit-icon green"></i></a></span></td>
+                            <td><span><a aria-label="Edit" href="/edit/{{ booking.id }}"><i class="far fa-edit edit-icon green"></i></a></span></td>
                             <td>
-                                <span><a name="{{ booking.id }}" class="delete_button" data-ref="0" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                <span><a aria-label="Delete" name="{{ booking.id }}" class="delete_button" data-ref="0" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                                     <i class="far fa-times-circle cancel-icon red"></i></a>
                                 </span>
                             </td>
@@ -81,7 +81,7 @@
             {{ bookingform.as_p }}
             {{ bookingform.non_field_errors }}
                 <div id="booking-button">
-                    <button type="submit" id="new_booking" class="btn btn-join">Submit</button>
+                    <button aria-label="Submit" type="submit" id="new_booking" class="btn btn-join">Submit</button>
                 </div>
             </form>
         </div>
