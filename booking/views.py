@@ -116,7 +116,7 @@ class EditDisplay(View):
                 booking).validate()
             if updated:
                 print(request.POST)
-                return redirect('bookings')
+                return HttpResponseRedirect(reverse('bookings'))
             else:
                 return redirect('edit_booking', booking_id=booking.id)
 

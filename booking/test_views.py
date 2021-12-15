@@ -50,7 +50,7 @@ class TestViews(TestCase):
 
     def test_can_make_booking(self):
         test_booking = Booking.objects.create(date= '2024-01-01', slot= self.slot, aircraft= self.aircraft, )
-        response = self.client.post('/bookings/', {'date': '2024-01-01', 'slot': '0', 'aircraft': 'G-TEST',})
+        # response = self.client.post('/bookings/', {'date': '2024-01-01', 'slot': '0', 'aircraft': 'G-TEST',})
         existing_booking = Booking.objects.filter(id=test_booking.id)
         self.assertEqual(len(existing_booking), 1)
 
@@ -60,6 +60,17 @@ class TestViews(TestCase):
         self.assertRedirects(response, '/bookings/')
         existing_booking = Booking.objects.filter(id=test_booking.id)
         self.assertEqual(len(existing_booking), 0)
+
+    def test_can_edit_booking(self):
+        test_booking = Booking.objects.create(date= '2024-01-01', slot= self.slot, aircraft= self.aircraft, )
+        response = self.client.post(
+            reverse('edit_booking', kwargs={'booking_id': test_booking.id}), 
+            {'date': '2024-02-02', 'slot': '0', 'aircraft': 'G-TEST',})
+     
+        # self.assertEqual(response.status_code, 302)
+
+        test_booking.refresh_from_db()
+        self.assertEqual(test_booking.date, '2024-02-02')
 
 
 # below tests are experiments to get a test for if showing if the edit page redirects to bookings (EDIT SUCCESS) or edit page(EDIT FAILED). 

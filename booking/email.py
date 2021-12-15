@@ -98,6 +98,7 @@ def send_register_email_to_admin(user):
     First Name - {user.first_name}
     Last Name - {user.last_name}
     Email - {user.email}
+    Message - {user.message}
     
     
     Click here to visit the admin site
