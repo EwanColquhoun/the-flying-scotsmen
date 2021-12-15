@@ -115,6 +115,7 @@ class EditDisplay(View):
                 msg,
                 booking).validate()
             if updated:
+                print(request.POST)
                 return redirect('bookings')
             else:
                 return redirect('edit_booking', booking_id=booking.id)
