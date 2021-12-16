@@ -93,6 +93,7 @@ MESSAGE_TAGS = {
     messages.ERROR: 'alert-danger',
 }
 
+MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

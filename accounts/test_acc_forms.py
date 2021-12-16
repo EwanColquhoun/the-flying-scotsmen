@@ -3,7 +3,6 @@ from django.contrib.auth.forms import UserCreationForm
 from .forms import CustomSignUpForm
 
 
-
 class TestCustomSignUpForm(TestCase):
 
     def test_username_required(self):
@@ -17,7 +16,6 @@ class TestCustomSignUpForm(TestCase):
         self.assertFalse(form.is_valid())
         self.assertIn('first_name', form.errors.keys())
         self.assertEqual(form.errors['first_name'][0], 'This field is required.')
-
 
     def test_last_name_required(self):
         form = CustomSignUpForm({'last_name': ''})

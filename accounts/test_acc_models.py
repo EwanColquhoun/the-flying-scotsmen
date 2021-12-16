@@ -18,5 +18,4 @@ class TestAccModels(TestCase):
 
     def test_group_member_message_is_accepted(self):
         member_message = CustomUser.objects.get(message='Test message')
-        print(member_message.message)
         self.assertTrue(member_message, 'Test message')
