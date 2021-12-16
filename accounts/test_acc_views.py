@@ -1,0 +1,11 @@
+from django.test import TestCase
+
+
+class TestViews(TestCase):
+
+    def test_get_awaiting_reg_page(self):
+        response = self.client.get('/awaiting_reg/')
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'booking/awaiting_reg.html')
+
+
