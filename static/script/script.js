@@ -200,3 +200,5 @@ window.addEventListener('load', ()=> {
       flatpickrInit();
   };
 });
+
+// module.exports = sidebar();
