@@ -1,0 +1,22 @@
+{
+  "name": "the-flying-scotsmen",
+  "version": "1.0.0",
+  "description": "The Flying Scotsmen is a site for a fictional flying group based in Scotland. It provides a booking and contact platform for the members of the group.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EwanColquhoun/the-flying-scotsmen.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EwanColquhoun/the-flying-scotsmen/issues"
+  },
+  "homepage": "https://github.com/EwanColquhoun/the-flying-scotsmen#readme",
+  "devDependencies": {
+    "jest": "^27.4.5"
+  }
+}

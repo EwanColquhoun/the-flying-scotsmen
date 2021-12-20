@@ -3,6 +3,7 @@ from django.test.client import Client
 from accounts.models import CustomUser
 from .models import Slot, Booking, Contact, Aircraft
 from .utils import ValidateBooking
+from .forms import BookingForm
 
 
 class TestValidateBookingUtil(TestCase):
@@ -18,3 +19,11 @@ class TestValidateBookingUtil(TestCase):
         self.booking = Booking.objects.create(date='2024-01-01', slot=self.slot, aircraft=self.aircraft,)
 
 # not sure how to test this??
+    def test_booking_validation(self):
+        q_s = 0
+        maint = 0
+        edit = False
+        booking = self.booking
+        booking_form = BookingForm(user= Client, data= {'date': '2024/01/01', 'slot': '0', 'aircraft': 'G-TEST' })
+        
+        ValidateBooking(edit, booking_form, request, msg, booking).booking_validation(request, q_s, maint)

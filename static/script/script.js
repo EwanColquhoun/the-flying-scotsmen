@@ -20,7 +20,7 @@ function sidebar(){
   let sidebar = document.querySelector(".sidebar");
   let closeBtn = document.querySelector("#btn");
   
-    closeBtn.addEventListener("click", ()=>{
+    closeBtn.addEventListener("click", function open(){
       sidebar.classList.toggle("open");
     });
 }
