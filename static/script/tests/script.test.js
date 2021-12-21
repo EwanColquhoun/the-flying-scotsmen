@@ -5,6 +5,7 @@
 const start = require("/workspace/the-flying-scotsmen/static/script/script.js");
 const setup = require("/workspace/the-flying-scotsmen/static/script/script.js");
 const deleteModal = require("/workspace/the-flying-scotsmen/static/script/script.js");
+const sidebar = require("/workspace/the-flying-scotsmen/static/script/script.js");
 
 // wanted this to show that when the passwords matched either true or false is returned from the function----------------------------------
 
@@ -47,16 +48,19 @@ describe("Base.html tests", () => {
     });
 
 // wanted these to show that the button opens the sidebar ---------------------
-
-    // test("sidebar.open should exist", () => {
-    //     const spy = jest.spyOn(setup, "sidebar" );
-    //     const side = setup.sidebar();
-    //     const addEvt = new Event('click');
-    //     document.dispatchEvent(addEvt);
-    //     expect(document.getElementById("sidebar").classList).toContain("open");
-    //     expect(spy).toHaveBeenCalled();
-    //     expect(side).toBe(true)
-    // });
+    test("sidebar.open should exist", () => {
+        let closeBtn = document.querySelector("#btn");
+        console.log(closeBtn)
+        const spy = jest.spyOn(sidebar, "sidebar" );
+        // const side = setup.sidebar();
+        // const addEvt = new Event('click');
+        // document.dispatchEvent(addEvt);
+        sidebar.sidebar()
+        closeBtn.click()
+        expect(document.getElementById("sidebar").classList).toContain("open");
+        expect(sidebar.sidebar).toBeCalled();
+        // expect(side).toBe(true)
+    });
 
 
     // test('resize to test the navbar exists', () => {

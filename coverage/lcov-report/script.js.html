@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">14% </span>
+                <span class="strong">26.21% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>14/100</span>
+                <span class='fraction'>27/103</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">4.16% </span>
+                <span class="strong">12.5% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>1/24</span>
+                <span class='fraction'>3/24</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">8.33% </span>
+                <span class="strong">20.83% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>2/24</span>
+                <span class='fraction'>5/24</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">14.14% </span>
+                <span class="strong">26.47% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>14/99</span>
+                <span class='fraction'>27/102</span>
             </div>
         
             
@@ -336,7 +336,10 @@
 <a name='L271'></a><a href='#L271'>271</a>
 <a name='L272'></a><a href='#L272'>272</a>
 <a name='L273'></a><a href='#L273'>273</a>
-<a name='L274'></a><a href='#L274'>274</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L274'></a><a href='#L274'>274</a>
+<a name='L275'></a><a href='#L275'>275</a>
+<a name='L276'></a><a href='#L276'>276</a>
+<a name='L277'></a><a href='#L277'>277</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -354,13 +357,15 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -378,10 +383,11 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -626,15 +632,17 @@ signupForms = <span class="fstat-no" title="function not covered" >fu</span>ncti
 <span class="cstat-no" title="statement not covered" >  document.getElementById("signup-form2").submit();</span>
 }
 // Sidebar functions
-function <span class="fstat-no" title="function not covered" >sidebar(</span>) {
-  let sidebar = <span class="cstat-no" title="statement not covered" >document.querySelector(".sidebar");</span>
-  let closeBtn = <span class="cstat-no" title="statement not covered" >document.querySelector("#btn");</span>
+function sidebar() {
+  console.log('SIDEBAR CALLED BY JEST')
+  let sidebar = document.querySelector(".sidebar");
+  let closeBtn = document.querySelector("#btn");
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  closeBtn.addEventListener("click", function <span class="fstat-no" title="function not covered" >open(</span>) {</span>
-<span class="cstat-no" title="statement not covered" >    sidebar.classList.toggle("open");</span>
-<span class="cstat-no" title="statement not covered" >    if (sidebar.classList.contains('open')) {</span>
-<span class="cstat-no" title="statement not covered" >      return true;</span>
-    } else {
+  closeBtn.addEventListener("click", function open() {
+    console.log('JEST CLICKED SIDEBAR')
+    sidebar.classList.toggle("open");
+    if (sidebar.classList.contains('open')) {
+      return true;
+    } else <span class="missing-if-branch" title="else path not taken" >E</span>{
 <span class="cstat-no" title="statement not covered" >      return false</span>
     }
   });
@@ -650,15 +658,16 @@ function deleteModal() {
 &nbsp;
   if (delete_button.length !== 0) {
     delete_button.forEach((button) =&gt; {
-      button.addEventListener('click', <span class="fstat-no" title="function not covered" >fu</span>nction () {
-        const booking_id = <span class="cstat-no" title="statement not covered" >button.getAttribute('name')</span>
-        let calbut = <span class="cstat-no" title="statement not covered" >button.getAttribute('data-ref')</span>
-<span class="cstat-no" title="statement not covered" >        if (calbut === '0') {</span>
-<span class="cstat-no" title="statement not covered" >          modal_buttons.innerHTML = `</span>
+      button.addEventListener('click', function () {
+        console.log('JEST CLICKED!')
+        const booking_id = button.getAttribute('name')
+        let calbut = button.getAttribute('data-ref')
+        if (calbut === '0') {
+          modal_buttons.innerHTML = `
           &lt;button type="button" class="btn btn-secondary" data-ref="0" data-bs-dismiss="modal"&gt;Close&lt;/button&gt;
           &lt;a href="/delete/${booking_id}" class="btn btn-back"&gt;DELETE&lt;/a&gt;
           `
-        } else {
+        } else <span class="missing-if-branch" title="else path not taken" >E</span>{
 <span class="cstat-no" title="statement not covered" >          modal_buttons.innerHTML = `</span>
           &lt;button type="button" class="btn btn-secondary" data-ref="1" data-bs-dismiss="modal"&gt;Close&lt;/button&gt;
           &lt;a href="/delete_calendar_booking/${booking_id}" class="btn btn-back"&gt;DELETE&lt;/a&gt;
@@ -882,14 +891,14 @@ const start = (
   })
 )
 &nbsp;
-module.exports = { deleteModal };</pre></td></tr></table></pre>
+module.exports = { deleteModal, sidebar };</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener">istanbul</a>
-                at Tue Dec 21 2021 14:53:22 GMT+0000 (Coordinated Universal Time)
+                at Tue Dec 21 2021 16:03:14 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="prettify.js"></script>

@@ -16,10 +16,12 @@ signupForms = function () {
 }
 // Sidebar functions
 function sidebar() {
+  console.log('SIDEBAR CALLED BY JEST')
   let sidebar = document.querySelector(".sidebar");
   let closeBtn = document.querySelector("#btn");
 
   closeBtn.addEventListener("click", function open() {
+    console.log('JEST CLICKED SIDEBAR')
     sidebar.classList.toggle("open");
     if (sidebar.classList.contains('open')) {
       return true;
@@ -272,4 +274,4 @@ const start = (
   })
 )
 
-module.exports = { deleteModal };
+module.exports = { deleteModal, sidebar };
