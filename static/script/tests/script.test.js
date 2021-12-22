@@ -50,7 +50,6 @@ describe("Base.html tests", () => {
 // wanted these to show that the button opens the sidebar ---------------------
     test("sidebar.open should exist", () => {
         let closeBtn = document.querySelector("#btn");
-        console.log(closeBtn)
         const spy = jest.spyOn(sidebar, "sidebar" );
         // const side = setup.sidebar();
         // const addEvt = new Event('click');
@@ -59,24 +58,10 @@ describe("Base.html tests", () => {
         closeBtn.click()
         expect(document.getElementById("sidebar").classList).toContain("open");
         expect(sidebar.sidebar).toBeCalled();
-        // expect(side).toBe(true)
+        closeBtn.click()
+        sidebar.sidebar()
+        expect(sidebar.sidebar()).toBeFalsy();
     });
-
-
-    // test('resize to test the navbar exists', () => {
-    //     // render(<Component />);
-    //     const resizeWindow = (width, height) => {
-    //         window.innerWidth = width
-    //         window.innerHeight = height
-    //         window.dispatchEvent(new Event('resize'))
-    //       }
-    //     resizeWindow(1200, 1200)
-    
-    //     const element = document.getElementById('navbar');
-    //     const styles = getComputedStyle(element);
-    
-    //     expect(styles.display).toBe('block');
-    // })
 });
 
 // these all pass but dont test the js..----------------------
@@ -100,7 +85,7 @@ describe("Bookings tests", () => {
     })
 });
 
-describe("booking with bookings tests", ()=> {
+describe("delete with bookings tests", ()=> {
     beforeAll(() => {
         document.body.innerHTML= `
         <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -121,18 +106,18 @@ describe("booking with bookings tests", ()=> {
             </div>
         </div>
         <tr class="booking-row approved">
-        <td>08/12</td>
-        <td>MAINT</td>
-        <td>G-BSAI</td>
-        <td class="notes"></td>
-        <td>No</td>
-        <td><span><a aria-label="Edit" href="/edit/2"><i class="far fa-edit edit-icon green" aria-hidden="true"></i></a></span></td>
-        <td>
-            <span><a aria-label="Delete" name="2" class="delete_button" data-ref="0" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                <i class="far fa-times-circle cancel-icon red" aria-hidden="true"></i></a>
-            </span>
-        </td>
-    </tr>`
+            <td>08/12</td>
+            <td>MAINT</td>
+            <td>G-BSAI</td>
+            <td class="notes"></td>
+            <td>No</td>
+            <td><span><a aria-label="Edit" href="/edit/2"><i class="far fa-edit edit-icon green" aria-hidden="true"></i></a></span></td>
+            <td>
+                <span><a aria-label="Delete" name="2" class="delete_button" data-ref="0" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                    <i class="far fa-times-circle cancel-icon red" aria-hidden="true"></i></a>
+                </span>
+            </td>
+        </tr>`
         })
 
     test("delete booking if activated should pass", () => {
@@ -140,16 +125,69 @@ describe("booking with bookings tests", ()=> {
         const spy = jest.spyOn(deleteModal, 'deleteModal')
         deleteModal.deleteModal()
         const delete_button = document.querySelectorAll('.delete_button')
+        calbut = 0
         delete_button.forEach(button => {
             button.click()
         });
-        // expect(spy).toHaveBeenCalled();
-        expect(deleteModal.deleteModal).toBeCalled();
+        expect(spy).toHaveBeenCalled();
+        // expect(deleteModal.deleteModal).toBeCalled();
         let modals= document.querySelectorAll('#staticBackdrop')
         expect(modals.length).toEqual(1);
 
     })
-})
+});
+
+describe("calendar delete with bookings test", () => {
+    beforeAll(() => {
+        document.body.innerHTML= `
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title scots" id="staticBackdropLabel">Delete Booking</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="delete-modal-body d-flex justify-content-center mt-4 mb-4">
+                        <p><i class="fas fa-exclamation-triangle"></i> Are you sure you want to delete this booking? <i class="fas fa-exclamation-triangle"></i></p>
+                    </div>
+                    <div class="modal-footer" id="delete-modal-buttons">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <a aria-label="Delete" href="/delete_calendar_booking/{{ booking.id }}" class="btn btn-back delete-button">DELETE</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <tr class="booking-row approved">
+            <td>08/12</td>
+            <td>MAINT</td>
+            <td>G-BSAI</td>
+            <td class="notes"></td>
+            <td>No</td>
+            <td><span><a aria-label="Edit" href="/edit/2"><i class="far fa-edit edit-icon green" aria-hidden="true"></i></a></span></td>
+            <td>
+                <span><a aria-label="Delete" name="2" class="delete_button" data-ref="1" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                    <i class="far fa-times-circle cancel-icon red" aria-hidden="true"></i></a>
+                </span>
+            </td>
+        </tr>`
+        })
+
+    test("delete calendar booking if activated should pass", () => {
+    
+        const spy = jest.spyOn(deleteModal, 'deleteModal')
+        calbut = 1
+        deleteModal.deleteModal()
+        const delete_button = document.querySelectorAll('.delete_button')
+        delete_button.forEach(button => {
+            button.click()
+        });
+        expect(spy).toHaveBeenCalled();
+        // expect(deleteModal.deleteModal).toBeCalled();
+        let modals= document.querySelectorAll('#staticBackdrop')
+        expect(modals.length).toEqual(1);
+
+    })
+});
 
 // all pass but again dont really the js..-----------------------------
 describe("Contact tests", () => {

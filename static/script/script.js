@@ -16,16 +16,18 @@ signupForms = function () {
 }
 // Sidebar functions
 function sidebar() {
-  console.log('SIDEBAR CALLED BY JEST')
+  // console.log('SIDEBAR CALLED BY JEST')
   let sidebar = document.querySelector(".sidebar");
   let closeBtn = document.querySelector("#btn");
 
   closeBtn.addEventListener("click", function open() {
-    console.log('JEST CLICKED SIDEBAR')
+    // console.log('JEST CLICKED SIDEBAR')
     sidebar.classList.toggle("open");
     if (sidebar.classList.contains('open')) {
+      // console.log('true for JEST')
       return true;
     } else {
+      // console.log('false for JEST')
       return false
     }
   });
@@ -35,22 +37,24 @@ function sidebar() {
 // Calendar functions
 function deleteModal() {
   // Gets the delete modal working
-  console.log("DELETE MODEL IS BEING CALLED BY JEST")
+  // console.log("DELETE MODEL IS BEING CALLED BY JEST")
   const modal_buttons = document.getElementById('delete-modal-buttons')
   const delete_button = document.querySelectorAll('.delete_button')
 
   if (delete_button.length !== 0) {
     delete_button.forEach((button) => {
       button.addEventListener('click', function () {
-        console.log('JEST CLICKED!')
+        // console.log('JEST CLICKED!')
         const booking_id = button.getAttribute('name')
         let calbut = button.getAttribute('data-ref')
         if (calbut === '0') {
+          console.log('Jest likes no but')
           modal_buttons.innerHTML = `
           <button type="button" class="btn btn-secondary" data-ref="0" data-bs-dismiss="modal">Close</button>
           <a href="/delete/${booking_id}" class="btn btn-back">DELETE</a>
           `
         } else {
+          console.log('Jest likes calbut')
           modal_buttons.innerHTML = `
           <button type="button" class="btn btn-secondary" data-ref="1" data-bs-dismiss="modal">Close</button>
           <a href="/delete_calendar_booking/${booking_id}" class="btn btn-back">DELETE</a>
