@@ -103,7 +103,9 @@ The Flying Scotsmen project is made up of 4 main pages. [index](templates/bookin
 [Back to top](<#contents>)
 
 # Data Model
-## Class Based Views (CBV)
+   * The Flying Scotsmen has been created around the principle of MVC (Model, View and Controller). It comprises a database with relationships between the various models 
+    (represented by tables in the database). The models are, Custom User(using the default User model as a base), Group Member, Booking, Slot, Aircraft and Contact. The views then render the models in a way dictated by the Controllers, represented in this case by the respective URLs and other user interactions.
+    ![Data Model](media/readme-images/dataModel.png)
 
 
 
@@ -236,17 +238,16 @@ The Flying Scotsmen project is made up of 4 main pages. [index](templates/bookin
 * [Python](https://docs.python.org/3/contents.html) - primary language of the application.
 * [HTML5](https://html.spec.whatwg.org/) - provides the content and structure for the website.
 * [CSS](https://www.w3.org/Style/CSS/Overview.en.html) - provides the styling.
+* [Django](https://www.djangoproject.com/) - Django framework for the project.
+* [Bootstrap](https://getbootstrap.com/) - Design toolkit.
 * [GitHub](https://github.com/) - to host the repositories.
 * [Gitpod](https://www.gitpod.io/) - as the IDE for the application.
 * [Lucid Charts](https://www.lucidchart.com/) - to create the flow diagram.
 * [Balsamiq](https://balsamiq.com/wireframes/) - used to create the wireframes.
 * [Google Cloud](https://cloud.google.com/) - to create a project for the API.
 * [PEP8](http://pep8online.com/) - for testing and validating the code.
-* [W3C Validator]
-* [Google Maps]
-* [Django]
-* [Bootstrap]
-* [Animate CSS]
+* [W3C Validator](https://validator.w3.org/) - test and code validation.
+* [Animate CSS](https://animate.style/) - for animations.
 * [DrawSQL](https://drawsql.app/) - for the database diagram
 
 [Back to top](<#contents>)
@@ -294,27 +295,25 @@ The method from cloning a project from GitHub is below:
 # Credits
 ### Content
 
-<!-- * The font came from [Google Fonts](https://fonts.google.com/).
-* The map is embedded from [Google Maps](https://www.google.com/maps).
+* The font came from [Google Fonts](https://fonts.google.com/).
+* The Contact map is embedded from [Google Maps](https://www.google.com/maps).
 * The colour palate was compiled by [Colormind](http://colormind.io/).
 * The icons came from [Font Awesome](https://fontawesome.com/).
-* The form validation idea came from a [YouTube tutorial](https://www.youtube.com/watch?v=fNcJuPIZ2WE).
-* The code for the Safari specific styling was inspired by an example on [Stack Overflow](https://stackoverflow.com/).
-* The inspiration for the Project page sliders came from this repository on [GitHub](https://gist.github.com/zhilinskiy/4603199).
 * [Balsamiq](https://balsamiq.com/wireframes/) was used to create the wireframes.
 * [PhoneNumberField](https://github.com/stefanfoulis/django-phonenumber-field) was used to validate the Contact form Telephone field.
-https://www.iconfinder.com/ - for favicon
- -->
+* [IconFinder](https://www.iconfinder.com/) - for favicon.
 
 
 ### Media
+* [Unsplash](https://unsplash.com/) - Stock Cessna Photos
+* William MacLeod - Photos of G-BSAI.
 
 
 [Back to top](<#contents>)
 
 # Acknowledgements
-The site was completed as a Portfolio 4 Project piece for the Full Stack Software Developer (e-Commerce) Diploma at the [Code Institute](https://codeinstitute.net/). As such I would like to thank my mentor [Precious Ijege](https://www.linkedin.com/in/precious-ijege-908a00168/), the Slack community, and all at the Code Institute for their help and support. The FLying Scotsmen is a fictional group, hovever the site could be adapted with very little effort to reflect a fully functional Aircraft Management Group.
+The site was completed as a Portfolio 4 Project piece for the Full Stack Software Developer (e-Commerce) Diploma at the [Code Institute](https://codeinstitute.net/). As such I would like to thank my mentor [Precious Ijege](https://www.linkedin.com/in/precious-ijege-908a00168/), the Slack community, and all at the Code Institute for their help and support. The FLying Scotsmen is a fictional group, however the site could be adapted with very little effort to reflect a fully functional Aircraft Management Group.
 
-Ewan Colquhoun 2021.
+Ewan Colquhoun 2022.
 
 [Back to top](<#contents>)

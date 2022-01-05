@@ -242,7 +242,6 @@ let password = document.querySelectorAll('#id_password1')
 let date_input = document.querySelectorAll('#id_date')
 let map_div = document.querySelectorAll('#map')
 let calendar_page = document.querySelectorAll('#calendar-page')
-let message_container = document.querySelector('#message-container')
 
 function setup() {
   alerts()
@@ -265,10 +264,8 @@ function setup() {
   };
 };
 
-const start = (
-  window.addEventListener('load', () => {
+window.addEventListener('load', () => {
     setup()
   })
-)
 
 module.exports = { deleteModal, sidebar };
