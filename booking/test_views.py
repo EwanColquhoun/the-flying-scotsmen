@@ -134,7 +134,5 @@ class TestBookingView(TestCase):
         data = {'date': '2024-02-02', 'slot':'0', 'aircraft':'G-TEST', 'instructor_requested':'0'}
         res = self.client.post('/bookings/', data=self.booking,
                                 content_type="application/json")
-        print(res.headers)
         booking_list = Booking.objects.filter(date='2024-02-02')
-        print(booking_list.count())
         self.assertEqual(res.status_code, 200)
