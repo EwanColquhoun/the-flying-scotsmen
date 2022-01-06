@@ -185,7 +185,6 @@ describe("calendar delete with bookings test", () => {
     })
 });
 
-// all pass but again dont really the js..-----------------------------
 describe("Contact tests", () => {
     beforeAll(() => {
         let fs = require("fs");

@@ -248,7 +248,11 @@ The Flying Scotsmen project is made up of 4 main pages. [index](templates/bookin
 * [PEP8](http://pep8online.com/) - for testing and validating the code.
 * [W3C Validator](https://validator.w3.org/) - test and code validation.
 * [Animate CSS](https://animate.style/) - for animations.
-* [DrawSQL](https://drawsql.app/) - for the database diagram
+* [DrawSQL](https://drawsql.app/) - for the database diagram.
+* [IconFinder](https://www.iconfinder.com/) - for favicon.
+* [FlatPickr](https://flatpickr.js.org/) - Used as a date interface, provides advanced features at the front end.
+* [Jest](https://jestjs.io/) - Testing framework for JavaScript.
+
 
 [Back to top](<#contents>)
 
@@ -260,34 +264,60 @@ Please refer to [**_here_**](TESTING.md) for more information on testing.
 
 # Deployment
 
-### **To deploy the project**
-The site was deployed to GitHub pages. The steps to deploy a site are as follows:
-  1. In the GitHub repository, navigate to the **Settings** tab.
-  2. Once in Settings, navigate to the **Pages** tab on the left hand side.
-  3. Under **Source**, select the branch to **master**, then click **save**.
-  4. Once the master branch has been selected, the page will be automatically refreshed with a detailed ribbon display to indicate the successful deployment.
+### **To deploy using [Heroku](https://www.heroku.com/):**
 
-![GitHub pages deployed image](assets/readme-images/deploy.png)
+1. Ensure your requirements.txt file has the required dependencies. To do this you can use the following code in your IDE:
+    > pip3 freeze > requirements.txt
+    - Heroku will use this file to import the dependencies that are required.
+3. Create or Login to your Heroku account.
+4. Navigate to Dashboard. 
+5. Click "New" and select "create new app" from the drop-down menu. This is found in the upper right portion of the window. 
+6. Provide a unique name for your application and select your region.
+7. Click "Create App".
+![New app image](media/readme-images/new-app.png)
 
-  The live link to the Github repository can be found here - https://github.com/EwanColquhoun/the-flying-scotsmen
+### **To use the Heroku Postgres database:**
+
+1. Navigate to the "Resources" tab. Once there, in the search box type "Postgres". 
+2. You will then be able to attach this to the App you have just created.
+![Heroku Postgres image](media/readme-images/postgres.png)
+
+### Setting up the App within Heroku
+
+1. Navigate to "Settings" and scroll down to "config vars".
+2. There are a number of config vars for this project, API_KEY, CLOUDINARY_URL, DATABASE_URL, EMAIL_PASSWORD and a SECRET_KEY.
+3. The config vars are specific to the local project. They are usually unique and often provided by the respective API in use.
+![Heroku Buildpack](media/readme-images/buildpacks.png)
+![Config Vars](media/readme-images/config-vars.png)
+
+### App Deployment
+
+1. Navigate to the "Deploy" section.
+2. Scroll down to "Deployment Method" and select "GitHub".
+3. Authorise the connection of Heroku to GitHub.
+4. Search for your GitHub repository name, and select the correct repository.
+5. For Deployment there are two options, Automatic Deployments or Manual.
+    - Automatic Deployment: This will prompt Heroku to re-build your app each time you push your code to GitHub.
+    - Manual Deployment: This will only prompt Heroku to build your app when you manually tell it to do so. 
+6. Ensure the correct branch is selected "master/Main", and select the deployment method that you desire.
+![Heroku deployment](media/readme-images/deploy.png)
 
 ### **To fork the repository on GitHub**
-A copy of the GitHub Repository can be made by forking the GitHub account. This copy can be viewed and changes can be made to the copy without affecting the original repository. Take the following steps to fork the repository;
+A copy of the GitHub Repository can be made by forking the repository. This copy can be viewed and changes can be made to the copy without affecting the original repository. Take the following steps to fork the repository;
 1. Log in to **GitHub** and locate the [repository](https://github.com/EwanColquhoun/the-flying-scotsmen).
 2. On the right hand side of the page inline with the repository name is a button called **'Fork'**, click on the button to create a copy of the original repository in your GitHub Account.
-![GitHub forking process image](assets/readme-images/forking.png)
+![GitHub forking process image](media/readme-images/forking.png)
 
 ### **To create a local clone of this project**
-The method from cloning a project from GitHub is below:
+The method for cloning a project from GitHub is below:
 
 1. Under the repository’s name, click on the **code** tab.
 2. In the **Clone with HTTPS** section, click on the clipboard icon to copy the given URL.
-![Cloning image](assets/readme-images/clone.png)
+![Cloning image](media/readme-images/clone.png)
 3. In your IDE of choice, open **Git Bash**.
 4. Change the current working directory to the location where you want the cloned directory to be made.
 5. Type **git clone**, and then paste the URL copied from GitHub.
 6. Press **enter** and the local clone will be created.
-
 
 
 [Back to top](<#contents>)
@@ -299,9 +329,7 @@ The method from cloning a project from GitHub is below:
 * The Contact map is embedded from [Google Maps](https://www.google.com/maps).
 * The colour palate was compiled by [Colormind](http://colormind.io/).
 * The icons came from [Font Awesome](https://fontawesome.com/).
-* [Balsamiq](https://balsamiq.com/wireframes/) was used to create the wireframes.
 * [PhoneNumberField](https://github.com/stefanfoulis/django-phonenumber-field) was used to validate the Contact form Telephone field.
-* [IconFinder](https://www.iconfinder.com/) - for favicon.
 
 
 ### Media

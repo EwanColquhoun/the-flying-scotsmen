@@ -124,6 +124,7 @@ class Contact(models.Model):
         help_text='Email must include "@"')
     message = models.TextField(blank=False, null=False)
     replied = models.IntegerField(choices=REPLIED, default=False)
+    created = models.DateTimeField(auto_now=True)
 
     class Meta:
         ordering = ['name']

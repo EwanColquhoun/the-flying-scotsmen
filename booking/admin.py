@@ -62,9 +62,9 @@ class ContactAdmin(admin.ModelAdmin):
         }
 
     actions = ['replied']
-    list_filter = ('name', 'telephone', 'email', 'message', 'replied')
-    list_display = ('name', 'telephone', 'email', 'message', 'replied')
-    search_fields = ['name', 'telephone', 'email', 'message', 'replied']
+    list_filter = ('created', 'name', 'telephone', 'email', 'message', 'replied')
+    list_display = ('created', 'name', 'telephone', 'email', 'message', 'replied')
+    search_fields = ['created', 'name', 'telephone', 'email', 'message', 'replied']
 
     def replied(self, request, queryset):
         queryset.update(replied=True)
