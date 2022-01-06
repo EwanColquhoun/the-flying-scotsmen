@@ -178,7 +178,7 @@ body {
     display: flex;
     align-items: center;
     position: relative;
-    bottom: -15px;
+    bottom: 10px;
   }
 
 .sidebar .logout-details .user-name{

@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "description": "The Flying Scotsmen is a site for a fictional flying group based in Scotland. It provides a booking and contact platform for the members of the group.",
   "main": "index.js",
+  "type": "commonjs",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "type": "commonjs"
   },
   "repository": {
     "type": "git",

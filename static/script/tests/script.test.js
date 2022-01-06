@@ -2,8 +2,9 @@
  * @jest-environment jsdom
 */
 
-const start = require("/workspace/the-flying-scotsmen/static/script/script.js");
-const setup = require("/workspace/the-flying-scotsmen/static/script/script.js");
+
+// import { deleteModal, sidebar } from './modules/script.js';
+
 const deleteModal = require("/workspace/the-flying-scotsmen/static/script/script.js");
 const sidebar = require("/workspace/the-flying-scotsmen/static/script/script.js");
 
@@ -51,9 +52,6 @@ describe("Base.html tests", () => {
     test("sidebar.open should exist", () => {
         let closeBtn = document.querySelector("#btn");
         const spy = jest.spyOn(sidebar, "sidebar" );
-        // const side = setup.sidebar();
-        // const addEvt = new Event('click');
-        // document.dispatchEvent(addEvt);
         sidebar.sidebar()
         closeBtn.click()
         expect(document.getElementById("sidebar").classList).toContain("open");
@@ -130,7 +128,6 @@ describe("delete with bookings tests", ()=> {
             button.click()
         });
         expect(spy).toHaveBeenCalled();
-        // expect(deleteModal.deleteModal).toBeCalled();
         let modals= document.querySelectorAll('#staticBackdrop')
         expect(modals.length).toEqual(1);
 
@@ -182,7 +179,6 @@ describe("calendar delete with bookings test", () => {
             button.click()
         });
         expect(spy).toHaveBeenCalled();
-        // expect(deleteModal.deleteModal).toBeCalled();
         let modals= document.querySelectorAll('#staticBackdrop')
         expect(modals.length).toEqual(1);
 

@@ -9,11 +9,12 @@ function alerts() {
   }, 5000);
 }
 
-// signup forms
-signupForms = function () {
-  document.getElementById("signup-form").submit();
-  document.getElementById("signup-form2").submit();
-}
+// // signup forms
+// signupForms = function () {
+//   document.getElementById("signup-form").submit();
+//   document.getElementById("signup-form2").submit();
+// }
+
 // Sidebar functions
 function sidebar() {
   let sidebar = document.querySelector(".sidebar");
