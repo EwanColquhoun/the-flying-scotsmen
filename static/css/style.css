@@ -91,7 +91,7 @@ body {
 .sidebar li{
   position: relative;
   min-height: 20%;
-  height: 25%;
+  height: 24%;
   margin: 8px 0;
   list-style: none;
 }
@@ -206,7 +206,6 @@ body {
   height: 100%;
 }
 
-.sidebar .logout-details a:hover #log_out,
 .sidebar .logout-details a:hover #log_in,
 .sidebar .logout-details a:hover,
 .sidebar .logo_name a:hover {
