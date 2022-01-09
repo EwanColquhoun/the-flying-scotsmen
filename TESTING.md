@@ -19,28 +19,38 @@ The responsive design tests were carried out manually with [Google Chrome DevToo
 | Links  | pass    | pass      | pass     | pass | pass     | pass            | pass            |
 
 ## Browser Compatibility
-* The Flying Scotsmen application has been tested on Chrome, Edge, Safari and Firefox. During development the various webkits were used with the existing CSS to help prevent future compatability issues. The library 
+* The Flying Scotsmen application has been tested on Chrome, Edge, Safari and Firefox. During development the various webkits were used with the existing CSS to help prevent browser compatability issues. The Animate CSS library was used to help make the animations functional on all browsers. 
 
 ## Testing User Stories
 * As a USER I can MAKE A BOOKING so that I CAN USE THE GROUP AIRCRAFT TO FLY.
+    - Once you are registered and approved by the Admin. The User can then access the Booking page by the Navigation menus. On the Bookings page the Approved User can then make bookings. 
 
 * As a USER I can VIEW A CALENDAR OF BOOKINGS so that I CAN SEE AVAILABILITY OF AIRCRAFT.
+    - Once you are registered and approved by the Admin. The User can then access the Calendar page by the Navigation menus. On the Calendar page the Approved User can view all the bookings that have been both approved and awaiting approval.  
 
 * As a USER I can CANCEL A BOOKING so that I HAVE FLEXIBILITY WHEN BOOKING.
+    - On both the Booking page and the Calendatr page the user can click on a 'Delete booking' icon. They will then be prompted to check that they want to proceed with the cancellation. 
 
 * As a USER I can EDIT A BOOKING so that I CAN CHANGE MY BOOKING DETAILS.
+    - On both the Booking page and the Calendatr page the user can click on an 'edit booking' icon and be taken to the edit-booking page to amend their booking.
 
 * As a USER I can REGISTER WITH THE SITE so thank I CAN MAKE BOOKINGS.
+    - On the home page there is a link to a Register page. Here the user can submit a form making a case to join the group. That information is then passed to the Admin for approval.
 
 * As a USER I can SEE WHAT AIRCRAFT THE GROUP OPERATES so that I CAN DECIDE IF I REGISTER.
+    - On the home page there is some information about the group and the aircraft they operate. It gives the user a basic understanding of what the aircraft capabilities are.
 
-* As a USER I can LOGIN/LOGOUT so that I CAN VIEW, MAKE AND EDIT MY BOOKINGS.
+* As a USER I can LOGIN so that I CAN VIEW, MAKE AND EDIT MY BOOKINGS.
+    - From any page a Login page can be accessed by the bottom most button in the navigation menus. This will take the User to a login page, or if they are already logged in, if clicked, it will log the user out.
 
 * As an ADMIN I can VIEW BOOKINGS so that I CAN MAKE SURE THE AIRCRAFT ARE AVAILABLE.
+    - Once logged into the Admin page of the site the Admin can approve, view, amend, and cancel the bookings.
 
 * As an ADMIN I can EDIT BOOKINGS so that I CAN CONTACT THE USERS IS THE CONDITIONS CHANGE.
+    - Once logged into the Admin page of the site the Admin can approve, view, amend, and cancel the bookings.
 
 * As an ADMIN I can BOOK SLOTS so that THE AIRCRAFT HAVE PREPOPULATED SLOTS FOR MAINTAINANCE.
+    - In the Admin page the Admin has access to all the inner workings of the booking system. If the group gets more aircraft, the Admin can add these on with little effort. If more slots become available, again, the Admin can add more slots. If Admin needs to book an aircraft out for maintance or test flights this is also possible on both the Admin site and the main site once logged in as Admin.
 
 ## Known Bugs
 * ### Resolved

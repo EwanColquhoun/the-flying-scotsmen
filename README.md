@@ -184,6 +184,7 @@ The Flying Scotsmen project is made up of 4 main pages. [index](templates/bookin
 
 * #### Booking form
     * To make a new booking there is a form underneath the Booking display. It uses the logged-in users' username for the booking but the rest of the form is selectable. The booking information is then stored in the database pending admin approval. 
+    * The Booking for also will send an email to Admin confirming the details of the booking. 
 
     <details><summary>Screenshots</summary>
         #
@@ -196,6 +197,7 @@ The Flying Scotsmen project is made up of 4 main pages. [index](templates/bookin
 ### Contact
 
 * #### Contact Details
+    * There is a link to send The Flying Scotsmen Admin an email from the default email client.
 
     <details><summary>Screenshots</summary>
         #
@@ -211,6 +213,7 @@ The Flying Scotsmen project is made up of 4 main pages. [index](templates/bookin
 [Back to top](<#contents>)
 
 * #### Contact Form
+    * When a User submits a contact request the application does a number of things. It logs the contact to the database for a record and it also emails the Admin with the details of the contact. Initially all contacts are marked as 'unreplied' (not replied). This gives the Admin a quick reference to see the status of the contact.
 
     <details><summary>Screenshots</summary>
         #
@@ -229,8 +232,7 @@ The Flying Scotsmen project is made up of 4 main pages. [index](templates/bookin
 
 [Back to top](<#contents>)
 ## Future Features 
-
-
+ * The Flying Scotsmen site would benifit from an automated booking/payment system. Currently there is some manual input regarding the approval of the bookings. This is mainly to keep the Admin in the 'loop' of the booking system. If an automated payment method could be added once the User adds the final flight time, that might help remove some of the human interaction/error that is present.  
 
 [Back to top](<#contents>)
 
