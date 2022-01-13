@@ -84,14 +84,14 @@ body {
 
 .sidebar .nav-list{
   /* margin-top: 20px; */
-  height: 77%;
+  height: 75%;
   margin-bottom: 20px;
   padding: 0;
 }
 .sidebar li{
   position: relative;
-  min-height: 20%;
-  height: 24%;
+  min-height: 19%;
+  height: 19%;
   margin: 8px 0;
   list-style: none;
 }
@@ -178,7 +178,8 @@ body {
     display: flex;
     align-items: center;
     position: relative;
-    bottom: 10px;
+    bottom: 0px;
+    margin-top: 5px;
   }
 
 .sidebar .logout-details .user-name{

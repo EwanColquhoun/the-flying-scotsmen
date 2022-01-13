@@ -37,6 +37,9 @@
                     <li class="nav-item">
                         <a class="nav-link" aria-label="Home" href="{% url 'home' %}"><i class="fas fa-home"></i><span class="text"> Home</span></a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-label="Home" href="{% url 'home' %}"><i class="fas fa-user-cog"></i><span class="text"> Admin</span></a>
+                    </li>
                     {% if user.is_authenticated and user.registered.registered %}
                     <li class="nav-item">
                         <a class="nav-link" aria-label="Calendar" href="{% url 'calendar' %}"><i class="fas fa-calendar-alt"></i><span class="text"> Calendar</span></a>
@@ -90,6 +93,13 @@
                     <span class="links_name">Home</span>
                 </a>
                 <span class="tooltip">Home</span>
+            </li>
+            <li>
+                <a aria-label="Home" href="{% url 'admin:index' %}">
+                    <i class="fas fa-user-cog"></i>
+                    <span class="links_name">Admin</span>
+                </a>
+                <span class="tooltip">Admin</span>
             </li>
         {% if user.is_authenticated and user.registered.registered %}
             <li>
