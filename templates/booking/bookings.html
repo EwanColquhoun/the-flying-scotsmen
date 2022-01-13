@@ -15,18 +15,18 @@
         <div class="col-12">
             <h3 class="sub-heading">Bookings for <strong class="scots">{{ request.user.username }}:</strong></h3>
                 <div id="booking-content" class="d-grid gap-3 blue-border">
-                    <table aria-label="booking table" class="bookings">
+                    <table aria-label="booking table" id="booking-table" class="bookings">
                    
             {% if bookings %}
            
                         <tr class="table-headings">
-                            <td>Date</td>
-                            <td>Slot</td>
-                            <td>Aircraft</td>
-                            <td class="notes">Notes</td>  
-                            <td>Inst Rqd</td>  
-                            <td>Edit</td>
-                            <td>Delete</td>    
+                            <th>Date</th>
+                            <th>Slot</th>
+                            <th>Aircraft</th>
+                            <th class="notes">Notes</th>  
+                            <th>Inst Rqd</th>  
+                            <th>Edit</th>
+                            <th>Delete</th>    
                         </tr>
             {% endif %}
 

@@ -61,11 +61,12 @@ function deleteModal() {
 
 function today() {
   // Highlights today on the calendar
-  const dates = document.querySelectorAll('.date')
-  d = new Date();
-  month = d.getMonth() + 1
-  day_of_the_month = d.getDate()
-  now = `${month}_${day_of_the_month}`
+  const dates = document.querySelectorAll('.date');
+  let d = new Date();
+  console.log(d)
+  let month = d.getMonth() + 1
+  let day_of_the_month = d.getDate()
+  let now = `${month}_${day_of_the_month}`
   getToday()
 
   function getToday() {
@@ -111,6 +112,7 @@ function calendarBookingModal() {
 
 function calendar() {
   deleteModal()
+  console.log('func cal')
   today()
   calendarBookingModal()
 }
@@ -251,6 +253,7 @@ function setup() {
     passwordMatch();
     return 'password'
   } else if (calendar_page.length >= 1) {
+    console.log('calendar')
     calendar()
     return 'calendar'
   } else if (date_input.length && map_div.length >= 1) {

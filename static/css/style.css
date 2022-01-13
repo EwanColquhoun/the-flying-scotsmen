@@ -83,22 +83,25 @@ body {
 }
 
 .sidebar .nav-list{
-  /* margin-top: 20px; */
+  display: flex;
   height: 75%;
   margin-bottom: 20px;
   padding: 0;
+  flex-direction: column;
+  justify-content: space-evenly;
 }
+
 .sidebar li{
   position: relative;
-  min-height: 19%;
-  height: 19%;
+  min-height: 17%;
+  /* height: 24%; */
   margin: 8px 0;
   list-style: none;
 }
 
-.sidebar .register-li {
+/* .sidebar .register-li {
   margin: 4rem 0;
-}
+} */
 
 .sidebar li .tooltip{
   position: absolute;
@@ -551,6 +554,7 @@ input[type=checkbox] {
 
 .awaiting {
   background-color: rgba(255, 73, 73, 0.1);
+  color: rgba(0, 0, 0, 0.5 );
 }
 
 .purple-trans {
@@ -567,8 +571,17 @@ input[type=checkbox] {
 
 #booking-content {
   height: fit-content;
+  max-height: 300px;
   overflow-y: scroll;
-  padding: 10px 5px;
+  padding-bottom: 10px;
+}
+
+#booking-table th {
+  position: sticky;
+  top: 0; /* Don't forget this, required for the stickiness */
+  background-color: #0065bd;
+  color: #E4E9F7;
+  padding-left: 5px;
 }
 
 /* booking form */
