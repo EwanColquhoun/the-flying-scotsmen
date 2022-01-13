@@ -35,6 +35,7 @@ function sidebar() {
 // Calendar functions
 function deleteModal() {
   // Gets the delete modal working
+  let delMod = true;
   const modal_buttons = document.getElementById('delete-modal-buttons')
   const delete_button = document.querySelectorAll('.delete_button')
 
@@ -61,9 +62,9 @@ function deleteModal() {
 
 function today() {
   // Highlights today on the calendar
+  let present = true;
   const dates = document.querySelectorAll('.date');
   let d = new Date();
-  console.log(d)
   let month = d.getMonth() + 1
   let day_of_the_month = d.getDate()
   let now = `${month}_${day_of_the_month}`
@@ -81,6 +82,7 @@ function today() {
 
 function calendarBookingModal() {
   // Activates the calendar booking modal
+  let calBookMod = true;
   const dates = document.querySelectorAll('.date')
 
   const modal = document.getElementById('myModal')
@@ -111,8 +113,10 @@ function calendarBookingModal() {
 }
 
 function calendar() {
+  const delMod = false;
+  const present = false;
+  const calBookMod = false; 
   deleteModal()
-  console.log('func cal')
   today()
   calendarBookingModal()
 }
@@ -253,7 +257,6 @@ function setup() {
     passwordMatch();
     return 'password'
   } else if (calendar_page.length >= 1) {
-    console.log('calendar')
     calendar()
     return 'calendar'
   } else if (date_input.length && map_div.length >= 1) {
@@ -272,4 +275,4 @@ window.addEventListener('load', () => {
     setup()
   })
 
-module.exports = { deleteModal, sidebar };
+module.exports = { deleteModal, sidebar, today, passwordMatch, calendar };

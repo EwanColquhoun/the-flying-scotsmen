@@ -7,27 +7,37 @@
 
 const deleteModal = require("/workspace/the-flying-scotsmen/static/script/script.js");
 const sidebar = require("/workspace/the-flying-scotsmen/static/script/script.js");
+const today = require("/workspace/the-flying-scotsmen/static/script/script.js");
+const passwordMatch = require("/workspace/the-flying-scotsmen/static/script/script.js");
+const calendar = require("/workspace/the-flying-scotsmen/static/script/script.js");
 
 // wanted this to show that when the passwords matched either true or false is returned from the function----------------------------------
 
-// describe("Password match test", () => {
-//     beforeAll(() => {
-//         document.body.innerHTML = `<input type="password" name="password1" placeholder="Password" autocomplete="new-password" required="" id="id_password1">
-//         <input type="password" name="password2" placeholder="Password Again" autocomplete="new-password" required="" id="id_password2">`
-//     })
+describe("Password match test", () => {
+    beforeAll(() => {
+        let fs = require("fs");
+        let fileContents = fs.readFileSync("templates/booking/base.html", "utf-8");
+        document.open();
+        document.write(fileContents);
+        document.close();
+        document.body.innerHTML += `
+        <input type="password" name="password1" placeholder="Password" autocomplete="new-password" required id="id_password1">
+        <input type="password" name="password2" placeholder="Password Again" autocomplete="new-password" required id="id_password2">`
+    })
 
-//     test("Check passwords match", () => {
-//         // let password1 = document.getElementById('id_password1')
-//         // let password2 = document.getElementById('id_password2')
-//         // password1.value = 'testpassword'
-//         // password2.value = 'testpassword'
-//         // const spy = jest.spyOn(start, 'passwordMatch')
-//         // const match = start.passwordMatch();
-       
-//         // expect(spy).toHaveBeenCalled();
-//         // expect(match).toBe(true)
-//     })
-// })
+    test("Check passwords match", () => {
+        let password1 = document.getElementById('id_password1')
+        let password2 = document.getElementById('id_password2')
+        password1.value = 'testpassword'
+        password2.value = 'testpassword'
+        const spy = jest.spyOn(passwordMatch, 'passwordMatch')
+        passwordMatch.passwordMatch();
+        expect(spy).toHaveBeenCalled();
+        let matched = password1.classList.contains('matched')
+        console.log(matched)
+        expect(matched).toBe(true)
+    })
+})
 
 
 describe("Base.html tests", () => {
@@ -184,6 +194,81 @@ describe("calendar delete with bookings test", () => {
 
     })
 });
+
+describe("calendar tests", () => {
+    beforeAll(() => {
+        document.body.innerHTML = `
+        <table border="0" cellpadding="0" cellspacing="0" class="calendar">
+            <tbody><tr><th colspan="7" class="month">January 2022</th></tr>
+                <tr><th class="mon">Mon</th><th class="tue">Tue</th><th class="wed">Wed</th><th class="thu">Thu</th><th class="fri">Fri</th><th class="sat">Sat</th><th class="sun">Sun</th></tr>
+                <tr><td class="day-null day"></td><td class="day-null day"></td>
+                    <td class="day-null day"></td><td class="day-null day"></td>
+                    <td class="day-null day"></td><td class="day-medium"><a class="btn date" data-bs-toggle="modal" data-bs-target="#myModal" name="1_1">1</a>
+                        <ul class="booking_list"> <li class="event"> <span class="btn-events aircraft-purple calendar-events" data-ref="1" name="1_1">MAINT | admin2021 | <i class="fas fa-check" aria-hidden="true"></i></span> </li> </ul></td>
+                    <td class="day-free"><a class="btn date" data-bs-toggle="modal" data-bs-target="#myModal" name="1_2">2</a>
+                        <ul class="booking_list">  </ul></td> 
+                </tr>
+                <tr><td class="day-free"><a class="btn date" data-bs-toggle="modal" data-bs-target="#myModal" name="1_3">3</a>
+                    <ul class="booking_list">  </ul></td>
+                    <td class="day-free"><a class="btn date" data-bs-toggle="modal" data-bs-target="#myModal" name="1_4">4</a>
+                        <ul class="booking_list">  </ul></td>
+                    <td class="day-free"><a class="btn date" data-bs-toggle="modal" data-bs-target="#myModal" name="1_5">5</a>
+                        <ul class="booking_list">  </ul></td>
+                    <td class="day-medium"><a class="btn date" data-bs-toggle="modal" data-bs-target="#myModal" name="1_6">6</a>
+                        <ul class="booking_list"> <li class="event"> <span class="btn-events calendar-events purple-trans" data-ref="0" name="1_6">1100-1300 | admin2021 | <i class="fas fa-user-cog" aria-hidden="true"></i></span> </li> </ul></td>
+                    <td class="day-free"><a class="btn date" data-bs-toggle="modal" data-bs-target="#myModal" name="1_7">7</a>
+                        <ul class="booking_list">  </ul></td>
+                    <td class="day-free"><a class="btn date" data-bs-toggle="modal" data-bs-target="#myModal" name="1_8">8</a>
+                        <ul class="booking_list">  </ul></td>
+                    <td class="day-free"><a class="btn date" data-bs-toggle="modal" data-bs-target="#myModal" name="1_9">9</a>
+                        <ul class="booking_list">  </ul></td>
+                </tr>
+                <tr><td class="day-free"><a class="btn date" data-bs-toggle="modal" data-bs-target="#myModal" name="1_10">10</a>
+                        <ul class="booking_list">  </ul></td>
+                    <td class="day-free"><a class="btn date" data-bs-toggle="modal" data-bs-target="#myModal" name="1_11">11</a>
+                        <ul class="booking_list">  </ul></td>
+                    <td class="day-medium"><a class="btn date" data-bs-toggle="modal" data-bs-target="#myModal" name="1_12">12</a>
+                        <ul class="booking_list"> <li class="event"> <span class="btn-events calendar-events purple-trans" data-ref="0" name="1_12">0900-1100 | admin2021 | <i class="fas fa-user-cog" aria-hidden="true"></i></span> </li><li class="event"> <span class="btn-events calendar-events purple-trans" data-ref="0" name="1_12">1500-1700 | admin2021 | <i class="fas fa-user-cog" aria-hidden="true"></i></span> </li> </ul></td>
+                    <td class="day-free"><a class="btn date" data-bs-toggle="modal" data-bs-target="#myModal" name="1_13" id="today">13</a>
+                        <ul class="booking_list">  </ul></td>
+                    <td class="day-free"><a class="btn date" data-bs-toggle="modal" data-bs-target="#myModal" name="1_14">14</a>
+                        <ul class="booking_list">  </ul></td>
+                    <td class="day-free"><a class="btn date" data-bs-toggle="modal" data-bs-target="#myModal" name="1_15">15</a>
+                        <ul class="booking_list">  </ul></td>
+                    <td class="day-free"><a class="btn date" data-bs-toggle="modal" data-bs-target="#myModal" name="1_16">16</a>
+                        <ul class="booking_list">  </ul></td> 
+                </tr>
+            </tbody>
+        </table>`
+    });
+
+    // Trying to get the variables to e changed when the function is called. maybe not needed!
+    test("calendarfunctions should be called", () => {
+        const spy = jest.spyOn(calendar, 'calendar');
+        let delMod = false;
+        let present = false;
+        let calBookMod = false; 
+        calendar.calendar()
+        expect(spy).toHaveBeenCalled();
+        expect(calendar.today).toHaveBeenCalled();
+        // expect(present).toBe(true);
+        // expect(calBookMod).toBe(true);
+    });
+
+    test("calendar should highlight today", () => {
+        const spy = jest.spyOn(today, 'today')
+        let d = 'Thu Jan 13 2022 11:42:12 GMT+0000 (Greenwich Mean Time)'
+        const dates = document.querySelectorAll('.date');
+        const present = document.querySelectorAll('#today')
+        today.today()
+        // const delete_button = document.querySelectorAll('.delete_button')
+        expect(spy).toHaveBeenCalled();
+        expect(present.length).toEqual(1);
+        // let modals= document.querySelectorAll('#staticBackdrop')
+        // expect(modals.length).toEqual(1);
+    });
+})
+
 
 describe("Contact tests", () => {
     beforeAll(() => {
