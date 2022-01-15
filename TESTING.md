@@ -7,7 +7,6 @@ The Flying Scotsmen has be throughly tested. All the code has been run through t
 The code passed the W3C Validator barring all the django template tags. Outside of those, no errors were found.
 The CSS passed the W3C Validator passed once an error with the 'transition-timing-function' propery was corrected (from '1000ms' to 'ease-in').
 
-
 ## Responsiveness Test
 
 The responsive design tests were carried out manually with [Google Chrome DevTools](https://developer.chrome.com/docs/devtools/) and [Responsive Design Checker](https://www.responsivedesignchecker.com/).
@@ -61,7 +60,6 @@ The responsive design tests were carried out manually with [Google Chrome DevToo
 * ### Unresolved
     At the time of writing there is still one known unresolved bug within the script.js file. I had to export two functions into the test_script file. I used 'module.exports' but once the browser loads the script it has an error that 'module' is unrecognised. The fix for this was just to use 'exports', this clears the error but doesn't actually export the functions into the test file and the tests fail. 
 
-
 ## Additional Testing
 ### Lighthouse
 The site was also tested using [Google Lighthouse](https://developers.google.com/web/tools/lighthouse) in Chrome Developer Tools to test each of the pages for:
@@ -71,7 +69,11 @@ The site was also tested using [Google Lighthouse](https://developers.google.com
 * SEO - Search engine optimisation. Is the site optimised for search engine result rankings.
 
 Here are the results from The Flying Scotsmen test. 
-![Lighthouse test results](assets/readme-images/testing.png)
+<!-- ![Lighthouse test results](assets/readme-images/testing.png) -->
+   <details><summary>Lighthouse Testing</summary>
+        #
+    </details>
+
 
 This part of the testing process showed up that the site was slow to load. All the images were compressed and the 'prefectch' function was added to the link elements in the head of the INDEX.page. This sped up the loading time and increased the performance rating.
 

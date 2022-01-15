@@ -18,21 +18,22 @@ The live site can be viewed [here!](https://the-flying-scotsmen.herokuapp.com/)
 * [**Data Model**](<#data-model>)
     * [Class Based Views](<#class-based-views>)
 * [**Features**](<#features>)
-    * [**Home**](<#home-page>)
-         * [Navigation bar](<#navigation-bar>)
-         * [Gallery Carousel](<#gallery-carousel>)
-         * [About-us](<#about-us>)
-         * [Footer](<#footer>)
-    * [**Calendar**](<#calendar>)
-        *
-    * [**Bookings**](<#bookings>)
-        *
-    * [**Contact**](<#contact>)
-       * Contact details
-       * Location map
-       * Contact Form form
-       * Testimonials
-    * [**Form Confirmation**](<#form-confirmation>)
+    * [**Existing Features**](<#existing-features>)
+        * [**Home**](<#home-page>)
+            * [Navigation bar](<#navigation-bar>)
+            * [Gallery Carousel](<#gallery-carousel>)
+            * [About-us](<#about-us>)
+            * [Footer](<#footer>)
+        * [**Calendar**](<#calendar>)
+            *
+        * [**Bookings**](<#bookings>)
+            *
+        * [**Contact**](<#contact>)
+            * Contact details
+            * Location map
+            * Contact Form form
+            * Testimonials
+        * [**Admin**](<#admin>)
     * [**Future Features**](<#future-features>)
 * [**Technologies Used**](<#technologies-used>)
 * [**Testing**](<#testing>)
@@ -106,8 +107,6 @@ The Flying Scotsmen project is made up of 4 main pages. [index](templates/bookin
    * The Flying Scotsmen has been created around the principle of MVC (Model, View and Controller). It comprises a database with relationships between the various models 
     (represented by tables in the database). The models are, Custom User(using the default User model as a base), Group Member, Booking, Slot, Aircraft and Contact. The views then render the models in a way dictated by the Controllers, represented in this case by the respective URLs and other user interactions.
     ![Data Model](media/readme-images/dataModel.png)
-
-
 
 
 [Back to top](<#contents>)
@@ -184,7 +183,7 @@ The Flying Scotsmen project is made up of 4 main pages. [index](templates/bookin
 
 * #### Booking form
     * To make a new booking there is a form underneath the Booking display. It uses the logged-in users' username for the booking but the rest of the form is selectable. The booking information is then stored in the database pending admin approval. 
-    * The Booking for also will send an email to Admin confirming the details of the booking. 
+    * The Booking form will also send an email to Admin confirming the details of the booking. 
 
     <details><summary>Screenshots</summary>
         #
@@ -192,7 +191,6 @@ The Flying Scotsmen project is made up of 4 main pages. [index](templates/bookin
 
 
 [Back to top](<#contents>)
-
 
 ### Contact
 
@@ -230,9 +228,14 @@ The Flying Scotsmen project is made up of 4 main pages. [index](templates/bookin
         #
     </details>
 
+### Admin
+ * Admin has access via the default Django Admin page. The Admin login can be accessed from the navigation menus. Once logged in, Admin users have all the access to amend, cancel, make and approve bookings. They can change slots, edit the aircraft details. All the contact requests can be viewed from the admin page. 
+
+
 [Back to top](<#contents>)
 ## Future Features 
  * The Flying Scotsmen site would benifit from an automated booking/payment system. Currently there is some manual input regarding the approval of the bookings. This is mainly to keep the Admin in the 'loop' of the booking system. If an automated payment method could be added once the User adds the final flight time, that might help remove some of the human interaction/error that is present.  
+ * In conjunction with the above point a tailor made Admin page would be the next feature to implement.
 
 [Back to top](<#contents>)
 
@@ -328,6 +331,7 @@ The method for cloning a project from GitHub is below:
 ### Content
 
 * The font came from [Google Fonts](https://fonts.google.com/).
+* [Stack Overflow](https://stackoverflow.com/) for general hints and tips.
 * The Contact map is embedded from [Google Maps](https://www.google.com/maps).
 * The colour palate was compiled by [Colormind](http://colormind.io/).
 * The icons came from [Font Awesome](https://fontawesome.com/).
