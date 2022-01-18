@@ -1,6 +1,4 @@
-from django.test import TestCase, RequestFactory
-from .views import CustomSignUpView
-from .forms import CustomSignUpForm
+from django.test import TestCase
 
 
 class TestViews(TestCase):
@@ -14,14 +12,3 @@ class TestViews(TestCase):
         response = self.client.get('/accounts/signup/')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed('/account/signup.html')
-
-# class TestCustomSignUpView(TestCase):
-
-#     def test_form_valid(self):
-#         data = {'username': 'joeybloggs', 'first_name':'joe', 'last_name':'bloggs', 'email':'jb@tfs.com', 'password1':'secret11', 'password2':'secret11', 'message':'test'}
-#         form = CustomSignUpForm(data)
-#         request = RequestFactory().post('/accounts/signup/', data=data)
-#         view = CustomSignUpView()
-#         view.setup(request)
-#         view.form_valid(form)(request)
-#    

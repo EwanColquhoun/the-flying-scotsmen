@@ -59,7 +59,7 @@ class Calendar(HTMLCalendar):
             date__year=self.year,
             date__month=self.month)
         cal_inner = ('<table border="0" cellpadding="0"'
-                    ' cellspacing="0" class="calendar">')
+                     ' cellspacing="0" class="calendar">')
         cal = f'{cal_inner}\n'
         cal += f'{self.formatmonthname(self.year, self.month, withyear=withyear)}\n'
         cal += f'{self.formatweekheader()}\n'

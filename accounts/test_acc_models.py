@@ -6,7 +6,10 @@ from .models import Group_Member, CustomUser
 class TestAccModels(TestCase):
 
     def setUp(self):
-        self.user = CustomUser.objects.create(username='testUser', email='test@email.com', password='', message='Test message')
+        self.user = CustomUser.objects.create(username='testUser',
+                                              email='test@email.com',
+                                              password='',
+                                              message='Test message')
         self.user.set_password('secret')
         self.user.save()
         self.client = Client()

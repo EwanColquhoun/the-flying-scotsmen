@@ -262,7 +262,6 @@ function setup() {
   } else if (date_input.length && map_div.length >= 1) {
     flatpickrInit();
     deleteModal()
-    initMap()
     googleMapApi()
     return 'contact'
   } else if (date_input.length >= 1) {

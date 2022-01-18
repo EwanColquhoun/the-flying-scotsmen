@@ -27,12 +27,15 @@ class CustomSignUpForm(UserCreationForm, SignupForm):
         widgets = {
             'message': forms.Textarea(attrs={'rows': 4,
                                              'cols': 33,
-                                             'placeholder': 'Why do you want to join The Flying Scotsmen...'}),
+                                             'placeholder': 'Why do you want \
+                                                 to join The Flying Scotsmen?'
+                                             }),
         }
 
     username = forms.CharField(max_length=30,
                                required=True,
-                               help_text='Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.')
+                               help_text='Required. 150 characters or fewer. \
+                                    Letters, digits and @/./+/-/_ only.')
     first_name = forms.CharField(max_length=30,
                                  required=True,
                                  help_text='Required')

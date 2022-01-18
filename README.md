@@ -25,9 +25,7 @@ The live site can be viewed [here!](https://the-flying-scotsmen.herokuapp.com/)
             * [About-us](<#about-us>)
             * [Footer](<#footer>)
         * [**Calendar**](<#calendar>)
-            *
         * [**Bookings**](<#bookings>)
-            *
         * [**Contact**](<#contact>)
             * Contact details
             * Location map
@@ -106,7 +104,8 @@ The Flying Scotsmen project is made up of 4 main pages. [index](templates/bookin
 # Data Model
    * The Flying Scotsmen has been created around the principle of MVC (Model, View and Controller). It comprises a database with relationships between the various models 
     (represented by tables in the database). The models are, Custom User(using the default User model as a base), Group Member, Booking, Slot, Aircraft and Contact. The views then render the models in a way dictated by the Controllers, represented in this case by the respective URLs and other user interactions.
-    ![Data Model](media/readme-images/dataModel.png)
+
+![Data Model](media/readme-images/dataModel.png)
 
 
 [Back to top](<#contents>)
@@ -114,7 +113,7 @@ The Flying Scotsmen project is made up of 4 main pages. [index](templates/bookin
 
 ## Existing Features
 
-### Home
+### Home Page
 
   * #### Navigation Bar
 
@@ -135,7 +134,8 @@ The Flying Scotsmen project is made up of 4 main pages. [index](templates/bookin
     * Located on the home page beneath the title section. It was intended to make the title section relatively plain to enable a focus on the images in the gallery.
     * A responsively styled carousel of images of group photos of the aircraft and the various adventures the group has had.
     <details><summary>Screenshots</summary>
-    #
+
+    ![Carousel](media/readme-images/carousel.png)
     </details>
 
 [Back to top](<#contents>)
@@ -145,7 +145,8 @@ The Flying Scotsmen project is made up of 4 main pages. [index](templates/bookin
     * An inbedded link to the Register page will help the user navigate quickly to the next step of the project process. If the user is already registered, the link will navigate to the Contact page.
 
     <details><summary>Screenshots</summary>
-    #
+
+    ![About Us](media/readme-images/about-us.png)
     </details>
 
 [Back to top](<#contents>)
@@ -164,72 +165,62 @@ The Flying Scotsmen project is made up of 4 main pages. [index](templates/bookin
     * When a date is clicked, a modal will appear at the top of the page displaying the bookings for that date. If there are no bookings, the modal will display accordingly. Each booking will display alongside an edit and a cancel booking button (only available if these bookings belong to the logged in user).
 
     <details><summary>Screenshots</summary>
-    #
+
+    ![Calendar-Large](media/readme-images/cal-large.png)
+    ![Calendar-Small](media/readme-images/cal-small.png)
     </details>
 
 
 [Back to top](<#contents>)
 
-### Bookings
+### Bookings Page
 
 * #### Booking Display
     * At the top of the booking page is the list of bookings for the current logged in user.
     * The display has all the information pertinant to that booking as well as the edit and cancel buttons.
     * If there are no buttons there is some text explaining that the bookings will appear once approved by admin.
 
-    <details><summary>Screenshots</summary>
-        #
-    </details>
-
 * #### Booking form
     * To make a new booking there is a form underneath the Booking display. It uses the logged-in users' username for the booking but the rest of the form is selectable. The booking information is then stored in the database pending admin approval. 
     * The Booking form will also send an email to Admin confirming the details of the booking. 
 
     <details><summary>Screenshots</summary>
-        #
+
+    ![Bookings](media/readme-images/bookings.png)
     </details>
 
 
 [Back to top](<#contents>)
 
-### Contact
+### Contact Page
 
 * #### Contact Details
     * There is a link to send The Flying Scotsmen Admin an email from the default email client.
 
-    <details><summary>Screenshots</summary>
-        #
-    </details>
-
-[Back to top](<#contents>)
-* #### Location Map
-
-    <details><summary>Screenshots</summary>
-        #
-    </details>
-
-[Back to top](<#contents>)
-
 * #### Contact Form
     * When a User submits a contact request the application does a number of things. It logs the contact to the database for a record and it also emails the Admin with the details of the contact. Initially all contacts are marked as 'unreplied' (not replied). This gives the Admin a quick reference to see the status of the contact.
-
-    <details><summary>Screenshots</summary>
-        #
-    </details>
-
-[Back to top](<#contents>)
 
 * #### Testimonials
 
     * The testimonials section provides the user with some feedback from current group members. There are three testimonials displayed giving a name, flying experience and some text.
     * The testimonals will be updated as more recent testimonials become available.
 
+* #### Location Map
+    * This is a simple map of the location of where The Flying Scotsmen are based.
+
     <details><summary>Screenshots</summary>
-        #
+
+    ![Contact](media/readme-images/contact-deployed.png)
     </details>
 
-### Admin
+[Back to top](<#contents>)
+
+### Admin Page
  * Admin has access via the default Django Admin page. The Admin login can be accessed from the navigation menus. Once logged in, Admin users have all the access to amend, cancel, make and approve bookings. They can change slots, edit the aircraft details. All the contact requests can be viewed from the admin page. 
+    <details><summary>Screenshots</summary>
+
+    ![Admin](media/readme-images/admin.png)
+    </details>
 
 
 [Back to top](<#contents>)
@@ -257,7 +248,6 @@ The Flying Scotsmen project is made up of 4 main pages. [index](templates/bookin
 * [IconFinder](https://www.iconfinder.com/) - for favicon.
 * [FlatPickr](https://flatpickr.js.org/) - Used as a date interface, provides advanced features at the front end.
 * [Jest](https://jestjs.io/) - Testing framework for JavaScript.
-
 
 [Back to top](<#contents>)
 

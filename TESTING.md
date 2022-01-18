@@ -7,6 +7,14 @@ The Flying Scotsmen has be throughly tested. All the code has been run through t
 The code passed the W3C Validator barring all the django template tags. Outside of those, no errors were found.
 The CSS passed the W3C Validator passed once an error with the 'transition-timing-function' propery was corrected (from '1000ms' to 'ease-in').
 
+![W3C Validation](media/readme-images/w3c.png)
+
+CSS Validation
+![W3C CSS Validation](media/readme-images/w3c-css.png)
+
+Pep8 Validation for booking/views.py but same result for all custom .py files.
+![PEP8 Validation](media/readme-images/pep8.png)
+
 ## Responsiveness Test
 
 The responsive design tests were carried out manually with [Google Chrome DevTools](https://developer.chrome.com/docs/devtools/) and [Responsive Design Checker](https://www.responsivedesignchecker.com/).

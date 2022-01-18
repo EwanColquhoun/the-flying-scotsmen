@@ -1,5 +1,4 @@
 from django.urls import path, re_path
-# from django.views.generic import RedirectView
 from allauth.account.views import LoginView
 
 from .views import AwaitingRegDisplay, CustomSignUpView

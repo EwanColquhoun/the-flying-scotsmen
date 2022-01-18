@@ -22,6 +22,7 @@ class Slot(models.Model):
     start = models.TimeField(auto_now=False, auto_now_add=False)
     duration = models.TimeField(auto_now=False, auto_now_add=False)
     admin = models.BooleanField(default=False)
+    objects = models.Manager()
 
     def __str__(self):
         return str(self.slot)
@@ -34,6 +35,7 @@ class Aircraft(models.Model):
     reg = models.CharField(max_length=6, null=False, blank=False)
     desc = models.CharField(max_length=25, null=False, blank=False)
     aircraft_image = CloudinaryField('image', default='placeholder')
+    objects = models.Manager()
 
     def __str__(self):
         return str(self.reg)
@@ -64,6 +66,8 @@ class Booking(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
     update_on = models.DateTimeField(auto_now_add=True)
     approved = models.IntegerField(choices=APPROVED, default=False)
+
+    objects = models.Manager()
 
     class Meta:
         ordering = ['date', 'slot']

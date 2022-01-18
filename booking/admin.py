@@ -38,16 +38,20 @@ class BookingAdmin(admin.ModelAdmin):
     class Meta:
         model = Booking
         widgets = {
-          'notes': forms.Textarea(attrs={'rows': 5, 'cols': 33, }),      
+          'notes': forms.Textarea(attrs={'rows': 5, 'cols': 33, }),
         }
 
-    list_filter = ('date', 'aircraft', 'username', 'instructor_requested', 'approved')
-    list_display = ('date', 'slot', 'aircraft', 'username', 'instructor_requested', 'created_on', 'notes', 'approved')
+    list_filter = ('date', 'aircraft', 'username', 'instructor_requested',
+                   'approved')
+    list_display = ('date', 'slot', 'aircraft', 'username',
+                    'instructor_requested', 'created_on',
+                    'notes', 'approved')
     search_fields = ['date', 'aircraft', 'username', 'instructor_requested']
     actions = ['approve_bookings']
 
-    def approve_bookings(self, request, queryset):
+    def approve_bookings(self, queryset):
         queryset.update(approved=True)
+
 
 @admin.register(Contact)
 class ContactAdmin(admin.ModelAdmin):
@@ -62,9 +66,12 @@ class ContactAdmin(admin.ModelAdmin):
         }
 
     actions = ['replied']
-    list_filter = ('created', 'name', 'telephone', 'email', 'message', 'replied')
-    list_display = ('created', 'name', 'telephone', 'email', 'message', 'replied')
-    search_fields = ['created', 'name', 'telephone', 'email', 'message', 'replied']
+    list_filter = ('created', 'name', 'telephone', 'email',
+                   'message', 'replied')
+    list_display = ('created', 'name', 'telephone', 'email',
+                    'message', 'replied')
+    search_fields = ['created', 'name', 'telephone', 'email',
+                     'message', 'replied']
 
-    def replied(self, request, queryset):
+    def replied(self, queryset):
         queryset.update(replied=True)
