@@ -27,11 +27,11 @@ The live site can be viewed [here!](https://the-flying-scotsmen.herokuapp.com/)
         * [**Calendar**](<#calendar>)
         * [**Bookings**](<#bookings>)
         * [**Contact**](<#contact>)
-            * Contact details
-            * Location map
-            * Contact Form form
-            * Testimonials
-        * [**Admin**](<#admin>)
+            * [Contact details](<#contact-details>)
+            * [Contact Form](<#contact-form>)
+            * [Testimonials](<#testimonials>)
+            * [Location Map](<#location-map>)
+        * [**Admin Page**](<#admin-page>)
     * [**Future Features**](<#future-features>)
 * [**Technologies Used**](<#technologies-used>)
 * [**Testing**](<#testing>)
@@ -45,25 +45,25 @@ The live site can be viewed [here!](https://the-flying-scotsmen.herokuapp.com/)
 # User Experience (UX)
 
 ## User Stories
-* As a USER I can MAKE A BOOKING so that I CAN USE THE GROUP AIRCRAFT TO FLY.
+* As a **USER** I can **MAKE A BOOKING** so that I can **USE THE GROUP AIRCRAFT TO FLY**.
 
-* As a USER I can VIEW A CALENDAR OF BOOKINGS so that I CAN SEE AVAILABILITY OF AIRCRAFT.
+* As a **USER** I can **VIEW A CALENDAR OF BOOKINGS** so that I can **SEE AVAILABILITY OF AIRCRAFT**.
 
-* As a USER I can CANCEL A BOOKING so that I HAVE FLEXIBILITY WHEN BOOKING.
+* As a **USER** I can **canCEL A BOOKING** so that I **HAVE FLEXIBILITY WHEN BOOKING**.
 
-* As a USER I can EDIT A BOOKING so that I CAN CHANGE MY BOOKING DETAILS.
+* As a **USER** I can **EDIT A BOOKING** so that I can **CHANGE MY BOOKING DETAILS**.
 
-* As a USER I can REGISTER WITH THE SITE so thank I CAN MAKE BOOKINGS.
+* As a **USER** I can **REGISTER WITH THE SITE** so that I can **MAKE BOOKINGS**.
 
-* As a USER I can SEE WHAT AIRCRAFT THE GROUP OPERATES so that I CAN DECIDE IF I REGISTER.
+* As a **USER** I can **SEE WHAT AIRCRAFT THE GROUP OPERATES** so that I can **DECIDE IF I REGISTER**.
 
-* As a USER I can LOGIN/LOGOUT so that I CAN VIEW, MAKE AND EDIT MY BOOKINGS.
+* As a **USER** I can **LOGIN/LOGOUT** so that I can **VIEW, MAKE AND EDIT MY BOOKINGS**.
 
-* As an ADMIN I can VIEW BOOKINGS so that I CAN MAKE SURE THE AIRCRAFT ARE AVAILABLE.
+* As an **ADMIN** I can **VIEW BOOKINGS** so that I can **MAKE SURE THE AIRCRAFT ARE AVAILABLE**.
 
-* As an ADMIN I can EDIT BOOKINGS so that I CAN CONTACT THE USERS IS THE CONDITIONS CHANGE.
+* As an **ADMIN** I can **EDIT BOOKINGS** so that I can **CONTACT THE USERS IS THE CONDITIONS CHANGE**.
 
-* As an ADMIN I can BOOK SLOTS so that THE AIRCRAFT HAVE PREPOPULATED SLOTS FOR MAINTAINANCE.
+* As an **ADMIN** I can **BOOK SLOTS** so that **THE AIRCRAFT HAVE PREPOPULATED SLOTS FOR MAINTAINANCE**.
 
 [Back to top](<#contents>)
 
@@ -86,7 +86,7 @@ The live site can be viewed [here!](https://the-flying-scotsmen.herokuapp.com/)
 
 ## Site Structure
 
-The Flying Scotsmen project is made up of 4 main pages. [index](templates/booking/index.html), [calendar](templates/booking/calendar.html), [bookings](templates/booking/bookings.html) and [contact](templates/booking/contact.html). It also has a number of ancillary pages related to log-in, register, sign-up and log-out.
+The Flying Scotsmen project is made up of 4 main pages. [index](templates/booking/index.html), [calendar](templates/booking/calendar.html), [bookings](templates/booking/bookings.html) and [contact](templates/booking/contact.html). It also has a number of ancillary pages related to Admin, log-in, register, sign-up and log-out.
 
 [Back to top](<#contents>)
 ## Design Choices
@@ -320,6 +320,7 @@ The method for cloning a project from GitHub is below:
 # Credits
 ### Content
 
+* The inspiration for the detailed Calender came from [Huiwen](https://www.huiwenteo.com/normal/2018/07/24/django-calendar.html)
 * The font came from [Google Fonts](https://fonts.google.com/).
 * [Stack Overflow](https://stackoverflow.com/) for general hints and tips.
 * The Contact map is embedded from [Google Maps](https://www.google.com/maps).
@@ -327,16 +328,14 @@ The method for cloning a project from GitHub is below:
 * The icons came from [Font Awesome](https://fontawesome.com/).
 * [PhoneNumberField](https://github.com/stefanfoulis/django-phonenumber-field) was used to validate the Contact form Telephone field.
 
-
 ### Media
 * [Unsplash](https://unsplash.com/) - Stock Cessna Photos
-* William MacLeod - Photos of G-BSAI.
-
+* William MacLeod - Photos of G-BSAI
 
 [Back to top](<#contents>)
 
 # Acknowledgements
-The site was completed as a Portfolio 4 Project piece for the Full Stack Software Developer (e-Commerce) Diploma at the [Code Institute](https://codeinstitute.net/). As such I would like to thank my mentor [Precious Ijege](https://www.linkedin.com/in/precious-ijege-908a00168/), the Slack community, and all at the Code Institute for their help and support. The FLying Scotsmen is a fictional group, however the site could be adapted with very little effort to reflect a fully functional Aircraft Management Group.
+The site was completed as a Portfolio 4 Project piece for the Full Stack Software Developer (e-Commerce) Diploma at the [Code Institute](https://codeinstitute.net/). As such I would like to thank my mentor [Precious Ijege](https://www.linkedin.com/in/precious-ijege-908a00168/), the Slack community, and all at the Code Institute for their help and support. The Flying Scotsmen is a fictional group, however the site could be adapted with very little effort to reflect a fully functional Aircraft Management Group.
 
 Ewan Colquhoun 2022.
 
