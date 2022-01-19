@@ -3,6 +3,7 @@ from django.urls import reverse
 from django.db import models
 from cloudinary.models import CloudinaryField
 from phonenumber_field.modelfields import PhoneNumberField
+# from accounts.models import CustomUser
 
 
 INSTRUCTOR_REQUIRED = (('No', 'No'), ('Yes', 'Yes'))
@@ -47,6 +48,7 @@ class Booking(models.Model):
     """
 
     username = models.CharField(max_length=20)
+    # username = models.ForeignKey(CustomUser, on_delete=models.DO_NOTHING)
     aircraft = models.ForeignKey(
         Aircraft,
         on_delete=models.CASCADE,

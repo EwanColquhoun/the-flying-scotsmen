@@ -1,4 +1,4 @@
-# The Flying Scotsmen (WIP)
+# The Flying Scotsmen
 
 The Flying Scotsmen is a site for a fictional flying group based in Scotland. It provides a booking and contact platform for the members of the group. 
 

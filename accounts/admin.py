@@ -22,6 +22,7 @@ class GroupMemberAdmin(admin.ModelAdmin):
     list_filter = ('registered', 'date_joined',)
     list_display = ('user', 'registered', 'date_joined',)
     search_fields = ['user', 'registered', 'date_joined', ]
+    actions = ['register_member']
 
     def register_member(self, queryset):
         queryset.update(registered=True)
