@@ -1,6 +1,6 @@
 from django.test import TestCase
 from django.test.client import Client
-from .models import Group_Member, CustomUser
+from .models import GroupMember, CustomUser
 
 
 class TestAccModels(TestCase):
@@ -16,7 +16,7 @@ class TestAccModels(TestCase):
         self.client.login(username='testUser', password='secret')
 
     def test_group_member_registered_is_false(self):
-        test_member = Group_Member.objects.create(user=self.user)
+        test_member = GroupMember.objects.create(user=self.user)
         self.assertFalse(test_member.registered)
 
     def test_group_member_message_is_accepted(self):

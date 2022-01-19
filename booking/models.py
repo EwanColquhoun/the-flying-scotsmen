@@ -3,7 +3,6 @@ from django.urls import reverse
 from django.db import models
 from cloudinary.models import CloudinaryField
 from phonenumber_field.modelfields import PhoneNumberField
-# from accounts.models import CustomUser
 
 
 INSTRUCTOR_REQUIRED = (('No', 'No'), ('Yes', 'Yes'))

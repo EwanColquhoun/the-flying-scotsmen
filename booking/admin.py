@@ -6,7 +6,7 @@ from .models import Booking, Aircraft, Slot, Contact
 @admin.register(Aircraft)
 class AircraftAdmin(admin.ModelAdmin):
     """
-    Manages Aircraft
+    Manages admin access to Aircraft information
     """
     list_filter = ('reg', 'desc',)
     list_display = ('reg', 'desc',)
@@ -16,7 +16,7 @@ class AircraftAdmin(admin.ModelAdmin):
 @admin.register(Slot)
 class SlotAdmin(admin.ModelAdmin):
     """
-    Manages Slot allocation
+    Manages Slot allocation for admin
     """
     class Meta:
         ordering = ['admin']
@@ -33,7 +33,7 @@ class SlotAdmin(admin.ModelAdmin):
 @admin.register(Booking)
 class BookingAdmin(admin.ModelAdmin):
     """
-    Manages bookings
+    Manages bookings for admin
     """
     class Meta:
         model = Booking
@@ -56,7 +56,7 @@ class BookingAdmin(admin.ModelAdmin):
 @admin.register(Contact)
 class ContactAdmin(admin.ModelAdmin):
     """
-    Manages contact requests
+    Manages contact requests for admin
     """
     class Meta:
         model = Contact

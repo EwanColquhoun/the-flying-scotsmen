@@ -1,6 +1,5 @@
 from django.urls import path, re_path
 from allauth.account.views import LoginView
-
 from .views import AwaitingRegDisplay, CustomSignUpView
 
 urlpatterns = [

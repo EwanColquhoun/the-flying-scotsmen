@@ -26,4 +26,3 @@ class GroupMemberAdmin(admin.ModelAdmin):
 
     def register_member(self, queryset):
         queryset.update(registered=True)
-        

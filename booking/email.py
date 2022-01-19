@@ -1,5 +1,6 @@
 import os
-import smtplib, ssl
+import smtplib
+import ssl
 
 
 def send_email_to_admin(booking):
@@ -17,9 +18,9 @@ def send_email_to_admin(booking):
     Notes: {booking.notes}
 
     Click here to visit the admin site
-    
+
     https://the-flying-scotsmen.herokuapp.com/admin/booking/booking/
-    
+
     Thanks."""
     smtp_server = "smtp.gmail.com"
     port = 587  # For starttls
@@ -31,17 +32,17 @@ def send_email_to_admin(booking):
 
     # Try to log in to server and send email
     try:
-        server = smtplib.SMTP(smtp_server,port)
-        server.ehlo() # Can be omitted
-        server.starttls(context=context) # Secure the connection
-        server.ehlo() # Can be omitted
+        server = smtplib.SMTP(smtp_server, port)
+        server.ehlo()
+        server.starttls(context=context)  # Secure the connection
+        server.ehlo()
         server.login(sender_email, password)
         server.sendmail(sender_email, receiver_email, message)
     except Exception as e:
         # Print any error messages to stdout
         print(e)
     finally:
-        server.quit() 
+        server.quit()
 
 
 def send_contact_email_to_admin(contact):
@@ -56,11 +57,11 @@ def send_contact_email_to_admin(contact):
     Email - {contact.email}
     Message - {contact.message}
 
-    
+
     Click here to visit the admin site
-    
+
     https://the-flying-scotsmen.herokuapp.com/admin/contact/
-    
+
     Thanks."""
 
     smtp_server = "smtp.gmail.com"
@@ -73,17 +74,17 @@ def send_contact_email_to_admin(contact):
 
     # Try to log in to server and send email
     try:
-        server = smtplib.SMTP(smtp_server,port)
-        server.ehlo() # Can be omitted
-        server.starttls(context=context) # Secure the connection
-        server.ehlo() # Can be omitted
+        server = smtplib.SMTP(smtp_server, port)
+        server.ehlo()
+        server.starttls(context=context)  # Secure the connection
+        server.ehlo()
         server.login(sender_email, password)
         server.sendmail(sender_email, receiver_email, message)
     except Exception as e:
         # Print any error messages to stdout
         print(e)
     finally:
-        server.quit() 
+        server.quit()
 
 
 def send_register_email_to_admin(user):
@@ -99,12 +100,12 @@ def send_register_email_to_admin(user):
     Last Name - {user.last_name}
     Email - {user.email}
     Message - {user.message}
-    
-    
+
+
     Click here to visit the admin site
-    
+
     https://the-flying-scotsmen.herokuapp.com/admin/booking/group_member/
-    
+
     Thanks."""
 
     smtp_server = "smtp.gmail.com"
@@ -117,14 +118,14 @@ def send_register_email_to_admin(user):
 
     # Try to log in to server and send email
     try:
-        server = smtplib.SMTP(smtp_server,port)
-        server.ehlo() # Can be omitted
-        server.starttls(context=context) # Secure the connection
-        server.ehlo() # Can be omitted
+        server = smtplib.SMTP(smtp_server, port)
+        server.ehlo()
+        server.starttls(context=context)  # Secure the connection
+        server.ehlo()
         server.login(sender_email, password)
         server.sendmail(sender_email, receiver_email, message)
     except Exception as e:
         # Print any error messages to stdout
         print(e)
     finally:
-        server.quit() 
+        server.quit()
