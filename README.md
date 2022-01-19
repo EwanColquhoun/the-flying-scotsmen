@@ -46,25 +46,25 @@ The live site can be viewed [here!](https://the-flying-scotsmen.herokuapp.com/)
 # User Experience (UX)
 
 ## User Stories
-* As a **USER** I can **MAKE A BOOKING** so that I can **USE THE GROUP AIRCRAFT TO FLY**.
+* As a **USER** I want to **MAKE A BOOKING** so that I can **USE THE GROUP AIRCRAFT TO FLY**.
 
-* As a **USER** I can **VIEW A CALENDAR OF BOOKINGS** so that I can **SEE AVAILABILITY OF AIRCRAFT**.
+* As a **USER** I want to **VIEW A CALENDAR OF BOOKINGS** so that I can **SEE AVAILABILITY OF AIRCRAFT**.
 
-* As a **USER** I can **canCEL A BOOKING** so that I **HAVE FLEXIBILITY WHEN BOOKING**.
+* As a **USER** I want to **CANCEL A BOOKING** so that I **HAVE FLEXIBILITY WHEN BOOKING**.
 
-* As a **USER** I can **EDIT A BOOKING** so that I can **CHANGE MY BOOKING DETAILS**.
+* As a **USER** I want to **EDIT A BOOKING** so that I can **CHANGE MY BOOKING DETAILS**.
 
-* As a **USER** I can **REGISTER WITH THE SITE** so that I can **MAKE BOOKINGS**.
+* As a **USER** I want to **REGISTER WITH THE SITE** so that I can **MAKE BOOKINGS**.
 
-* As a **USER** I can **SEE WHAT AIRCRAFT THE GROUP OPERATES** so that I can **DECIDE IF I REGISTER**.
+* As a **USER** I want to **SEE WHAT AIRCRAFT THE GROUP OPERATES** so that I can **DECIDE IF I REGISTER**.
 
-* As a **USER** I can **LOGIN/LOGOUT** so that I can **VIEW, MAKE AND EDIT MY BOOKINGS**.
+* As a **USER** I want to **LOGIN/LOGOUT** so that I can **VIEW, MAKE AND EDIT MY BOOKINGS**.
 
-* As an **ADMIN** I can **VIEW BOOKINGS** so that I can **MAKE SURE THE AIRCRAFT ARE AVAILABLE**.
+* As an **ADMIN** I want to **VIEW BOOKINGS** so that I can **MAKE SURE THE AIRCRAFT ARE AVAILABLE**.
 
-* As an **ADMIN** I can **EDIT BOOKINGS** so that I can **CONTACT THE USERS IS THE CONDITIONS CHANGE**.
+* As an **ADMIN** I want to **EDIT BOOKINGS** so that I can **CONTACT THE USERS IS THE CONDITIONS CHANGE**.
 
-* As an **ADMIN** I can **BOOK SLOTS** so that **THE AIRCRAFT HAVE PREPOPULATED SLOTS FOR MAINTAINANCE**.
+* As an **ADMIN** I want to **BOOK SLOTS** so that **THE AIRCRAFT HAVE PREPOPULATED SLOTS FOR MAINTAINANCE**.
 
 [Back to top](<#contents>)
 
@@ -278,15 +278,14 @@ Please refer to [**_here_**](TESTING.md) for more information on testing.
 2. You will then be able to attach this to the App you have just created.
 ![Heroku Postgres image](media/readme-images/postgres.png)
 
-### Setting up the App within Heroku
+### Setting up the App within Heroku:
 
 1. Navigate to "Settings" and scroll down to "config vars".
 2. There are a number of config vars for this project, API_KEY, CLOUDINARY_URL, DATABASE_URL, EMAIL_PASSWORD and a SECRET_KEY.
 3. The config vars are specific to the local project. They are usually unique and often provided by the respective API in use.
-![Heroku Buildpack](media/readme-images/buildpacks.png)
 ![Config Vars](media/readme-images/config-vars.png)
 
-### App Deployment
+### App Deployment:
 
 1. Navigate to the "Deploy" section.
 2. Scroll down to "Deployment Method" and select "GitHub".
@@ -298,13 +297,13 @@ Please refer to [**_here_**](TESTING.md) for more information on testing.
 6. Ensure the correct branch is selected "master/Main", and select the deployment method that you desire.
 ![Heroku deployment](media/readme-images/deploy.png)
 
-### **To fork the repository on GitHub**
+### **To fork the repository on GitHub:**
 A copy of the GitHub Repository can be made by forking the repository. This copy can be viewed and changes can be made to the copy without affecting the original repository. Take the following steps to fork the repository;
 1. Log in to **GitHub** and locate the [repository](https://github.com/EwanColquhoun/the-flying-scotsmen).
 2. On the right hand side of the page inline with the repository name is a button called **'Fork'**, click on the button to create a copy of the original repository in your GitHub Account.
 ![GitHub forking process image](media/readme-images/forking.png)
 
-### **To create a local clone of this project**
+### **To create a local clone of this project:**
 The method for cloning a project from GitHub is below:
 
 1. Under the repository’s name, click on the **code** tab.
@@ -314,6 +313,40 @@ The method for cloning a project from GitHub is below:
 4. Change the current working directory to the location where you want the cloned directory to be made.
 5. Type **git clone**, and then paste the URL copied from GitHub.
 6. Press **enter** and the local clone will be created.
+
+### Initialising the Application locally from the clone:
+
+* Once the clone is accessed locally you need to set up the database, create a superuser, create the environmental variables, migrate the models into the database and install the dependencies from the requirements.txt file. 
+1. The default database included with Django is a SQLite variation of MYSQL. If you have preferred database you will need to edit the location of the Database in the settings file of your app.
+![Database setup](media/readme-images/database.png)
+
+2. To install all the required libraries and modules for the project you will need to install those listed in the requirements.txt file. This is achieved using the following prompt;
+    > pip install -r requirements.txt
+
+3. There are a number of environmental variables for this project, API_KEY, CLOUDINARY_URL, DATABASE_URL, EMAIL_PASSWORD and a SECRET_KEY.
+    
+    To set these up locally, create a file called env.py (will contain sensitive information so ensure the data is not publically viewable). Within that file you will need to import os and create the respective variables.
+
+    ![Env Var](media/readme-images/envvar.png)
+
+    The variables can then be accessed within your local code.
+
+4. Once you have the database set up you will need to mirgate the models over to it. This is done with the following command line prompts;
+    > python3 manage.py makemigrations --dry-run 
+    
+    (optional, can be used to see what the migrations are going to be.)
+    > python3 manage.py makemigrations
+
+    > python3 manage.py migrate
+
+5. Now you will need to create a super user to access the Admin site of Django and The Flying Scotsmen.
+    Again, using the command line, enter the following and follow the prompts;
+    > python3 manage.py create superuser
+
+    It will ask you for a username and email - take note of these for future admin use.
+    
+6. You are set up and should be able to run the project with the following command;
+    > python3 manage.py runserver
 
 
 [Back to top](<#contents>)

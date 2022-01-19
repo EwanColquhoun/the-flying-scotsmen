@@ -94,6 +94,7 @@
                 </a>
                 <span class="tooltip">Home</span>
             </li>
+        {% if user.is_superuser %}
             <li>
                 <a aria-label="Home" href="{% url 'admin:index' %}">
                     <i class="fas fa-user-cog"></i>
@@ -101,6 +102,7 @@
                 </a>
                 <span class="tooltip">Admin</span>
             </li>
+        {% endif %}
         {% if user.is_authenticated and user.registered.registered %}
             <li>
             <a aria-label="Calendar" href="{% url 'calendar' %}">
