@@ -1,26 +1,40 @@
-# Testing for The Flying Scotsmen (WIP)
-
-## UnitTest
+# Testing for The Flying Scotsmen
 
 ## Code Validation
 The Flying Scotsmen has be throughly tested. All the code has been run through the [W3C html validator](https://validator.w3.org/), the [W3C CSS validator](https://jigsaw.w3.org/css-validator/) and the [JavaScript JSHint validator](https://jshint.com/). 
 The code passed the W3C Validator barring all the django template tags. Outside of those, no errors were found.
 The CSS passed the W3C Validator passed once an error with the 'transition-timing-function' propery was corrected (from '1000ms' to 'ease-in').
-After some minor re-formatting the script passed the JSHint tests. There are some warnings about unused variables, however these are related to the googlemaps api and the flatpicker add-on. 
+After some minor re-formatting the script passed the JSHint tests. There are some warnings about unused variables, however these are related to bootstrap, the googlemaps api and the flatpicker add-on. 
 
-W3C Validation
-![W3C Validation](media/readme-images/w3c.png)
+* CSS Validation
 
-CSS Validation
 ![W3C CSS Validation](media/readme-images/w3c-css.png)
 
-Pep8 Validation for booking/views.py but same result for all custom .py files.
+* Pep8 Validation for booking/views.py but same result for all custom .py files.
+
 ![PEP8 Validation](media/readme-images/pep8.png)
 
-JSHint results
+* JSHint results
 
+![JSHint Validation](media/readme-images/jshint.png)
 
+[Back to top](<#code-validation>)
+## Automated testing with Jest and Unittest
 
+The automated testing for The Flying Scotsmen was completed using the Django built in test library Unittest, more specifically the TestCase class. The tests cover form, models and views. Overall test coverage is at 87% for the Python based files. 
+Jest was used for the testing with JavaScript. There are a number of external sources used (Google Maps, Flatpickr, Bootstrap) so I haven't endeavoured to test those items within my code. The coverage of the script file as a whole is at 37%.
+
+* UnitTest for Django
+
+![Unittest Validation](media/readme-images/unittest.png)
+
+![Coverage report](media/readme-images/coverage.png)
+
+* Jest for JavaScript
+
+![Jest Validation](media/readme-images/jest.png)
+
+[Back to top](<#code-validation>)
 ## Responsiveness Test
 
 The responsive design tests were carried out manually with [Google Chrome DevTools](https://developer.chrome.com/docs/devtools/) and [Responsive Design Checker](https://www.responsivedesignchecker.com/).
@@ -31,9 +45,11 @@ The responsive design tests were carried out manually with [Google Chrome DevToo
 | Images | pass    | pass      | pass     | pass | pass     | pass            | pass            |
 | Links  | pass    | pass      | pass     | pass | pass     | pass            | pass            |
 
+[Back to top](<#code-validation>)
 ## Browser Compatibility
 * The Flying Scotsmen application has been tested on Chrome, Edge, Safari and Firefox. During development the various webkits were used with the existing CSS to help prevent browser compatability issues. The Animate CSS library was used to help make the animations functional on all browsers. 
 
+[Back to top](<#code-validation>)
 ## Testing User Stories
 * As a USER I can MAKE A BOOKING so that I CAN USE THE GROUP AIRCRAFT TO FLY.
     - Once you are registered and approved by the Admin. The User can then access the Booking page by the Navigation menus. On the Bookings page the Approved User can then make bookings. 
@@ -65,6 +81,7 @@ The responsive design tests were carried out manually with [Google Chrome DevToo
 * As an ADMIN I can BOOK SLOTS so that THE AIRCRAFT HAVE PREPOPULATED SLOTS FOR MAINTAINANCE.
     - In the Admin page the Admin has access to all the inner workings of the booking system. If the group gets more aircraft, the Admin can add these on with little effort. If more slots become available, again, the Admin can add more slots. If Admin needs to book an aircraft out for maintance or test flights this is also possible on both the Admin site and the main site once logged in as Admin.
 
+[Back to top](<#code-validation>)
 ## Known Bugs
 * ### Resolved
     There were a number of bugs that were overcome during the development process. 
@@ -74,6 +91,7 @@ The responsive design tests were carried out manually with [Google Chrome DevToo
 * ### Unresolved
     At the time of writing there is still one known unresolved bug within the script.js file. I had to export two functions into the test_script file. I used 'module.exports' but once the browser loads the script it has an error that 'module' is unrecognised. The fix for this was just to use 'exports', this clears the error but doesn't actually export the functions into the test file and the tests fail. 
 
+[Back to top](<#code-validation>)
 ## Additional Testing
 ### Lighthouse
 The site was also tested using [Google Lighthouse](https://developers.google.com/web/tools/lighthouse) in Chrome Developer Tools to test each of the pages for:
@@ -95,3 +113,5 @@ This part of the testing process showed up that the site was slow to load. All t
 The Flying Scotsmen Application has been tested by Peers both in the software development field and external to it. The feedback has generally been positive but with minor points cropping up from time to time. A common one has been 'Server Errors(500)' whilst trying to register or send a contact message. This was found to have been caused by the command to send the email associated with the request. The fix was to change the security settings on the gmail account registered to the application to allow access from low security applications and two factor login and the email side. This poses no problems for the user, it means that the admin of the functional email address would need to complete the extra login steps.
 
 Back to [README.md](./README.md#testing).
+
+[Back to top](<#code-validation>)

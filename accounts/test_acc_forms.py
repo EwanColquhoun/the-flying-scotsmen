@@ -4,6 +4,16 @@ from .forms import CustomSignUpForm
 
 class TestCustomSignUpForm(TestCase):
 
+    def test_form_validated(self):
+        form = CustomSignUpForm({'username': 'EwanCol',
+                                 'first_name': 'Ewan',
+                                 'last_name': 'Col',
+                                 'email': 'testemail@tfs.com',
+                                 'password1': 'testPassword01',
+                                 'password2': 'testPassword01',
+                                 'message': 'Test message'})
+        self.assertTrue(form.is_valid())
+
     def test_username_required(self):
         form = CustomSignUpForm({'username': ''})
         self.assertFalse(form.is_valid())

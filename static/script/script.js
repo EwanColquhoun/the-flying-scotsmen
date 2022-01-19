@@ -9,12 +9,6 @@ function alerts() {
   }, 5000);
 }
 
-// // signup forms
-// signupForms = function () {
-//   document.getElementById("signup-form").submit();
-//   document.getElementById("signup-form2").submit();
-// }
-
 // Sidebar functions
 function sidebar() {
   let sidebar = document.querySelector(".sidebar");
@@ -31,11 +25,9 @@ function sidebar() {
   });
 }
 
-
 // Calendar functions
 function deleteModal() {
   // Gets the delete modal working
-  let delMod = true;
   const modal_buttons = document.getElementById('delete-modal-buttons');
   const delete_button = document.querySelectorAll('.delete_button');
 
@@ -62,7 +54,6 @@ function deleteModal() {
 
 function today() {
   // Highlights today on the calendar
-  let present = true;
   const dates = document.querySelectorAll('.date');
   let d = new Date();
   let month = d.getMonth() + 1;
@@ -82,9 +73,7 @@ function today() {
 
 function calendarBookingModal() {
   // Activates the calendar booking modal
-  let calBookMod = true;
   const dates = document.querySelectorAll('.date');
-
   const modal = document.getElementById('myModal');
   const noBookings = document.getElementById('no-bookings-text');
   const bookingTable = document.getElementById('booking-table');
@@ -113,9 +102,6 @@ function calendarBookingModal() {
 }
 
 function calendar() {
-  const delMod = false;
-  const present = false;
-  const calBookMod = false; 
   deleteModal();
   today();
   calendarBookingModal();
@@ -220,11 +206,10 @@ function flatpickrInit() {
   const myInput = document.querySelector("#id_date");
   const fp = flatpickr(myInput, {
     minDate: "today"
-  }); // flatpickr
+  });
 }
 
-// provides feedback if passwords match
-
+// provides UI feedback if passwords match
 function passwordMatch() {
 
   let password1 = document.getElementById('id_password1');
@@ -244,7 +229,6 @@ function passwordMatch() {
 }
 
 // Site initialisation
-
 let password = document.querySelectorAll('#id_password1');
 let date_input = document.querySelectorAll('#id_date');
 let map_div = document.querySelectorAll('#map');
