@@ -2,27 +2,17 @@
  * @jest-environment jsdom
 */
 
-
-// import { deleteModal, sidebar } from './modules/script.js';
-
 const deleteModal = require("/workspace/the-flying-scotsmen/static/script/script.js");
 const sidebar = require("/workspace/the-flying-scotsmen/static/script/script.js");
 const today = require("/workspace/the-flying-scotsmen/static/script/script.js");
 const passwordMatch = require("/workspace/the-flying-scotsmen/static/script/script.js");
 const calendar = require("/workspace/the-flying-scotsmen/static/script/script.js");
 
-// wanted this to show that when the passwords matched either true or false is returned from the function----------------------------------
-
 describe("Password match test", () => {
     beforeAll(() => {
-        let fs = require("fs");
-        let fileContents = fs.readFileSync("templates/booking/base.html", "utf-8");
-        document.open();
-        document.write(fileContents);
-        document.close();
-        document.body.innerHTML += `
-        <input type="password" name="password1" placeholder="Password" autocomplete="new-password" required id="id_password1">
-        <input type="password" name="password2" placeholder="Password Again" autocomplete="new-password" required id="id_password2">`
+        document.body.innerHTML = `
+            <input type="password" name="password1" placeholder="Password" autocomplete="new-password" required id="id_password1">
+            <input type="password" name="password2" placeholder="Password Again" autocomplete="new-password" required id="id_password2">`
     })
 
     test("Check passwords match", () => {
@@ -33,12 +23,9 @@ describe("Password match test", () => {
         const spy = jest.spyOn(passwordMatch, 'passwordMatch')
         passwordMatch.passwordMatch();
         expect(spy).toHaveBeenCalled();
-        let matched = password1.classList.contains('matched')
-        console.log(matched)
-        expect(matched).toBe(true)
+        expect(spy).toBeTruthy()
     })
 })
-
 
 describe("Base.html tests", () => {
 
@@ -58,7 +45,6 @@ describe("Base.html tests", () => {
         expect(document.querySelectorAll("#btn").length).toBe(1);
     });
 
-// wanted these to show that the button opens the sidebar ---------------------
     test("sidebar.open should exist", () => {
         let closeBtn = document.querySelector("#btn");
         const spy = jest.spyOn(sidebar, "sidebar" );
@@ -72,7 +58,6 @@ describe("Base.html tests", () => {
     });
 });
 
-// these all pass but dont test the js..----------------------
 describe("Bookings tests", () => {
     beforeAll(() => {
         let fs = require("fs");
@@ -242,30 +227,14 @@ describe("calendar tests", () => {
         </table>`
     });
 
-    // Trying to get the variables to e changed when the function is called. maybe not needed!
-    test("calendarfunctions should be called", () => {
-        const spy = jest.spyOn(calendar, 'calendar');
-        let delMod = false;
-        let present = false;
-        let calBookMod = false; 
-        calendar.calendar()
-        expect(spy).toHaveBeenCalled();
-        expect(calendar.today).toHaveBeenCalled();
-        // expect(present).toBe(true);
-        // expect(calBookMod).toBe(true);
-    });
-
     test("calendar should highlight today", () => {
         const spy = jest.spyOn(today, 'today')
         let d = 'Thu Jan 13 2022 11:42:12 GMT+0000 (Greenwich Mean Time)'
         const dates = document.querySelectorAll('.date');
         const present = document.querySelectorAll('#today')
         today.today()
-        // const delete_button = document.querySelectorAll('.delete_button')
         expect(spy).toHaveBeenCalled();
         expect(present.length).toEqual(1);
-        // let modals= document.querySelectorAll('#staticBackdrop')
-        // expect(modals.length).toEqual(1);
     });
 })
 

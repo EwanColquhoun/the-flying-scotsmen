@@ -1,11 +1,11 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser, UserManager
 
 
 class CustomUser(AbstractUser):
     message = models.TextField(blank=False, null=False, help_text='Required')
     email = models.CharField(max_length=100, blank=False, null=False)
-    objects = models.Manager()
+    objects = UserManager()
         
     def __str__(self):
         return str(self.username)

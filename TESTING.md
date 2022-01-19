@@ -6,6 +6,7 @@
 The Flying Scotsmen has be throughly tested. All the code has been run through the [W3C html validator](https://validator.w3.org/), the [W3C CSS validator](https://jigsaw.w3.org/css-validator/) and the [JavaScript JSHint validator](https://jshint.com/). 
 The code passed the W3C Validator barring all the django template tags. Outside of those, no errors were found.
 The CSS passed the W3C Validator passed once an error with the 'transition-timing-function' propery was corrected (from '1000ms' to 'ease-in').
+After some minor re-formatting the script passed the JSHint tests. There are some warnings about unused variables, however these are related to the googlemaps api and the flatpicker add-on. 
 
 W3C Validation
 ![W3C Validation](media/readme-images/w3c.png)
@@ -17,6 +18,7 @@ Pep8 Validation for booking/views.py but same result for all custom .py files.
 ![PEP8 Validation](media/readme-images/pep8.png)
 
 JSHint results
+
 
 
 ## Responsiveness Test
