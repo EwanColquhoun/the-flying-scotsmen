@@ -1,5 +1,16 @@
 # Testing for The Flying Scotsmen
 
+## Contents
+
+* [Code Validation](<#code-validation>)
+* [Automated Testing](<#automated-testing-with-jest-and-unittest>)
+* [Responsiveness Test](<#responsiveness-test>)
+* [Browser Compatibility](<#browser-compatibility>)
+* [Testing User Stories](<#testing-user-stories>)
+* [Known Bugs](<#known-bugs>)
+* [Additional Testing](<#additional-testing>)
+
+
 ## Code Validation
 The Flying Scotsmen has be throughly tested. All the code has been run through the [W3C html validator](https://validator.w3.org/), the [W3C CSS validator](https://jigsaw.w3.org/css-validator/) and the [JavaScript JSHint validator](https://jshint.com/). 
 The code passed the W3C Validator barring all the django template tags. Outside of those, no errors were found.
@@ -18,7 +29,7 @@ After some minor re-formatting the script passed the JSHint tests. There are som
 
 ![JSHint Validation](media/readme-images/jshint.png)
 
-[Back to top](<#code-validation>)
+[Back to top](<#contents>)
 ## Automated testing with Jest and Unittest
 
 The automated testing for The Flying Scotsmen was completed using the Django built in test library Unittest, more specifically the TestCase class. The tests cover form, models and views. Overall test coverage is at 87% for the Python based files. 
@@ -34,7 +45,7 @@ Jest was used for the testing with JavaScript. There are a number of external so
 
 ![Jest Validation](media/readme-images/jest.png)
 
-[Back to top](<#code-validation>)
+[Back to top](<#contents>)
 ## Responsiveness Test
 
 The responsive design tests were carried out manually with [Google Chrome DevTools](https://developer.chrome.com/docs/devtools/) and [Responsive Design Checker](https://www.responsivedesignchecker.com/).
@@ -45,11 +56,11 @@ The responsive design tests were carried out manually with [Google Chrome DevToo
 | Images | pass    | pass      | pass     | pass | pass     | pass            | pass            |
 | Links  | pass    | pass      | pass     | pass | pass     | pass            | pass            |
 
-[Back to top](<#code-validation>)
+[Back to top](<#contents>)
 ## Browser Compatibility
 * The Flying Scotsmen application has been tested on Chrome, Edge, Safari and Firefox. During development the various webkits were used with the existing CSS to help prevent browser compatability issues. The Animate CSS library was used to help make the animations functional on all browsers. 
 
-[Back to top](<#code-validation>)
+[Back to top](<#contents>)
 ## Testing User Stories
 * As a USER I can MAKE A BOOKING so that I CAN USE THE GROUP AIRCRAFT TO FLY.
     - Once you are registered and approved by the Admin. The User can then access the Booking page by the Navigation menus. On the Bookings page the Approved User can then make bookings. 
@@ -81,7 +92,7 @@ The responsive design tests were carried out manually with [Google Chrome DevToo
 * As an ADMIN I can BOOK SLOTS so that THE AIRCRAFT HAVE PREPOPULATED SLOTS FOR MAINTAINANCE.
     - In the Admin page the Admin has access to all the inner workings of the booking system. If the group gets more aircraft, the Admin can add these on with little effort. If more slots become available, again, the Admin can add more slots. If Admin needs to book an aircraft out for maintance or test flights this is also possible on both the Admin site and the main site once logged in as Admin.
 
-[Back to top](<#code-validation>)
+[Back to top](<#contents>)
 ## Known Bugs
 * ### Resolved
     There were a number of bugs that were overcome during the development process. 
@@ -91,7 +102,7 @@ The responsive design tests were carried out manually with [Google Chrome DevToo
 * ### Unresolved
     At the time of writing there is still one known unresolved bug within the script.js file. I had to export two functions into the test_script file. I used 'module.exports' but once the browser loads the script it has an error that 'module' is unrecognised. The fix for this was just to use 'exports', this clears the error but doesn't actually export the functions into the test file and the tests fail. 
 
-[Back to top](<#code-validation>)
+[Back to top](<#contents>)
 ## Additional Testing
 ### Lighthouse
 The site was also tested using [Google Lighthouse](https://developers.google.com/web/tools/lighthouse) in Chrome Developer Tools to test each of the pages for:
@@ -114,4 +125,5 @@ The Flying Scotsmen Application has been tested by Peers both in the software de
 
 Back to [README.md](./README.md#testing).
 
-[Back to top](<#code-validation>)
+
+[Back to top](<#contents>)

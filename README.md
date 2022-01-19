@@ -16,7 +16,6 @@ The live site can be viewed [here!](https://the-flying-scotsmen.herokuapp.com/)
     *  [Typography](<#typography>)
     *  [Colour Scheme](<#colour-scheme>)
 * [**Data Model**](<#data-model>)
-    * [Class Based Views](<#class-based-views>)
 * [**Features**](<#features>)
     * [**Existing Features**](<#existing-features>)
         * [**Home**](<#home-page>)
@@ -26,6 +25,8 @@ The live site can be viewed [here!](https://the-flying-scotsmen.herokuapp.com/)
             * [Footer](<#footer>)
         * [**Calendar**](<#calendar>)
         * [**Bookings**](<#bookings>)
+            * [Booking display](<#booking-display>)
+            * [Booking form](<#booking-form>)
         * [**Contact**](<#contact>)
             * [Contact details](<#contact-details>)
             * [Contact Form](<#contact-form>)
@@ -151,7 +152,7 @@ The Flying Scotsmen project is made up of 4 main pages. [index](templates/bookin
 
 [Back to top](<#contents>)
 
-* #### Footer
+  * #### Footer
     * A basic, semi-transparent footer displaying copyright information.
 
 [Back to top](<#contents>)
