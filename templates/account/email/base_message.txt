@@ -2,6 +2,6 @@
 
 {% block content %}{% endblock %}
 
-{% blocktrans with site_name=current_site.name site_domain=current_site.domain %}Thank you for using The Flying Scotsmen!
+{% blocktrans with site_name=current_site.name site_domain=the-flying-scotsmen.herokuapp.com %}Thank you for using The Flying Scotsmen!
 the-flying-scotsmen.herokuapp.com{% endblocktrans %}
 {% endautoescape %}
