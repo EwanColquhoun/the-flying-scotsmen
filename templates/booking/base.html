@@ -4,7 +4,6 @@
 <html lang="en">
 
 <head>
-    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self'"> -->
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -37,9 +36,11 @@
                     <li class="nav-item">
                         <a class="nav-link" aria-label="Home" href="{% url 'home' %}"><i class="fas fa-home"></i><span class="text"> Home</span></a>
                     </li>
+                    {% if user.is_superuser %}
                     <li class="nav-item">
                         <a class="nav-link" aria-label="Home" href="{% url 'home' %}"><i class="fas fa-user-cog"></i><span class="text"> Admin</span></a>
                     </li>
+                    {% endif %}
                     {% if user.is_authenticated and user.registered.registered %}
                     <li class="nav-item">
                         <a class="nav-link" aria-label="Calendar" href="{% url 'calendar' %}"><i class="fas fa-calendar-alt"></i><span class="text"> Calendar</span></a>
@@ -103,7 +104,7 @@
                 <span class="tooltip">Admin</span>
             </li>
         {% endif %}
-        {% if user.is_authenticated and user.registered.registered %}
+        {% if user.registered.registered and user.is_authenticated %}
             <li>
             <a aria-label="Calendar" href="{% url 'calendar' %}">
                 <i class="fas fa-calendar-alt"></i>
@@ -119,8 +120,8 @@
             </a>
             <span class="tooltip">Bookings</span>
             </li>
-        {% endif %}
-        {% if user.is_authenticated and not user.registered.registered %}
+    
+        {% elif user.is_authenticated and not user.registered.registered %}
             <li class="register-li">
                 <a aria-label="Register" href="{% url 'awaiting_reg' %}">
                     <i class="fas fa-user-plus"></i>
@@ -128,8 +129,8 @@
                 </a>
                 <span class="tooltip">Register</span>
             </li>
-        {% endif %}
-        {% if not user.is_authenticated %}
+   
+        {% else %}
             <li class="register-li">
                 <a aria-label="Register" href="{% url 'account_signup' %}">
                     <i class="fas fa-user-plus"></i>
@@ -309,7 +310,6 @@
     <!-- Google Map API -->
     {% block script %}
     {% endblock %}
-    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDWMSnIwRPg1eaSJzBfGrlNCmQuLin6rTw&callback=initMap"></script> -->
     
 </body>
 </html>

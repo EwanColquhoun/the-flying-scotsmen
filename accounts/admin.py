@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import CustomUser, Group_Member
+from .models import CustomUser, GroupMember
 
 
 @admin.register(CustomUser)
@@ -13,7 +13,7 @@ class CustomUserAdmin(admin.ModelAdmin):
     search_fields = ['username', 'first_name', 'last_name', 'email']
 
 
-@admin.register(Group_Member)
+@admin.register(GroupMember)
 class GroupMemberAdmin(admin.ModelAdmin):
     """
     Allows admin access to the group members.

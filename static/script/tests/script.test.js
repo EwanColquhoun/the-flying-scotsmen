@@ -2,6 +2,8 @@
  * @jest-environment jsdom
 */
 
+// import {deleteModal, sidebar, today, passwordMatch, calendar} from "/workspace/the-flying-scotsmen/static/script/script.js";
+
 const deleteModal = require("/workspace/the-flying-scotsmen/static/script/script.js");
 const sidebar = require("/workspace/the-flying-scotsmen/static/script/script.js");
 const today = require("/workspace/the-flying-scotsmen/static/script/script.js");
