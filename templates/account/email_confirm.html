@@ -12,7 +12,7 @@
 <div class="container">
     <div class="row d-flex justify-content-center">
       <div class="col-12 d-flex justify-content-center">
-        <h1>{% trans "Confirm E-mail Address" %}</h1>
+        <h1 class="page-heading">{% trans "Confirm E-mail Address" %}</h1>
       </div>
     </div>
 </div>
@@ -29,7 +29,7 @@
 
             <form method="post" action="{% url 'account_confirm_email' confirmation.key %}">
             {% csrf_token %}
-                <button type="submit btn btn-join">{% trans 'Confirm' %}</button>
+                <button class="btn btn-join" type="submit">{% trans 'Confirm' %}</button>
             </form>
         </div>    
     </div>
