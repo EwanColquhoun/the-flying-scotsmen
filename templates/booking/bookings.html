@@ -2,16 +2,17 @@
 
 {% block content %}
 
-
+<!-- Page heading -->
 <div class="container">
     <div class="row">
         <div id="bookings-page" class="col-12 d-flex justify-content-center"><h1 class="page-heading">Bookings</h1></div>
     </div>
 </div>
 
-
+<!-- Booking container -->
 <div class="container">
     <div class="row g-0">
+        <!-- Booking table  -->
         <div class="col-12">
             <h3 class="sub-heading">Bookings for <strong class="scots">{{ request.user.username }}:</strong></h3>
                 <div id="booking-content" class="d-grid gap-3 blue-border">
@@ -72,7 +73,9 @@
         </div>
     </div>
      
+
     <div class="row g-0 d-flex justify-content-between">
+        <!-- Booking form -->
         <div class="col-12 col-md-6 col-lg-5 mb-5">
             <h3 class="sub-heading">Make A New Booking</h3>
 
@@ -88,6 +91,7 @@
 
         <hr id="mobile-break" class="half-page-break">
 
+        <!-- Map with markers -->
         <div class="col-12 col-md-6 col-lg-5 mb-5">
             <h3 class="sub-heading">Our Travels So Far</h3>
             <div id='map' class="blue-border">

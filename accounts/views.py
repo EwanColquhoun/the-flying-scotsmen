@@ -17,7 +17,7 @@ class AwaitingRegDisplay(View):
 
         return render(
             request,
-            'booking/awaiting_reg.html',
+            'account/awaiting_reg.html',
         )
 
 
