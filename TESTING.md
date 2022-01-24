@@ -48,7 +48,7 @@ Jest was used for the testing with JavaScript. There are a number of external so
 [Back to top](<#contents>)
 ## Responsiveness Test
 
-The responsive design tests were carried out manually with [Google Chrome DevTools](https://developer.chrome.com/docs/devtools/) and [Responsive Design Checker](https://www.responsivedesignchecker.com/).
+The responsive design tests were carried out manually with [Google Chrome DevTools](https://developer.chrome.com/docs/devtools/).
 
 |        | Moto G4 | Galaxy S5 | iPhone 5 | iPad | iPad Pro | Display <1200px | Display >1200px |
 |--------|---------|-----------|----------|------|----------|-----------------|-----------------|
@@ -69,10 +69,10 @@ The responsive design tests were carried out manually with [Google Chrome DevToo
     - Once you are registered and approved by the Admin. The User can then access the Calendar page by the Navigation menus. On the Calendar page the Approved User can view all the bookings that have been both approved and awaiting approval.  
 
 * As a USER I want to CANCEL A BOOKING so that I HAVE FLEXIBILITY WHEN BOOKING.
-    - On both the Booking page and the Calendatr page the user can click on a 'Delete booking' icon. They will then be prompted to check that they want to proceed with the cancellation. 
+    - On both the Booking page and the Calendar page the user can click on a 'Delete booking' icon. They will then be prompted to check that they want to proceed with the cancellation. 
 
 * As a USER I want to EDIT A BOOKING so that I CAN CHANGE MY BOOKING DETAILS.
-    - On both the Booking page and the Calendatr page the user can click on an 'edit booking' icon and be taken to the edit-booking page to amend their booking.
+    - On both the Booking page and the Calendar page the user can click on an 'edit booking' icon and be taken to the edit-booking page to amend their booking.
 
 * As a USER I want to REGISTER WITH THE SITE so thank I CAN MAKE BOOKINGS.
     - On the home page there is a link to a Register page. Here the user can submit a form making a case to join the group. That information is then passed to the Admin for approval.
@@ -86,7 +86,7 @@ The responsive design tests were carried out manually with [Google Chrome DevToo
 * As an ADMIN I want to VIEW BOOKINGS so that I CAN MAKE SURE THE AIRCRAFT ARE AVAILABLE.
     - Once logged into the Admin page of the site the Admin can approve, view, amend, and cancel the bookings.
 
-* As an ADMIN I want to EDIT BOOKINGS so that I CAN CONTACT THE USERS IS THE CONDITIONS CHANGE.
+* As an ADMIN I want to EDIT BOOKINGS so that I CAN CONTACT THE USERS IF THE CONDITIONS CHANGE.
     - Once logged into the Admin page of the site the Admin can approve, view, amend, and cancel the bookings.
 
 * As an ADMIN I want to BOOK SLOTS so that THE AIRCRAFT HAVE PREPOPULATED SLOTS FOR MAINTAINANCE.

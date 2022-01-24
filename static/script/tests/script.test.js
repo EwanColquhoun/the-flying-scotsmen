@@ -2,13 +2,15 @@
  * @jest-environment jsdom
 */
 
-// import {deleteModal, sidebar, today, passwordMatch, calendar} from "/workspace/the-flying-scotsmen/static/script/script.js";
+import {deleteModal, sidebar, today, passwordMatch} from "../script.js";
 
-const deleteModal = require("/workspace/the-flying-scotsmen/static/script/script.js");
-const sidebar = require("/workspace/the-flying-scotsmen/static/script/script.js");
-const today = require("/workspace/the-flying-scotsmen/static/script/script.js");
-const passwordMatch = require("/workspace/the-flying-scotsmen/static/script/script.js");
-const calendar = require("/workspace/the-flying-scotsmen/static/script/script.js");
+// below works for testing purposes
+
+
+// const deleteModal = require("../script.js").default;
+// const sidebar = require("../script.js").default;
+// const today = require("../script.js").default;
+// const passwordMatch = require("../script.js").default;
 
 describe("Password match test", () => {
     beforeAll(() => {

@@ -258,4 +258,11 @@ window.addEventListener('load', () => {
     setup();
   });
 
-module.exports = { deleteModal, sidebar, today, passwordMatch, calendar };
+
+
+// no console errors
+export default { deleteModal, sidebar, today, passwordMatch, calendar };
+
+// console errors in browser but script.test.js works.
+// module.exports = { deleteModal, sidebar, today, passwordMatch, calendar };
+

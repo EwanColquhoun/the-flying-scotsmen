@@ -13,8 +13,8 @@ The live site can be viewed [here!](https://the-flying-scotsmen.herokuapp.com/)
     * [Wireframes](<#wireframes>)
     * [Site Structure](<#site-structure>)
     * [Design Choices](<#design-choices>)
-    *  [Typography](<#typography>)
-    *  [Colour Scheme](<#colour-scheme>)
+        *  [Typography](<#typography>)
+        *  [Colour Scheme](<#colour-scheme>)
 * [**Data Model**](<#data-model>)
 * [**Features**](<#features>)
     * [**Existing Features**](<#existing-features>)
@@ -23,11 +23,11 @@ The live site can be viewed [here!](https://the-flying-scotsmen.herokuapp.com/)
             * [Gallery Carousel](<#gallery-carousel>)
             * [About-us](<#about-us>)
             * [Footer](<#footer>)
-        * [**Calendar**](<#calendar>)
-        * [**Bookings**](<#bookings>)
+        * [**Calendar**](<#calendar-page>)
+        * [**Bookings**](<#bookings-page>)
             * [Booking display](<#booking-display>)
             * [Booking form](<#booking-form>)
-        * [**Contact**](<#contact>)
+        * [**Contact**](<#contact-page>)
             * [Contact details](<#contact-details>)
             * [Contact Form](<#contact-form>)
             * [Testimonials](<#testimonials>)
@@ -62,7 +62,7 @@ The live site can be viewed [here!](https://the-flying-scotsmen.herokuapp.com/)
 
 * As an **ADMIN** I want to **VIEW BOOKINGS** so that I can **MAKE SURE THE AIRCRAFT ARE AVAILABLE**.
 
-* As an **ADMIN** I want to **EDIT BOOKINGS** so that I can **CONTACT THE USERS IS THE CONDITIONS CHANGE**.
+* As an **ADMIN** I want to **EDIT BOOKINGS** so that I can **CONTACT THE USERS IF THE CONDITIONS CHANGE**.
 
 * As an **ADMIN** I want to **BOOK SLOTS** so that **THE AIRCRAFT HAVE PREPOPULATED SLOTS FOR MAINTAINANCE**.
 
@@ -93,10 +93,10 @@ The Flying Scotsmen project is made up of 4 main pages. [index](templates/bookin
 ## Design Choices
 
  * ### Typography
-    * The pronciple font family is a sans-serif font, 'Poppins' from [Google fonts](https://fonts.google.com/specimen/Poppins?query=poppins#standard-styles). It is an easy to read font and doesn't distract the user from the content of the site.
+    * The principle font family is a sans-serif font, 'Poppins' from [Google fonts](https://fonts.google.com/specimen/Poppins?query=poppins#standard-styles). It is an easy to read font and doesn't distract the user from the content of the site.
 
  * ### Colour Scheme
-    * The colour scheme was chosen to reflect the heritage of The Flying Scotsmen. The below palate was based upon the Blue used in the Scottish Flag (Pantone 300 / #0065BD). This gives the site an appealing and familiar look to the users.
+    * The colour scheme was chosen to reflect the heritage of The Flying Scotsmen. The below palate was based upon the blue used in the Scottish Flag (Pantone 300 / #0065BD). This gives the site an appealing and familiar look to the users.
 
     ![Colour Palate](media/readme-images/palate3.png) ![Colour Palate](media/readme-images/palate2.png)
 
@@ -104,7 +104,7 @@ The Flying Scotsmen project is made up of 4 main pages. [index](templates/bookin
 
 # Data Model
    * The Flying Scotsmen has been created around the principle of MVC (Model, View and Controller). It comprises a database with relationships between the various models 
-    (represented by tables in the database). The models are, Custom User(using the default User model as a base), Group Member, Booking, Slot, Aircraft and Contact. The views then render the models in a way dictated by the Controllers, represented in this case by the respective URLs and other user interactions.
+    (represented by tables in the database). The models are, Custom User (using the default User model as a base), Group Member, Booking, Slot, Aircraft and Contact. The views then render the models in a way dictated by the Controllers, represented in this case by the respective URLs and other user interactions.
 
 ![Data Model](media/readme-images/dataModel.png)
 
@@ -169,6 +169,7 @@ The Flying Scotsmen project is made up of 4 main pages. [index](templates/bookin
 
     ![Calendar-Large](media/readme-images/cal-large.png)
     ![Calendar-Small](media/readme-images/cal-small.png)
+    ![Calendar-Bookings](media/readme-images/cal-booking-modal.png)
     </details>
 
 
@@ -236,6 +237,7 @@ The Flying Scotsmen project is made up of 4 main pages. [index](templates/bookin
 * [HTML5](https://html.spec.whatwg.org/) - provides the content and structure for the website.
 * [CSS](https://www.w3.org/Style/CSS/Overview.en.html) - provides the styling.
 * [Django](https://www.djangoproject.com/) - Django framework for the project.
+* [Heroku](https://www.heroku.com/) - For project deployment.
 * [Bootstrap](https://getbootstrap.com/) - Design toolkit.
 * [GitHub](https://github.com/) - to host the repositories.
 * [Gitpod](https://www.gitpod.io/) - as the IDE for the application.
