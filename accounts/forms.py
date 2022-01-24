@@ -27,8 +27,8 @@ class CustomSignUpForm(UserCreationForm, SignupForm):
         widgets = {
             'message': forms.Textarea(attrs={'rows': 4,
                                              'cols': 33,
-                                             'placeholder': 'Why do you want\
-                                                 to join The Flying Scotsmen?'
+                                             'placeholder': 'Why do you want'
+                                             ' to join The Flying Scotsmen?'
                                              }),
         }
 
