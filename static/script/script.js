@@ -25,6 +25,7 @@ function sidebar() {
   });
 }
 
+
 // Calendar functions
 function deleteModal() {
   // Gets the delete modal working
@@ -236,7 +237,7 @@ let calendar_page = document.querySelectorAll('#calendar-page');
 
 function setup() {
   alerts();
-  sidebar();
+  Sidebar.open();
   if (password.length >= 1) {
     passwordMatch();
     return 'password';
@@ -259,10 +260,8 @@ window.addEventListener('load', () => {
   });
 
 
-
 // no console errors
-export default { deleteModal, sidebar, today, passwordMatch, calendar };
+export { deleteModal, sidebar, today, passwordMatch };
 
 // console errors in browser but script.test.js works.
-// module.exports = { deleteModal, sidebar, today, passwordMatch, calendar };
-
+// module.export = { deleteModal, sidebar, today, passwordMatch, calendar }
