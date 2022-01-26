@@ -2,24 +2,7 @@
  * @jest-environment jsdom
 */
 
-import { deleteModal, sidebar, today, passwordMatch } from "../script.js";
-
-// const deleteModal = require("../script.js");
-// const sidebar = require("../script.js");
-// const today = require("../script.js");
-// const passwordMatch = require("../script.js");
-
-jest.mock('../script.js', () => {
-  const original = jest. requireActual('../script')
-  return {
-    __esModule: true,
-    deleteModal: jest.fn(),
-    today: jest.fn(),
-    passwordMatch: jest.fn(),
-    sidebar: jest.fn()
-  }
-});
-
+import * as tfs from "../script.js";
 
 describe("Password match test", () => {
     beforeAll(() => {
@@ -33,10 +16,10 @@ describe("Password match test", () => {
         let password2 = document.getElementById('id_password2')
         password1.value = 'testpassword'
         password2.value = 'testpassword'
-        // const spy = jest.spyOn(tfs.passwordMatch, 'passwordMatch')
-        passwordMatch();
-        expect(passwordMatch).toHaveBeenCalled();
-        expect(passwordMatch).toBeTruthy()
+        const spy = jest.spyOn(tfs, 'passwordMatch')
+        tfs.passwordMatch();
+        expect(tfs.passwordMatch).toHaveBeenCalled();
+        expect(tfs.passwordMatch).toBeTruthy()
     })
 })
 
@@ -60,17 +43,14 @@ describe("Base.html tests", () => {
 
     test("sidebar.open should exist", () => {
         let closeBtn = document.querySelector("#btn");
-        // sidebar();
-        closeBtn.addEventListener('click', sidebar);
-        // const spy = jest.spyOn(sidebar, "sidebar" );
-        // expect(sidebar()).toBeTruthy();
-        closeBtn.click();
-        
-        expect(document.getElementById("sidebar").classList).toContain("sidebar");
-        expect(sidebar).toBeCalled();
-        closeBtn.click();
-        sidebar();
-        expect(sidebar()).toBeFalsy();
+        const spy = jest.spyOn(tfs, "sidebar" );
+        tfs.sidebar()
+        closeBtn.click()
+        expect(document.getElementById("sidebar").classList).toContain("open");
+        expect(tfs.sidebar).toBeCalled();
+        closeBtn.click()
+        tfs.sidebar()
+        expect(tfs.sidebar()).toBeFalsy();
     });
 });
 
@@ -131,14 +111,14 @@ describe("delete with bookings tests", ()=> {
 
     test("delete booking if activated should pass", () => {
     
-        // const spy = jest.spyOn(deleteModal, 'deleteModal')
-        deleteModal()
+        const spy = jest.spyOn(tfs, 'deleteModal')
+        tfs.deleteModal()
         const delete_button = document.querySelectorAll('.delete_button')
         let calbut = 0
         delete_button.forEach(button => {
             button.click()
         });
-        expect(deleteModal).toHaveBeenCalled();
+        expect(tfs.deleteModal).toHaveBeenCalled();
         let modals= document.querySelectorAll('#staticBackdrop')
         expect(modals.length).toEqual(1);
 
@@ -182,14 +162,14 @@ describe("calendar delete with bookings test", () => {
 
     test("delete calendar booking if activated should pass", () => {
     
-        // const spy = jest.spyOn(deleteModal, 'deleteModal')
+        const spy = jest.spyOn(tfs, 'deleteModal')
         let calbut = 1
-        deleteModal()
+        tfs.deleteModal()
         const delete_button = document.querySelectorAll('.delete_button')
         delete_button.forEach(button => {
             button.click()
         });
-        expect(deleteModal).toHaveBeenCalled();
+        expect(tfs.deleteModal).toHaveBeenCalled();
         let modals= document.querySelectorAll('#staticBackdrop')
         expect(modals.length).toEqual(1);
 
@@ -244,12 +224,12 @@ describe("calendar tests", () => {
     });
 
     test("calendar should highlight today", () => {
-        // const spy = jest.spyOn(today.today, 'today')
+        const spy = jest.spyOn(tfs, 'today')
         let d = 'Thu Jan 13 2022 11:42:12 GMT+0000 (Greenwich Mean Time)'
         const dates = document.querySelectorAll('.date');
         const present = document.querySelectorAll('#today')
-        today()
-        expect(today).toHaveBeenCalled();
+        tfs.today()
+        expect(tfs.today).toHaveBeenCalled();
         expect(present.length).toEqual(1);
     });
 })

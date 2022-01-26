@@ -25,6 +25,23 @@ function sidebar() {
   });
 }
 
+export const sidebarHolder = {
+  open() {
+    let sidebar = document.querySelector(".sidebar");
+    let closeBtn = document.querySelector("#btn");
+
+    closeBtn.addEventListener("click", function open() {
+
+      sidebar.classList.toggle("open");
+      if (sidebar.classList.contains('open')) {
+        return true;
+      } else {
+        return false;
+      }
+    });
+  }
+};
+
 
 // Calendar functions
 function deleteModal() {
@@ -237,7 +254,7 @@ let calendar_page = document.querySelectorAll('#calendar-page');
 
 function setup() {
   alerts();
-  Sidebar.open();
+  sidebar();
   if (password.length >= 1) {
     passwordMatch();
     return 'password';
