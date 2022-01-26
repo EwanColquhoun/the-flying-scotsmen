@@ -25,24 +25,6 @@ function sidebar() {
   });
 }
 
-export const sidebarHolder = {
-  open() {
-    let sidebar = document.querySelector(".sidebar");
-    let closeBtn = document.querySelector("#btn");
-
-    closeBtn.addEventListener("click", function open() {
-
-      sidebar.classList.toggle("open");
-      if (sidebar.classList.contains('open')) {
-        return true;
-      } else {
-        return false;
-      }
-    });
-  }
-};
-
-
 // Calendar functions
 function deleteModal() {
   // Gets the delete modal working
