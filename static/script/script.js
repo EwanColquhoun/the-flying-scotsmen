@@ -91,7 +91,6 @@ function calendarBookingModal() {
         bookingTable.classList.replace('hide', 'show');
         for (let a = 0; a <= bookings.length; a++) {
           bookings[a].classList.replace('hide', 'show');
-          console.log(bookings[a].classList)
           modal.addEventListener('hidden.bs.modal', function () {
             bookings[a].classList.replace('show', 'hide');
 
@@ -295,20 +294,14 @@ function setup() {
   sidebar();
   if (password.length >= 1) {
     passwordMatch();
-    // return 'password';
   } else if (calendar_page.length >= 1) {
     calendar();
-    // return 'calendar';
   } else if (date_input.length && map_div.length >= 1) {
     flatpickrInit();
     deleteModal();
-    // googleMapApi();
     initMap()
-    console.log('booking');
-    // return 'contact';
   } else if (date_input.length >= 1) {
     flatpickrInit();
-    console.log('contact')
   }
 }
 
