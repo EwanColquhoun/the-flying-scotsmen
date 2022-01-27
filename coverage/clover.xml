@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1643202964719" clover="3.2.0">
-  <project timestamp="1643202964719" name="All files">
+<coverage generated="1643204168617" clover="3.2.0">
+  <project timestamp="1643204168617" name="All files">
     <metrics statements="92" coveredstatements="34" conditionals="24" coveredconditionals="6" methods="23" coveredmethods="9" elements="139" coveredelements="49" complexity="0" loc="92" ncloc="92" packages="1" files="1" classes="1"/>
     <file name="script.js" path="/workspace/the-flying-scotsmen/static/script/script.js">
       <metrics statements="92" coveredstatements="34" conditionals="24" coveredconditionals="6" methods="23" coveredmethods="9"/>

@@ -91,6 +91,7 @@ function calendarBookingModal() {
         bookingTable.classList.replace('hide', 'show');
         for (let a = 0; a <= bookings.length; a++) {
           bookings[a].classList.replace('hide', 'show');
+          console.log(bookings[a].classList)
           modal.addEventListener('hidden.bs.modal', function () {
             bookings[a].classList.replace('show', 'hide');
 
@@ -107,18 +108,73 @@ function calendar() {
   calendarBookingModal();
 }
 
+// new Map
+// import { MarkerClusterer } from "@googlemaps/markerclusterer";
+
+// function initMap() {
+//   const map = new google.maps.Map(document.getElementById("map"), {
+//     zoom: 4.5,
+//     center: { lat: 52.3308, lng: 1.6851},
+//   });
+//   const infoWindow = new google.maps.InfoWindow({
+//     content: "",
+//     disableAutoPan: true,
+//   });
+//   // Create an array of alphabetical characters used to label the markers.
+//   const labels = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+//   // Add some markers to the map.
+//   const markers = locations.map((position, i) => {
+//     const label = labels[i % labels.length];
+//     const marker = new google.maps.Marker({
+//       position,
+//       label,
+//     });
+
+//     // markers can only be keyboard focusable when they have click listeners
+//     // open info window when marker is clicked
+//     marker.addListener("click", () => {
+//       infoWindow.setContent(label);
+//       infoWindow.open(map, marker);
+//     });
+//     return marker;
+//   });
+
+//   // Add a marker clusterer to manage the markers.
+//   new MarkerClusterer({ markers, map });
+// }
+
+// var locations = [
+//   {lat: 55.9508, lng: -3.3615},
+//   {lat: 58.2139, lng: -6.3219},
+//   {lat: 57.2037, lng: -2.2002},
+//   {lat: 57.3406, lng: -5.6491},
+//   {lat: 53.8981, lng: -0.3660},
+//   {lat: 55.0372, lng: -8.3414},
+//   {lat: 50.9660, lng: -2.1572},
+//   {lat: 50.1024, lng: -5.6681},
+//   {lat: 50.9557, lng: 0.9335},
+//   {lat: 47.4072, lng: 8.6396},
+//   {lat: 52.4825, lng: 13.3891},
+//   {lat: 48.5897, lng: -2.0758},
+//   {lat: 51.9555, lng: 4.4399},
+//   {lat: 48.9812, lng: 6.2437},
+//   {lat: 48.8335, lng: 3.0056},
+//   {lat: 56.4391, lng: -3.3714},
+//   {lat: 55.6836, lng: -6.2483},
+// ];
+
 // Map with Markers
 function initMap() {
-  map = new google.maps.Map(document.getElementById('map'), {
+  const map = new google.maps.Map(document.getElementById('map'), {
     center: {
       lat: 52.3308,
       lng: 1.6851
     },
     zoom: 4.5
   });
-}
+// }
 
-function googleMapApi() {
+// function googleMapApi() {
   var labels = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   var locations = [{
       lat: 55.9508,
@@ -239,18 +295,20 @@ function setup() {
   sidebar();
   if (password.length >= 1) {
     passwordMatch();
-    return 'password';
+    // return 'password';
   } else if (calendar_page.length >= 1) {
     calendar();
-    return 'calendar';
+    // return 'calendar';
   } else if (date_input.length && map_div.length >= 1) {
     flatpickrInit();
     deleteModal();
-    googleMapApi();
-    return 'contact';
+    // googleMapApi();
+    initMap()
+    console.log('booking');
+    // return 'contact';
   } else if (date_input.length >= 1) {
     flatpickrInit();
-    return 'bookings';
+    console.log('contact')
   }
 }
 
@@ -258,9 +316,4 @@ window.addEventListener('load', () => {
     setup();
   });
 
-
-// no console errors
 export { deleteModal, sidebar, today, passwordMatch };
-
-// console errors in browser but script.test.js works.
-// module.export = { deleteModal, sidebar, today, passwordMatch, calendar }

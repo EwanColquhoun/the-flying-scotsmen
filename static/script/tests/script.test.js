@@ -18,9 +18,11 @@ describe("Password match test", () => {
         password2.value = 'testpassword'
         const spy = jest.spyOn(tfs, 'passwordMatch')
         tfs.passwordMatch();
-        expect(tfs.passwordMatch).toHaveBeenCalled();
+        expect(spy).toHaveBeenCalled();
+        expect(spy).toHaveBeenCalled();
         expect(tfs.passwordMatch).toBeTruthy()
     })
+
 })
 
 describe("Base.html tests", () => {
@@ -47,7 +49,7 @@ describe("Base.html tests", () => {
         tfs.sidebar()
         closeBtn.click()
         expect(document.getElementById("sidebar").classList).toContain("open");
-        expect(tfs.sidebar).toBeCalled();
+        expect(spy).toBeCalled();
         closeBtn.click()
         tfs.sidebar()
         expect(tfs.sidebar()).toBeFalsy();
@@ -118,7 +120,7 @@ describe("delete with bookings tests", ()=> {
         delete_button.forEach(button => {
             button.click()
         });
-        expect(tfs.deleteModal).toHaveBeenCalled();
+        expect(spy).toHaveBeenCalled();
         let modals= document.querySelectorAll('#staticBackdrop')
         expect(modals.length).toEqual(1);
 

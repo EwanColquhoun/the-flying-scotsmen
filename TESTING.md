@@ -97,10 +97,40 @@ The responsive design tests were carried out manually with [Google Chrome DevToo
 * ### Resolved
     There were a number of bugs that were overcome during the development process. 
     1. The availability panel on the calendar page. The Calendar in the template tags isn't recognised by the availability section so it was difficult to find the problem and then develop a fix. The fix was to position it absolutley to the page and not the other block elements.
+
     2. I wanted to add a message to be associated with the new user on the sign-up page. I tried submitting it as a separate form but that wasn't the ideal solution. The fix was to modify the default User class. Then modify the default sign-up form. 
 
+
+    3. During testing a console error relating to 'Module is not recognised'. After some investigation it was discovered that there were incompatibility issuse with the script.js and the script.jest.js files.
+    <br>
+    Initially I attemped to remove 'module.exports = {myFunctions}' and replace it with 'export {myFunctions}'. This removed the console error but caused the test file to fail (see next bug!).
+
+    ![Module error](media/readme-images/module-error.png)
+
+    4. Now that the module error was removed. The next task was to get the script.test.js file to run and pass all tests. This was a bit more complicated, the problem seems widespread and the fixes seem very dependent on the rest of the code setup. After trying numerous 'fixes' ranging from renaming the .js files to .mjs files to setting up jest.config.js files.
+    The ultimate fix in this case was to create a babel.config.js file and to include the following;
+    <br>
+    <br>
+
+    > // babel.config.js //
+        module.exports = {
+        presets: [
+            [
+            '@babel/preset-env',
+            {
+                targets: {
+                node: 'current',
+                },
+            },
+            ],
+            ["@babel/preset-react"],
+        ],
+        };
+
+    The issue seems to stem from the transferring of the common JS into a format readable by ES Modules. Jest/Babel seems to need configuring to accept the ES6 variation of JS. 
+
 * ### Unresolved
-    At the time of writing there is still one known unresolved bug within the script.js file. I had to export two functions into the test_script file. I used 'module.exports' but once the browser loads the script it has an error that 'module' is unrecognised. The fix for this was just to use 'exports', this clears the error but doesn't actually export the functions into the test file and the tests fail. 
+    * At the time of writing there are currently no known bugs.
 
 [Back to top](<#contents>)
 ## Additional Testing
