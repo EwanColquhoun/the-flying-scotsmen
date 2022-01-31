@@ -177,67 +177,106 @@
                         <div class="row d-flex justify-content-center">
                             <div class="col-12 col-md-10 g-0">
                                 <div class="d-grid gap-3">
-                                    <div id="no-bookings-text" class="hide">There are no bookings for the selected date</div>
-                                        <table aria-label="Bookings table" id="booking-table" class="hide bookings">
-                                            
-                                        {% if bookings %}
-                                            <tr class="table-headings">
+                                    <div id="no-bookings-text" class="hide">There are no bookings for the selected date.
+                                    </div>
+                                    <table aria-label="Bookings table" id="booking-table" class="hide bookings">
                                         
-                                                <td>Slot</td>
-                                                <td>Aircraft</td>
-                                                <td class="notes">Notes</td>
-                                                <td>Inst Req</td>
-                                                <td>Edit/Delete</td>
-                                        
-                                            </tr>
-                                        {% endif %}
-                        
-                                    {% for booking in bookings %} 
-                                        {% if booking.approved == 0 %}
-
-                                            <tr class="booking-row hide booking_{{booking.date.month}}_{{booking.date.day}} awaiting">
-                                            
-                                                <td>{{ booking.slot.slot }}</td>
-                                                <td>{{ booking.aircraft }}</td>
-                                                <td class='notes'>{{ booking.notes }}</td>
-                                                <td>{{ booking.instructor_requested }}</td>
-
-                                                {% if booking.username == request.user.username %}
-                                                <td><span><a aria-label="Edit" href="/edit/{{ booking.id }}"><i class="far fa-edit edit-icon green"></i></a></span>
-                                                    <span><a aria-label="Delete name="{{ booking.id }}" class="delete_button" data-num="1" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                                                    <i class="far fa-times-circle cancel-icon red"></i></a></span>
-                                                </td>
-                                                {% else %}
-                                                <td><span><i class="fas fa-lock cancel-icon"></i></span>
-                                                    <span><i class="fas fa-lock cancel-icon"></i></span></td>
-                                                {% endif %}
-                                            </tr>
-                                        {% else %}
+                                    {% if bookings %}
+                                        <tr class="table-headings">
                                     
-                                            <tr class="booking-row hide booking_{{booking.date.month}}_{{booking.date.day}} approved">
-                                            
-                                                <td>{{ booking.slot.slot }}</td>
-                                                <td>{{ booking.aircraft }}</td>
-                                                <td class="notes">{{ booking.notes }}</td>
-                                                <td>{{ booking.instructor_requested }}</td>
+                                            <td>Slot</td>
+                                            <td>Aircraft</td>
+                                            <td class="notes">Notes</td>
+                                            <td>Inst Req</td>
+                                            <td>Edit/Delete</td>
+                                    
+                                        </tr>
+                                    {% endif %}
+                    
+                                {% for booking in bookings %} 
+                                    {% if booking.approved == 0 and booking.aircraft.reg == 'G-BSAI' %}
 
-                                                {% if booking.username == request.user.username %}
-                                                <td><span><a aria-label="Edit" href="/edit/{{ booking.id }}"><i class="far fa-edit edit-icon green"></i></a></span>
-                                                    <span><a aria-label="Delete" name="{{ booking.id }}" class="delete_button" data-num="1" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                                                    <i class="far fa-times-circle cancel-icon red"></i></a></span>
-                                                </td>
-                                                {% else %}
-                                                <td><span><i class="fas fa-lock cancel-icon"></i></span>
+                                        <tr class="booking-row hide booking_{{booking.date.month}}_{{booking.date.day}} purple-trans">
+                                        
+                                            <td>{{ booking.slot.slot }}</td>
+                                            <td>{{ booking.aircraft }}</td>
+                                            <td class='notes'>{{ booking.notes }}</td>
+                                            <td>{{ booking.instructor_requested }}</td>
+
+                                            {% if booking.username == request.user.username %}
+                                            <td><span><a aria-label="Edit" href="/edit/{{ booking.id }}"><i class="far fa-edit edit-icon green"></i></a></span>
+                                                <span><a aria-label="Delete" name="{{ booking.id }}" class="delete_button" data-num="1" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                                <i class="far fa-times-circle cancel-icon red"></i></a></span>
+                                            </td>
+                                            {% else %}
+                                            <td><span><i class="fas fa-lock cancel-icon"></i></span>
                                                 <span><i class="fas fa-lock cancel-icon"></i></span></td>
-                                                {% endif %}
-                                            </tr>
+                                            {% endif %}
+                                        </tr>
+                                    {% elif booking.approved == 0 and booking.aircraft.reg == 'G-BURD' %}
+
+                                    <tr class="booking-row hide booking_{{booking.date.month}}_{{booking.date.day}} green-trans">
+                                    
+                                        <td>{{ booking.slot.slot }}</td>
+                                        <td>{{ booking.aircraft }}</td>
+                                        <td class='notes'>{{ booking.notes }}</td>
+                                        <td>{{ booking.instructor_requested }}</td>
+
+                                        {% if booking.username == request.user.username %}
+                                        <td><span><a aria-label="Edit" href="/edit/{{ booking.id }}"><i class="far fa-edit edit-icon green"></i></a></span>
+                                            <span><a aria-label="Delete" name="{{ booking.id }}" class="delete_button" data-num="1" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                            <i class="far fa-times-circle cancel-icon red"></i></a></span>
+                                        </td>
+                                        {% else %}
+                                        <td><span><i class="fas fa-lock cancel-icon"></i></span>
+                                            <span><i class="fas fa-lock cancel-icon"></i></span></td>
                                         {% endif %}
-                                    {% empty %}
+                                    </tr>
+                                    {% elif booking.approved == 1 and booking.aircraft.reg == 'G-BSAI' %}
+
+                                    <tr class="booking-row hide booking_{{booking.date.month}}_{{booking.date.day}} aircraft-purple">
+                                    
+                                        <td>{{ booking.slot.slot }}</td>
+                                        <td>{{ booking.aircraft }}</td>
+                                        <td class='notes'>{{ booking.notes }}</td>
+                                        <td>{{ booking.instructor_requested }}</td>
+
+                                        {% if booking.username == request.user.username %}
+                                        <td><span><a aria-label="Edit" href="/edit/{{ booking.id }}"><i class="far fa-edit edit-icon green"></i></a></span>
+                                            <span><a aria-label="Delete" name="{{ booking.id }}" class="delete_button" data-num="1" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                            <i class="far fa-times-circle cancel-icon red"></i></a></span>
+                                        </td>
+                                        {% else %}
+                                        <td><span><i class="fas fa-lock cancel-icon"></i></span>
+                                            <span><i class="fas fa-lock cancel-icon"></i></span></td>
+                                        {% endif %}
+                                    </tr>
+                                    {% elif booking.approved == 1 and booking.aircraft.reg == 'G-BURD' %}
+
+                                    <tr class="booking-row hide booking_{{booking.date.month}}_{{booking.date.day}} aircraft-green">
+                                    
+                                        <td>{{ booking.slot.slot }}</td>
+                                        <td>{{ booking.aircraft }}</td>
+                                        <td class='notes'>{{ booking.notes }}</td>
+                                        <td>{{ booking.instructor_requested }}</td>
+
+                                        {% if booking.username == request.user.username %}
+                                        <td><span><a aria-label="Edit" href="/edit/{{ booking.id }}"><i class="far fa-edit edit-icon green"></i></a></span>
+                                            <span><a aria-label="Delete" name="{{ booking.id }}" class="delete_button" data-num="1" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                            <i class="far fa-times-circle cancel-icon red"></i></a></span>
+                                        </td>
+                                        {% else %}
+                                        <td><span><i class="fas fa-lock cancel-icon"></i></span>
+                                            <span><i class="fas fa-lock cancel-icon"></i></span></td>
+                                        {% endif %}
+                                    </tr>
+                                    {% endif %}
+                                {% empty %}
+                        
+                                        <div>Your bookings will appear here once approved by admin.</div> 
                             
-                                            <div>Your bookings will appear here once approved by admin.</div> 
-                                
-                                    {% endfor %}
-                                        </table>
+                                {% endfor %}
+                                    </table>
                                 </div>
                             </div>
                         </div>

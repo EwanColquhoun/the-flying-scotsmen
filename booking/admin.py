@@ -49,7 +49,7 @@ class BookingAdmin(admin.ModelAdmin):
     search_fields = ['date', 'aircraft', 'username', 'instructor_requested']
     actions = ['approve_bookings']
 
-    def approve_bookings(self, queryset):
+    def approve_bookings(self, request, queryset):
         queryset.update(approved=True)
 
 

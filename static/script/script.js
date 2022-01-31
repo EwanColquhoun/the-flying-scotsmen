@@ -89,11 +89,10 @@ function calendarBookingModal() {
       } else {
         noBookings.classList.replace('show', 'hide');
         bookingTable.classList.replace('hide', 'show');
-        for (let a = 0; a <= bookings.length; a++) {
+        for (let a = 0; a < bookings.length; a++) {
           bookings[a].classList.replace('hide', 'show');
           modal.addEventListener('hidden.bs.modal', function () {
             bookings[a].classList.replace('show', 'hide');
-
           });
         }
       }

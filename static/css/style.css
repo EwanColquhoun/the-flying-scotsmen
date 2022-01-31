@@ -526,7 +526,7 @@ input[type=checkbox] {
 }
 
 .green {
-  color: green;
+  color: #30aa00;
 }
 
 .approved {
@@ -850,12 +850,12 @@ input[type=checkbox] {
 }
 
 .aircraft-purple {
-  background-color: purple;
+  background-color: #800080cc;
   color: #E4E9F7;
 }
 
 .aircraft-green {
-  background-color: green;
+  background-color: rgba(0, 128, 0, 0.8);
   color: #E4E9F7;
 }
 
