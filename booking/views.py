@@ -32,6 +32,7 @@ class BookingDisplay(View):
     def get(self, request):
         current_user = request.user
         bookings = Booking.objects.filter(username=current_user)
+        today = date.today()
 
         return render(
             request,
@@ -39,6 +40,7 @@ class BookingDisplay(View):
             {
                 "bookings": bookings,
                 "bookingform": BookingForm(user=request.user),
+                "today": today,
             },
         )
 
