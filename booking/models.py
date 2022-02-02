@@ -130,6 +130,8 @@ class Contact(models.Model):
     replied = models.IntegerField(choices=REPLIED, default=False)
     created = models.DateTimeField(auto_now=True)
 
+    objects = models.Manager()
+
     class Meta:
         ordering = ['name']
 

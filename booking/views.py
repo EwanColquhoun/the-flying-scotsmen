@@ -11,7 +11,7 @@ from django.core.mail import send_mail
 from .models import Booking
 from .forms import BookingForm, ContactForm
 from .utils import Calendar, ValidateBooking, UserMessages
-from .email_util import send_contact_email_to_admin
+from .email_util import contact_email
 
 
 class HomeDisplay(View):

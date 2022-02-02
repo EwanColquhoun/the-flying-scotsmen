@@ -4,7 +4,7 @@ from django.contrib import messages
 from allauth.account.views import SignupView
 from allauth.account.utils import complete_signup
 from allauth.exceptions import ImmediateHttpResponse
-from booking.email_util import send_register_email_to_admin
+from booking.email_util import register_email
 from theFlyingScotsmen import settings
 from booking.utils import UserMessages
 
@@ -30,7 +30,8 @@ class CustomSignUpView(SignupView):
     def form_valid(self, form):
         self.user = form.save(self.request)
         try:
-            send_register_email_to_admin(form.instance)
+            # send_register_email_to_admin(form.instance)
+            register_email(form.instance)
             messages.add_message(
                 self.request,
                 messages.SUCCESS,

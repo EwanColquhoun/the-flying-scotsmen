@@ -1,11 +1,12 @@
 from django.test import TestCase
+from django.core import mail
 from django.test.client import Client
 from accounts.models import CustomUser
 from .models import Slot, Booking, Contact, Aircraft
 from .email_util import (
-    send_email_to_admin,
-    send_contact_email_to_admin,
-    send_register_email_to_admin)
+    booking_email,
+    contact_email,
+    register_email)
 
 
 class TestEmailUtil(TestCase):
@@ -35,15 +36,19 @@ class TestEmailUtil(TestCase):
             telephone='123456789',
             email='joe@tfs.com',
             message='Test contact message')
-        send_contact_email_to_admin(contact)
+        contact_email(contact)
         only_contact = Contact.objects.filter(name='Joe')
         self.assertEqual(len(only_contact), 1)
+        self.assertEqual(len(mail.outbox), 1)
+        self.assertEqual(mail.outbox[0].subject, 'New Contact Request')
 
     def test_send_email_to_admin(self):
         booking = self.booking
-        send_email_to_admin(booking)
+        booking_email(booking)
         only_booking = Booking.objects.filter(date='2024-01-01')
         self.assertEqual(len(only_booking), 1)
+        self.assertEqual(len(mail.outbox), 1)
+        self.assertEqual(mail.outbox[0].subject, 'New Booking Request')
 
     def test_send_register_email_to_admin(self):
         user = self.client
@@ -52,6 +57,6 @@ class TestEmailUtil(TestCase):
         user.last_name = 'Awesome'
         user.email = 'ap@tfs.com'
         user.message = 'Please accept me'
-        send_register_email_to_admin(user)
+        register_email(user)
         name = self.user.username
         self.assertEqual(name, 'testUser')
