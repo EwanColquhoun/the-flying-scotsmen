@@ -19,12 +19,10 @@ class EmailConfig:
             server.ehlo()
             server.login(self.sender_email, self.password)
             server.sendmail(self.sender_email, self.receiver_email, message)
-            # server.quit()
+            server.quit()
         except Exception as e:
             # Print any error messages to stdout
             print(e)
-        finally:
-            server.quit()
 
 def send_email_to_admin(booking):
     # sender_email = "theflyingscotsmen.booking@gmail.com"
