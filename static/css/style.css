@@ -510,7 +510,7 @@ input[type=checkbox] {
 
 .booking-row {
   border-radius: 5px;
-  border: 1px solid rgb(241, 214, 177);
+  border: 1px solid lightslategray;
 }
 
 .booking-row td {
@@ -526,7 +526,8 @@ input[type=checkbox] {
 }
 
 .green {
-  color: #30aa00;
+  /* color: #30aa00; */
+  color: rgb(3, 83, 3);
 }
 
 .approved {
@@ -860,6 +861,10 @@ input[type=checkbox] {
   background-color: rgba(0, 128, 0, 0.8);
   color: #E4E9F7;
 }
+
+.aircraft-purple .edit-icon {
+  color: rgb(27, 148, 27);
+} 
 
 .calendar ul {
   height: 80%;

@@ -33,7 +33,7 @@ class BookingDisplay(View):
 
     def get(self, request):
         current_user = request.user
-        bookings = Booking.objects.filter(username=current_user)
+        bookings = Booking.objects.filter(username=current_user).order_by("-date")
         today = date.today()
 
         return render(
