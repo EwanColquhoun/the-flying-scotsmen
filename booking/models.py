@@ -75,9 +75,6 @@ class Booking(models.Model):
     def __str__(self):
         return str(self.aircraft)
 
-    def reverse_date(self):
-        ordering.reverse('date')
-
     @property
     def get_html_url(self):
         """

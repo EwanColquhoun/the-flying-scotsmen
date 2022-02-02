@@ -31,7 +31,7 @@ TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 
@@ -71,8 +71,8 @@ SITE_ID = 1
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
-# ACCOUNT_ADAPTER = 'theFlyingScotsmen.users.adapter.MyAccountAdapter'
 
+# Email settings:
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587

@@ -2,7 +2,7 @@ from datetime import date
 from calendar import HTMLCalendar
 from django.contrib import messages
 from .models import Booking
-from .email import send_email_to_admin
+from .email_util import send_email_to_admin
 
 
 class Calendar(HTMLCalendar):
@@ -150,6 +150,7 @@ class ValidateBooking:
         """
         Calls the respective validation methods.
         """
+        # checks for a future date
         if self.booking_form.instance.date > self.today:
             q_s = Booking.objects.filter(
                     date=self.booking_form.instance.date,
@@ -161,6 +162,7 @@ class ValidateBooking:
                     slot=7,
                     aircraft_id=self.booking_form.instance.aircraft_id,
                     ).count()
+            # checks that if a MAINT slot, you are admin.
             if (self.booking_form.instance.slot_id == 7
                and self.request.user.username != 'admin2021'):
                 messages.add_message(
@@ -168,6 +170,7 @@ class ValidateBooking:
                     messages.WARNING,
                     UserMessages.maint)
             else:
+                # edit booking or initial booking.
                 if self.edit:
                     updated = self.edit_validation(self.request, q_s, maint)
                     return updated

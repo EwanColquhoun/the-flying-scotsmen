@@ -4,7 +4,7 @@ from django.contrib import messages
 from allauth.account.views import SignupView
 from allauth.account.utils import complete_signup
 from allauth.exceptions import ImmediateHttpResponse
-from booking.email import send_register_email_to_admin
+from booking.email_util import send_register_email_to_admin
 from theFlyingScotsmen import settings
 from booking.utils import UserMessages
 
@@ -28,8 +28,6 @@ class CustomSignUpView(SignupView):
     success_url = 'awaiting_reg'
 
     def form_valid(self, form):
-        # By assigning the User to a property on the view, we allow subclasses
-        # of SignupView to access the newly created User instance
         self.user = form.save(self.request)
         try:
             send_register_email_to_admin(form.instance)

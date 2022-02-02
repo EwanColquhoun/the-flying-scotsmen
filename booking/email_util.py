@@ -3,9 +3,32 @@ import smtplib
 import ssl
 
 
-def send_email_to_admin(booking):
+class EmailConfig:
     sender_email = "theflyingscotsmen.booking@gmail.com"
     receiver_email = "theflyingscotsmen.booking@gmail.com"
+    smtp_server = "smtp.gmail.com"
+    port = 587
+    password = os.environ.get('EMAIL_PASSWORD')
+
+    @classmethod
+    def send_email(self, message, context):
+        try:
+            server = smtplib.SMTP_SSL(self.smtp_server, self.port)
+            server.ehlo()
+            server.starttls(context=context)  # Secure the connection
+            server.ehlo()
+            server.login(self.sender_email, self.password)
+            server.sendmail(self.sender_email, self.receiver_email, message)
+            # server.quit()
+        except Exception as e:
+            # Print any error messages to stdout
+            print(e)
+        finally:
+            server.quit()
+
+def send_email_to_admin(booking):
+    # sender_email = "theflyingscotsmen.booking@gmail.com"
+    # receiver_email = "theflyingscotsmen.booking@gmail.com"
     message = f"""
     Subject: NEW BOOKING
 
@@ -22,27 +45,28 @@ def send_email_to_admin(booking):
     https://the-flying-scotsmen.herokuapp.com/admin/booking/booking/
 
     Thanks."""
-    smtp_server = "smtp.gmail.com"
-    port = 587  # For starttls
-    sender_email = "theflyingscotsmen.booking@gmail.com"
-    password = os.environ.get('EMAIL_PASSWORD')
+    # smtp_server = "smtp.gmail.com"
+    # port = 587  # For starttls
+    # sender_email = "theflyingscotsmen.booking@gmail.com"
+    # password = os.environ.get('EMAIL_PASSWORD')
 
-    # Create a secure SSL context
+    # # Create a secure SSL context
     context = ssl.create_default_context()
-
+    EmailConfig.send_email(message, context)
     # Try to log in to server and send email
-    try:
-        server = smtplib.SMTP(smtp_server, port)
-        server.ehlo()
-        server.starttls(context=context)  # Secure the connection
-        server.ehlo()
-        server.login(sender_email, password)
-        server.sendmail(sender_email, receiver_email, message)
-    except Exception as e:
-        # Print any error messages to stdout
-        print(e)
-    finally:
-        server.quit()
+
+    # try:
+    #     server = smtplib.SMTP(EmailConfig.smtp_server, EmailConfig.port)
+    #     server.ehlo()
+    #     server.starttls(context=context)  # Secure the connection
+    #     server.ehlo()
+    #     server.login(EmailConfig.sender_email, EmailConfig.password)
+    #     server.sendmail(EmailConfig.sender_email, Email.Config.receiver_email, message)
+    # except Exception as e:
+    #     # Print any error messages to stdout
+    #     print(e)
+    # finally:
+    #     server.quit()
 
 
 def send_contact_email_to_admin(contact):

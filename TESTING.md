@@ -130,7 +130,7 @@ The responsive design tests were carried out manually with [Google Chrome DevToo
     The issue seems to stem from the transferring of the common JS into a format readable by ES Modules. Jest/Babel seems to need configuring to accept the ES6 variation of JS. 
 
 * ### Unresolved
-    * At the time of writing there are currently no known bugs.
+    * At the time of writing there is one bug that might detract from the User Experience over the long term. On the Bookings page, currently all the bookings are displayed with the latest being at the top. As the number of bookings increase, the application will continue to display all the existing bookings. This will eventually take up memory and thus time. The most recent bookings are readily visible. For convenience it would be nice to only display the previous 6 months bookings for example. 
 
 [Back to top](<#contents>)
 ## Additional Testing

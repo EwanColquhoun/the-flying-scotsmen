@@ -2,7 +2,7 @@ from django.test import TestCase
 from django.test.client import Client
 from accounts.models import CustomUser
 from .models import Slot, Booking, Contact, Aircraft
-from .email import (
+from .email_util import (
     send_email_to_admin,
     send_contact_email_to_admin,
     send_register_email_to_admin)
