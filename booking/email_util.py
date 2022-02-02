@@ -1,7 +1,6 @@
-import smtplib
-import ssl
-import os
-import yagmail
+# import smtplib
+# import ssl
+# import os
 from django.core.mail import send_mail
 
 
