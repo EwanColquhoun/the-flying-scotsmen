@@ -95,29 +95,37 @@ class ValidateBooking:
             booking.save()
             # send_email_to_admin(self.booking_form.instance)
             if 'runserver' in sys.argv:
-                return
+                print('testEnvbooking')
+                messages.add_message(
+                    request,
+                    messages.SUCCESS,
+                    UserMessages.confirmed)
+                return True
             else:
                 booking_email(self.booking_form.instance)
-                return
-            messages.add_message(
-                request,
-                messages.SUCCESS,
-                UserMessages.confirmed)
-            return True
+                messages.add_message(
+                    request,
+                    messages.SUCCESS,
+                    UserMessages.confirmed)
+                return True
         elif q_s == 0 and maint == 0:
             booking = self.booking_form.save(commit=False)
             booking.save()
             # send_email_to_admin(self.booking_form.instance)
             if 'runserver' in sys.argv:
-                return
+                print('testEnvbooking')
+                messages.add_message(
+                    request,
+                    messages.SUCCESS,
+                    UserMessages.confirmed)
+                return True
             else:
                 booking_email(self.booking_form.instance)
-                return
-            messages.add_message(
-                request,
-                messages.SUCCESS,
-                UserMessages.confirmed)
-            return True
+                messages.add_message(
+                    request,
+                    messages.SUCCESS,
+                    UserMessages.confirmed)
+                return True
         elif q_s != 0 and maint != 0:
             messages.add_message(
                 request,
@@ -139,15 +147,19 @@ class ValidateBooking:
             booking = self.booking_form.save(commit=False)
             booking.save()
             if 'runserver' in sys.argv:
-                return
+                print('testEnvbooking')
+                messages.add_message(
+                    request,
+                    messages.SUCCESS,
+                    UserMessages.confirmed)
+                return True
             else:
                 booking_email(self.booking_form.instance)
-                return
-            messages.add_message(
-                request,
-                messages.SUCCESS,
-                UserMessages.confirmed)
-            return True
+                messages.add_message(
+                    request,
+                    messages.SUCCESS,
+                    UserMessages.confirmed)
+                return True
         elif q_s != 0 and maint != 0:
             messages.add_message(
                 request,

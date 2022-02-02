@@ -119,7 +119,6 @@ class EditDisplay(View):
                 msg,
                 booking).validate()
             if updated:
-                print(request.POST)
                 return HttpResponseRedirect(reverse('bookings'))
             else:
                 return redirect('edit_booking', booking_id=booking.id)
@@ -205,16 +204,23 @@ class ContactDisplay(View):
             form.replied = False
             form.save()
             if 'runserver' in sys.argv:
-                return
+                print('testENV')
+                messages.add_message(
+                    request,
+                    messages.SUCCESS,
+                    UserMessages.sent)
+                return redirect('contact')
+
             else:
+                print('nottest')
                 contact_email(form.instance)
-                return
-            messages.add_message(
-                request,
-                messages.SUCCESS,
-                UserMessages.sent)
-            return redirect('contact')
+                messages.add_message(
+                    request,
+                    messages.SUCCESS,
+                    UserMessages.sent)
+                return redirect('contact')
         else:
+            print('notvalid')
             messages.add_message(
                 request,
                 messages.WARNING,
