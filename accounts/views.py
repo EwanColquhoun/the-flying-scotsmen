@@ -34,7 +34,7 @@ class CustomSignUpView(SignupView):
         self.user = form.save(self.request)
         try:
             if 'runserver' in sys.argv:
-                pass
+                return
             else:
                 register_email(form.instance)
                 return

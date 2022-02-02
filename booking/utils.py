@@ -95,7 +95,7 @@ class ValidateBooking:
             booking.save()
             # send_email_to_admin(self.booking_form.instance)
             if 'runserver' in sys.argv:
-                pass
+                return
             else:
                 booking_email(self.booking_form.instance)
                 return
@@ -109,7 +109,7 @@ class ValidateBooking:
             booking.save()
             # send_email_to_admin(self.booking_form.instance)
             if 'runserver' in sys.argv:
-                pass
+                return
             else:
                 booking_email(self.booking_form.instance)
                 return
@@ -139,7 +139,7 @@ class ValidateBooking:
             booking = self.booking_form.save(commit=False)
             booking.save()
             if 'runserver' in sys.argv:
-                pass
+                return
             else:
                 booking_email(self.booking_form.instance)
                 return

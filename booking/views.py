@@ -205,7 +205,7 @@ class ContactDisplay(View):
             form.replied = False
             form.save()
             if 'runserver' in sys.argv:
-                pass
+                return
             else:
                 contact_email(form.instance)
                 return
