@@ -11,7 +11,8 @@ from booking.utils import UserMessages
 
 class AwaitingRegDisplay(View):
     """
-    Displayed when a registration has been completed but the user is not yet registered.
+    Displayed when a registration has been completed
+    but the user is not yet registered.
     """
     def get(self, request):
 
@@ -28,9 +29,9 @@ class CustomSignUpView(SignupView):
     success_url = 'awaiting_reg'
 
     def form_valid(self, form):
+        # User initiated here to gain access.
         self.user = form.save(self.request)
         try:
-            # send_register_email_to_admin(form.instance)
             register_email(form.instance)
             messages.add_message(
                 self.request,

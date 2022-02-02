@@ -132,6 +132,12 @@ The responsive design tests were carried out manually with [Google Chrome DevToo
 * ### Unresolved
     * At the time of writing there is one bug that might detract from the User Experience over the long term. On the Bookings page, currently all the bookings are displayed with the latest being at the top. As the number of bookings increase, the application will continue to display all the existing bookings. This will eventually take up memory and thus time. The most recent bookings are readily visible. For convenience it would be nice to only display the previous 6 months bookings for example. 
 
+    * When the application is viewed on a development live server (In this case, port 8000 with GitPod) the email function will not work. The server fails to connect to the email ports (tried ports 587 and 465). Upon further investigation it appears that GitPod have blocked the access on those ports recently to prevent attacks. The work around to get the tests to run and pass is to assign another EMAIL_BACKEND environmental variable for testing purposes. As the email functionality isn't crucial for the application whilst in the development environment this bug will we investigated further after final deployment. 
+    <br>
+    The error message is below:
+
+    ![Email error](media/readme-images/email_error.png)
+
 [Back to top](<#contents>)
 ## Additional Testing
 ### Lighthouse
