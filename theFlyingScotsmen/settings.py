@@ -75,7 +75,7 @@ LOGOUT_REDIRECT_URL = '/'
 # Email settings:
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
+EMAIL_PORT = 465
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = "theflyingscotsmen.booking@gmail.com"
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASSWORD')
@@ -84,7 +84,6 @@ EMAIL_VERIFICATION = 'optional'
 
 ACCOUNT_FORMS = {'signup': 'accounts.forms.CustomSignUpForm'}
 AUTH_USER_MODEL = 'accounts.CustomUser'
-
 
 MESSAGE_TAGS = {
     messages.DEBUG: 'alert-info',
