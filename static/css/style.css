@@ -540,10 +540,12 @@ input[type=checkbox] {
 
 .purple-trans {
   background-color: rgba(128, 0, 128, 0.3);
+  color: rgba(0, 0, 0, 0.5);
 }
 
 .green-trans {
   background-color: rgba(0, 128, 0, 0.3);
+  color: rgba(0, 0, 0, 0.5);
 }
 
 .red {

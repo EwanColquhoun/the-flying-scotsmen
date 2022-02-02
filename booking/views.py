@@ -6,6 +6,8 @@ from django.views import View
 from django.utils.safestring import mark_safe
 from django.contrib import messages
 
+from django.core.mail import send_mail
+
 from .models import Booking
 from .forms import BookingForm, ContactForm
 from .utils import Calendar, ValidateBooking, UserMessages
@@ -202,7 +204,13 @@ class ContactDisplay(View):
         if form.is_valid():
             form.replied = False
             form.save()
-            send_contact_email_to_admin(form.instance)
+            # send_contact_email_to_admin(form.instance)
+            send_mail(
+                'TFS Contact Request',
+                'form.instance.name',
+                form.instance.email,
+                ['theflyingscotsmen.booking@gmail.com']
+            )
             messages.add_message(
                 request,
                 messages.SUCCESS,
