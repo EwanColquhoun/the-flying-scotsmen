@@ -3,6 +3,7 @@ from calendar import HTMLCalendar
 from django.contrib import messages
 from .models import Booking
 from .email_util import booking_email, contact_email, register_email
+import sys
 
 
 class Calendar(HTMLCalendar):
@@ -93,7 +94,11 @@ class ValidateBooking:
             booking = self.booking_form.save(commit=False)
             booking.save()
             # send_email_to_admin(self.booking_form.instance)
-            booking_email(self.booking_form.instance)
+            if 'runserver' in sys.argv:
+                pass
+            else:
+                booking_email(self.booking_form.instance)
+                return
             messages.add_message(
                 request,
                 messages.SUCCESS,
@@ -103,7 +108,11 @@ class ValidateBooking:
             booking = self.booking_form.save(commit=False)
             booking.save()
             # send_email_to_admin(self.booking_form.instance)
-            booking_email(self.booking_form.instance)
+            if 'runserver' in sys.argv:
+                pass
+            else:
+                booking_email(self.booking_form.instance)
+                return
             messages.add_message(
                 request,
                 messages.SUCCESS,
@@ -129,8 +138,11 @@ class ValidateBooking:
         if q_s == 0 and maint == 0:
             booking = self.booking_form.save(commit=False)
             booking.save()
-            # send_email_to_admin(self.booking_form.instance)
-            booking_email(self.booking_form.instance)
+            if 'runserver' in sys.argv:
+                pass
+            else:
+                booking_email(self.booking_form.instance)
+                return
             messages.add_message(
                 request,
                 messages.SUCCESS,

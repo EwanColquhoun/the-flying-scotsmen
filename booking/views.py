@@ -1,5 +1,6 @@
 from datetime import datetime, timedelta, date
 import calendar
+import sys
 from django.shortcuts import render, get_object_or_404, reverse, redirect
 from django.http import HttpResponseRedirect
 from django.views import View
@@ -203,7 +204,11 @@ class ContactDisplay(View):
         if form.is_valid():
             form.replied = False
             form.save()
-            contact_email(form.instance)
+            if 'runserver' in sys.argv:
+                pass
+            else:
+                contact_email(form.instance)
+                return
             messages.add_message(
                 request,
                 messages.SUCCESS,

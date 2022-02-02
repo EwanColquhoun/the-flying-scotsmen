@@ -7,6 +7,7 @@ from allauth.exceptions import ImmediateHttpResponse
 from booking.email_util import register_email
 from theFlyingScotsmen import settings
 from booking.utils import UserMessages
+import sys
 
 
 class AwaitingRegDisplay(View):
@@ -32,7 +33,11 @@ class CustomSignUpView(SignupView):
         # User initiated here to gain access.
         self.user = form.save(self.request)
         try:
-            register_email(form.instance)
+            if 'runserver' in sys.argv:
+                pass
+            else:
+                register_email(form.instance)
+                return
             messages.add_message(
                 self.request,
                 messages.SUCCESS,
