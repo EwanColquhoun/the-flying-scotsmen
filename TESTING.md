@@ -147,11 +147,14 @@ The site was also tested using [Google Lighthouse](https://developers.google.com
 * Best Practices - Site conforms to industry best practices.
 * SEO - Search engine optimisation. Is the site optimised for search engine result rankings.
 
-Here are the results from The Flying Scotsmen test. 
-<!-- ![Lighthouse test results](assets/readme-images/testing.png) -->
-   <details><summary>Lighthouse Testing</summary>
-        #
-    </details>
+Here are the results from The Flying Scotsmen test;
+
+<details><summary>Lighthouse Testing</summary>
+
+![Lighthouse home](media/readme-images/lh_home.png)
+![Lighthouse Calendar](media/readme-images/lh_cal.png)
+
+</details>
 
 
 This part of the testing process showed up that the site was slow to load. All the images were compressed and the 'prefectch' function was added to the link elements in the head of the INDEX.page. This sped up the loading time and increased the performance rating.
