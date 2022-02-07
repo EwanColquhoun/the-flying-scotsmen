@@ -1,3 +1,4 @@
+import sys
 from django.shortcuts import render
 from django.views import View
 from django.contrib import messages
@@ -5,9 +6,8 @@ from allauth.account.views import SignupView
 from allauth.account.utils import complete_signup
 from allauth.exceptions import ImmediateHttpResponse
 from booking.email_util import register_email
-from theFlyingScotsmen import settings
 from booking.utils import UserMessages
-import sys
+from theFlyingScotsmen import settings
 
 
 class AwaitingRegDisplay(View):
@@ -48,5 +48,5 @@ class CustomSignUpView(SignupView):
                 settings.EMAIL_VERIFICATION,
                 self.success_url,
             )
-        except ImmediateHttpResponse as e:
-            return e.response
+        except ImmediateHttpResponse as error:
+            return error.response

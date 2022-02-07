@@ -190,7 +190,7 @@ class ContactDisplay(View):
     def get(self, request):
         form = ContactForm()
         context = {
-            'contact_form': form,
+            'form': form,
         }
         return render(
             request,
@@ -204,7 +204,6 @@ class ContactDisplay(View):
             form.replied = False
             form.save()
             if 'runserver' in sys.argv:
-                print('testENV')
                 messages.add_message(
                     request,
                     messages.SUCCESS,
@@ -212,7 +211,6 @@ class ContactDisplay(View):
                 return redirect('contact')
 
             else:
-                print('nottest')
                 contact_email(form.instance)
                 messages.add_message(
                     request,
@@ -220,7 +218,6 @@ class ContactDisplay(View):
                     UserMessages.sent)
                 return redirect('contact')
         else:
-            print('notvalid')
             messages.add_message(
                 request,
                 messages.WARNING,
@@ -229,6 +226,6 @@ class ContactDisplay(View):
 
         form = ContactForm()
         context = {
-            'contact_form': form,
+            'form': form,
         }
         return render(request, 'booking/contact.html', context)

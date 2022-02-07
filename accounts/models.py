@@ -16,7 +16,8 @@ class CustomUser(AbstractUser):
 
 class GroupMember(models.Model):
     """
-    The class for The Flying Scotsmen group members to allow access to booking and calender functions.
+    The class for The Flying Scotsmen group members
+    to allow access to booking and calender functions.
     """
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE,
                                 unique=True,

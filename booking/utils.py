@@ -1,9 +1,9 @@
+import sys
 from datetime import date
 from calendar import HTMLCalendar
 from django.contrib import messages
 from .models import Booking
-from .email_util import booking_email, contact_email, register_email
-import sys
+from .email_util import booking_email
 
 
 class Calendar(HTMLCalendar):
@@ -93,9 +93,7 @@ class ValidateBooking:
         if q_s != 0 and self.message != self.msg and maint == 0:
             booking = self.booking_form.save(commit=False)
             booking.save()
-            # send_email_to_admin(self.booking_form.instance)
             if 'runserver' in sys.argv:
-                print('testEnvbooking')
                 messages.add_message(
                     request,
                     messages.SUCCESS,
@@ -111,9 +109,8 @@ class ValidateBooking:
         elif q_s == 0 and maint == 0:
             booking = self.booking_form.save(commit=False)
             booking.save()
-            # send_email_to_admin(self.booking_form.instance)
+
             if 'runserver' in sys.argv:
-                print('testEnvbooking')
                 messages.add_message(
                     request,
                     messages.SUCCESS,
@@ -147,7 +144,6 @@ class ValidateBooking:
             booking = self.booking_form.save(commit=False)
             booking.save()
             if 'runserver' in sys.argv:
-                print('testEnvbooking')
                 messages.add_message(
                     request,
                     messages.SUCCESS,

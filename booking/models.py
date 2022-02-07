@@ -1,5 +1,4 @@
 from datetime import date
-from django.urls import reverse
 from django.db import models
 from cloudinary.models import CloudinaryField
 from phonenumber_field.modelfields import PhoneNumberField
@@ -80,8 +79,6 @@ class Booking(models.Model):
         """
         Displays the booking as a span in the Calendar
         """
-        url = reverse('edit_booking', args=(self.pk,))
-
         if str(self.aircraft) == 'G-BSAI':
             if self.approved == 1:
                 return (
@@ -97,20 +94,21 @@ class Booking(models.Model):
                     f'{self.date.day}>{self.slot} | {self.username} | '
                     f'<i class="fas fa-user-cog"></i></span>'
                 )
-        elif self.approved == 1:
-            return (
-                f'<span class="btn-events aircraft-green calendar-events"'
-                f'data-ref={self.approved} name={self.date.month}_'
-                f'{self.date.day}>{self.slot} | {self.username}'
-                f' | <i class="fas fa-check"></i></span>'
-            )
-        else:
-            return (
-                f'<span class="btn-events calendar-events green-trans"'
-                f' data-ref={self.approved} name={self.date.month}_'
-                f'{self.date.day}>{self.slot} | {self.username}'
-                f' | <i class="fas fa-user-cog"></i></span>'
-            )
+        elif str(self.aircraft) == 'G-BURD':
+            if self.approved == 1:
+                return (
+                    f'<span class="btn-events aircraft-green calendar-events"'
+                    f'data-ref={self.approved} name={self.date.month}_'
+                    f'{self.date.day}>{self.slot} | {self.username}'
+                    f' | <i class="fas fa-check"></i></span>'
+                )
+            else:
+                return (
+                    f'<span class="btn-events calendar-events green-trans"'
+                    f' data-ref={self.approved} name={self.date.month}_'
+                    f'{self.date.day}>{self.slot} | {self.username}'
+                    f' | <i class="fas fa-user-cog"></i></span>'
+                )
 
 
 class Contact(models.Model):

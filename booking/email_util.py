@@ -5,24 +5,24 @@ def booking_email(booking):
     send_mail(
         'New Booking Request',
         f"""
-#         Subject: NEW BOOKING
+        Subject: NEW BOOKING
 
-#         You have a new booking request to approve
-#         Member Username: {booking.username}
-#         Booking Date: {booking.date}
-#         Slot: {booking.slot}
-#         Aircraft: {booking.aircraft}
-#         Instructor Requested: {booking.instructor_requested}
-#         Notes: {booking.notes}
+        You have a new booking request to approve
+        Member Username: {booking.username}
+        Booking Date: {booking.date}
+        Slot: {booking.slot}
+        Aircraft: {booking.aircraft}
+        Instructor Requested: {booking.instructor_requested}
+        Notes: {booking.notes}
 
-#         Click here to visit the admin site
+        Click here to visit the admin site
 
-#         https://the-flying-scotsmen.herokuapp.com/admin/booking/booking/
+        https://the-flying-scotsmen.herokuapp.com/admin/booking/booking/
 
-#         Thanks.""",
+        Thanks.""",
         None,
         ['theflyingscotsmen.booking@gmail.com'],
-        fail_silently=False,
+        fail_silently=True,
     )
 
 
@@ -46,7 +46,7 @@ def contact_email(contact):
         Thanks.""",
         None,
         ['theflyingscotsmen.booking@gmail.com'],
-        fail_silently=False,
+        fail_silently=True,
     )
 
 
@@ -72,5 +72,5 @@ def register_email(user):
         Thanks.""",
         None,
         ['theflyingscotsmen.booking@gmail.com'],
-        fail_silently=False,
+        fail_silently=True,
     )
