@@ -24,10 +24,10 @@
 <!-- Confirmed content -->
 <div class="container">
     <div class="row d-flex justify-content-center">
-        <div class="col-12 d-flex justify-content-center">
+        <div class="col-12 center">
             <p>{% blocktrans with confirmation.email_address.email as email %}Please confirm that <a href="mailto:{{ email }}"><span class="scots strong">{{ email }}</span></a> is an e-mail address for user <span class="scots strong">{{ user_display }}</span>.{% endblocktrans %}</p>
 
-            <form method="post" action="{% url 'account_confirm_email' confirmation.key %}">
+            <form class="d-flex justify-content-center" method="post" action="{% url 'account_confirm_email' confirmation.key %}">
             {% csrf_token %}
                 <button class="btn btn-verify" type="submit">{% trans 'Confirm' %}</button>
             </form>

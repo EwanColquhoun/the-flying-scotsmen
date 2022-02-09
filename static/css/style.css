@@ -952,11 +952,19 @@ margin: unset;
   margin: 10px 10px;
 }
 
+.center {
+  display: flex!important;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+}
+
 .btn-remove {
   background-color: #e62e2e;
   color: #E4E9F7;
   display: inline;
-  margin: 10px 10px;
+  margin: 0 auto;
 }
 
 .btn-remove:hover {
