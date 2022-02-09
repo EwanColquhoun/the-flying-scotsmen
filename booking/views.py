@@ -138,6 +138,8 @@ class EditDisplay(View):
 class CalendarView(View):
     """
     Calendar page
+    Methods get, get_date, prev_month and next_month all from 
+    Huiwen (https://www.huiwenteo.com/normal/2018/07/24/django-calendar.html).
     """
 
     def get(self, request):

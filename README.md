@@ -370,7 +370,7 @@ The method for cloning a project from GitHub is below:
 
 ### Media
 * [Unsplash](https://unsplash.com/) - Stock Cessna Photos
-* William MacLeod - Photos of G-BSAI
+* William MacLeod (Friend) - Photos of G-BSAI
 
 [Back to top](<#contents>)
 
