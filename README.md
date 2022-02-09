@@ -66,6 +66,10 @@ The live site can be viewed [here!](https://the-flying-scotsmen.herokuapp.com/)
 
 * As an **ADMIN** I want to **BOOK SLOTS** so that **THE AIRCRAFT HAVE PREPOPULATED SLOTS FOR MAINTAINANCE**.
 
+The above user stories were created and their deveopment progress monitored in an agile environment. The project tab of github was used to help with this task.
+
+![Github agile](media/readme-images/agile.png)
+
 [Back to top](<#contents>)
 
 ## Wireframes
@@ -218,7 +222,7 @@ The Flying Scotsmen project is made up of 4 main pages. [index](templates/bookin
 [Back to top](<#contents>)
 
 ### Admin Page
- * Admin has access via the default Django Admin page. The Admin login can be accessed from the navigation menus. Once logged in, Admin users have all the access to amend, cancel, make and approve bookings. They can change slots, edit the aircraft details. All the contact requests can be viewed from the admin page. 
+ * Admin has access via the default Django Admin page. The Admin login can be accessed from the navigation menus once a superuser has logged into The Flying Scotsmen. Once logged in, Admin users have all the access to amend, cancel, make and approve bookings. They can change slots, edit the aircraft details. All the contact requests can be viewed from the admin page. 
     <details><summary>Screenshots</summary>
 
     ![Admin](media/readme-images/admin.png)

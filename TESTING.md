@@ -33,15 +33,17 @@ After some minor re-formatting the script passed the JSHint tests. There are som
 ## Automated testing with Jest and Unittest
 
 The automated testing for The Flying Scotsmen was completed using the Django built in test library Unittest, more specifically the TestCase class. The tests cover form, models and views. Overall test coverage is at 87% for the Python based files. 
-Jest was used for the testing with JavaScript. There are a number of external sources used (Google Maps, Flatpickr, Bootstrap) so I haven't endeavoured to test those items within my code. The coverage of the script file as a whole is at 37%.
+Jest was used for the testing with JavaScript. There are a number of external sources used (Google Maps, Flatpickr, Bootstrap) so I haven't endeavoured to test those items within my code. The coverage of the script file as a whole is at 38%.
 
 * UnitTest for Django
+    * UnitTest is built into Django. The documentation is located on the [Django](https://docs.djangoproject.com/en/4.0/topics/testing/overview/#running-tests) website. There is good documentaion for coverage located [here](https://docs.djangoproject.com/en/4.0/internals/contributing/writing-code/unit-tests/#code-coverage).
 
 ![Unittest Validation](media/readme-images/unittest.png)
 
 ![Coverage report](media/readme-images/coverage.png)
 
 * Jest for JavaScript
+    * Your application needs to be set up to use Jest for testing. There is good documentation on the [Jest](https://jestjs.io/docs/getting-started) website. 
 
 ![Jest Validation](media/readme-images/jest.png)
 
