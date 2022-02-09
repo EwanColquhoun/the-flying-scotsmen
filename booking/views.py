@@ -18,7 +18,6 @@ class HomeDisplay(View):
     The home page
     """
     def get(self, request):
-
         return render(
             request,
             'booking/index.html',
@@ -142,16 +141,16 @@ class CalendarView(View):
     """
 
     def get(self, request):
-        d = self.get_date(self.request.GET.get('month', None))
-        cal = Calendar(d.year, d.month)
+        d_y = self.get_date(self.request.GET.get('month', None))
+        cal = Calendar(d_y.year, d_y.month)
         html_cal = cal.formatmonth(withyear=True)
         bookings = Booking.objects.all()
         return render(request,
                       'booking/calendar.html',
                       {
                         'calendar': mark_safe(html_cal),
-                        'prev_month': self.prev_month(d),
-                        'next_month': self.next_month(d),
+                        'prev_month': self.prev_month(d_y),
+                        'next_month': self.next_month(d_y),
                         'bookings': bookings,
                        })
 
@@ -161,21 +160,25 @@ class CalendarView(View):
             return date(year, month, day=1)
         return datetime.today()
 
-    def prev_month(self, d):
-        first = d.replace(day=1)
+    def prev_month(self, d_y):
+        first = d_y.replace(day=1)
         prev_month = first - timedelta(days=1)
         month = 'month=' + str(prev_month.year) + '-' + str(prev_month.month)
         return month
 
-    def next_month(self, d):
-        days_in_month = calendar.monthrange(d.year, d.month)[1]
-        last = d.replace(day=days_in_month)
+    def next_month(self, d_y):
+        days_in_month = calendar.monthrange(d_y.year, d_y.month)[1]
+        last = d_y.replace(day=days_in_month)
         next_month = last + timedelta(days=1)
         month = 'month=' + str(next_month.year) + '-' + str(next_month.month)
         return month
 
     @staticmethod
     def delete_booking(request, booking_id):
+        """
+        Gets the selected booking, once modal confirmation has been accepted
+        the booking is then deleted.
+        """
         booking = get_object_or_404(Booking, id=booking_id)
         booking.delete()
         messages.add_message(request, messages.SUCCESS, UserMessages.deleted)

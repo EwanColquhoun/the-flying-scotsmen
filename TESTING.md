@@ -132,7 +132,11 @@ The responsive design tests were carried out manually with [Google Chrome DevToo
 * ### Unresolved
     * At the time of writing there is one bug that might detract from the User Experience over the long term. On the Bookings page, currently all the bookings are displayed with the latest being at the top. As the number of bookings increase, the application will continue to display all the existing bookings. This will eventually take up memory and thus time. The most recent bookings are readily visible. For convenience it would be nice to only display the previous 6 months bookings for example. 
 
-    * When the application is viewed on a development live server (In this case, port 8000 with GitPod) the email function will not work. The server fails to connect to the email ports (tried ports 587 and 465). Upon further investigation it appears that GitPod have blocked the access on those ports recently to prevent attacks. The work around to get the tests to run and pass is to assign another EMAIL_BACKEND environmental variable for testing purposes. As the email functionality isn't crucial for the application whilst in the development environment this bug will we investigated further after final deployment. 
+    * When the application is viewed in a development environment (In this case, port 8000 with GitPod) the email function will not work. The server fails to connect to the email ports (tried ports 587 and 465). Upon further investigation it appears that GitPod have blocked the access on those ports recently to prevent attacks. The work around to get the tests to run and pass is to assign another EMAIL_BACKEND environmental variable for testing purposes As well as the following code in the views to bypass the sending of email in the development environment.
+    
+    > if 'runserver' in sys.argv:
+
+    As the email functionality isn't crucial for the application whilst in the development environment this bug will we investigated further after final deployment. 
     <br>
     The error message is below:
 
@@ -149,14 +153,9 @@ The site was also tested using [Google Lighthouse](https://developers.google.com
 
 Here are the results from The Flying Scotsmen test;
 
-<details><summary>Lighthouse Testing</summary>
+![Lighthouse home](media/readme-images/lh-home.png)
 
-![Lighthouse home](media/readme-images/lh_home.png)
-![Lighthouse Calendar](media/readme-images/lh_cal.png)
-
-</details>
-
-
+<br>
 This part of the testing process showed up that the site was slow to load. All the images were compressed and the 'prefectch' function was added to the link elements in the head of the INDEX.page. This sped up the loading time and increased the performance rating.
 
 ### Peer review

@@ -31,7 +31,7 @@ TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 
@@ -82,6 +82,7 @@ EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASSWORD')
 DEFAULT_FROM_EMAIL = "theflyingscotsmen.booking@gmail.com"
 ACCOUNT_EMAIL_SUBJECT_PREFIX = '[TFS] '
 EMAIL_VERIFICATION = 'optional'
+EMAIL_VERIFICATION_DEV = 'none'
 
 ACCOUNT_FORMS = {'signup': 'accounts.forms.CustomSignUpForm'}
 AUTH_USER_MODEL = 'accounts.CustomUser'

@@ -3,6 +3,10 @@ from .models import Booking, Contact
 
 
 class BookingForm(forms.ModelForm):
+    """
+    Booking form set up. Username as a hidden input to prevent the
+    user from booking with a username that isn't their own.
+    """
 
     class Meta:
         model = Booking
@@ -30,7 +34,9 @@ class BookingForm(forms.ModelForm):
 
 
 class ContactForm(forms.ModelForm):
-
+    """
+    Contact form set up.
+    """
     class Meta:
         model = Contact
         fields = ('name', 'telephone', 'email', 'message')

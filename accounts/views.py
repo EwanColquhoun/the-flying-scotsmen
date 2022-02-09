@@ -16,7 +16,6 @@ class AwaitingRegDisplay(View):
     but the user is not yet registered.
     """
     def get(self, request):
-
         return render(
             request,
             'account/awaiting_reg.html',
@@ -34,19 +33,27 @@ class CustomSignUpView(SignupView):
         self.user = form.save(self.request)
         try:
             if 'runserver' in sys.argv:
-                return
+                messages.add_message(
+                    self.request,
+                    messages.SUCCESS,
+                    UserMessages.register)
+                return complete_signup(
+                    self.request,
+                    self.user,
+                    settings.EMAIL_VERIFICATION_DEV,
+                    self.success_url,
+                )
             else:
                 register_email(form.instance)
-                return
-            messages.add_message(
-                self.request,
-                messages.SUCCESS,
-                UserMessages.register)
-            return complete_signup(
-                self.request,
-                self.user,
-                settings.EMAIL_VERIFICATION,
-                self.success_url,
-            )
+                messages.add_message(
+                    self.request,
+                    messages.SUCCESS,
+                    UserMessages.register)
+                return complete_signup(
+                    self.request,
+                    self.user,
+                    settings.EMAIL_VERIFICATION,
+                    self.success_url,
+                )
         except ImmediateHttpResponse as error:
             return error.response

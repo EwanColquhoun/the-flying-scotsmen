@@ -981,7 +981,7 @@ margin: unset;
   }
 
   .blockquote p {
-    font-size: large;
+    font-size: initial;
   }
 
   .bookings {
