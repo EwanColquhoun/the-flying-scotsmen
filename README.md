@@ -128,7 +128,12 @@ The Flying Scotsmen project is made up of 4 main pages. [index](templates/bookin
     <details><summary>Screenshots</summary>
 
     ![Sidebar](media/readme-images/sidebar.png)
+
+    ![Sidebar-Anon](media/readme-images/sidebar-anon.png)
+
     ![Navbar](media/readme-images/navbar.png)
+    
+    ![Navbar-Anon](media/readme-images/navbar-anon.png)
     </details>
     
 
