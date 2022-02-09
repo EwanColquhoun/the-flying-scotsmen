@@ -39,7 +39,7 @@
                     </li>
                     {% if user.is_superuser %}
                     <li class="nav-item">
-                        <a class="nav-link" aria-label="Home" href="{% url 'home' %}"><i class="fas fa-user-cog"></i><span class="text"> Admin</span></a>
+                        <a class="nav-link" aria-label="Home" href="{% url 'admin:index' %}"><i class="fas fa-user-cog"></i><span class="text"> Admin</span></a>
                     </li>
                     {% endif %}
                     {% if user.is_authenticated and user.registered.registered %}

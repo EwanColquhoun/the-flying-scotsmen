@@ -3,9 +3,9 @@ from django.core.mail import send_mail
 
 def booking_email(booking):
     send_mail(
-        'New Booking Request',
+        'Booking Request',
         f"""
-        Subject: NEW BOOKING
+        NEW BOOKING,
 
         You have a new booking request to approve
         Member Username: {booking.username}
@@ -28,9 +28,9 @@ def booking_email(booking):
 
 def contact_email(contact):
     send_mail(
-        'New Contact Request',
+        'Contact Request',
         f"""
-        Subject: CONTACT
+        CONTACT,
 
         You have a new contact request from {contact.name}
 
@@ -52,9 +52,9 @@ def contact_email(contact):
 
 def register_email(user):
     send_mail(
-        'New Registration Request',
+        'Registration Request',
         f"""
-        Subject: REGISTER
+        REGISTER,
 
         You have a new registration request from {user.first_name}
 
