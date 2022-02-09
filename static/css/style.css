@@ -952,7 +952,7 @@ margin: unset;
   margin: 10px 10px;
 }
 
-.center {
+.center-form {
   display: flex!important;
   flex-direction: column;
   align-content: center;
